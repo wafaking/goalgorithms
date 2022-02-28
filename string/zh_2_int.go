@@ -30,14 +30,11 @@ func ZHToInt64(chinese string) int64 {
 	for i, v := range chinese {
 		num, ok := mapZHToInt[string(v)]
 		if ok { // 数值
-			if i == len(chinese)-3 { // 最后一位，结束
-				return res + num
-			}
-
-			// todo
-			// 未结束, 是0则不处理
 			if num > 0 {
 				tempNum = num
+			}
+			if i == len(chinese)-3 { // 最后一位，结束
+				return res + tempRes + tempNum
 			}
 
 		} else { // 单位
@@ -46,22 +43,30 @@ func ZHToInt64(chinese string) int64 {
 				return -1
 			}
 
-			if i == len(chinese)-3 { // 最后一位，结束
-				return res + tempNum*unit
-			}
 			// TODO 考虑万亿这种情况
+			// todo
+			// "七千零七十九万",
 
 			//"二千五百一十三",
 			//"四万二千五百一十三",
 			// 如果是万，亿
-			//section = unit
+			// TODO duplication
 			if string(v) == "万" || string(v) == "亿" {
-				res = res * unit
-				//section = 0
-				temp = 0
+				res += (tempRes + tempNum) * unit
+				tempRes = 0
 			} else {
-				tempNum = tempNum * unit
-				unit = 0
+				tempRes += tempNum * unit
+			}
+			tempNum = 0
+			unit = 0
+
+			// todo
+			if i == len(chinese)-3 { // 最后一位，结束
+				if string(v) == "万" || string(v) == "亿" {
+					return res
+				} else {
+					return res + tempRes
+				}
 			}
 
 		}
