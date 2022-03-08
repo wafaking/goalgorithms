@@ -67,20 +67,55 @@ func TestRemoveKdigits(t *testing.T) {
 }
 
 func TestChineseToNumber(t *testing.T) {
-	var list = []string{
-		// "四千五百一十三",
-		// "四万",
-		// "四万二千五百一十三",
-		// "四万零五百一十三",
-		// "四万二千五百一十三",
-		"七千零七十九万",
-		"一亿七千七十九万七千一百九十七",
-		"一千亿七千七十九万七千一百九十七",
-		"一万亿七千七十九万七千一百九十七",
+	var listMap = map[string]int64{
+		"四千五百一十三":          4513,
+		"四万":               40000,
+		"四万二千五百一十三":        42513,
+		"四万零五百一十三":         40513,
+		"七千零七十九万":          70790000,
+		"一亿七千七十九万七千一百九十七":  170797197,
+		"一亿七千零七十九万七千一百九十七": 170797197,
+		"一千亿七千七十九万七千一百九十七": 100070797197,
+		"一万亿七千七十九万七千一百九十七": 1000070807197,
 	}
-	for _, v := range list {
+	for k, expected := range listMap {
 		//res := chineseToNumber(v)
-		res := ZHToInt64(v)
-		log.Printf("v:%s, res: %d \n", v, res)
+		res := ZHToInt64(k)
+		log.Printf("isPass: %t,%s, v:%d, expectd:%d \n", res == expected, k, res, expected)
 	}
+}
+
+func TestNumberToChinese(t *testing.T) {
+	var listMap = map[int64]string{
+		0:            "零",
+		4000:         "四千",
+		4510:         "四千五百一十",
+		4513:         "四千五百一十三",
+		4013:         "四千零一十三",
+		4003:         "四千零三",
+		40000:        "四万",
+		42513:        "四万二千五百一十三",
+		40513:        "四万零五百一十三",
+		70790000:     "七千零七十九万",
+		10797197:     "一千零七十九万七千一百九十七",
+		100797197:    "一亿零七十九万七千一百九十七",
+		170797197:    "一亿七千零七十九万七千一百九十七",
+		100070797197: "一千亿七千零七十九万七千一百九十七",
+	}
+	for k, expected := range listMap {
+		//log.Println("k: ", k)
+		res := Number2ZH1(k)
+		//res := Number2ZH2(k)
+		log.Printf("isPass: %t, %d, v:%s, expectd:%s\n", res == expected, k, res, expected)
+	}
+}
+
+func TestAddStrings(t *testing.T) {
+	//var num1, num2 = "333", "222"
+	//var num1, num2 = "33", "222"
+	//var num1, num2 = "333", "adb"
+	var num1, num2 = "399", "21"
+	//var num1, num2 = "59", "93"
+	res := addStrings2(num1, num2)
+	t.Logf("res: %s, num1：%s, num2:%s", res, num1, num2)
 }
