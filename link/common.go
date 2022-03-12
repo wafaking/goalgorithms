@@ -18,7 +18,6 @@ func SetListNode(sli []int) {
 }
 
 func makeListNode(sli []int) *ListNode {
-
 	dummy := &ListNode{-1, nil}
 	cur := dummy
 	for _, v := range sli {
@@ -31,7 +30,6 @@ func makeListNode(sli []int) *ListNode {
 
 func PrintHead() {
 	var valSli []int
-	//fmt.Println("head11: ", head)
 	cur := head
 	for cur != nil {
 		valSli = append(valSli, cur.Val)
@@ -40,6 +38,19 @@ func PrintHead() {
 	fmt.Println("***********************************")
 	log.Printf("*******NodeList: %#v ********\n", valSli)
 	fmt.Println("***********************************")
+}
+
+func PrintList(list *ListNode) {
+	var (
+		cur = list
+		sli = []int{}
+	)
+
+	for cur != nil {
+		sli = append(sli, cur.Val)
+		cur = cur.Next
+	}
+	fmt.Println("list: ", sli)
 }
 
 // 链表添加尾部元素

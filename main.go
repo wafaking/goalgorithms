@@ -1,43 +1,49 @@
 package main
 
 import (
+	"fmt"
 	"log"
-	"math"
-	"runtime"
-	//_ "net/http/pprof"
-	//"github.com/wafaking/"
 )
 
 func main() {
-	var p uint32 = 1
-	q := p << 1
-	m := q << 1
-	n := m << 1
-	log.Println(p, q)
-	log.Println(1&11, q&11, m&11, n&11)
-	log.Println(runtime.GOOS)
+	var stu = &Stu{
+		Name: "wafa",
+		Age:  10,
+	}
+	var stu2 = stu
+	fmt.Printf("%p, %p\n", stu, stu2)
+	var num = 10
+	num1 := &num
+	fmt.Printf("%p, %p\n", &num, num1)
 
-	//var str string = ""
-	//var sli [][]int64
-	//num := 170797197
-	num := 1170797197
-	//num := 7197
-	// 170797197:    "一亿七千零七十九万七千一百九十七",
-	// 1170797197:    "一十一亿七千零七十九万七千一百九十七",
-	//w1 := num % 100000000
-	w1 := num % 10000
-	num /= 10000
-	w2 := num % 10000
-	log.Println("w1:", w1)
-	log.Println("w2: ", w2)
+	var list2 []*Stu
+	list := make([]*Stu, 0)
+	log.Printf("list: %#v, %#v", list, list2)
+	//var b string
+	log.Println("res: ", fibonacci(5))
+}
 
-	var num1 = 100070797197
-	temp := math.MaxInt64
-	log.Println(num1 > temp)
-
+func reverse(str string) string {
+	bt := []byte(str)
+	for start, end := 0, len(str)-1; start < end; start, end = start+1, end-1 {
+		bt[start], bt[end] = bt[end], bt[start]
+	}
+	return string(bt)
 }
 
 type Stu struct {
 	Name string
 	Age  int
+}
+
+// 0, 1, 1, 2, 3, 5, 8
+func fibonacci(n int) int {
+	if n == 0 {
+		return 0
+	} else if n == 1 {
+		return 1
+	} else if n == 2 {
+		return 1
+	}
+	return fibonacci(n-1) + fibonacci(n-2)
 }
