@@ -6,6 +6,20 @@ import (
 	"testing"
 )
 
+func TestReverse(t *testing.T) {
+	var strRes = map[string]string{
+		"abcd":  "dcba",
+		"a":     "a",
+		"":      "",
+		"ab-cd": "dc-ba",
+	}
+
+	for k, expected := range strRes {
+		res := reverse(k)
+		log.Printf("isRight: %t, res:%s, expected:%s", res == expected, res, expected)
+	}
+}
+
 func TestSwapTwoNum(t *testing.T) {
 	var a, b = 10, 20
 	SwapTwoNum(a, b)
@@ -118,4 +132,19 @@ func TestAddStrings(t *testing.T) {
 	//var num1, num2 = "59", "93"
 	res := addStrings2(num1, num2)
 	t.Logf("res: %s, num1：%s, num2:%s", res, num1, num2)
+}
+
+func TestReverseStr(t *testing.T) {
+
+	var strList = []string{
+		"abcdefg",
+		"abcdef",
+		"abcd",
+	}
+
+	for _, v := range strList {
+		//res := reverseStr1(v, 7)
+		res := reverseStr2(v, 2)
+		log.Printf("res:%s", res)
+	}
 }

@@ -10,17 +10,16 @@ func main() {
 		Name: "wafa",
 		Age:  10,
 	}
-	var stu2 = stu
+	stu2 := stu
 	fmt.Printf("%p, %p\n", stu, stu2)
 	var num = 10
 	num1 := &num
 	fmt.Printf("%p, %p\n", &num, num1)
 
-	var list2 []*Stu
-	list := make([]*Stu, 0)
-	log.Printf("list: %#v, %#v", list, list2)
-	//var b string
-	log.Println("res: ", fibonacci(5))
+	var s = "abcd"
+	s = s[2:]
+	log.Println(s)
+
 }
 
 func reverse(str string) string {

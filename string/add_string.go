@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-//字符串相加(leetcode 415)
+//字符串相加(leetcode-415)
 //求给定两个字符串形式的非负整数num1和num2的和;
 
 //示例 1：
