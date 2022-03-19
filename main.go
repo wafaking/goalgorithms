@@ -1,25 +1,52 @@
 package main
 
 import (
-	"fmt"
 	"log"
+	"math/rand"
+	"strings"
+	"time"
 )
 
 func main() {
-	var stu = &Stu{
-		Name: "wafa",
-		Age:  10,
+	rand.Seed(time.Now().UnixNano())
+	log.Println(rand.Intn(3))
+	base := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+	log.Println(len(base))
+	GetRandomStr2(3)
+}
+
+const (
+	base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+	//l    = len(base)
+)
+
+func GetRandomStr2(length int) {
+
+	//var words = []byte(base)
+	var words = strings.Fields("we are family")
+	log.Println(words)
+	//var l = len(words)
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(len(words), func(i, j int) {
+		words[i], words[j] = words[j], words[i]
+	})
+	log.Println(words)
+
+	return
+}
+
+func GetRandomStr(length int) string {
+	if length <= 0 {
+		return ""
 	}
-	stu2 := stu
-	fmt.Printf("%p, %p\n", stu, stu2)
-	var num = 10
-	num1 := &num
-	fmt.Printf("%p, %p\n", &num, num1)
 
-	var s = "abcd"
-	s = s[2:]
-	log.Println(s)
-
+	var res string
+	var l = len(base)
+	for i := 0; i < length; i++ {
+		rand.Seed(time.Now().UnixNano())
+		res += string(base[rand.Intn(l)])
+	}
+	return res
 }
 
 func reverse(str string) string {
@@ -33,16 +60,4 @@ func reverse(str string) string {
 type Stu struct {
 	Name string
 	Age  int
-}
-
-// 0, 1, 1, 2, 3, 5, 8
-func fibonacci(n int) int {
-	if n == 0 {
-		return 0
-	} else if n == 1 {
-		return 1
-	} else if n == 2 {
-		return 1
-	}
-	return fibonacci(n-1) + fibonacci(n-2)
 }

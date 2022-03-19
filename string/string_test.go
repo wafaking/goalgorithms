@@ -145,6 +145,23 @@ func TestReverseStr(t *testing.T) {
 	for _, v := range strList {
 		//res := reverseStr1(v, 7)
 		res := reverseStr2(v, 2)
-		log.Printf("res:%s", res)
+		t.Logf("res:%s", res)
+	}
+}
+
+func TestLongestPalindrome(t *testing.T) {
+	var m = map[string]string{
+		"a":     "a",
+		"ab":    "a",
+		"abc":   "a",
+		"aba":   "aba",
+		"cbbd":  "bb",
+		"babad": "bab",
+	}
+
+	for str, expected := range m {
+		//res := longestPalindrome1(str)
+		res := longestPalindrome1(str)
+		t.Logf(" Right: %t, res：%s, expected:%s, str: %s", res == expected, res, expected, str)
 	}
 }
