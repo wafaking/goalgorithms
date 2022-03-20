@@ -51,33 +51,27 @@ func longestPalindrome2(s string) string {
 		return s
 	}
 
-	// "abcdcba"
-
-	//b abc
-	//c bcd abcdcbac
-	//
-
+	var res string
 	for i := 0; i < len(s); i++ {
-
-	}
-	var res = s[:1]
-	for i := 0; i < len(s)-1; i++ {
-		for j := i + 2; j <= len(s); j++ {
-			if len(s[i:]) <= len(res) {
-				return res
-			}
-
-			var str = s[i:j]
-			if isSymmetry(str) {
-				if len(s[i:j]) > len(res) {
-					res = s[i:j]
-				}
-			}
+		res1 := judge(s, i, i)
+		res2 := judge(s, i, i+1)
+		if len(res1) > len(res) {
+			res = res1
+		}
+		if len(res2) > len(res) {
+			res = res2
 		}
 	}
 	return res
 }
 
-func judge(s string, start, end int) {
-
+func judge(s string, start, end int) (res string) {
+	for i, j := start, end; i >= 0 && j < len(s); i, j = i-1, j+1 {
+		if s[i] == s[j] {
+			res = s[i : j+1]
+		} else {
+			break
+		}
+	}
+	return
 }
