@@ -69,13 +69,14 @@ func TestCheckInclusion(t *testing.T) {
 
 func TestRemoveKdigits(t *testing.T) {
 	sli := map[string]int{
-		//"1432219": 3,
-		//"10200":   1,
-		//"10":      2,
-		"10001": 4,
+		"1432219": 3, // 1219
+		"10200":   1, // 200
+		"10":      2, // 0
+		"10001":   4, // 0
 	}
 	for str, k := range sli {
-		res := removeKdigits(str, k)
+		//res := removeKdigits1(str, k)
+		res := removeKdigits2(str, k)
 		log.Printf("res---- str:%s, k: %d, res: %s\n", str, k, res)
 	}
 }
