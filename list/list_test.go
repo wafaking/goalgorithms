@@ -167,3 +167,9 @@ func TestGetWordSum(t *testing.T) {
 	res := getWordSum(10)
 	t.Logf("res: %d", res)
 }
+
+func TestMaxArea(t *testing.T) {
+	height := []int{1, 8, 6, 2, 5, 4, 8, 3, 7}
+	res := maxArea2(height)
+	t.Logf("res: %d", res)
+}

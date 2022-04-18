@@ -3,16 +3,66 @@ package main
 import (
 	"log"
 	"math/rand"
+	"path"
 	"strings"
 	"time"
 )
 
+type Student struct {
+	Name string
+	Age  int
+}
+
 func main() {
+	var stus = []*Student{
+		{"wafa", 20},
+		{"king", 30},
+	}
+	opt(stus)
+	for _, v := range stus {
+		log.Printf("%#v", v)
+	}
+
 	rand.Seed(time.Now().UnixNano())
 	log.Println(rand.Intn(3))
 	base := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 	log.Println(len(base))
 	GetRandomStr2(3)
+
+	p := "12345"
+	log.Println(p[:3] + "xxxx" + p[len(p)-4:])
+
+	//log.Println(time.Now().Unix()-1648637864 > 86400)
+	//treeNames, treePaths := getParentTreeFields("conf/dir")
+	//log.Printf("%+v, %+v", treeNames, treePaths)
+	//var pa = "base/.gitkeep"
+	var pa = "/base/a.gitkeep"
+	log.Println(path.Ext(pa))
+	log.Println(path.Split(pa))
+}
+
+func opt(stus []*Student) {
+	for k, v := range stus {
+		if v.Name == "wafa" {
+			stus[k].Age++
+		} else if v.Name == "king" {
+			v.Age++
+		}
+		log.Println(v)
+	}
+}
+
+func getParentTreeFields(treePath string) (treeNames []string, treePaths []string) {
+	if len(treePath) == 0 {
+		return treeNames, treePaths
+	}
+
+	treeNames = strings.Split(treePath, "/")
+	treePaths = make([]string, len(treeNames))
+	for i := range treeNames {
+		treePaths[i] = strings.Join(treeNames[:i+1], "/")
+	}
+	return treeNames, treePaths
 }
 
 const (
