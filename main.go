@@ -20,6 +20,7 @@ func main() {
 	}
 	opt(stus)
 	for _, v := range stus {
+		log.Printf("v:%#v", v)
 		log.Printf("%#v", v)
 	}
 
