@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"math/rand"
-	"path"
 	"strings"
 	"time"
 )
@@ -23,23 +22,32 @@ func main() {
 		log.Printf("v:%#v", v)
 		log.Printf("%#v", v)
 	}
+	ConstT()
+	mapp()
+}
 
-	rand.Seed(time.Now().UnixNano())
-	log.Println(rand.Intn(3))
-	base := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-	log.Println(len(base))
-	GetRandomStr2(3)
+func mapp() {
+	var m = map[int]string{
+		1: "name",
+		2: "wafa",
+	}
+	delete(m, 3)
+	log.Println(m)
+}
 
-	p := "12345"
-	log.Println(p[:3] + "xxxx" + p[len(p)-4:])
+func ConstT() {
+	type UserType int
+	const (
+		User1 UserType = iota
+		User2
+		User3
+	)
+	const (
+		User11 UserType = iota + 11
+		User12
+	)
+	log.Println(User1, User2, User3, User11, User12)
 
-	//log.Println(time.Now().Unix()-1648637864 > 86400)
-	//treeNames, treePaths := getParentTreeFields("conf/dir")
-	//log.Printf("%+v, %+v", treeNames, treePaths)
-	//var pa = "base/.gitkeep"
-	var pa = "/base/a.gitkeep"
-	log.Println(path.Ext(pa))
-	log.Println(path.Split(pa))
 }
 
 func opt(stus []*Student) {
@@ -54,6 +62,7 @@ func opt(stus []*Student) {
 }
 
 func getParentTreeFields(treePath string) (treeNames []string, treePaths []string) {
+
 	if len(treePath) == 0 {
 		return treeNames, treePaths
 	}
