@@ -1,4 +1,4 @@
-package insert
+package sort
 
 func InsertSort(sli []int) {
 	length := len(sli)
