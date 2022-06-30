@@ -1,84 +1,105 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"log"
 	"math/rand"
+	"path/filepath"
 	"strings"
 	"time"
 )
 
+func main() {
+
+	//urls := []string{}
+	////初始化urls
+	//
+	//var (
+	//	ch   = make(chan string, 100)
+	//	wg   *sync.WaitGroup
+	//	nums = 100
+	//)
+	//
+	//wg.Add(2)
+	//go producer(wg, ch, urls)
+	//go consumer(wg, ch, nums)
+	//
+	//wg.Wait()
+	//var path = "111/222/a.txt"
+	//var path = "111/222/a"
+	var path = "111/222/a.gitkeep"
+	log.Printf("ext: %#v", filepath.Ext(path))
+	log.Printf("base: %#v", filepath.Base(path))
+	dir, name := filepath.Split(path)
+	log.Printf("dir: %#v ,name: %#v", dir, name)
+	log.Printf("%#v", filepath.SplitList(path))
+
+	if filepath.Base(path) == ".gitkeep" {
+		log.Printf("%v ----------", filepath.Dir(path))
+	}
+
+	//match()
+	//fileMain()
+}
+
 type Student struct {
 	Name string
 	Age  int
+	Sub  *Student
 }
 
-func main() {
-	var stus = []*Student{
-		{"wafa", 20},
-		{"king", 30},
-	}
-	opt(stus)
-	for _, v := range stus {
-		log.Printf("v:%#v", v)
-		log.Printf("%#v", v)
-	}
-	ConstT()
-	mapp()
+type FileInfo struct {
+	Name string
+	Path string
+	Age  int
+	Sub  *FileInfo
 }
 
-func mapp() {
-	var m = map[int]string{
-		1: "name",
-		2: "wafa",
-	}
-	delete(m, 3)
-	log.Println(m)
+type MFileInfo struct {
+	Name string
+	Ojb  *MFileInfo
 }
 
-func ConstT() {
-	type UserType int
-	const (
-		User1 UserType = iota
-		User2
-		User3
-	)
-	const (
-		User11 UserType = iota + 11
-		User12
-	)
-	log.Println(User1, User2, User3, User11, User12)
-
-}
-
-func opt(stus []*Student) {
-	for k, v := range stus {
-		if v.Name == "wafa" {
-			stus[k].Age++
-		} else if v.Name == "king" {
-			v.Age++
-		}
-		log.Println(v)
-	}
-}
-
-func getParentTreeFields(treePath string) (treeNames []string, treePaths []string) {
-
-	if len(treePath) == 0 {
-		return treeNames, treePaths
+func match() {
+	var nancy = FileInfo{
+		Name: "111",
+		Path: "111",
+		Age:  1,
+		Sub: &FileInfo{
+			Name: "222",
+			Path: "222",
+			Age:  1,
+			Sub: &FileInfo{
+				Name: "readme.md",
+				Path: "111/222/readme.md",
+				Age:  0,
+				Sub:  nil,
+			},
+		},
 	}
 
-	treeNames = strings.Split(treePath, "/")
-	treePaths = make([]string, len(treeNames))
-	for i := range treeNames {
-		treePaths[i] = strings.Join(treeNames[:i+1], "/")
+	var wafa = Student{
+		Name: "111/222/hehe.md",
+		Age:  0,
+		Sub:  nil,
 	}
-	return treeNames, treePaths
-}
+	//
+	//var king = Student{
+	//	Name: "king",
+	//	Age:  21,
+	//	Sub:  nil,
+	//}
+	log.Printf("nancy: %#v", nancy)
+	var fileNameList = strings.Split(wafa.Name, "/")
+	if nancy.Name == fileNameList[0] {
 
-const (
-	base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-	//l    = len(base)
-)
+		//for _, sub := range nancy.Sub {
+		//
+		//}
+	}
+
+}
 
 func GetRandomStr2(length int) {
 
@@ -95,29 +116,76 @@ func GetRandomStr2(length int) {
 	return
 }
 
-func GetRandomStr(length int) string {
-	if length <= 0 {
-		return ""
-	}
-
-	var res string
-	var l = len(base)
-	for i := 0; i < length; i++ {
-		rand.Seed(time.Now().UnixNano())
-		res += string(base[rand.Intn(l)])
-	}
-	return res
+//层级节点
+type Node struct {
+	Name     string  `json:"name"`
+	Path     string  `json:"path"`
+	Value    string  `json:"value"`
+	Children []*Node `json:"children"`
 }
 
-func reverse(str string) string {
-	bt := []byte(str)
-	for start, end := 0, len(str)-1; start < end; start, end = start+1, end-1 {
-		bt[start], bt[end] = bt[end], bt[start]
+func NewNode(name string, value string, path string) *Node {
+	return &Node{
+		Name:     name,
+		Value:    value,
+		Path:     path,
+		Children: []*Node{},
 	}
-	return string(bt)
 }
 
-type Stu struct {
-	Name string
-	Age  int
+func (n *Node) Insert(path string, value string) {
+	n.insert(path, value, path)
+}
+
+//根据路径插入值
+func (n *Node) insert(path string, value string, orginPath string) {
+	if string(path[0]) == "/" {
+		path = path[1:]
+	}
+	ps := strings.Split(path, "/")
+	length := len(ps)
+	is_exist := false
+	for _, p := range n.Children {
+		if ps[0] == p.Name {
+			is_exist = true
+			if length == 1 {
+				p.Value = value
+				p.Path = orginPath
+			}
+			if length > 1 {
+				p.insert(path[len(ps[0]):], value, orginPath)
+				p.Path = orginPath[:strings.LastIndex(orginPath, ps[0])+len(ps[0])]
+			}
+		}
+	}
+	if !is_exist {
+		newNode := &Node{
+			Name:     ps[0],
+			Children: []*Node{},
+		}
+		if length == 1 {
+			newNode.Value = value
+			newNode.Path = orginPath
+		} else if length > 1 {
+			newNode.insert(path[len(ps[0]):], value, orginPath)
+			newNode.Path = orginPath[:strings.LastIndex(orginPath, ps[0])+len(ps[0])]
+		}
+		n.Children = append(n.Children, newNode)
+	}
+	return
+}
+
+func fileMain() {
+	node := NewNode("", "", "")
+	node.Insert("hello/world", `{"env":"dev"}`)
+	node.Insert("hello1/world", `{"env":"dev"}`)
+	//node.Insert("/hello1/world/haha", `{"env":"dev"}`)
+	//node.Insert("/hello1/world1/haha", `{"env":"dev"}`)
+	//node.Insert("/hello2/world", `{"env":"dev3"}`)
+	//node.Insert("/hello3/world3/haha/hehe/aa", `{"env":"dev"}`)
+	res, err := json.Marshal(node)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(res))
 }
