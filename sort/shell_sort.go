@@ -1,4 +1,4 @@
-package shell
+package sort
 
 func ShellSort(sli []int) {
 	length := len(sli)

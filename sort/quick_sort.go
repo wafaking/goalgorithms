@@ -1,4 +1,4 @@
-package quick
+package sort
 
 import "fmt"
 

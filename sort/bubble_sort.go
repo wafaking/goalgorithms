@@ -1,6 +1,6 @@
-package bubble
+package sort
 
-// 普通的冒泡排序（严格意义上非冒泡排序）
+// BubbleSort 普通的冒泡排序（严格意义上非冒泡排序）
 func BubbleSort(sli []int) {
 	// fmt.Println("before sorted: ", sli)
 	length := len(sli)
@@ -14,7 +14,7 @@ func BubbleSort(sli []int) {
 	// fmt.Println("after sorted: ", sli)
 }
 
-// 标准冒泡排序
+// BubbleSortStandard 标准冒泡排序
 func BubbleSortStandard(sli []int) {
 	length := len(sli)
 
@@ -27,7 +27,7 @@ func BubbleSortStandard(sli []int) {
 	}
 }
 
-// 标准冒泡排序优化
+// BubbleSortStandardOptimize 标准冒泡排序优化(针对大部分有序的情况)
 func BubbleSortStandardOptimize(sli []int) {
 	length := len(sli)
 

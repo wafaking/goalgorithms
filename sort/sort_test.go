@@ -1,10 +1,9 @@
-package bubble
+package sort
 
 import (
 	"fmt"
+	"github.com/wafaking/goalgorithms/utils/sort"
 	"testing"
-
-	"github.com/wafaking/goalgorithm/sort/utils"
 )
 
 var arraySli = [][]int{
@@ -18,7 +17,7 @@ var arraySli = [][]int{
 // -----TestBubbleSort---test---------------
 func TestBubbleSort(t *testing.T) {
 	for i := 2; i < 30; i++ {
-		list := utils.GetArrayOfSize(i)
+		list := sort.GetArrayOfSize(i)
 
 		BubbleSort(list)
 
@@ -26,6 +25,7 @@ func TestBubbleSort(t *testing.T) {
 			if list[i] > list[i+1] {
 				fmt.Println(list)
 				t.Error()
+
 			}
 		}
 	}
@@ -43,7 +43,7 @@ func TestBubbleSort(t *testing.T) {
 }
 
 func benchmarkBubbleSort(n int, b *testing.B) {
-	list := utils.GetArrayOfSize(n)
+	list := sort.GetArrayOfSize(n)
 	for i := 0; i < b.N; i++ {
 		BubbleSort(list)
 	}
@@ -58,7 +58,7 @@ func BenchmarkBubbleSort100000(b *testing.B) { benchmarkBubbleSort(100000, b) }
 
 func TestBubbleSortStandard(t *testing.T) {
 	for i := 2; i < 30; i++ {
-		list := utils.GetArrayOfSize(i)
+		list := sort.GetArrayOfSize(i)
 
 		BubbleSortStandard(list)
 
@@ -83,7 +83,7 @@ func TestBubbleSortStandard(t *testing.T) {
 }
 
 func benchmarkBubbleSortStandard(n int, b *testing.B) {
-	list := utils.GetArrayOfSize(n)
+	list := sort.GetArrayOfSize(n)
 	for i := 0; i < b.N; i++ {
 		BubbleSortStandard(list)
 	}
@@ -97,7 +97,7 @@ func BenchmarkBubbleSortStandard100000(b *testing.B) { benchmarkBubbleSortStanda
 // -----BubbleSortStandardOptimize---test---------------
 func TestStandardBubbleSortOptimize(t *testing.T) {
 	for i := 2; i < 30; i++ {
-		list := utils.GetArrayOfSize(i)
+		list := sort.GetArrayOfSize(i)
 
 		BubbleSortStandardOptimize(list)
 
@@ -122,12 +122,14 @@ func TestStandardBubbleSortOptimize(t *testing.T) {
 }
 
 func benchmarkBubbleSortStandardOptimize(n int, b *testing.B) {
-	list := utils.GetArrayOfSize(n)
+	list := sort.GetArrayOfSize(n)
 	for i := 0; i < b.N; i++ {
 		BubbleSortStandardOptimize(list)
 	}
 }
-func BenchmarkBubbleSortStandardOptimize100(b *testing.B) { benchmarkBubbleSortStandardOptimize(100, b) }
+func BenchmarkBubbleSortStandardOptimize100(b *testing.B) {
+	benchmarkBubbleSortStandardOptimize(100, b)
+}
 func BenchmarkBubbleSortStandardOptimize1000(b *testing.B) {
 	benchmarkBubbleSortStandardOptimize(1000, b)
 }
@@ -137,3 +139,84 @@ func BenchmarkBubbleSortStandardOptimize10000(b *testing.B) {
 func BenchmarkBubbleSortStandardOptimize100000(b *testing.B) {
 	benchmarkBubbleSortStandardOptimize(100000, b)
 }
+
+func TestInsertSort(t *testing.T) {
+	for i := 2; i < 30; i++ {
+		list := sort.GetArrayOfSize(i)
+
+		InsertSort(list)
+
+		for i := 0; i < len(list)-2; i++ {
+			if list[i] > list[i+1] {
+				fmt.Println(list)
+				t.Error()
+			}
+		}
+	}
+}
+
+func benchmarkInsertSort(n int, b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		list := sort.GetArrayOfSize(n)
+		InsertSort(list)
+	}
+}
+
+func BenchmarkInsertSort100(b *testing.B)    { benchmarkInsertSort(100, b) }
+func BenchmarkInsertSort1000(b *testing.B)   { benchmarkInsertSort(1000, b) }
+func BenchmarkInsertSort10000(b *testing.B)  { benchmarkInsertSort(10000, b) }
+func BenchmarkInsertSort100000(b *testing.B) { benchmarkInsertSort(100000, b) }
+
+func TestSelectionSort(t *testing.T) {
+	for i := 2; i < 30; i++ {
+		list := sort.GetArrayOfSize(i)
+
+		SelectionSort(list)
+
+		for i := 0; i < len(list)-2; i++ {
+			if list[i] > list[i+1] {
+				fmt.Println(list)
+				t.Error()
+			}
+		}
+	}
+}
+
+func benchmarkSelectionSort(num int, b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		list := sort.GetArrayOfSize(num)
+		SelectionSort(list)
+	}
+}
+
+func BenchmarkSelectionSort100(b *testing.B)    { benchmarkSelectionSort(100, b) }
+func BenchmarkSelectionSort1000(b *testing.B)   { benchmarkSelectionSort(1000, b) }
+func BenchmarkSelectionSort10000(b *testing.B)  { benchmarkSelectionSort(10000, b) }
+func BenchmarkSelectionSort100000(b *testing.B) { benchmarkSelectionSort(100000, b) }
+
+func TestShellSort(t *testing.T) {
+	for i := 2; i < 30; i++ {
+		list := sort.GetArrayOfSize(i)
+
+		ShellSort(list)
+
+		for i := 0; i < len(list)-2; i++ {
+			if list[i] > list[i+1] {
+				fmt.Println(list)
+				t.Error()
+			}
+		}
+	}
+}
+
+func benchmarkShellSort(n int, b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		list := sort.GetArrayOfSize(n)
+		ShellSort(list)
+	}
+}
+
+func BenchmarkShellSort100(b *testing.B)    { benchmarkShellSort(100, b) }
+func BenchmarkShellSort1000(b *testing.B)   { benchmarkShellSort(1000, b) }
+func BenchmarkShellSort10000(b *testing.B)  { benchmarkShellSort(10000, b) }
+func BenchmarkShellSort100000(b *testing.B) { benchmarkShellSort(100000, b) }

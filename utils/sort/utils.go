@@ -1,4 +1,4 @@
-package utils
+package sort
 
 import (
 	"bufio"
@@ -9,7 +9,7 @@ import (
 )
 
 func GetArrayOfSize(n int) []int {
-	p, err := build.Default.Import("goalgorithm/sort/utils", "", build.FindOnly)
+	p, err := build.Default.Import("goalgorithms/sort/utils", "", build.FindOnly)
 
 	if err != nil {
 		// handle error
