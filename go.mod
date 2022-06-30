@@ -1,3 +1,3 @@
-module github.com/wafaking/goalgorithms
+module goalgorithms
 
-go 1.14
+go 1.17

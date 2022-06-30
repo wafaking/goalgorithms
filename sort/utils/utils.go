@@ -1,4 +1,4 @@
-package sort
+package utils
 
 import (
 	"bufio"
@@ -12,7 +12,6 @@ func GetArrayOfSize(n int) []int {
 	p, err := build.Default.Import("goalgorithms/sort/utils", "", build.FindOnly)
 
 	if err != nil {
-		// handle error
 		panic(err)
 	}
 	fname := filepath.Join(p.Dir, "IntegerArray.txt")

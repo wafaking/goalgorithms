@@ -15,15 +15,3 @@ func SelectionSort(sli []int) {
 		}
 	}
 }
-
-func selectSort(sli []int) {
-	var min int
-	for i := 0; i < len(sli); i++ {
-		for j := i + 1; j < len(sli); j++ {
-			if sli[j] < sli[min] {
-				sli[min], sli[j] = sli[j], sli[min]
-				break
-			}
-		}
-	}
-}
