@@ -100,3 +100,7 @@ func TestPostBuildTree(t *testing.T) {
 	inOrder2 := InOrder2(tree)
 	log.Println("tree inOrder: ", inOrder2)
 }
+
+func TestBuildPathTree(t *testing.T) {
+	BuildPathTree()
+}
