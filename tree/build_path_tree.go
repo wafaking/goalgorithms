@@ -43,8 +43,9 @@ func (n *PathNode) insert(path string, value string, orginPath string) {
 				p.Path = orginPath
 			}
 			if length > 1 {
+				//p.Path = orginPath[:strings.Index(orginPath, ps[0])+len(ps[0])]
+				p.Path = orginPath[:strings.Index(orginPath, path)+len(ps[0])]
 				p.insert(path[len(ps[0]):], value, orginPath)
-				p.Path = orginPath[:strings.LastIndex(orginPath, ps[0])+len(ps[0])]
 			}
 		}
 	}
@@ -57,8 +58,9 @@ func (n *PathNode) insert(path string, value string, orginPath string) {
 			newPathNode.Value = value
 			newPathNode.Path = strings.TrimSpace(orginPath)
 		} else if length > 1 {
+			//newPathNode.Path = orginPath[:strings.LastIndex(orginPath, ps[0])+len(ps[0])]
+			newPathNode.Path = orginPath[:strings.Index(orginPath, path)+len(ps[0])]
 			newPathNode.insert(path[len(ps[0]):], value, orginPath)
-			newPathNode.Path = orginPath[:strings.LastIndex(orginPath, ps[0])+len(ps[0])]
 		}
 		n.Children = append(n.Children, newPathNode)
 	}
@@ -67,8 +69,9 @@ func (n *PathNode) insert(path string, value string, orginPath string) {
 
 func BuildPathTree() {
 	node := NewPathNode("", "", "")
-	node.Insert("hello/world", `{"env":"dev"}`)
-	node.Insert("hello/world ", `{"env":"dev"}`)
+	node.Insert("1/hello/world1/1/1/b.txt", `{"env":"dev"}`)
+	node.Insert("1/hello/world1/1/1/b.txt", `{"env":"dev"}`)
+	//node.Insert("1/hello/world ", `{"env":"dev"}`)
 	//node.Insert("hello1/world", `{"env":"dev"}`)
 	//node.Insert("/hello1/world/haha", `{"env":"dev"}`)
 	//node.Insert("/hello1/world1/haha", `{"env":"dev"}`)
