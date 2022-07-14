@@ -106,11 +106,11 @@ func BenchmarkBubbleSortStandardOptimize100000(b *testing.B) {
 }
 
 func TestInsertSort(t *testing.T) {
-	for i := 2; i < 30; i++ {
-		list := utils.GetArrayOfSize(i)
-
-		InsertSort(list)
-
+	for _, list := range commonListArray {
+		t.Logf("start list: %v", list)
+		InsertSort1(list)
+		//InsertSort2(list)
+		t.Logf("end list: %v", list)
 		for i := 0; i < len(list)-2; i++ {
 			if list[i] > list[i+1] {
 				fmt.Println(list)
@@ -123,7 +123,7 @@ func TestInsertSort(t *testing.T) {
 func benchmarkInsertSort(n int, b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		list := utils.GetArrayOfSize(n)
-		InsertSort(list)
+		InsertSort1(list)
 	}
 }
 
