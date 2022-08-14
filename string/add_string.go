@@ -62,7 +62,7 @@ func addStrings(num1 string, num2 string) string {
 	return res
 }
 
-func addStrings2(num1 string, num2 string) string {
+func AddStrings2(num1 string, num2 string) string {
 	var sign uint8
 	var res string
 	for i, j := len(num1)-1, len(num2)-1; i >= 0 || j >= 0 || sign > 0; i, j = i-1, j-1 {

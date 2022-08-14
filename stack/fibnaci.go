@@ -1,5 +1,11 @@
 package stack
 
+import (
+	str "goalgorithms/string"
+	"math"
+	"strconv"
+)
+
 // 1. 使用降序，依次将大的数值分解成小的(大量重复计算)
 func fibonacci1(n int) int {
 	if n == 0 {
@@ -28,6 +34,44 @@ func fibonacci2(n int) int {
 		fib0, fib1 = fib1, fibN
 	}
 	return fibN
+}
+
+//Fibonacci3 3. 使用升序，避免重复计算(可以解决n过大时溢出的问题)
+func Fibonacci3(n int) string {
+	if n == 0 {
+		return "0"
+	} else if n == 1 {
+		return "1"
+	}
+
+	var (
+		fib0     int64 = 0
+		fib1     int64 = 1
+		fibN     int64
+		fs0, fs1 string
+		res      string
+		i        = 2
+	)
+
+	for i <= n {
+		if math.MaxInt64-fib1 <= fib0 {
+			fs0 = strconv.FormatInt(fib0, 10)
+			fs1 = strconv.FormatInt(fib1, 10)
+			break
+		}
+		fibN = fib0 + fib1
+		fib0, fib1 = fib1, fibN
+		res = strconv.FormatInt(fibN, 10)
+		i++
+	}
+
+	for i <= n {
+		res = str.AddStrings2(fs0, fs1)
+		fs0, fs1 = fs1, res
+		i++
+	}
+
+	return res
 }
 
 // 青蛙跳台阶问题(sword 10)
