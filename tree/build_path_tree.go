@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+// 根据文件路径构建目录树
+
 type PathNode struct {
 	Name     string      `json:"name"`
 	Path     string      `json:"path"`

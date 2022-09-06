@@ -7,6 +7,12 @@ var (
 	d2Nums [][]int // 二维数组
 )
 
+type item struct {
+	list   []int
+	target int
+	res    []int
+}
+
 func InitNums(sli []int) {
 	nums = sli
 }

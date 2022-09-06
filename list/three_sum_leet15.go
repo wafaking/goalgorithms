@@ -1,104 +1,83 @@
 package list
 
 import (
-	"log"
 	"sort"
 )
 
-//15. 三数之和
-//给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？
-//请你找出所有和为 0 且不重复的三元组。
+//15. 三数之和(leetcode-15)
+//给你一个包含n个整数的数组nums，判断nums中是否存在三个元素a，b，c ，使得a+b+c=0？
+//示例1： 输入：nums = [-1,0,1,2,-1,-4], 输出：[[-1,-1,2],[-1,0,1]]
+//示例2： 输入：nums = [], 输出：[]
+//示例3： 输入：nums = [0], 输出：[]
 
-//注意：答案中不可以包含重复的三元组。
+// threeSum1，排序后拆分成a=-(b+c),a固定，b+c用双指针确定
+func threeSum1(nums []int) [][]int {
+	var res [][]int
+	sort.Ints(nums)
 
-//示例 1：
-//输入：nums = [-1,0,1,2,-1,-4]
-//输出：[[-1,-1,2],[-1,0,1]]
+	// 先枚举a
+	for i := 0; i < len(nums)-2; i++ {
+		if nums[i] > 0 {
+			break
+		}
+		if i > 0 && nums[i] == nums[i-1] { // a与前一个元素不重复
+			continue
+		}
+		// 使用双指针j,k
+		for j, k := i+1, len(nums)-1; j < k; {
+			var temp = nums[i] + nums[j] + nums[k]
+			if temp > 0 {
+				k-- // 右指针前移
+			} else if temp < 0 {
+				j++ // 左指针后移
+			} else {
+				// -4, -1, -1, -1, -1, 0, 1, 2, 2
+				res = append(res, []int{nums[i], nums[j], nums[k]})
+				k-- // 右指针前移
+				// 因双指针两个元素已使用过，也可同时右指针前移并左指针后移
+				for j < k && nums[k] == nums[k+1] { // 右指针元素与后面的不重复
+					k--
+				}
+			}
+		}
+	}
+	return res
+}
 
-//示例 2：
-//输入：nums = []
-//输出：[]
-
-//示例 3：
-//输入：nums = [0]
-//输出：[]
-
-func threeSum(nums []int) [][]int {
+func threeSum2(nums []int) [][]int {
 	sort.Ints(nums) // 排序保证a<=b<=c
-	//log.Println("nums: ", nums)
-	length := len(nums)
 	res := make([][]int, 0)
 
 	// 枚举第一个指针
-	for first := 0; first < length; first++ {
+	for a := 0; a < len(nums); a++ {
 		// 保证枚举的和上一次的不同，此处要注意a要从第二个数开始
-		if first > 0 && nums[first] == nums[first-1] {
+		if a > 0 && nums[a] == nums[a-1] {
 			continue
 		}
 
 		// 枚举第二个指针
-		for second := first + 1; second < length; second++ {
-			if second > first+1 && nums[second] == nums[second-1] {
+		for b := a + 1; b < len(nums); b++ {
+			if b > a+1 && nums[b] == nums[b-1] {
 				continue
 			}
 
-			target := -1 * nums[first] // 取对等反向值
-			third := length - 1        // c 对应的指针初始指向数组的最右端
+			target := -1 * nums[a] // 取对等反向值
+			c := len(nums) - 1     // c 对应的指针初始指向数组的最右端
 
-			for second < third && nums[second]+nums[third] > target { // 大了，将第三个数的指针向前移
-				//log.Println("second: ******: ", nums[second], nums[third], target)
-				third--
+			for b < c && nums[b]+nums[c] > target { // 大了，将第三个数的指针向前移
+				c--
 			}
 
-			if second == third { // 防止c跑到b的前面
+			if b == c { // 防止c跑到b的前面
 				break
 			}
 
 			// 注：此处排序后如果相等，b++向后移，会忽略相等值
-			if nums[second]+nums[third] == target { // 只有相等了再添加
-				res = append(res, []int{nums[first], nums[second], nums[third]})
+			if nums[b]+nums[c] == target { // 只有相等了再添加
+				res = append(res, []int{nums[a], nums[b], nums[c]})
 			}
 		}
 	}
 
 	return res
-}
-
-func threeSum1(nums []int) [][]int {
-	n := len(nums)
-	sort.Ints(nums)
-	log.Println("nums: ", nums)
-	ans := make([][]int, 0)
-
-	// 枚举 a
-	for first := 0; first < n; first++ {
-		// 需要和上一次枚举的数不相同
-		if first > 0 && nums[first] == nums[first-1] {
-			continue
-		}
-		// c 对应的指针初始指向数组的最右端
-		third := n - 1
-		target := -1 * nums[first]
-		// 枚举 b
-		for second := first + 1; second < n; second++ {
-			// 需要和上一次枚举的数不相同
-			if second > first+1 && nums[second] == nums[second-1] {
-				continue
-			}
-			log.Println("*****second*****: ", nums[second], nums[third])
-			// 需要保证 b 的指针在 c 的指针的左侧
-			for second < third && nums[second]+nums[third] > target {
-				third--
-			}
-			// 如果指针重合，随着 b 后续的增加
-			// 就不会有满足 a+b+c=0 并且 b<c 的 c 了，可以退出循环
-			if second == third {
-				break
-			}
-			if nums[second]+nums[third] == target {
-				ans = append(ans, []int{nums[first], nums[second], nums[third]})
-			}
-		}
-	}
-	return ans
 }

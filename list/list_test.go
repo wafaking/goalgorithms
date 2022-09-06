@@ -2,7 +2,6 @@ package list
 
 import (
 	"fmt"
-	"log"
 	"testing"
 )
 
@@ -31,24 +30,78 @@ func TestFindKthLargest(t *testing.T) {
 }
 
 func TestTwoSum(t *testing.T) {
-	sum := 6
-	res := twoSum(nums, sum)
-	log.Println("res: ", res)
+	var samples = []item{
+		{[]int{2, 7, 11, 15}, 9, []int{0, 1}},
+		{[]int{3, 2, 4}, 6, []int{1, 2}},
+		{[]int{3, 3}, 6, []int{0, 1}},
+	}
+	for _, v := range samples {
+		res := twoSum1(v.list, v.target)
+		if len(res) != len(v.res) {
+			t.Failed()
+		}
+		for i := 0; i < len(res); i++ {
+			if res[i] != v.res[i] {
+				t.Fatal()
+			}
+		}
+	}
+	t.Log("------------SPLIT-------------")
+	for _, v := range samples {
+		res := twoSum2(v.list, v.target)
+		if len(res) != len(v.res) {
+			t.Failed()
+		}
+		for i := 0; i < len(res); i++ {
+			if res[i] != v.res[i] {
+				t.Fatal()
+			}
+		}
+	}
 }
 
 func TestFindRepeatNumber(t *testing.T) {
 	res := findRepeatNumber(nums)
-	log.Println("res: ", res)
+	t.Log("res: ", res)
 }
 
 func TestGetDuplications(t *testing.T) {
 	res := getDuplications(nums, 8)
-	log.Println("res: ", res)
+	t.Log("res: ", res)
 }
 
 func TestThreeSum(t *testing.T) {
-	res := threeSum(nums)
-	log.Println("res: ", res)
+	var samples = [][]int{
+		//{0, 1, 1},
+		//{0, 0, 0},
+		//{-1, 0, 1, 2, -1, -4},
+		{-4, -1, -1, -1, -1, 0, 1, 2, 2},
+	}
+	for _, nums := range samples {
+		res := threeSum1(nums)
+		t.Log("res: ", res)
+	}
+	t.Log("----------SPLIT------------")
+	for _, nums := range samples {
+		res := threeSum2(nums)
+		t.Log("res: ", res)
+	}
+}
+
+func TestFourSum(t *testing.T) {
+	var samples = []item{
+		//{[]int{2, 2, 2, 2, 2}, 8, nil},
+		//{[]int{1, 0, -1, 0, -2, 2}, 0, nil},
+		{[]int{-4, -1, -1, -1, -1, 0, 1, 2, 2, 3}, 0, nil},
+	}
+	// 示例1： 输入：nums=[1,0,-1,0,-2,2], target=0, 输出：[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+	// 示例2： 输入：nums = [2,2,2,2,2], target=8, 输出：[[2,2,2,2]]
+
+	for _, item := range samples {
+		res := fourSum(item.list, item.target)
+		t.Log("res: ", res)
+	}
+	t.Log("----------SPLIT------------")
 }
 
 func TestFindNumberIn2DArray(t *testing.T) {
@@ -61,7 +114,7 @@ func TestFindNumberIn2DArray(t *testing.T) {
 	}
 	matrix = [][]int{{-5}}
 	res := findNumberIn2DArray(matrix, -5)
-	log.Println("res: ", res)
+	t.Log("res: ", res)
 }
 
 func TestMerge(t *testing.T) {
@@ -107,17 +160,17 @@ func TestMerge(t *testing.T) {
 	//m, n := 1, 1
 
 	for _, v := range sli {
-		log.Println("nums1: ", v.nums1)
-		log.Println("nums2: ", v.nums2)
+		t.Log("nums1: ", v.nums1)
+		t.Log("nums2: ", v.nums2)
 		merge(v.nums1, v.m, v.nums2, v.n)
-		log.Println("res: ", v.nums1)
+		t.Log("res: ", v.nums1)
 	}
 
 }
 
 func TestTotalDestinationPath(t *testing.T) {
 	res := TotalDestinationPath(1, 1)
-	log.Println("res: ", res)
+	t.Log("res: ", res)
 }
 
 func TestMinArray(t *testing.T) {
@@ -172,4 +225,53 @@ func TestMaxArea(t *testing.T) {
 	height := []int{1, 8, 6, 2, 5, 4, 8, 3, 7}
 	res := maxArea2(height)
 	t.Logf("res: %d", res)
+}
+
+func TestPermute(t *testing.T) {
+	var numsList = [][]int{
+		{},
+		{1},
+		{0, 1},
+		{1, 2, 3},
+	}
+	for _, nums := range numsList {
+		res := permute11(nums)
+		t.Logf("res: %v\n", res)
+	}
+	for _, nums := range numsList {
+		res := permute12(nums)
+		t.Logf("res: %v\n", res)
+	}
+	for _, nums := range numsList {
+		res := permute21(nums)
+		t.Logf("res: %v\n", res)
+	}
+	for _, nums := range numsList {
+		res := permute22(nums)
+		t.Logf("res: %v\n", res)
+	}
+}
+
+func TestPermuteUnique(t *testing.T) {
+	var numsList = [][]int{
+		//{},
+		//{1},
+		//{0, 1},
+		//{1, 2, 3},
+		//{1, 1, 2},
+		//{1, 2, 1},
+		//{1, 1, 1},
+		//{1, 2, 1, 1},
+		//{-1, 2, -1, 2, 1, -1, 2, 1},
+		{0, 1, 0, 0, 9},
+	}
+	for _, nums := range numsList {
+		res := permuteUnique1(nums)
+		t.Logf("res: %v\n", res)
+	}
+	t.Log("----------SPLIT------------")
+	for _, nums := range numsList {
+		res := permuteUnique2(nums)
+		t.Logf("res: %v\n", res)
+	}
 }

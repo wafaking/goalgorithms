@@ -1,35 +1,36 @@
 package list
 
-//1. 两数之和
+//1. 两数之和(leetcode-1)
 
-//给定一个整数数组 nums和一个整数目标值 target，请你在该数组中找出 和为目标值 的那两个整数，并返回它们的数组下标。
-//你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
-//你可以按任意顺序返回答案。
+//给定整数数组nums和整数目标值target，请在数组中找出和为目标值的那两个整数的下标。
+//示例1： 输入：nums=[2,7,11,15], target=9, 输出：[0,1]
+//示例2： 输入：nums=[3,2,4], target=6，输出：[1,2]
+//示例3： 输入：nums=[3,3], target=6， 输出：[0,1]
 
-//示例 1：
-//输入：nums = [2,7,11,15], target = 9
-//输出：[0,1]
-//解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1]。
-
-//示例 2：
-//输入：nums = [3,2,4], target = 6
-//输出：[1,2]
-
-//示例 3：
-//输入：nums = [3,3], target = 6
-//输出：[0,1]
-
-func twoSum(nums []int, target int) []int {
-	var m = make(map[int]int, len(nums))
-
+func twoSum1(nums []int, target int) []int {
 	var res []int
+	for i := 0; i < len(nums); i++ {
+		for j := i + 1; j < len(nums); j++ {
+			if nums[i]+nums[j] == target {
+				res = append(res, i, j)
+				return res
+			}
+		}
+	}
+	return res
+}
+
+func twoSum2(nums []int, target int) []int {
+	var (
+		res     []int
+		visited = make(map[int]int) // map[值]索引
+	)
 	for k, v := range nums {
-		diff := target - v
-		if i, ok := m[diff]; ok {
-			res = append(res, i, k)
+		if idx, ok := visited[target-v]; ok {
+			res = append(res, idx, k)
 			break
 		}
-		m[v] = k
+		visited[v] = k
 	}
 	return res
 }
