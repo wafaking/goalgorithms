@@ -13,6 +13,14 @@ type ListNode struct {
 	Next *ListNode
 }
 
+type item struct {
+	list1, list2, expected *ListNode
+}
+
+type array struct {
+	list1, list2, expected []int
+}
+
 func SetListNode(sli []int) {
 	head = makeListNode(sli)
 }
@@ -21,8 +29,7 @@ func makeListNode(sli []int) *ListNode {
 	dummy := &ListNode{-1, nil}
 	cur := dummy
 	for _, v := range sli {
-		node := &ListNode{v, nil}
-		cur.Next = node
+		cur.Next = &ListNode{v, nil}
 		cur = cur.Next
 	}
 	return dummy.Next
@@ -38,6 +45,19 @@ func PrintHead() {
 	fmt.Println("***********************************")
 	log.Printf("*******NodeList: %#v ********\n", valSli)
 	fmt.Println("***********************************")
+}
+
+func PrintList2(list *ListNode) []int {
+	var (
+		cur = list
+		sli = []int{}
+	)
+
+	for cur != nil {
+		sli = append(sli, cur.Val)
+		cur = cur.Next
+	}
+	return sli
 }
 
 func PrintList(list *ListNode) {

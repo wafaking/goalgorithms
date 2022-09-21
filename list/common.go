@@ -8,9 +8,14 @@ var (
 )
 
 type item struct {
-	list   []int
+	nums   []int
 	target int
 	res    []int
+}
+
+type item2 struct {
+	nums []int
+	res  int
 }
 
 func InitNums(sli []int) {

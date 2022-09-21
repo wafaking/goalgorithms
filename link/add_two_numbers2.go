@@ -1,23 +1,20 @@
 package link
 
-// 链表中的两数相加(sword2-25, 同leetcode-445)
+// 链表中的两数相加(sword2-25/leetcode-445)
 // 给定两个非空链表l1和l2来代表两个非负整数。数字最高位位于链表开始位置。
 // 它们的每个节点只存储一位数字。将这两数相加会返回一个新的链表。
 
-//示例1：
-//输入：l1 = [7,2,4,3], l2 = [5,6,4], 输出：[7,8,0,7]
-
-//示例2：
-//输入：l1 = [2,4,3], l2 = [5,6,4], 输出：[8,0,7]
-
-//示例3：
-//输入：l1 = [0], l2 = [0], 输出：[0]
+//示例1：输入：l1 = [7,2,4,3], l2 = [5,6,4], 输出：[7,8,0,7]
+//  7->2->4->3
+//	   5->6->4
+//示例2：输入：l1 = [2,4,3], l2 = [5,6,4], 输出：[8,0,7]
+//示例3：输入：l1 = [0], l2 = [0], 输出：[0]
 
 //进阶：如果输入链表不能修改该如何处理？换句话说，不能对列表中的节点进行翻转。
 //注意：本题与主站 445 题相同：https://leetcode-cn.com/problems/add-two-numbers-ii/
 
 // 法一：翻转链表
-func addTwoNumbers1(l1 *ListNode, l2 *ListNode) *ListNode {
+func addTwoNumbers21(l1 *ListNode, l2 *ListNode) *ListNode {
 	ll1 := reverseLink(l1)
 	ll2 := reverseLink(l2)
 
@@ -66,7 +63,7 @@ func reverseLink(head *ListNode) *ListNode {
 
 // 法二：借助列表实现(不改变原链表结果,用列表存放每个相加得出的结果)
 // 法二与法三相似，但一个是列表的概念，一个是栈的概念
-func addTwoNumbers2(l1 *ListNode, l2 *ListNode) *ListNode {
+func addTwoNumbers22(l1 *ListNode, l2 *ListNode) *ListNode {
 	var (
 		sli1, sli2, sli []int
 		head1           = l1
@@ -120,7 +117,7 @@ func addTwoNumbers2(l1 *ListNode, l2 *ListNode) *ListNode {
 }
 
 // 法二：借助栈实现
-func addTwoNumbers3(l1 *ListNode, l2 *ListNode) *ListNode {
+func addTwoNumbers23(l1 *ListNode, l2 *ListNode) *ListNode {
 	var (
 		stackA, stackB, stack []int
 		sign                  = 0

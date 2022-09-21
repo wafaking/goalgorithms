@@ -36,7 +36,7 @@ func TestTwoSum(t *testing.T) {
 		{[]int{3, 3}, 6, []int{0, 1}},
 	}
 	for _, v := range samples {
-		res := twoSum1(v.list, v.target)
+		res := twoSum1(v.nums, v.target)
 		if len(res) != len(v.res) {
 			t.Failed()
 		}
@@ -48,7 +48,7 @@ func TestTwoSum(t *testing.T) {
 	}
 	t.Log("------------SPLIT-------------")
 	for _, v := range samples {
-		res := twoSum2(v.list, v.target)
+		res := twoSum2(v.nums, v.target)
 		if len(res) != len(v.res) {
 			t.Failed()
 		}
@@ -61,8 +61,29 @@ func TestTwoSum(t *testing.T) {
 }
 
 func TestFindRepeatNumber(t *testing.T) {
-	res := findRepeatNumber(nums)
-	t.Log("res: ", res)
+	var list = []item{
+		{[]int{2, 3, 1, 0, 2, 5, 3}, 0, nil},
+		{[]int{3, 4, 2, 1, 1, 0}, 0, nil},
+	}
+	for _, v := range list {
+		res := findRepeatNumber1(v.nums)
+		t.Log("res: ", res)
+	}
+	t.Log("-----------SPLIT---------")
+	for _, v := range list {
+		res := findRepeatNumber2(v.nums)
+		t.Log("res: ", res)
+	}
+	t.Log("-----------SPLIT---------")
+	for _, v := range list {
+		res := findRepeatNumber3(v.nums)
+		t.Log("res: ", res)
+	}
+	t.Log("-----------SPLIT---------")
+	for _, v := range list {
+		res := findRepeatNumber4(v.nums)
+		t.Log("res: ", res)
+	}
 }
 
 func TestGetDuplications(t *testing.T) {
@@ -98,7 +119,7 @@ func TestFourSum(t *testing.T) {
 	// 示例2： 输入：nums = [2,2,2,2,2], target=8, 输出：[[2,2,2,2]]
 
 	for _, item := range samples {
-		res := fourSum(item.list, item.target)
+		res := fourSum(item.nums, item.target)
 		t.Log("res: ", res)
 	}
 	t.Log("----------SPLIT------------")
@@ -162,7 +183,7 @@ func TestMerge(t *testing.T) {
 	for _, v := range sli {
 		t.Log("nums1: ", v.nums1)
 		t.Log("nums2: ", v.nums2)
-		merge(v.nums1, v.m, v.nums2, v.n)
+		merge2(v.nums1, v.m, v.nums2, v.n)
 		t.Log("res: ", v.nums1)
 	}
 
@@ -274,4 +295,106 @@ func TestPermuteUnique(t *testing.T) {
 		res := permuteUnique2(nums)
 		t.Logf("res: %v\n", res)
 	}
+}
+
+func TestPrintln2DNums(t *testing.T) {
+	var list = []item{
+		{[]int{2, 2, 2, 4, 6}, 8, nil},
+		//{[]int{1, 1, 1, 2}, 4, nil},
+		//{[]int{0, 0, 0, 0}, 0, nil},
+	}
+	for _, item := range list {
+		res := combinationSum2(item.nums, item.target)
+		t.Logf("res: %v\n", res)
+	}
+}
+
+func TestFindDuplicate(t *testing.T) {
+	var list = []item2{
+		{[]int{1, 2, 2, 3}, 2},
+		{[]int{1, 3, 4, 2, 2}, 2},
+		{[]int{3, 1, 3, 4, 2}, 3},
+		{[]int{1, 2, 3, 3, 3, 5, 4}, 3},
+	}
+	for _, item := range list {
+		res := findDuplicate1(item.nums)
+		t.Logf("res: %t\n", res == item.res)
+	}
+	t.Log("----------SPLIT------------")
+	for _, item := range list {
+		res := findDuplicate21(item.nums)
+		t.Logf("res: %t\n", res == item.res)
+	}
+	t.Log("----------SPLIT------------")
+	for _, item := range list {
+		res := findDuplicate22(item.nums)
+		t.Logf("res: %t\n", res == item.res)
+	}
+	t.Log("----------SPLIT------------")
+	for _, item := range list {
+		res := findDuplicate3(item.nums)
+		t.Logf("res: %t\n", res == item.res)
+	}
+	t.Log("----------SPLIT------------")
+	for _, item := range list {
+		res := findDuplicate4(item.nums)
+		t.Logf("res: %t\n", res == item.res)
+	}
+}
+
+func TestSingleNumber(t *testing.T) {
+	var list = []item2{
+		{[]int{1, 2, 2}, 1},
+		{[]int{4, 1, 2, 1, 2}, 4},
+	}
+	for _, item := range list {
+		res := singleNumber(item.nums)
+		t.Logf("res: %t\n", res == item.res)
+	}
+	t.Log("----------SPLIT------------")
+}
+
+func TestSingleNumber2(t *testing.T) {
+	var list = []item2{
+		//{[]int{6, 3, 6, 6}, 3},
+		//{[]int{2, 2, 3, 2}, 3},
+		//{[]int{0, 1, 0, 1, 0, 1, 99}, 99},
+		//{[]int{-2, -2, 1, -2, 1, 4, 1}, 4},
+		//{[]int{-2, -2, 1, 1, 4, 1, 4, 4, -4, -2}, -4},
+		{[]int{-2, -2, -2, -4}, -4},
+	}
+	for _, item := range list {
+		res := singleNumber21(item.nums)
+		t.Logf("res: %t\n", res == item.res)
+	}
+	t.Log("----------SPLIT------------")
+	for _, item := range list {
+		res := singleNumber22(item.nums)
+		t.Logf("res: %t\n", res == item.res)
+	}
+	t.Log("----------SPLIT------------")
+	for _, item := range list {
+		res := singleNumber23(item.nums)
+		t.Logf("res: %t\n", res == item.res)
+	}
+	t.Log("----------SPLIT------------")
+}
+
+func TestSingleNumber3(t *testing.T) {
+	var list = []item{
+		{[]int{1, 2, 1, 2, 3}, 0, nil},
+		{[]int{2, 2, 3, 3, 4, 5}, 0, []int{4, 5}},
+		{[]int{-2, -2, -3, -4, 1, 1}, 0, []int{-3, -4}},
+		{[]int{-1, 0}, 0, []int{-1, 0}},
+	}
+	for _, item := range list {
+		res := singleNumber31(item.nums)
+		t.Logf("res: %v, expected: %v\n", res, item.res)
+	}
+	t.Log("----------SPLIT------------")
+	for _, item := range list {
+		res := singleNumber32(item.nums)
+		t.Logf("res: %v, expected: %v\n", res, item.res)
+	}
+	t.Log("----------SPLIT------------")
 }
