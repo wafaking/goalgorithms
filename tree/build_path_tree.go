@@ -69,10 +69,24 @@ func (n *PathNode) insert(path string, value string, orginPath string) {
 	return
 }
 
+type item struct {
+	Path    string
+	Content string
+}
+
 func BuildPathTree() {
 	node := NewPathNode("", "", "")
-	node.Insert("1/hello/world1/1/1/b.txt", `{"env":"dev"}`)
-	node.Insert("1/hello/world1/1/1/b.txt", `{"env":"dev"}`)
+	var fileList = []item{
+		{Path: "a/1.txt", Content: "1"},
+		{Path: "a/b/2.txt", Content: "2"},
+		{Path: "a/b/3.txt", Content: "3"},
+		{Path: "a/b/c/4.ppt", Content: "4"},
+	}
+	for _, file := range fileList {
+		node.Insert(file.Path, file.Content)
+	}
+	//node.Insert("1/hello/world1/1/1/b.txt", "")
+	//node.Insert("1/hello/world1/1/1/b.txt", "路")
 	//node.Insert("1/hello/world ", `{"env":"dev"}`)
 	//node.Insert("hello1/world", `{"env":"dev"}`)
 	//node.Insert("/hello1/world/haha", `{"env":"dev"}`)

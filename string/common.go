@@ -1,5 +1,11 @@
 package str
 
+type item struct {
+	Num      float64
+	N        int
+	Expected float64
+}
+
 func reverse(str string) string {
 	bt := []byte(str)
 	for start, end := 0, len(str)-1; start < end; start, end = start+1, end-1 {

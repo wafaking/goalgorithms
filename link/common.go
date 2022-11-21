@@ -21,6 +21,11 @@ type array struct {
 	list1, list2, expected []int
 }
 
+type itemExt struct {
+	array
+	start, end int
+}
+
 func SetListNode(sli []int) {
 	head = makeListNode(sli)
 }
@@ -70,7 +75,7 @@ func PrintList(list *ListNode) {
 		sli = append(sli, cur.Val)
 		cur = cur.Next
 	}
-	fmt.Println("list: ", sli)
+	fmt.Println("array: ", sli)
 }
 
 // 链表添加尾部元素

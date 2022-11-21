@@ -56,9 +56,58 @@ func TestMyAtoi(t *testing.T) {
 		}
 	}
 }
+
 func TestPermutation(t *testing.T) {
-	res := permutation4("abc")
-	log.Println("res: ", res)
+	var list = []string{
+		"abc",
+		"aac",
+		//"中1c",
+	}
+	for _, item := range list {
+		res := permutation1(item)
+		t.Logf("res: %v\n", res)
+		t.Log("----------SPLIT------------")
+		res = permutation2(item)
+		t.Logf("res: %v\n", res)
+		t.Log("----------SPLIT------------")
+		res = permutation3(item)
+		t.Logf("res: %v\n", res)
+		t.Log("----------SPLIT------------")
+		//res = permutation4(item)
+		//t.Logf("res: %v\n", res)
+		//t.Log("----------SPLIT------------")
+		//res = permutation5(item)
+		//t.Logf("res: %v\n", res)
+		//t.Log("----------SPLIT------------")
+
+	}
+}
+
+func TestLetterCasePermutation(t *testing.T) {
+	var list = []string{
+		"1a2b3c",
+		//"3z4",
+		//"a1b2",
+		//"中1c",
+	}
+	for _, item := range list {
+		//res := letterCasePermutation11(item)
+		//t.Logf("res: %v\n", res)
+		//t.Log("----------SPLIT------------")
+		res := letterCasePermutation12(item)
+		t.Logf("res: %v\n", res)
+		t.Log("----------SPLIT------------")
+		//res = permutation3(item)
+		//t.Logf("res: %v\n", res)
+		//t.Log("----------SPLIT------------")
+		//res = permutation4(item)
+		//t.Logf("res: %v\n", res)
+		//t.Log("----------SPLIT------------")
+		//res = permutation5(item)
+		//t.Logf("res: %v\n", res)
+		//t.Log("----------SPLIT------------")
+
+	}
 }
 
 func TestCheckInclusion(t *testing.T) {
@@ -131,7 +180,7 @@ func TestAddStrings(t *testing.T) {
 	//var num1, num2 = "333", "adb"
 	var num1, num2 = "399", "21"
 	//var num1, num2 = "59", "93"
-	res := addStrings2(num1, num2)
+	res := AddStrings2(num1, num2)
 	t.Logf("res: %s, num1：%s, num2:%s", res, num1, num2)
 }
 
@@ -165,5 +214,37 @@ func TestLongestPalindrome(t *testing.T) {
 		//res := longestPalindrome1(str)
 		res := longestPalindrome2(str)
 		t.Logf(" Right: %t, res：%s, expected:%s, str: %s", res == expected, res, expected, str)
+	}
+
+}
+func TestMyPow(t *testing.T) {
+	list := []item{
+		{
+			Num:      2.00000,
+			N:        10,
+			Expected: 1024.00000,
+		},
+		{
+			Num:      2.10000,
+			N:        3,
+			Expected: 9.26100,
+		},
+		{
+			Num:      2.00000,
+			N:        -2,
+			Expected: 0.25000,
+		},
+	}
+
+	for _, item := range list {
+		res := myPow11(item.Num, item.N)
+		t.Logf("%f(res): %f(expected),num: %f, n=%d", res, item.Expected, item.Num, item.N)
+		t.Log("-----------SPLIT----------")
+		res = myPow12(item.Num, item.N)
+		t.Logf("%f(res): %f(expected),num: %f, n=%d", res, item.Expected, item.Num, item.N)
+		t.Log("-----------SPLIT----------")
+		res = myPow13(item.Num, item.N)
+		t.Logf("%f(res): %f(expected),num: %f, n=%d", res, item.Expected, item.Num, item.N)
+		t.Log("-----------SPLIT----------")
 	}
 }

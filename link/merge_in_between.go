@@ -1,22 +1,16 @@
 package link
 
-//给你两个链list1和list2，它们包含的元素分别为n个和m个。
-//请你将list1中下标从a到b的全部节点都删除，并将list2接在被删除节点的位置。
-//下图中蓝色边和节点展示了操作后的结果：
-//请你返回结果链表的头指针。
+// 合并两个链表(leetcode-1669)
+// 给定元素个数分别为n和m的链表list1和list2, 请将list1中
+// 下标从a到b的全部节点都删除，并将list2接在被删除节点的位置。
 
-//示例 1：
-//输入：list1 = [0,1,2,3,4,5], a = 3, b = 4, list2 = [1000000,1000001,1000002]
-//输出：[0,1,2,1000000,1000001,1000002,5]
-//解释：我们删除 list1 中下标为 3 和 4 的两个节点，并将 list2 接在该位置。上图中蓝色的边和节点为答案链表。
-
-//示例 2：
-//输入：list1 = [0,1,2,3,4,5,6], a = 2, b = 5, list2 = [1000000,1000001,1000002,1000003,1000004]
-//输出：[0,1,1000000,1000001,1000002,1000003,1000004,6]
-//解释：上图中蓝色的边和节点为答案链表。
+// 示例1： 输入：list1 = [0,1,2,3,4,5], a = 3, b = 4, list2 = [1000000,1000001,1000002]
+// 输出：[0,1,2,1000000,1000001,1000002,5]
+// 示例2：输入：list1 = [0,1,2,3,4,5,6], a = 2, b = 5, list2 = [1000000,1000001,1000002,1000003,1000004]
+// 输出：[0,1,1000000,1000001,1000002,1000003,1000004,6]
 
 // 双指针法，记录pre, next位置，将list2.Next=next, pre.Next=list2
-func mergeInBetween(list1 *ListNode, a int, b int, list2 *ListNode) *ListNode {
+func mergeInBetween1(list1 *ListNode, a int, b int, list2 *ListNode) *ListNode {
 	//1. 特殊案例
 	// 1.1 list1为空链表时，直接返回list2s
 	if list1 == nil {
@@ -73,4 +67,51 @@ func addTailList(head, list *ListNode) *ListNode {
 	}
 	cur.Next = list
 	return head
+}
+
+// mergeInBetween2 暂不考虑a,b小于0的情况
+func mergeInBetween2(list1 *ListNode, a int, b int, list2 *ListNode) *ListNode {
+	if list1 == nil {
+		return list2
+	}
+
+	if a > b {
+		a, b = b, a
+	}
+
+	var (
+		pos  int
+		cur  = list1
+		cur2 = list2
+	)
+
+	for ; cur.Next != nil; cur = cur.Next {
+		if pos == b {
+			break
+		}
+		pos++
+	}
+
+	for cur2 != nil && cur2.Next != nil {
+		cur2 = cur2.Next
+	}
+
+	if cur2 == nil {
+		list2 = cur.Next
+	} else {
+		cur2.Next = cur.Next
+	}
+
+	cur = list1
+	pos = 0
+	for ; cur.Next != nil; cur = cur.Next {
+		pos++
+		if pos == a {
+			break
+		}
+	}
+
+	cur.Next = list2
+
+	return list1
 }

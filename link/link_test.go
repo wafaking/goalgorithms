@@ -30,13 +30,27 @@ func TestDeleteDuplicatesAll(t *testing.T) {
 }
 
 func TestReversePrint(t *testing.T) {
-	//reversePrint(head)
-	//res := reversePrint23(head)
-	//log.Println("res: ", res)
-
-	//log.Println("--------split-----------split------")
-
-	reversePrint4(head)
+	var (
+		list = [][]int{
+			{1, 2, 3},
+			{1, 2, 3, 4},
+		}
+	)
+	for _, sli := range list {
+		res := reversePrint1(makeListNode(sli))
+		t.Logf("res: %+v", res)
+		t.Log("---------------SPLIT-------------SPLIT-------")
+		res = reversePrint2(makeListNode(sli))
+		t.Logf("res: %+v", res)
+		t.Log("---------------SPLIT-------------SPLIT-------")
+		res = reversePrint3(makeListNode(sli))
+		t.Logf("res: %+v", res)
+		t.Log("---------------SPLIT-------------SPLIT-------")
+		res = reversePrint4(makeListNode(sli))
+		t.Logf("res: %+v", res)
+		t.Log("---------------SPLIT-------------SPLIT-------")
+	}
+	//reversePrint4(head)
 	//log.Println("res: ", res)
 
 }
@@ -144,34 +158,30 @@ func TestAddTwoNumbers2(t *testing.T) {
 }
 
 func TestMergeInBetween(t *testing.T) {
-	//var (
-	//	ll1      = []int{0, 1, 2, 3, 4, 5}
-	//	ll2      = []int{1000000, 1000001, 1000002}
-	//	expected = []int{0, 1, 2, 1000000, 1000001, 1000002, 5}
-	//	a        = 2
-	//	b        = 5
-	//)
+	var array = array{
+		list1:    []int{0, 1, 2, 3, 4, 5, 6},
+		list2:    []int{1000000, 1000001, 1000002},
+		expected: []int{0, 1, 1000000, 1000001, 1000002, 5, 6},
+	}
+	var list = [][2]int{
+		//{2, 4},
+		//{4, 2},
+		{-2, -1},
+		//{0, 6},
+	}
 
-	//var (
-	//	ll1      = []int{0, 1, 2, 3, 4, 5, 6}
-	//	ll2      = []int{1000000, 1000001, 1000002, 1000003, 1000004}
-	//	expected = []int{0, 1, 1000000, 1000001, 1000002, 1000003, 1000004, 6}
-	//	a        = 5
-	//	b        = 2
-	//)
+	for _, item := range list {
+		list1 := makeListNode(array.list1)
+		list2 := makeListNode(array.list2)
+		res := mergeInBetween1(list1, item[0], item[1], list2)
+		t.Logf("res: %v, expected: %+v", PrintList2(res), array.expected)
+		t.Logf("---------------SPLIT-------------")
 
-	var (
-		ll1      = []int{0, 1, 2, 3, 4, 5, 6}
-		ll2      = []int{1000000, 1000001, 1000002, 1000003, 1000004}
-		expected = []int{1000000, 1000001, 1000002, 1000003, 1000004, 6}
-		a        = 5
-		b        = 0
-	)
+		list1 = makeListNode(array.list1)
+		list2 = makeListNode(array.list2)
+		res = mergeInBetween2(list1, item[0], item[1], list2)
+		t.Logf("res: %v, expected: %+v", PrintList2(res), array.expected)
 
-	list1 := makeListNode(ll1)
-	list2 := makeListNode(ll2)
-
-	res := mergeInBetween(list1, a, b, list2)
-	PrintList(res)
-	log.Printf("expected: %+v", expected)
+		t.Logf("---------------SPLIT-------------")
+	}
 }

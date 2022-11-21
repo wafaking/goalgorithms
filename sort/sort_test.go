@@ -23,7 +23,7 @@ func TestMain(t *testing.M) {
 func TestBubbleSort(t *testing.T) {
 	for _, list := range commonListArray {
 		BubbleSort(list)
-		t.Logf("list: %v", list)
+		t.Logf("array: %v", list)
 		for i := 0; i < len(list)-2; i++ {
 			if list[i] > list[i+1] {
 				fmt.Println(list)
@@ -107,10 +107,10 @@ func BenchmarkBubbleSortStandardOptimize100000(b *testing.B) {
 
 func TestInsertSort(t *testing.T) {
 	for _, list := range commonListArray {
-		t.Logf("start list: %v", list)
+		t.Logf("start array: %v", list)
 		InsertSort1(list)
-		//InsertSort2(list)
-		t.Logf("end list: %v", list)
+		//InsertSort2(array)
+		t.Logf("end array: %v", list)
 		for i := 0; i < len(list)-2; i++ {
 			if list[i] > list[i+1] {
 				fmt.Println(list)
