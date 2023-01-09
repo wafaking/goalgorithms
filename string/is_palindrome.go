@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func isPalindrome(s string) bool {
+func isPalindromeStr1(s string) bool {
 	var build strings.Builder
 
 	for _, v := range s {
@@ -30,7 +30,7 @@ func isPalindrome(s string) bool {
 	return true
 }
 
-func isPalindrome1(s string) bool {
+func isPalindromeStr2(s string) bool {
 	var start, end = 0, len(s) - 1
 	s = strings.ToLower(s)
 	fmt.Println(s, start, end)

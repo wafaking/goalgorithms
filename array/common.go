@@ -18,6 +18,17 @@ type item2 struct {
 	expected int
 }
 
+type item3 struct {
+	nums     []int
+	target   int
+	expected int
+}
+
+type item4 struct {
+	target   int
+	expected int
+}
+
 func InitNums(sli []int) {
 	nums = sli
 }

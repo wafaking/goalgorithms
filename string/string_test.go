@@ -85,17 +85,27 @@ func TestPermutation(t *testing.T) {
 
 func TestLetterCasePermutation(t *testing.T) {
 	var list = []string{
-		"1a2b3c",
+		"ab",
+		"abc",
+		"a1b2",
+		//"1a2b3c",
 		//"3z4",
-		//"a1b2",
+		//"123",
 		//"中1c",
 	}
 	for _, item := range list {
-		//res := letterCasePermutation11(item)
-		//t.Logf("res: %v\n", res)
-		//t.Log("----------SPLIT------------")
-		res := letterCasePermutation12(item)
+		res := letterCasePermutation1(item)
 		t.Logf("res: %v\n", res)
+		res = letterCasePermutation2(item)
+		t.Logf("res: %v\n", res)
+		res = letterCasePermutation3(item)
+		t.Logf("res: %v\n", res)
+		res = letterCasePermutation4(item)
+		t.Logf("res: %v\n", res)
+		res = letterCasePermutation5(item)
+		t.Logf("res: %v\n", res)
+		//res = letterCasePermutation6(item)
+		//t.Logf("res: %v\n", res)
 		t.Log("----------SPLIT------------")
 		//res = permutation3(item)
 		//t.Logf("res: %v\n", res)
@@ -132,15 +142,16 @@ func TestRemoveKdigits(t *testing.T) {
 
 func TestChineseToNumber(t *testing.T) {
 	var listMap = map[string]int64{
-		"四千五百一十三":          4513,
-		"四万":               40000,
-		"四万二千五百一十三":        42513,
-		"四万零五百一十三":         40513,
-		"七千零七十九万":          70790000,
-		"一亿七千七十九万七千一百九十七":  170797197,
-		"一亿七千零七十九万七千一百九十七": 170797197,
-		"一千亿七千七十九万七千一百九十七": 100070797197,
-		"一万亿七千七十九万七千一百九十七": 1000070807197,
+		//"四千五百一十三":          4513,
+		//"四万":               40000,
+		//"四万二千五百一十三":        42513,
+		//"四万零五百一十三":         40513,
+		//"七千零七十九万":          70790000,
+		//"一亿七千七十九万七千一百九十七":  170797197,
+		//"一亿七千零七十九万七千一百九十七": 170797197,
+		//"一千亿七千七十九万七千一百九十七": 100070797197,
+		//"一万亿七千七十九万七千一百九十七": 1000070807197,
+		"11000万": 1000,
 	}
 	for k, expected := range listMap {
 		//res := chineseToNumber(v)
@@ -245,6 +256,35 @@ func TestMyPow(t *testing.T) {
 		t.Log("-----------SPLIT----------")
 		res = myPow13(item.Num, item.N)
 		t.Logf("%f(res): %f(expected),num: %f, n=%d", res, item.Expected, item.Num, item.N)
+		t.Log("-----------SPLIT----------")
+	}
+}
+
+func TestIsPalindromeInt1(t *testing.T) {
+	var list = []int{
+		-121,
+		0,
+		1,
+		10,
+		11,
+		1221,
+		1224,
+		1001,
+		12321,
+		12341,
+		10021,
+		100021,
+	}
+	for _, num := range list {
+		res := isPalindrome1(num)
+		t.Logf("res: %t, num=%d", res, num)
+		//t.Log("-----------SPLIT----------")
+		res = isPalindrome21(num)
+		t.Logf("res: %t, num=%d", res, num)
+		res = isPalindrome22(num)
+		t.Logf("res: %t, num=%d", res, num)
+		res = isPalindrome3(num)
+		t.Logf("res: %t, num=%d", res, num)
 		t.Log("-----------SPLIT----------")
 	}
 }

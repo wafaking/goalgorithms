@@ -11,3 +11,6 @@ func main() {
 	// 100000
 	//1100001 97
 }
+
+type Student struct {
+}

@@ -74,8 +74,48 @@ func TestDeleteValue(t *testing.T) {
 }
 
 func TestReverseList(t *testing.T) {
-	reverseList()
-	PrintHead()
+
+	var (
+		list = [][]int{
+			{1, 2, 3},
+			{1, 2, 3, 4},
+		}
+	)
+	for _, sli := range list {
+		res := PrintList2(reverseList1(makeListNode(sli)))
+		t.Logf("res: %+v", res)
+		t.Log("---------------SPLIT-------------SPLIT-------")
+		res = PrintList2(reverseList2(makeListNode(sli)))
+		t.Logf("res: %+v", res)
+		t.Log("---------------SPLIT-------------SPLIT-------")
+		res = PrintList2(reverseList3(makeListNode(sli)))
+		t.Logf("res: %+v", res)
+		t.Log("---------------SPLIT-------------SPLIT-------")
+	}
+}
+
+func TestReverseBetween(t *testing.T) {
+
+	var (
+		list = [][]int{
+			//{1, 2, 3},
+			{1, 2, 3, 4, 5, 6},
+		}
+	)
+	for _, sli := range list {
+		res := PrintList2(reverseBetween1(makeListNode(sli), 1, 6))
+		t.Logf("res: %+v", res)
+		t.Log("---------------SPLIT-------------SPLIT-------")
+		res = PrintList2(reverseBetween2(makeListNode(sli), 1, 5))
+		t.Logf("res: %+v", res)
+		t.Log("---------------SPLIT-------------SPLIT-------")
+		//res = PrintList2(reverseList2(makeListNode(sli)))
+		//t.Logf("res: %+v", res)
+		//t.Log("---------------SPLIT-------------SPLIT-------")
+		//res = PrintList2(reverseList3(makeListNode(sli)))
+		//t.Logf("res: %+v", res)
+		//t.Log("---------------SPLIT-------------SPLIT-------")
+	}
 }
 
 func TestMiddleNode(t *testing.T) {
@@ -183,5 +223,34 @@ func TestMergeInBetween(t *testing.T) {
 		t.Logf("res: %v, expected: %+v", PrintList2(res), array.expected)
 
 		t.Logf("---------------SPLIT-------------")
+	}
+}
+
+func TestGetDecimalValue(t *testing.T) {
+	var array = []array{
+		{
+			list1:    []int{1, 0, 1},
+			expected: []int{5},
+		},
+		{
+			list1:    []int{0, 0},
+			expected: []int{0},
+		},
+		{
+			list1:    []int{1},
+			expected: []int{1},
+		},
+		{
+			list1:    []int{1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+			expected: []int{18880},
+		},
+	}
+	for _, item := range array {
+		res := getDecimalValue1(makeListNode(item.list1))
+		t.Logf("res: %t, %d, list:%v", res == item.expected[0], res, item.list1)
+		res = getDecimalValue2(makeListNode(item.list1))
+		t.Logf("res: %t, %d, list:%v", res == item.expected[0], res, item.list1)
+		res = getDecimalValue3(makeListNode(item.list1))
+		t.Logf("res: %t, %d, list:%v", res == item.expected[0], res, item.list1)
 	}
 }

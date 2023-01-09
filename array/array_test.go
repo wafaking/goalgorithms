@@ -24,11 +24,6 @@ func TestMain(t *testing.M) {
 	t.Run()
 }
 
-func TestFindKthLargest(t *testing.T) {
-	var k = 2
-	fmt.Println("res: ", findKthLargest(nums, k))
-}
-
 func TestTwoSum(t *testing.T) {
 	var samples = []item{
 		{[]int{2, 7, 11, 15}, 9, []int{0, 1}},
@@ -309,9 +304,9 @@ func TestPermute(t *testing.T) {
 		res = permute3(nums)
 		t.Logf("res: %v\n", res)
 		t.Log("-------------SPLIT----------")
-		res = permute32(nums)
-		t.Logf("res: %v\n", res)
-		t.Log("-------------SPLIT----------")
+		//res = permute32(nums)
+		//t.Logf("res: %v\n", res)
+		//t.Log("-------------SPLIT----------")
 	}
 }
 
@@ -553,4 +548,33 @@ func TestSubsets1(t *testing.T) {
 		res = subsets2(item.nums)
 		t.Logf("res: %v\n", res)
 	}
+}
+
+func TestKthLargest(t *testing.T) {
+	var nums = []int{4, 5, 8, 2}
+	var list = []item4{
+		{3, 4},
+		{5, 5},
+		{10, 5},
+		{9, 8},
+		{4, 8},
+	}
+
+	// [[3, [4, 5, 8, 2]], [3], [5], [10], [9], [4]], 输出：[null, 4, 5, 5, 8, 8]
+	// [4, 5, 8, 2]的第3大元素：4
+	// [4, 5, 8, 2, 3]---> 4
+	// [4, 5, 8, 2, 3, 5]---> 5
+	// [4, 5, 8, 2, 3, 5, 10]---> 5
+	// [4, 5, 8, 2, 3, 5, 10, 9]---> 8
+	// [4, 5, 8, 2, 3, 5, 10, 9, 4]---> 8
+	var kth = Constructor(3, nums)
+	for _, item := range list {
+		res := kth.Add(item.target)
+		t.Logf("%t, expected: %d, res:%d", res == item.expected, item.expected, res)
+	}
+}
+
+func TestFindKthLargest(t *testing.T) {
+	var k = 2
+	fmt.Println("res: ", findKthLargest1(nums, k))
 }
