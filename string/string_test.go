@@ -127,16 +127,30 @@ func TestCheckInclusion(t *testing.T) {
 }
 
 func TestRemoveKdigits(t *testing.T) {
-	sli := map[string]int{
-		"1432219": 3, // 1219
-		"10200":   1, // 200
-		"10":      2, // 0
-		"10001":   4, // 0
+	var list = []item2{
+		{Num: "10001", N: 1, Expected: "1"},
+		{Num: "100010", N: 1, Expected: "10"},
+		{Num: "1432219", N: 3, Expected: "1219"},
+		{Num: "10200", N: 1, Expected: "200"},
+		{Num: "10", N: 1, Expected: "0"},
+		{Num: "10", N: 2, Expected: "0"},
+		{Num: "10", N: 3, Expected: "0"},
+		{Num: "10001", N: 4, Expected: "0"},
+		{Num: "10001", N: 2, Expected: "0"},
+		{Num: "1102912", N: 2, Expected: "2912"},
+		{Num: "1102912", N: 3, Expected: "212"},
+		{Num: "11111", N: 3, Expected: "11"},
+		{Num: "12345", N: 2, Expected: "123"},
 	}
-	for str, k := range sli {
-		//res := removeKdigits1(str, k)
-		res := removeKdigits2(str, k)
-		log.Printf("res---- str:%s, k: %d, res: %s\n", str, k, res)
+	for _, item := range list {
+		res := removeKdigits1(item.Num, item.N)
+		if res != item.Expected {
+			t.Fatalf("removeKdigits1 FAILED, res: %s, expected:%s, item:%#v", res, item.Expected, item)
+		}
+		res = removeKdigits2(item.Num, item.N)
+		if res != item.Expected {
+			t.Fatalf("removeKdigits2 FAILED, res: %s, expected:%s, item:%#v", res, item.Expected, item)
+		}
 	}
 }
 
@@ -286,5 +300,27 @@ func TestIsPalindromeInt1(t *testing.T) {
 		res = isPalindrome3(num)
 		t.Logf("res: %t, num=%d", res, num)
 		t.Log("-----------SPLIT----------")
+	}
+}
+
+func TestLengthOfLongestSubstring(t *testing.T) {
+	var list = []struct {
+		Str      string
+		Expected int
+	}{
+		{Str: "abcabcbb", Expected: 3},
+		{Str: "bbbbb", Expected: 1},
+		{Str: "pwwkew", Expected: 3},
+	}
+	for _, item := range list {
+		res := lengthOfLongestSubstring2(item.Str)
+		if res != item.Expected {
+			log.Fatalf("lengthOfLongestSubstring2 failed, res: %d, item:%#v", res, item)
+		}
+
+		res = lengthOfLongestSubstring3(item.Str)
+		if res != item.Expected {
+			log.Fatalf("lengthOfLongestSubstring3 failed, res: %d, item:%#v", res, item)
+		}
 	}
 }

@@ -1,21 +1,70 @@
 package str
 
 // 无重复字符的最长子串(leetcode-3)
-// 给定一个字符串s，请你找出其中不含有重复字符的 最长子串的长度。
+// 给定一个字符串s，请你找出其中不含有重复字符的最长子串的长度。
+// 注："pwke"是"pwwkew"子序列，不是子串。
 
-// 示例 1: 输入: s = "abcabcbb" 输出: 3
-// 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
-// 示例 2: 输入: s = "bbbbb" 输出: 1
-// 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
-// 示例 3: 输入: s = "pwwkew" 输出: 3
-// 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
-// 请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+// 示例1: 输入:s="abcabcbb" 输出: 3(abc)
+// 示例2: 输入:s="bbbbb" 输出: 1(b)
+// 示例3: 输入:s="pwwkew" 输出: 3(wke)
 
-func lengthOfLongestSubstring(s string) int {
+// lengthOfLongestSubstring1 使用map，双层遍历
+func lengthOfLongestSubstring1(s string) int {
+	var maxLength int
+	for i := 0; i < len(s); i++ {
+		var m = map[uint8]struct{}{s[i]: {}}
+		for j := i + 1; j < len(s); j++ {
+			if _, ok := m[s[j]]; ok {
+				break
+			}
+			m[s[j]] = struct{}{}
+		}
+		if len(m) > maxLength {
+			maxLength = len(m)
+		}
+	}
+	return maxLength
+}
+
+// lengthOfLongestSubstring2 使用滑动窗口
+func lengthOfLongestSubstring2(s string) int {
+	var (
+		maxLength int
+		m         = make(map[uint8]struct{})
+	)
+	// i, j 分别表示滑动窗口的左、右边界
+	for i, j := 0, 0; i < len(s) && j < len(s); {
+		// 右边界没有重复，添加
+		if _, ok := m[s[j]]; !ok {
+			m[s[j]] = struct{}{}
+			j++
+			if maxLength < len(m) {
+				maxLength = len(m)
+			}
+			continue
+		}
+		// 有重复,则从左边界i判断重复的字符
+		for {
+			if s[i] == s[j] { // 此位置重复，则左、右边界都右移
+				i++
+				j++
+				break
+			} else { // 不重复，则左边界右移, 并移除已记录的元素
+				delete(m, s[i])
+				i++
+			}
+		}
+	}
+
+	return maxLength
+}
+
+// lengthOfLongestSubstring21 滑动窗口
+func lengthOfLongestSubstring21(s string) int {
 	// 哈希集合，记录每个字符是否出现过
 	m := map[byte]int{}
 	n := len(s)
-	// 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
+	// 右指针，初始值为-1，相当于我们在字符串的左边界的左侧，还没有开始移动
 	rk, ans := -1, 0
 	for i := 0; i < n; i++ {
 		if i != 0 {

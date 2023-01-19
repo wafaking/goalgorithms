@@ -1,7 +1,6 @@
 package array
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -575,6 +574,25 @@ func TestKthLargest(t *testing.T) {
 }
 
 func TestFindKthLargest(t *testing.T) {
-	var k = 2
-	fmt.Println("res: ", findKthLargest1(nums, k))
+	var list = []item3{
+		{nums: []int{6, 8, 10, 7, 4, 5, 9, 2, 3, 1}, target: 3, expected: 8},
+		{nums: []int{3, 2, 1, 5, 6, 4}, target: 2, expected: 5},
+		{nums: []int{3, 2, 3, 1, 2, 4, 5, 5, 6}, target: 4, expected: 4},
+	}
+
+	for _, item := range list {
+		var nums = item.nums
+		res := findKthLargest1(item.nums, item.target)
+		if res != item.expected {
+			t.Fatalf("res: %d, origin:%+v", res, item)
+		}
+
+		t.Log("-------SPLIT-----------SPLIT------SPLIT----------")
+
+		nums = item.nums
+		res = findKthLargest2(nums, item.target)
+		if res != item.expected {
+			t.Fatalf("res: %d, origin:%+v", res, item)
+		}
+	}
 }
