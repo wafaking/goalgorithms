@@ -1,6 +1,8 @@
 package tree
 
 import (
+	"encoding/json"
+	"fmt"
 	"log"
 	"testing"
 )
@@ -102,5 +104,42 @@ func TestPostBuildTree(t *testing.T) {
 }
 
 func TestBuildPathTree(t *testing.T) {
-	BuildPathTree()
+	var (
+		fileList = []item{
+			{Path: "a/1.txt", Content: "1"},
+			{Path: "a/b/2.txt", Content: "2"},
+			{Path: "a/b/3.txt", Content: "3"},
+			{Path: "a/b/c/4.ppt", Content: "4"},
+
+			// new add
+			{Path: "a/c/ac.txt", Content: "1"},
+			{Path: "m/n/mn.txt", Content: "1"},
+			{Path: "m/m.txt", Content: "1"},
+		}
+
+		gitKeepList = []item{
+			{Path: ".gitkeep", Content: "1"},
+			{Path: "a/b/c/.gitkeep", Content: "3"},
+			{Path: "a/b/.gitkeep", Content: "3"},
+			{Path: "a/c/.gitkeep", Content: "1"},
+			{Path: "m/n/.gitkeep", Content: "1"},
+			{Path: "m/.gitkeep", Content: "1"},
+		}
+		// result:
+		//		a/b --> del
+		//		a/b/c --> del
+		//		a/c --> add
+		//		m	--> add
+		//		m/n --> add
+	)
+
+	pathNode := BuildPathTree(fileList)
+
+	SignDirDelta(gitKeepList, pathNode)
+
+	res, err := json.Marshal(pathNode)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(res))
 }

@@ -1,9 +1,8 @@
 package tree
 
 import (
-	"encoding/json"
-	"fmt"
-	"log"
+	pathPkg "path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -11,61 +10,110 @@ import (
 
 type PathNode struct {
 	Name     string      `json:"name"`
-	Path     string      `json:"path"`
+	FullPath string      `json:"path"`
 	Value    string      `json:"value"`
+	DiffType string      `json:"diff_type"`
 	Children []*PathNode `json:"children"`
 }
 
-func NewPathNode(name string, value string, path string) *PathNode {
+func NewPathNode(name string, value string, fullPath string) *PathNode {
 	return &PathNode{
 		Name:     name,
 		Value:    value,
-		Path:     path,
+		FullPath: fullPath,
 		Children: []*PathNode{},
 	}
 }
 
-func (n *PathNode) Insert(path string, value string) {
-	n.insert(path, value, path)
+func (n *PathNode) Insert(fullPath string, value string) {
+	n.insert(fullPath, value, fullPath)
 }
 
 //根据路径插入值
-func (n *PathNode) insert(path string, value string, orginPath string) {
-	if string(path[0]) == "/" {
-		path = path[1:]
+func (n *PathNode) insert(fullPath string, value string, originPath string) {
+	if string(fullPath[0]) == "/" {
+		fullPath = fullPath[1:]
 	}
-	ps := strings.Split(path, "/")
+	ps := strings.Split(fullPath, "/")
 	length := len(ps)
-	is_exist := false
+	isExist := false
 	for _, p := range n.Children {
 		if ps[0] == p.Name {
-			is_exist = true
+			isExist = true
 			if length == 1 {
 				p.Value = value
-				p.Path = orginPath
+				p.FullPath = originPath
 			}
 			if length > 1 {
-				//p.Path = orginPath[:strings.Index(orginPath, ps[0])+len(ps[0])]
-				p.Path = orginPath[:strings.Index(orginPath, path)+len(ps[0])]
-				p.insert(path[len(ps[0]):], value, orginPath)
+				//p.FullPath = originPath[:strings.Index(originPath, ps[0])+len(ps[0])]
+				p.FullPath = originPath[:strings.Index(originPath, fullPath)+len(ps[0])]
+				p.insert(fullPath[len(ps[0]):], value, originPath)
 			}
 		}
 	}
-	if !is_exist {
+	if !isExist {
 		newPathNode := &PathNode{
 			Name:     strings.TrimSpace(ps[0]),
 			Children: []*PathNode{},
 		}
 		if length == 1 {
 			newPathNode.Value = value
-			newPathNode.Path = strings.TrimSpace(orginPath)
+			newPathNode.FullPath = strings.TrimSpace(originPath)
 		} else if length > 1 {
-			//newPathNode.Path = orginPath[:strings.LastIndex(orginPath, ps[0])+len(ps[0])]
-			newPathNode.Path = orginPath[:strings.Index(orginPath, path)+len(ps[0])]
-			newPathNode.insert(path[len(ps[0]):], value, orginPath)
+			//newPathNode.Path = originPath[:strings.LastIndex(originPath, ps[0])+len(ps[0])]
+			newPathNode.FullPath = originPath[:strings.Index(originPath, fullPath)+len(ps[0])]
+			newPathNode.insert(fullPath[len(ps[0]):], value, originPath)
 		}
 		n.Children = append(n.Children, newPathNode)
 	}
+	return
+}
+
+func (n *PathNode) Sign(fullPath string, value string) {
+	fullPath = pathPkg.Dir(fullPath)
+	n.sign(fullPath, value, fullPath)
+}
+
+//根据路径插入值
+func (n *PathNode) sign(fullPath string, value string, originPath string) {
+	if string(fullPath[0]) == "/" {
+		fullPath = fullPath[1:]
+	}
+	ps := strings.Split(fullPath, "/")
+	length := len(ps)
+
+	//isExist := false
+	for _, p := range n.Children {
+		if ps[0] == p.Name {
+			//isExist = true
+			if length == 1 {
+				//p.Value = value
+				//p.Path = originPath
+				p.DiffType = value
+			}
+			if length > 1 {
+				//p.Path = originPath[:strings.Index(originPath, ps[0])+len(ps[0])]
+				//p.FullPath = originPath[:strings.Index(originPath, fullPath)+len(ps[0])]
+				p.sign(fullPath[len(ps[0]):], value, originPath)
+			}
+		}
+	}
+	//if !isExist {
+	//	newPathNode := &PathNode{
+	//		Name:     strings.TrimSpace(ps[0]),
+	//		Children: []*PathNode{},
+	//	}
+	//	if length == 1 {
+	//		//newPathNode.Value = value
+	//		//newPathNode.FullPath = strings.TrimSpace(originPath)
+	//		newPathNode.DiffType = value
+	//	} else if length > 1 {
+	//		//newPathNode.Path = originPath[:strings.LastIndex(originPath, ps[0])+len(ps[0])]
+	//		newPathNode.FullPath = originPath[:strings.Index(originPath, fullPath)+len(ps[0])]
+	//		newPathNode.sign(fullPath[len(ps[0]):], value, originPath)
+	//	}
+	//	n.Children = append(n.Children, newPathNode)
+	//}
 	return
 }
 
@@ -74,17 +122,8 @@ type item struct {
 	Content string
 }
 
-func BuildPathTree() {
+func BuildPathTree(fileList []item) *PathNode {
 	node := NewPathNode("", "", "")
-	var fileList = []item{
-		{Path: "a/1.txt", Content: "1"},
-		{Path: "a/b/2.txt", Content: "2"},
-		{Path: "a/b/3.txt", Content: "3"},
-		{Path: "a/b/c/4.ppt", Content: "4"},
-	}
-	for _, file := range fileList {
-		node.Insert(file.Path, file.Content)
-	}
 	//node.Insert("1/hello/world1/1/1/b.txt", "")
 	//node.Insert("1/hello/world1/1/1/b.txt", "路")
 	//node.Insert("1/hello/world ", `{"env":"dev"}`)
@@ -93,9 +132,23 @@ func BuildPathTree() {
 	//node.Insert("/hello1/world1/haha", `{"env":"dev"}`)
 	//node.Insert("/hello2/world", `{"env":"dev3"}`)
 	//node.Insert("/hello3/world3/haha/hehe/aa", `{"env":"dev"}`)
-	res, err := json.Marshal(node)
-	if err != nil {
-		log.Fatal(err)
+	for _, file := range fileList {
+		node.Insert(file.Path, file.Content)
 	}
-	fmt.Println(string(res))
+	return node
+}
+
+func SignDirDelta(fileList []item, pathNode *PathNode) {
+	if pathNode == nil {
+		return
+	}
+	sort.Slice(fileList, func(i, j int) bool {
+		return fileList[i].Path < fileList[j].Path
+	})
+	for _, v := range fileList {
+		if v.Path == ".gitkeep" {
+			continue
+		}
+		pathNode.Sign(v.Path, v.Content)
+	}
 }

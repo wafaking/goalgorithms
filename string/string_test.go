@@ -318,7 +318,7 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 			log.Fatalf("lengthOfLongestSubstring2 failed, res: %d, item:%#v", res, item)
 		}
 
-		res = lengthOfLongestSubstring3(item.Str)
+		res = lengthOfLongestSubstring21(item.Str)
 		if res != item.Expected {
 			log.Fatalf("lengthOfLongestSubstring3 failed, res: %d, item:%#v", res, item)
 		}

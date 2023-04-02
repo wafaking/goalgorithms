@@ -12,9 +12,9 @@ import (
 
 // threeSum1，排序后拆分成a=-(b+c),a固定，b+c用双指针确定
 func threeSum1(nums []int) [][]int {
-	var res [][]int
 	sort.Ints(nums)
 
+	var res [][]int
 	// 先枚举a
 	for i := 0; i < len(nums)-2; i++ {
 		if nums[i] > 0 {
