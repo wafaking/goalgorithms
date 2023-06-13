@@ -12,6 +12,17 @@ type item2 struct {
 	Expected string
 }
 
+type item3 struct {
+	S        string
+	Expected []int
+}
+
+type item4 struct {
+	S        string
+	P        string
+	Expected int
+}
+
 func reverse(str string) string {
 	bt := []byte(str)
 	for start, end := 0, len(str)-1; start < end; start, end = start+1, end-1 {

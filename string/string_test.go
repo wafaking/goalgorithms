@@ -324,3 +324,54 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 		}
 	}
 }
+
+//func TestPrefixMap(t *testing.T) {
+//	var list = []string{
+//		"",
+//		"A",
+//		"ABCDBA",
+//	}
+//	for _, str := range list {
+//		res := prefixMap(str)
+//		t.Logf("str: %s, res: %+v", str, res)
+//		//t.Log("------------------------")
+//	}
+//}
+
+func TestKMPSearch(t *testing.T) {
+	var list = []item4{
+		{
+			S:        "ABC ABCDAB ABCDABCDABDE",
+			P:        "ABCDABD",
+			Expected: 15,
+		},
+		{
+			S:        "AAAAAAAAAAAAAAAAAAS",
+			P:        "AAAAAAAAB",
+			Expected: -1,
+		},
+	}
+	for _, item := range list {
+		res := strStrV2(item.S, item.P)
+		t.Logf("result: %t, res-expect:%d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+	}
+}
+
+func TestGenerateNext(t *testing.T) {
+	var list = []item3{
+		{
+			S:        "ABCDABD",
+			Expected: []int{-1, 0, 0, 0, 0, 1, 2},
+		},
+	}
+	for _, item := range list {
+		//res := generateNext(item.S)
+		res := generateNext(item.S)
+		//assert.Equal("")
+		//assert := assert.New(t)
+		// assert equality
+		//assert.Equal(item.Expected, res, "they should be equal")
+		t.Logf("str: %s, res: %+v", item.S, res)
+		t.Log("------------------------")
+	}
+}

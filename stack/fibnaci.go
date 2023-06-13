@@ -6,6 +6,14 @@ import (
 	"strconv"
 )
 
+// 斐波那契数(leetcode-509)
+//斐波那契数形成的序列称为斐波那契数列。该数列由0和1开始，后面的每一项数字都是前面两项数字的和。也就是：
+//F(0)=0，F(1)=1, F(n)=F(n-1)+F(n-2)，其中n>1,给定n，请计算F(n)。
+
+// 示例1：输入：n=2,输出:1,解释：F(2)=F(1)+F(0)=1+0=1
+// 示例2：输入：n=3, 输出:2,解释：F(3)=F(2)+F(1)=1+1=2
+// 示例3：输入：n=4, 输出:3,解释：F(4)=F(3)+F(2)=2+1=3
+
 // 1. 使用降序，依次将大的数值分解成小的(大量重复计算)
 func fibonacci1(n int) int {
 	if n == 0 {
@@ -13,15 +21,13 @@ func fibonacci1(n int) int {
 	} else if n == 1 {
 		return 1
 	}
-	return fibonacci2(n-1) + fibonacci2(n-2)
+	return fibonacci1(n-1) + fibonacci1(n-2)
 }
 
 // 2. 使用升序，避免重复计算
 func fibonacci2(n int) int {
-	if n == 0 {
-		return 0
-	} else if n == 1 {
-		return 1
+	if n <= 1 {
+		return n
 	}
 
 	var (

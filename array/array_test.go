@@ -621,3 +621,21 @@ func TestFindKthLargest(t *testing.T) {
 		}
 	}
 }
+
+func TestSolveNQueens(t *testing.T) {
+	var list = []item5{
+		{
+			num: 1, expected: [][]string{{"Q"}},
+		},
+		{
+			num: 4, expected: [][]string{{".Q..", "...Q", "Q...", "..Q."}, {"..Q.", "Q...", "...Q", ".Q.."}},
+		},
+	}
+	for _, item := range list {
+		res := solveNQueens1(item.num)
+		t.Logf("res: %v\n, expect:%v", res, item.expected)
+		t.Log("----------SPLIT------------")
+		//res = subsets2(item.nums)
+		//t.Logf("res: %v\n", res)
+	}
+}

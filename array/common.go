@@ -29,6 +29,11 @@ type item4 struct {
 	expected int
 }
 
+type item5 struct {
+	num      int
+	expected [][]string
+}
+
 func InitNums(sli []int) {
 	nums = sli
 }
