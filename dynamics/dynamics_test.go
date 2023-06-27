@@ -275,8 +275,8 @@ func TestRob(t *testing.T) {
 		//{Sli: []int{}, Expected: 0},
 		//{Sli: []int{1}, Expected: 1},
 		//{Sli: []int{3, 1}, Expected: 3},
-		{Sli: []int{1, 2, 4, 3, 0, 9}, Expected: 14},
-		{Sli: []int{1, 2, 3, 1}, Expected: 4},
+		//{Sli: []int{1, 2, 4, 3, 0, 9}, Expected: 14},
+		//{Sli: []int{1, 2, 3, 1}, Expected: 4},
 		{Sli: []int{2, 7, 9, 3, 1}, Expected: 12},
 		{Sli: []int{2, 1, 1, 2}, Expected: 4},
 	}
@@ -288,6 +288,54 @@ func TestRob(t *testing.T) {
 		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 		res = rob13(item.Sli)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestRob2(t *testing.T) {
+	var list = []item3{
+		{Sli: []int{}, Expected: 0},
+		{Sli: []int{1}, Expected: 1},
+		{Sli: []int{1, 2}, Expected: 2},
+		{Sli: []int{3, 1}, Expected: 3},
+		{Sli: []int{2, 3, 2}, Expected: 3},
+		{Sli: []int{1, 2, 3}, Expected: 3},
+		{Sli: []int{1, 2, 1, 1}, Expected: 3},
+		{Sli: []int{1, 2, 3, 1}, Expected: 4},
+		{Sli: []int{2, 7, 9, 3, 1}, Expected: 11},
+		{Sli: []int{2, 1, 1, 2}, Expected: 3},
+		//例1：输入：nums=[2,3,2], 输出：3,解释：你不能先偷窃1号房屋（金额=2），然后偷窃3号房屋（金额=2）,因为他们是相邻的。
+		//示例2：输入：nums=[1,2,3,1], 输出：4,解释：你可以先偷窃1号房屋（金额=1），然后偷窃3号房屋(金额=3)偷窃到的最高金额=1+3=4。
+		//示例3：输入：nums=[1,2,3],输出：3;
+
+	}
+	for _, item := range list {
+		res := rob21(item.Sli)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestRob3(t *testing.T) {
+	var list = []item3{
+		{Sli: []int{}, Expected: 0},
+		{Sli: []int{1}, Expected: 1},
+		{Sli: []int{1, 2}, Expected: 2},
+		{Sli: []int{3, 1}, Expected: 3},
+		{Sli: []int{2, 3, 2}, Expected: 3},
+		{Sli: []int{1, 2, 3}, Expected: 3},
+		{Sli: []int{1, 2, 1, 1}, Expected: 3},
+		{Sli: []int{1, 2, 3, 1}, Expected: 4},
+		{Sli: []int{2, 7, 9, 3, 1}, Expected: 11},
+		{Sli: []int{2, 1, 1, 2}, Expected: 3},
+		//例1：输入：nums=[2,3,2], 输出：3,解释：你不能先偷窃1号房屋（金额=2），然后偷窃3号房屋（金额=2）,因为他们是相邻的。
+		//示例2：输入：nums=[1,2,3,1], 输出：4,解释：你可以先偷窃1号房屋（金额=1），然后偷窃3号房屋(金额=3)偷窃到的最高金额=1+3=4。
+		//示例3：输入：nums=[1,2,3],输出：3;
+
+	}
+	for _, item := range list {
+		res := rob21(item.Sli)
 		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
@@ -327,4 +375,39 @@ func TestMaxValue(t *testing.T) {
 		t.Log("--------------split----------------split--------------")
 	}
 
+}
+
+func TestLengthOfLIS11(t *testing.T) {
+	var list = []item3{
+		{
+			Sli:      []int{10, 9, 2, 5, 3, 7, 101, 18},
+			Expected: 4,
+		},
+		{
+			Sli:      []int{0, 1, 0, 3, 2, 3},
+			Expected: 4,
+		},
+		{
+			Sli:      []int{7, 7, 7, 7, 7, 7, 7},
+			Expected: 1,
+		},
+	}
+	for _, item := range list {
+		res := lengthOfLIS11(item.Sli)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+		res = lengthOfLIS12(item.Sli)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+		res = lengthOfLIS13(item.Sli)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+		res = lengthOfLIS14(item.Sli)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+		res = lengthOfLIS15(item.Sli)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+
+	}
 }

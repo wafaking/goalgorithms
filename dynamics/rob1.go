@@ -67,7 +67,7 @@ func rob12(nums []int) int {
 	return next
 }
 
-// 动态规划，动态数组
+// 动态规划，动态数组(修改原有数组)
 func rob13(nums []int) int {
 	// 状态:f(n)表示前n个房间可以偷窥到的最大金额
 	// 状态转移方程f(n)=max(f(n-1),f(n-2)+nums[n-1])

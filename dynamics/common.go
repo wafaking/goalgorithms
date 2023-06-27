@@ -24,3 +24,10 @@ type item5 struct {
 	Grid     [][]int
 	Expected int
 }
+
+func MaxInTwo(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}

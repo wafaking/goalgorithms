@@ -13,9 +13,14 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-// 添加节点
+// Insert 添加节点
 func Insert(num int) {
-	node := &TreeNode{Val: num}
+	var node *TreeNode
+	if num == -1 {
+		node = nil
+	} else {
+		node = &TreeNode{Val: num}
+	}
 	if root == nil {
 		root = node
 		return
@@ -43,7 +48,7 @@ func Insert(num int) {
 	}
 }
 
-// 前序遍历的递归实现(先根遍历)
+// PreOrder1 前序遍历的递归实现(先根遍历)
 func PreOrder1(root *TreeNode) {
 	if root == nil {
 		return
@@ -55,7 +60,7 @@ func PreOrder1(root *TreeNode) {
 	return
 }
 
-// 前序遍历的递归实现(先根遍历)
+// PreOrder2 前序遍历的递归实现(先根遍历)
 func PreOrder2(root *TreeNode) []int {
 	var (
 		preorder func(root *TreeNode)
@@ -73,7 +78,7 @@ func PreOrder2(root *TreeNode) []int {
 	return sli
 }
 
-// 前序遍历的循环实现(先根遍历)
+// PreOrder3 前序遍历的循环实现(先根遍历)
 func PreOrder3(root *TreeNode) []int {
 	var (
 		head  = root
@@ -95,7 +100,7 @@ func PreOrder3(root *TreeNode) []int {
 	return sli
 }
 
-// 中序遍历(先左子树，再根节点，再右子树)
+// InOrder1 中序遍历(先左子树，再根节点，再右子树)
 func InOrder1(root *TreeNode) {
 	if root == nil {
 		return
@@ -105,7 +110,7 @@ func InOrder1(root *TreeNode) {
 	InOrder1(root.Right)
 }
 
-// 中序遍历(先左子树，再根节点，再右子树)
+// InOrder2 中序遍历(先左子树，再根节点，再右子树)
 func InOrder2(root *TreeNode) []int {
 	var (
 		sli     []int
@@ -124,7 +129,7 @@ func InOrder2(root *TreeNode) []int {
 	return sli
 }
 
-// 中序遍历(先左子树，再根节点，再右子树)
+// InOrder3 中序遍历(先左子树，再根节点，再右子树)
 func InOrder3(root *TreeNode) []int {
 	var (
 		sli   []int
@@ -146,7 +151,7 @@ func InOrder3(root *TreeNode) []int {
 	return sli
 }
 
-// 后序遍历（先左子树，再右子树，最后根节点）
+// PostOrder1 后序遍历（先左子树，再右子树，最后根节点）
 func PostOrder1(root *TreeNode) {
 	if root == nil {
 		return
@@ -156,7 +161,7 @@ func PostOrder1(root *TreeNode) {
 	fmt.Println(root.Val)
 }
 
-// 后序遍历（先左子树，再右子树，最后根节点）
+// PostOrder2 后序遍历（先左子树，再右子树，最后根节点）
 func PostOrder2(root *TreeNode) []int {
 	var (
 		sli       []int
@@ -174,7 +179,7 @@ func PostOrder2(root *TreeNode) []int {
 	return sli
 }
 
-// 后序遍历（先左子树，再右子树，最后根节点）
+// PostOrder3 后序遍历（先左子树，再右子树，最后根节点）
 //增加辅助保存上一次打印结果数组的节点，
 //当一个节点左右都是空的时候，就可以放入结果集
 //当上一个放入结果集的节点是他的孩子节点的时候，
@@ -213,7 +218,7 @@ func PostOrder3(root *TreeNode) []int {
 	return sli
 }
 
-// 层序遍历(宽度优先，借助队列实现)
+// LevelOrder1 层序遍历(宽度优先，借助队列实现)
 func LevelOrder1(root *TreeNode) []int {
 	var (
 		sli   []int
@@ -225,15 +230,20 @@ func LevelOrder1(root *TreeNode) []int {
 	queue = append(queue, root)
 	for len(queue) > 0 {
 		cur := queue[0] // 先进先出
-		sli = append(sli, cur.Val)
 		queue = queue[1:]
+		if cur == nil {
+			sli = append(sli, -1)
+			continue
+		}
 
-		if cur.Left != nil {
-			queue = append(queue, cur.Left)
-		}
-		if cur.Right != nil {
-			queue = append(queue, cur.Right)
-		}
+		sli = append(sli, cur.Val)
+
+		//if cur.Left != nil {
+		queue = append(queue, cur.Left)
+		//}
+		//if cur.Right != nil {
+		queue = append(queue, cur.Right)
+		//}
 	}
 	return sli
 }

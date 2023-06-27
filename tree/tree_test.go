@@ -2,7 +2,6 @@ package tree
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"testing"
 )
@@ -36,6 +35,18 @@ func TestMain(t *testing.M) {
 
 func TestPermute(t *testing.T) {
 	log.Println(permute([]int{1, 2, 3}))
+}
+
+func TestGenerateTree(t *testing.T) {
+	var list = [][]int{
+		{4, 3, 8, 1, 5, 9, 2, 7, 10, 6},
+		{3, 2, 3, -1, 3, -1, 1},
+	}
+	for _, nums := range list {
+		tree := GenerateTree(nums)
+		res := LevelOrder1(tree)
+		t.Logf("org:%+v, res:%+v", nums, res)
+	}
 }
 
 func TestPermuteUnique(t *testing.T) {
@@ -141,5 +152,5 @@ func TestBuildPathTree(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(string(res))
+	t.Log(string(res))
 }
