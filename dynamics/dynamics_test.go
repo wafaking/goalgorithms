@@ -411,3 +411,80 @@ func TestLengthOfLIS11(t *testing.T) {
 
 	}
 }
+
+func TestWeightBag1(t *testing.T) {
+	var list = []item6{
+		{
+			Weight:    []int{3, 2, 5, 5},
+			Value:     []int{2, 8, 1, 3},
+			BagWeight: 6,
+			Expected:  10,
+		},
+		{
+			Weight:    []int{1, 4, 4, 3},
+			Value:     []int{2, 1, 3, 1},
+			BagWeight: 6,
+			Expected:  5,
+		},
+		{
+			Weight:    []int{2, 3, 3, 1},
+			Value:     []int{6, 8, 1, 9},
+			BagWeight: 6,
+			Expected:  23,
+		},
+		{
+			Weight:    []int{3, 3, 2, 2, 5, 5, 5, 5},
+			Value:     []int{2, 2, 8, 8, 1, 1, 3, 3},
+			BagWeight: 6,
+			Expected:  16,
+		},
+		{
+			Weight:    []int{1, 1, 4, 4, 4, 4, 3, 3},
+			Value:     []int{2, 2, 1, 1, 3, 3, 1, 1},
+			BagWeight: 6,
+			Expected:  7,
+		},
+		{
+			Weight:    []int{2, 2, 3, 3, 3, 3, 1, 1},
+			Value:     []int{6, 6, 8, 8, 1, 1, 9, 9},
+			BagWeight: 6,
+			Expected:  30,
+		},
+	}
+	for _, item := range list {
+		res := weightBag11(item.Weight, item.Value, item.BagWeight)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestWeightBag2(t *testing.T) {
+	var list = []item7{
+		{
+			Weight:    []int{3, 2, 5, 5},
+			Value:     []int{2, 8, 1, 3},
+			Times:     []int{2, 2, 2, 2},
+			BagWeight: 6,
+			Expected:  16,
+		},
+		{
+			Weight:    []int{1, 4, 4, 3},
+			Value:     []int{2, 1, 3, 1},
+			Times:     []int{2, 2, 2, 2},
+			BagWeight: 6,
+			Expected:  7,
+		},
+		{
+			Weight:    []int{2, 3, 3, 1},
+			Value:     []int{6, 8, 1, 9},
+			Times:     []int{2, 2, 2, 2},
+			BagWeight: 6,
+			Expected:  30,
+		},
+	}
+	for _, item := range list {
+		res := weightBag21(item.Weight, item.Value, item.Times, item.BagWeight)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}

@@ -25,6 +25,17 @@ type item5 struct {
 	Expected int
 }
 
+type item6 struct {
+	Weight, Value []int
+	BagWeight     int
+	Expected      int
+}
+type item7 struct {
+	Weight, Value, Times []int
+	BagWeight            int
+	Expected             int
+}
+
 func MaxInTwo(a, b int) int {
 	if a > b {
 		return a
