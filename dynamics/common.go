@@ -36,6 +36,11 @@ type item7 struct {
 	Expected             int
 }
 
+type item8 struct {
+	s, p     string
+	Expected bool
+}
+
 func MaxInTwo(a, b int) int {
 	if a > b {
 		return a

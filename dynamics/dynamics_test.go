@@ -488,3 +488,155 @@ func TestWeightBag2(t *testing.T) {
 		t.Log("--------------split----------------split--------------")
 	}
 }
+
+func TestIsMatchRegx(t *testing.T) {
+	var list = []item8{
+		{
+			s:        "abc",
+			p:        ".*c",
+			Expected: true,
+		},
+		{
+			s:        "abc",
+			p:        "*.c",
+			Expected: false,
+		},
+		{
+			s:        "AAAA",
+			p:        "BAAC*.",
+			Expected: false,
+		},
+		{
+			s:        "ACAB",
+			p:        "A.B*AB",
+			Expected: true,
+		},
+		{
+			s:        "ABAA",
+			p:        "A*CA.C",
+			Expected: false,
+		},
+		{
+			s:        "aa",
+			p:        "a",
+			Expected: false,
+		},
+		{
+			s:        "aa",
+			p:        "a*",
+			Expected: true,
+		},
+		{
+			s:        "ab",
+			p:        ".*",
+			Expected: true,
+		},
+		{
+			s:        "ab",
+			p:        "..",
+			Expected: true,
+		},
+		{
+			s:        "ab",
+			p:        "**",
+			Expected: false,
+		},
+		{
+			s:        "aab",
+			p:        "c*a*b",
+			Expected: true,
+		},
+	}
+	var res bool
+	for _, item := range list {
+		res = isMatchRegx1(item.s, item.p)
+		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestIsMatchWildCard(t *testing.T) {
+	var list = []item8{
+		{
+			s:        "abc",
+			p:        "?*c",
+			Expected: true,
+		},
+		{
+			s:        "abc",
+			p:        "*?c",
+			Expected: true,
+		},
+		{
+			s:        "CABCB",
+			p:        "C?BC*",
+			Expected: true,
+		},
+		{
+			s:        "AAAA",
+			p:        "BAAC*?",
+			Expected: false,
+		},
+		{
+			s:        "ACAB",
+			p:        "A?*AB",
+			Expected: true,
+		},
+		{
+			s:        "aa",
+			p:        "a",
+			Expected: false,
+		},
+		{
+			s:        "aa",
+			p:        "*",
+			Expected: true,
+		},
+		{
+			s:        "aa",
+			p:        "a*",
+			Expected: true,
+		},
+		{
+			s:        "b",
+			p:        "?*",
+			Expected: true,
+		},
+		{
+			s:        "ab",
+			p:        "?*",
+			Expected: true,
+		},
+		{
+			s:        "ab",
+			p:        "??",
+			Expected: true,
+		},
+		{
+			s:        "ab",
+			p:        "**",
+			Expected: true,
+		},
+		{
+			s:        "ab",
+			p:        "*",
+			Expected: true,
+		},
+		{
+			s:        "aab",
+			p:        "c*a*b",
+			Expected: false,
+		},
+		{
+			s:        "AC",
+			p:        "?*C",
+			Expected: true,
+		},
+	}
+	var res bool
+	for _, item := range list {
+		res = isMatchWildCard(item.s, item.p)
+		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
