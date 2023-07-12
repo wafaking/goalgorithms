@@ -640,3 +640,92 @@ func TestIsMatchWildCard(t *testing.T) {
 		t.Log("--------------split----------------split--------------")
 	}
 }
+
+func TestLongestCommonSubsequence(t *testing.T) {
+	var list = []item9{
+		{
+			text1:    "AAAT",
+			text2:    "ATACATAC",
+			Expected: 4,
+		},
+		{
+			text1:    "abcde",
+			text2:    "ace",
+			Expected: 3,
+		},
+		{
+			text1:    "abc",
+			text2:    "abc",
+			Expected: 3,
+		},
+		{
+			text1:    "abc",
+			text2:    "def",
+			Expected: 0,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = longestCommonSubsequence(item.text1, item.text2)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestLongestCommonSubstring(t *testing.T) {
+	var list = []item9{
+		{
+			text1:    "AAAT",
+			text2:    "ATACATAC",
+			Expected: 2,
+		},
+		{
+			text1:    "bacde",
+			text2:    "ace",
+			Expected: 2,
+		},
+		{
+			text1:    "abc",
+			text2:    "abc",
+			Expected: 3,
+		},
+		{
+			text1:    "abc",
+			text2:    "def",
+			Expected: 0,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = longestCommonSubstring(item.text1, item.text2)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestFindLength(t *testing.T) {
+	var list = []item1{
+		{
+			Sli1:     []int{1, 2, 3, 2, 1},
+			Sli2:     []int{3, 2, 1, 4, 7},
+			Expected: 3,
+			//示例2：输入：nums1=[0,0,0,0,0],nums2=[0,0,0,0,0]输出：5
+		},
+		{
+			Sli1:     []int{0, 0, 0, 0, 0},
+			Sli2:     []int{0, 0, 0, 0, 0},
+			Expected: 5,
+		},
+		{
+			Sli1:     []int{1, 2, 3},
+			Sli2:     []int{1, 2},
+			Expected: 2,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = findLength(item.Sli1, item.Sli2)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
