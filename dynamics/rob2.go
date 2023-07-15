@@ -15,16 +15,16 @@ func rob21(nums []int) int {
 	} else if len(nums) == 1 {
 		return nums[0]
 	} else if len(nums) == 2 {
-		return MaxInTwo(nums[0], nums[1])
+		return maxInTwo(nums[0], nums[1])
 	}
 
 	var rob = func(nums []int) int {
-		var pre, cur = nums[0], MaxInTwo(nums[0], nums[1])
+		var pre, cur = nums[0], maxInTwo(nums[0], nums[1])
 		for i := 2; i < len(nums); i++ {
-			pre, cur = cur, MaxInTwo(pre+nums[i], cur)
+			pre, cur = cur, maxInTwo(pre+nums[i], cur)
 		}
-		return MaxInTwo(pre, cur)
+		return maxInTwo(pre, cur)
 	}
 	//nums[1:]表示不偷第一间，num[:len(nums)-1]表示偷第一间不偷最后一间
-	return MaxInTwo(rob(nums[1:]), rob(nums[0:len(nums)-1]))
+	return maxInTwo(rob(nums[1:]), rob(nums[0:len(nums)-1]))
 }

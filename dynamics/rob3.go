@@ -33,9 +33,9 @@ func rob31(root *TreeNode) int {
 		// 不选当前节点,则可以选子节点(则左子树选与不选取大值)
 		// 即选左子树不一定是最大值，因为选左子树时，左子树的子节点不能选，会影响结果
 		// 右子树同理
-		notRob := MaxInTwo(lRob, lNotRob) + MaxInTwo(rRob, rNotRob)
+		notRob := maxInTwo(lRob, lNotRob) + maxInTwo(rRob, rNotRob)
 		return rob, notRob
 	}
 
-	return MaxInTwo(dfs(root))
+	return maxInTwo(dfs(root))
 }

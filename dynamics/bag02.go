@@ -35,7 +35,7 @@ func weightBag21(weight, value, times []int, bagWeight int) int {
 			if j < newWeight[i-1] { // 大于背包重量，装不下
 				cur[j] = pre[j]
 			} else {
-				cur[j] = MaxInTwo(pre[j], newValue[i-1]+pre[j-newWeight[i-1]])
+				cur[j] = maxInTwo(pre[j], newValue[i-1]+pre[j-newWeight[i-1]])
 			}
 		}
 		copy(pre, cur)

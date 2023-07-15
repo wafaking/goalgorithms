@@ -22,7 +22,7 @@ func findLength(nums1 []int, nums2 []int) int {
 		for j := 1; j < len(dp[0]); j++ {
 			if nums1[i-1] == nums2[j-1] { // 匹配
 				dp[i][j] = dp[i-1][j-1] + 1 // 取上一个匹配数量加1
-				maxLength = MaxInTwo(maxLength, dp[i][j])
+				maxLength = maxInTwo(maxLength, dp[i][j])
 			}
 		}
 	}

@@ -17,7 +17,7 @@ func weightBag31(weight, value []int, bagWeight int) int {
 				// 此处与0/1背包、多重背包不同，因为同一物品可以多次选择
 				dp[i][j] = dp[i-1][j]
 			} else {
-				dp[i][j] = MaxInTwo(dp[i-1][j], value[i-1]+dp[i][j-weight[i-1]])
+				dp[i][j] = maxInTwo(dp[i-1][j], value[i-1]+dp[i][j-weight[i-1]])
 			}
 		}
 	}

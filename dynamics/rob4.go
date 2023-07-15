@@ -18,7 +18,7 @@ package dynamics
 //示例2：输入：nums=[2,7,9,3,1],k=2, 输出：2;
 //解释：共有7种窃取方式。窃取能力最小的情况所对应的方式是窃取下标0和4处的房屋。返回max(nums[0],nums[4])=2。
 
-// TODO
+// minCapability TODO
 func minCapability(nums []int, k int) int {
 	return 0
 }

@@ -33,7 +33,7 @@ func weightBag11(weight, value []int, bagWeight int) int {
 				curValue := value[i-1]                       // 第i件物品的价值
 				leftWeight := j - weight[i-1]                // 剩余重量
 				leftValue := dp[i-1][leftWeight]             // 剩余重量对应的最大价值
-				dp[i][j] = MaxInTwo(pre, curValue+leftValue) // 两者取最大价值
+				dp[i][j] = maxInTwo(pre, curValue+leftValue) // 两者取最大价值
 			}
 		}
 	}

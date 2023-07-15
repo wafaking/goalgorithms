@@ -26,7 +26,7 @@ func longestCommonSubsequence(text1 string, text2 string) int {
 				dp[i][j] = dp[i-1][j-1] + 1 // 取上一个匹配数量加1
 			} else { // 不匹配
 				// 则取max(text1当前字符与text2上一个字符匹配数量,text1上一个字符与text2当前字符匹配数量)
-				dp[i][j] = MaxInTwo(dp[i-1][j], dp[i][j-1])
+				dp[i][j] = maxInTwo(dp[i-1][j], dp[i][j-1])
 			}
 		}
 	}

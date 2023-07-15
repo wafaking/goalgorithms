@@ -48,7 +48,7 @@ func uniquePathsWithObstacles1(obstacleGrid [][]int) int {
 	return ans[m-1][n-1]
 }
 
-// 动态规划，动态数组
+// 动态规划(动态数组)
 func uniquePathsWithObstacles2(obstacleGrid [][]int) int {
 
 	var (
