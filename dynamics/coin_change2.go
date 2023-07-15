@@ -49,6 +49,7 @@ func change1(amount int, coins []int) int {
 // 动态规划（一维数组）
 func change2(amount int, coins []int) int {
 	// 原理：由原来的二维数据退化成滚动数组，再退化成一维数组
+	// dp[i]表示当总金额为i时的组合数
 	var dp = make([]int, amount+1)
 	dp[0] = 1
 	for _, coin := range coins { // 遍历每种硬币，

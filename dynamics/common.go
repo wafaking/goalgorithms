@@ -52,6 +52,11 @@ type item10 struct {
 	expected int
 }
 
+type item11 struct {
+	nums     []int
+	expected bool
+}
+
 func maxInTwo(a, b int) int {
 	if a > b {
 		return a
