@@ -42,5 +42,23 @@ func weightBag11(weight, value []int, bagWeight int) int {
 
 // TODO 使用动态规划+滚动数组
 func weightBag12(weight, value []int, bagWeight int) int {
+
 	return 0
+}
+
+// 动态规划+一维数组
+func weightBag13(weight, value []int, bagWeight int) int {
+	// dp[i]表示当背包承重为i时的最大价值
+	var dp = make([]int, bagWeight+1)
+	// 遍历每个物品，用此物品分别去填充重量为j的背包
+	// 类似二维数组的先填充行
+	for i, w := range weight {
+		// 此处选择从最大背包的重量开始递减,因为0/1背包问题物品不能重复
+		for j := bagWeight; j > 0; j-- {
+			if w <= j {
+				dp[j] = maxInTwo(dp[j], dp[j-weight[i]]+value[i])
+			}
+		}
+	}
+	return dp[bagWeight]
 }

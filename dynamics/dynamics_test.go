@@ -451,8 +451,11 @@ func TestWeightBag1(t *testing.T) {
 			expected:  30,
 		},
 	}
+	var res int
 	for _, item := range list {
-		res := weightBag11(item.Weight, item.Value, item.BagWeight)
+		res = weightBag11(item.Weight, item.Value, item.BagWeight)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = weightBag13(item.Weight, item.Value, item.BagWeight)
 		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
@@ -924,6 +927,38 @@ func TestCanPartition(t *testing.T) {
 		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.expected, res, item.expected, item)
 		res = canPartition3(item.nums)
 		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.expected, res, item.expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestFindTargetSumWays(t *testing.T) {
+	var list = []item12{
+		{
+			nums:     []int{1, 1, 1, 1, 1},
+			target:   3,
+			expected: 5,
+		},
+		{
+			nums:     []int{1},
+			target:   1,
+			expected: 1,
+		},
+		{
+			nums:     []int{1},
+			target:   2,
+			expected: 0,
+		},
+		{
+			nums:     []int{1, 0},
+			target:   1,
+			expected: 2,
+		},
+	}
+
+	var res int
+	for _, item := range list {
+		res = findTargetSumWays(item.nums, item.target)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
