@@ -14,13 +14,45 @@ package dynamics
 //	+1+1+1+1-1=3
 //示例2：输入：nums=[1],target=1,输出：1;
 
+// 回溯法
+func findTargetSumWays11(nums []int, target int) int {
+	var (
+		times int
+		sum   int
+	)
+	for _, v := range nums {
+		sum += v
+	}
+	if sum < target || (sum-target)%2 == 1 {
+		return 0
+	}
+
+	var (
+		backTrace func(idx, sum int)
+		//neg       = (sum - target) >> 2
+	)
+	backTrace = func(idx, sum int) {
+		if idx == len(nums) {
+			if target == sum {
+				times++
+			}
+			return
+		}
+		backTrace(idx+1, sum+nums[idx])
+		backTrace(idx+1, sum-nums[idx])
+	}
+
+	backTrace(0, 0)
+	return times
+}
+
 // 动态规划+拆分成两个数组
-func findTargetSumWays(nums []int, target int) int {
+func findTargetSumWays12(nums []int, target int) int {
 	var sum int
 	for _, v := range nums {
 		sum += v
 	}
-	if sum < target {
+	if sum < target || (sum-target)%2 == 1 {
 		return 0
 	}
 
@@ -40,17 +72,41 @@ func findTargetSumWays(nums []int, target int) int {
 	dp[0][0] = 1
 	for i := 1; i < len(dp); i++ {
 		for j := 0; j < len(dp[0]); j++ {
-			if j == 0 {
-				dp[i][0] = 1
-				continue
-			}
-			if nums[i-1] < j {
-				dp[i][j] = dp[i-1][j]
-			} else {
-				dp[i][j] = dp[i-1][j] + dp[i][j-nums[i-1]]
+			//if j == 0 {
+			//	// 注：此处初始化上一行的值(而不是一定为1,因此去掉continue）
+			//	dp[i][0] = dp[i-1][0]
+			//}
+			dp[i][j] = dp[i-1][j]
+			if nums[i-1] <= j {
+				// 即不选用此num的方案数+选用此num的方案数(物品不能多次选择)
+				dp[i][j] = dp[i-1][j] + dp[i-1][j-nums[i-1]]
 			}
 		}
 	}
 
 	return dp[len(dp)-1][len(dp[0])-1]
+}
+
+// 动态规划，一维数组
+func findTargetSumWays13(nums []int, target int) int {
+	sum := 0
+	for _, v := range nums {
+		sum += v
+	}
+	diff := sum - target
+	if diff < 0 || diff%2 == 1 {
+		return 0
+	}
+	neg := diff / 2
+	dp := make([]int, neg+1)
+	dp[0] = 1
+	for _, num := range nums {
+		// num不能多次选择，因此需要利用之前选择的，因此倒序递减遍历
+		for j := neg; j >= 0; j-- {
+			if j >= num {
+				dp[j] = dp[j] + dp[j-num]
+			}
+		}
+	}
+	return dp[neg]
 }

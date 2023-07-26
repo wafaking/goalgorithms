@@ -1,38 +1,38 @@
 package dynamics
 
 type item1 struct {
-	Sli1, Sli2 []int
-	expected   int
+	nums1, nums2 []int
+	expected     int
 }
 
 type item2 struct {
-	Num      int
+	num      int
 	expected int
 }
 
 type item3 struct {
-	Sli      []int
+	nums     []int
 	expected int
 }
 
 type item4 struct {
-	Num1, Num2 int
+	num1, num2 int
 	expected   int
 }
 
 type item5 struct {
-	Grid     [][]int
+	grid     [][]int
 	expected int
 }
 
 type item6 struct {
-	Weight, Value []int
-	BagWeight     int
+	weight, value []int
+	bagWeight     int
 	expected      int
 }
 type item7 struct {
-	Weight, Value, Times []int
-	BagWeight            int
+	weight, value, times []int
+	bagWeight            int
 	expected             int
 }
 
@@ -61,6 +61,11 @@ type item12 struct {
 	nums     []int
 	target   int
 	expected int
+}
+
+type item13 struct {
+	str []string
+	item4
 }
 
 func maxInTwo(a, b int) int {
