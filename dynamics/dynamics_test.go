@@ -1084,3 +1084,105 @@ func TestIsSubstring(t *testing.T) {
 		t.Log("--------------split----------------split--------------")
 	}
 }
+
+func TestTwoEggDrop(t *testing.T) {
+	var list = []item2{
+		{
+			num:      1,
+			expected: 1,
+		},
+		{
+			num:      2,
+			expected: 2,
+		},
+		{
+			num:      3,
+			expected: 2,
+		},
+		{
+			num:      4,
+			expected: 3,
+		},
+		{
+			num:      5,
+			expected: 3,
+		},
+		{
+			num:      100,
+			expected: 14,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = twoEggDrop1(item.num)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = twoEggDrop2(item.num)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = twoEggDrop3(item.num)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = twoEggDrop4(item.num)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestSuperEggDrop(t *testing.T) {
+	var list = []item4{
+		{
+			num1:     1,
+			num2:     2,
+			expected: 2,
+		},
+		{
+			num1:     3,
+			num2:     7,
+			expected: 3,
+		},
+		{
+			num1:     2,
+			num2:     6,
+			expected: 3,
+		},
+		{
+			num1:     3,
+			num2:     14,
+			expected: 4,
+		},
+		{
+			num1:     7,
+			num2:     10000,
+			expected: 15,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = superEggDrop1(item.num1, item.num2)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = superEggDrop2(item.num1, item.num2)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = superEggDrop3(item.num1, item.num2)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = superEggDrop4(item.num1, item.num2)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestLastStoneWeight1(t *testing.T) {
+	var list = []item3{
+		{
+			nums:     []int{2, 7, 4, 1, 8, 1},
+			expected: 1,
+		},
+		{
+			nums:     []int{1},
+			expected: 1,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = lastStoneWeight1(item.nums)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}

@@ -91,3 +91,10 @@ func minInThree(a, b, c int) int {
 	}
 	return a
 }
+
+func abs(num int) int {
+	if num > 0 {
+		return num
+	}
+	return -num
+}

@@ -4,18 +4,9 @@ package heap
 type Heap []int
 
 // len get h's length(注：可以不用*Heap，因heap是引用，只要长度不会变，操作的同一地址)
-func (h Heap) len() int {
-	return len(h)
-}
-
-func (h Heap) swap(i, j int) {
-	h[i], h[j] = h[j], h[i]
-	return
-}
-
-func (h Heap) less(i, j int) bool {
-	return h[i] < h[j]
-}
+func (h Heap) len() int           { return len(h) }
+func (h Heap) swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h Heap) less(i, j int) bool { return h[i] < h[j] } //大顶堆，将交换改成>
 
 // up to up adjust the index i's position
 func (h *Heap) up(i int) {
@@ -32,13 +23,14 @@ func (h *Heap) up(i int) {
 // down to down adjust the index i's position
 func (h *Heap) down(i int) {
 	for {
+		// i为父节点索引
 		var subLeft = 2*i + 1  // 左子节点
 		var subRight = 2*i + 2 // 右子节点
 
 		// 判断是不是左、右子节点：
 		// 如果2*k>n，则此节点无左子节点(k为编号)
 		// 如果2*k+1>n，则此节点无右子节点
-		if subLeft >= (h.len() - 1) {
+		if subLeft >= (h.len()-1) || i < 0 { // i<0:overflow
 			break
 		}
 
@@ -77,7 +69,6 @@ func (h *Heap) remove(i int) int {
 	} else {
 		h.down(i)
 	}
-
 	return remVal
 }
 
@@ -87,14 +78,14 @@ func (h *Heap) Pop() int {
 
 func (h *Heap) Push(val int) {
 	*h = append(*h, val)
-	h.up(len(*h) - 1)
+	h.up(h.len() - 1)
 }
 
 func BuildHeap(array []int) Heap {
 	var h = Heap(array)
 	//建立堆的过程就是完全二叉树从下到上调整堆的过程，
 	//从i=len(arr)/2开始依次向上调整，i=len(arr)/2是堆中末尾节点的父节点， i=0是根节点。
-	for i := len(h)/2 - 1; i >= 0; i-- {
+	for i := h.len()/2 - 1; i >= 0; i-- {
 		h.down(i)
 	}
 	return h
