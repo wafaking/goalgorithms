@@ -1,29 +1,44 @@
 package array
 
-import (
-	"errors"
-	"fmt"
-)
+//颜色分类(leetcode-75)
+//给定一个包含红色、白色和蓝色、共n个元素的数组nums，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
+//我们使用整数0、1和2分别表示红色、白色和蓝色。
+//不使用库内置的sort函数。
+//示例1：输入：nums=[2,0,2,1,1,0],输出：[0,0,1,1,2,2]
+//示例2：输入：nums=[2,0,1],输出：[0,1,2]
 
-func sortColors(nums []int) {
-	var start, end int = 0, len(nums) - 1 // 设置起、始指针
+// 单指针(两次遍历，分别交换0，1)
+func sortColors1(nums []int) {
+	var traverseFunc func(pos, i int) int
+	traverseFunc = func(pos, targetNum int) int {
+		for i := pos; i < len(nums); i++ {
+			if nums[i] == targetNum {
+				nums[i], nums[pos] = nums[pos], nums[i]
+				pos++
+			}
+		}
+		return pos
+	}
 
-	// 遍历数组，当值为0时，与起始指针值交换，
-	for i := 0; i <= end; {
+	pos := traverseFunc(0, 0)
+	_ = traverseFunc(pos, 1)
+}
+
+// 双指针（三路快排）
+func sortColors2(nums []int) {
+	var l, r = -1, len(nums)
+	// (-1,l]是0,(l, r)是1，[r,)是2
+	for i := 0; i < r; {
 		switch nums[i] {
 		case 0:
-			nums[i], nums[start] = nums[start], nums[i]
-			start++ // 起始指针向后移
-			i++     // 游标后移
+			l++
+			nums[l], nums[i] = nums[i], nums[l]
+			i++
 		case 1:
-			i++ // 不作交换，游标后移
+			i++
 		case 2:
-			nums[i], nums[end] = nums[end], nums[i] // 游标元素与尾指针元素交换
-			end--                                   // 尾指针前移
-		default:
-			panic(errors.New("invalid given slice"))
-			return
+			r--
+			nums[r], nums[i] = nums[i], nums[r]
 		}
 	}
-	fmt.Println("nums: ", nums)
 }

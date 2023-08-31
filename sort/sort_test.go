@@ -2,6 +2,7 @@ package sort
 
 import (
 	"fmt"
+	"goalgorithms/common"
 	"testing"
 
 	"goalgorithms/sort/utils"
@@ -185,3 +186,34 @@ func BenchmarkShellSort100(b *testing.B)    { benchmarkShellSort(100, b) }
 func BenchmarkShellSort1000(b *testing.B)   { benchmarkShellSort(1000, b) }
 func BenchmarkShellSort10000(b *testing.B)  { benchmarkShellSort(10000, b) }
 func BenchmarkShellSort100000(b *testing.B) { benchmarkShellSort(100000, b) }
+
+func TestQuickSort2Ways(t *testing.T) {
+	var list = []common.Item6{
+		{
+			Nums:     []int{1, 3, 2},
+			Expected: []int{1, 2, 3},
+		},
+		{
+			Nums:     []int{2, 1, 4, 3, 7, 8, 5, 6},
+			Expected: []int{1, 2, 3, 4, 5, 6, 7, 8},
+		},
+		{
+			Nums:     []int{2, 1, 4, 3, 7, 8, 5, 9, 6},
+			Expected: []int{1, 2, 3, 4, 5, 6, 7, 8, 9},
+		},
+		{
+			Nums:     []int{2, 0, 2, 1, 1, 0},
+			Expected: []int{0, 0, 1, 1, 2, 2},
+		},
+	}
+	for _, item := range list {
+		var nums = make([]int, len(item.Nums))
+		copy(nums, item.Nums)
+		QuickSort2Ways(nums)
+		t.Logf("res: %v, %+v, , item:%+v", common.DiffSlice(nums, item.Expected), nums, item)
+		copy(nums, item.Nums)
+		QuickSort3Ways(nums)
+		t.Logf("res: %v, item:%+v", common.DiffSlice(nums, item.Expected), item)
+		t.Log("--------------------SPLIT--------------------")
+	}
+}

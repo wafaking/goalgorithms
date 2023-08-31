@@ -15,6 +15,7 @@ package dynamics
 //	组合1和1，得到0，所以数组转化为[1]，这就是最优值。
 //示例2： 输入：stones=[31,26,33,21,40],输出：5
 
+//TODO ---
 func lastStoneWeightII(stones []int) int {
 	//1,1,2,4,7,8
 	//var sum int

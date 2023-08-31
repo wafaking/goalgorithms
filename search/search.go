@@ -5,7 +5,7 @@ package search
 // 示例1:输入:nums=[-1,0,3,5,9,12],target=9,输出:4
 // 示例2:输入:nums=[-1,0,3,5,9,12],target=2输出:-1
 
-// 法一：循环-左闭右开区间
+// 法一：循环-左闭右闭区间
 func binarySearch1(nums []int, target int) int {
 	var low, high = 0, len(nums) - 1 // 左闭右闭区间，因此low<=high
 	for low <= high {                //
@@ -21,7 +21,7 @@ func binarySearch1(nums []int, target int) int {
 	return -1
 }
 
-// 法二：循环-左闭右闭区间
+// 法二：循环-左闭右开区间
 func binarySearch2(nums []int, target int) int {
 	var low, high = 0, len(nums) // 左闭右开，因此选择low<high
 	for low < high {
@@ -48,11 +48,11 @@ func binarySearch4(nums []int, target int) int {
 		if nums[mid] == target {
 			return mid
 		} else if nums[mid] > target {
-			high = mid
-			return dfs(low, high)
+			//high = mid
+			return dfs(low, mid)
 		} else {
-			low = mid + 1
-			return dfs(low, high)
+			//low = mid + 1
+			return dfs(mid+1, high)
 		}
 	}
 

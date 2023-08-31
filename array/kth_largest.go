@@ -57,7 +57,7 @@ func partition(nums []int, left, right int) int {
 	return pos
 }
 
-// findKthLargest2 使用大顶堆(构建大顶堆后，删除n-k+1个元素即可)
+// findKthLargest2 使用大顶堆(构建大顶堆后，删除k-1个元素，取剩余堆顶元素)
 func findKthLargest2(nums []int, k int) int {
 	var size = len(nums)
 	buildMaxHeap(nums)
