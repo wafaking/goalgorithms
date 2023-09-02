@@ -636,8 +636,6 @@ func TestSolveNQueens(t *testing.T) {
 		res := solveNQueens1(item.Num)
 		t.Logf("res: %v\n, expect:%v", res, item.Expected)
 		t.Log("----------SPLIT------------")
-		//res = subsets2(item.Nums)
-		//t.Logf("res: %v\n", res)
 	}
 }
 
@@ -703,4 +701,74 @@ func TestSortArray(t *testing.T) {
 		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
 		t.Log("--------------------SPLIT--------------------")
 	}
+}
+
+func TestConstructorLRU(t *testing.T) {
+
+	var (
+		lRUCache LRUCache
+		res      int
+	)
+
+	/*
+		lRUCache = ConstructorLRU(2)
+		lRUCache.Put(1, 1)
+		lRUCache.Put(2, 2)
+		res = lRUCache.Get(1)
+		t.Logf("%t, res:expect==%d:%d", res == 1, res, 1)
+		lRUCache.Put(3, 3)
+
+		res = lRUCache.Get(2)
+		t.Logf("%t, res:expect==%d:%d", res == -1, res, -1)
+
+		lRUCache.Put(4, 4)
+
+		res = lRUCache.Get(1)
+		t.Logf("%t, res:expect==%d:%d", res == -1, res, -1)
+
+		res = lRUCache.Get(3)
+		t.Logf("%t, res:expect==%d:%d", res == 3, res, 3)
+
+		res = lRUCache.Get(4)
+		t.Logf("%t, res:expect==%d:%d", res == 4, res, 4)
+	*/
+
+	t.Log("--------------------------SPLIT-----------------------------")
+	//["LRUCache","put","put","put","put", "get","get","get","get", "put", "get","get","get","get","get"]
+	//[[3],[1,1],[2,2],[3,3],[4,4], [4],[3],[2],[1], [5,5], [1],[2],[3],[4],[5]]
+	//
+	//添加到测试用例
+	//输出
+	//[null,null,null,null,null,4,3,2,-1,null,-1,2,-1,4,5]
+	//预期结果
+	//[null,null,null,null,null,4,3,2,-1,null,-1,2,3,-1,5]
+
+	lRUCache = ConstructorLRU(3)
+	lRUCache.Put(1, 1)
+	lRUCache.Put(2, 2)
+	lRUCache.Put(3, 3)
+	lRUCache.Put(4, 4)
+
+	//var res int
+	res = lRUCache.Get(4)
+	t.Logf("%t, res:expect==%d:%d", res == 4, res, 4)
+	res = lRUCache.Get(3)
+	t.Logf("%t, res:expect==%d:%d", res == 3, res, 3)
+	res = lRUCache.Get(2)
+	t.Logf("%t, res:expect==%d:%d", res == 2, res, 2)
+	res = lRUCache.Get(1)
+	t.Logf("%t, res:expect==%d:%d", res == -1, res, -1)
+
+	lRUCache.Put(5, 5)
+
+	res = lRUCache.Get(1)
+	t.Logf("%t, res:expect==%d:%d", res == -1, res, -1)
+	res = lRUCache.Get(2)
+	t.Logf("%t, res:expect==%d:%d", res == 2, res, 2)
+	res = lRUCache.Get(3)
+	t.Logf("%t, res:expect==%d:%d", res == 3, res, 3)
+	res = lRUCache.Get(4)
+	t.Logf("%t, res:expect==%d:%d", res == -1, res, -1)
+	res = lRUCache.Get(5)
+	t.Logf("%t, res:expect==%d:%d", res == 5, res, 5)
 }
