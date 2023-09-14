@@ -1186,3 +1186,53 @@ func TestLastStoneWeight1(t *testing.T) {
 		t.Log("--------------split----------------split--------------")
 	}
 }
+
+func TestMaxProfit1(t *testing.T) {
+	var list = []item3{
+		{
+			nums:     []int{7, 1, 5, 3, 6, 4},
+			expected: 5,
+		},
+		{
+			nums:     []int{7, 6, 4, 3, 1},
+			expected: 0,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = maxProfit11(item.nums)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxProfit12(item.nums)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxProfit13(item.nums)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestMaxProfit2(t *testing.T) {
+	var list = []item3{
+		{
+			nums:     []int{7, 1, 5, 3, 6, 4},
+			expected: 7,
+		},
+		{
+			nums:     []int{1, 2, 3, 4, 5},
+			expected: 4,
+		},
+		{
+			nums:     []int{7, 6, 4, 3, 1},
+			expected: 0,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = maxProfit21(item.nums)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxProfit22(item.nums)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		//res = maxProfit13(item.nums)
+		//t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
