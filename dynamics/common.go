@@ -47,7 +47,7 @@ type item9 struct {
 }
 
 type item10 struct {
-	sli      []int
+	nums     []int
 	target   int
 	expected int
 }
@@ -57,11 +57,11 @@ type item11 struct {
 	expected bool
 }
 
-type item12 struct {
-	nums     []int
-	target   int
-	expected int
-}
+//type item12 struct {
+//	nums     []int
+//	target   int
+//	expected int
+//}
 
 type item13 struct {
 	str []string
@@ -73,6 +73,15 @@ func maxInTwo(a, b int) int {
 		return a
 	}
 	return b
+}
+
+func maxInNums(l []int) int {
+	for i := 1; i < len(l); i++ {
+		if l[0] < l[i] {
+			l[0] = l[i]
+		}
+	}
+	return l[0]
 }
 
 func minInTwo(a, b int) int {

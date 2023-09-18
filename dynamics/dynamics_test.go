@@ -762,44 +762,44 @@ func TestMinDistance(t *testing.T) {
 func TestCoinChange(t *testing.T) {
 	var list = []item10{
 		{
-			sli:      []int{2},
+			nums:     []int{2},
 			target:   3,
 			expected: -1,
 		},
 		{
-			sli:      []int{1},
+			nums:     []int{1},
 			target:   0,
 			expected: 0,
 		},
 		{
-			sli:      []int{1, 2, 5},
+			nums:     []int{1, 2, 5},
 			target:   11,
 			expected: 3,
 		},
 		{
-			sli:      []int{5, 2, 1},
+			nums:     []int{5, 2, 1},
 			target:   11,
 			expected: 3,
 		},
 		{
-			sli:      []int{1, 2, 3, 4},
+			nums:     []int{1, 2, 3, 4},
 			target:   6,
 			expected: 2,
 		},
 		{
-			sli:      []int{5, 7, 2, 1, 6},
+			nums:     []int{5, 7, 2, 1, 6},
 			target:   6,
 			expected: 1,
 		},
 		{
-			sli:      []int{186, 419, 83, 408},
+			nums:     []int{186, 419, 83, 408},
 			target:   6249,
 			expected: 20,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = coinChange(item.sli, item.target)
+		res = coinChange(item.nums, item.target)
 		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
@@ -808,56 +808,56 @@ func TestCoinChange(t *testing.T) {
 func TestChange(t *testing.T) {
 	var list = []item10{
 		{
-			sli:      []int{2},
+			nums:     []int{2},
 			target:   3,
 			expected: 0,
 		},
 		{
-			sli:      []int{1},
+			nums:     []int{1},
 			target:   0,
 			expected: 1,
 		},
 		{
-			sli:      []int{1},
+			nums:     []int{1},
 			target:   5,
 			expected: 1,
 		},
 		{
-			sli:      []int{5},
+			nums:     []int{5},
 			target:   10,
 			expected: 1,
 		},
 		{
-			sli:      []int{1, 2, 5},
+			nums:     []int{1, 2, 5},
 			target:   5,
 			expected: 4,
 		},
 		{
-			sli:      []int{5, 2, 1},
+			nums:     []int{5, 2, 1},
 			target:   5,
 			expected: 4,
 		},
 		{
-			sli:      []int{7},
+			nums:     []int{7},
 			target:   0,
 			expected: 1,
 		},
 		{
-			sli:      []int{10},
+			nums:     []int{10},
 			target:   10,
 			expected: 1,
 		},
 		{
-			sli:      []int{7},
+			nums:     []int{7},
 			target:   0,
 			expected: 1,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = change1(item.target, item.sli)
+		res = change1(item.target, item.nums)
 		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = change2(item.target, item.sli)
+		res = change2(item.target, item.nums)
 		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
@@ -936,7 +936,7 @@ func TestCanPartition(t *testing.T) {
 }
 
 func TestFindTargetSumWays(t *testing.T) {
-	var list = []item12{
+	var list = []item10{
 		{
 			nums:     []int{1, 1, 1, 1, 1},
 			target:   3,
@@ -1233,6 +1233,64 @@ func TestMaxProfit2(t *testing.T) {
 		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
 		//res = maxProfit13(item.nums)
 		//t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestMaxProfit3(t *testing.T) {
+	var list = []item3{
+		{
+			nums:     []int{3, 3, 5, 0, 0, 3, 1, 4},
+			expected: 6,
+		},
+		{
+			nums:     []int{1, 2, 3, 4, 5},
+			expected: 4,
+		},
+		{
+			nums:     []int{7, 6, 4, 3, 1},
+			expected: 0,
+		},
+		{
+			nums:     []int{1},
+			expected: 0,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = maxProfit31(item.nums)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxProfit32(item.nums)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestMaxProfit4(t *testing.T) {
+	var list = []item10{
+		{
+			nums:     []int{2, 4, 1},
+			target:   2,
+			expected: 2,
+		},
+		{
+			nums:     []int{3, 2, 6, 5, 0, 3},
+			target:   2,
+			expected: 7,
+		},
+		{
+			nums:     []int{2, 4, 1, 8, 2, 5, 9, 11},
+			target:   3,
+			expected: 18,
+		},
+	}
+
+	var res int
+	for _, item := range list {
+		res = maxProfit41(item.target, item.nums)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxProfit42(item.target, item.nums)
+		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
