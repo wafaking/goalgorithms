@@ -44,7 +44,7 @@ func maxProfit41(k int, prices []int) int {
 		}
 	}
 
-	return maxInNums(dp[n-1])
+	return maxInNums(dp[n-1]...)
 }
 
 // 动态规划+一维数组(参考maxProfit32)
@@ -76,5 +76,5 @@ func maxProfit42(k int, prices []int) int {
 		}
 	}
 
-	return maxInNums(dp)
+	return maxInNums(dp...)
 }

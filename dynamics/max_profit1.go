@@ -37,6 +37,9 @@ func maxProfit12(prices []int) int {
 func maxProfit13(prices []int) int {
 	// dp[i][0]表示第i天未持有股票时的收益
 	// dp[i][1]表示第i天持有股票的收益
+	if len(prices) == 0 {
+		return 0
+	}
 	var (
 		n  = len(prices)
 		dp = make([][2]int, n)

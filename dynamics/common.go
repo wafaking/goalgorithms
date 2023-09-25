@@ -75,7 +75,7 @@ func maxInTwo(a, b int) int {
 	return b
 }
 
-func maxInNums(l []int) int {
+func maxInNums(l ...int) int {
 	for i := 1; i < len(l); i++ {
 		if l[0] < l[i] {
 			l[0] = l[i]
