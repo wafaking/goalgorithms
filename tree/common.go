@@ -13,6 +13,48 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+// BuildBinaryTree 构建二叉树(使用队列)
+func BuildBinaryTree(nums []int) *TreeNode {
+	if len(nums) == 0 {
+		return nil
+	}
+
+	if nums[0] == -1 {
+		return nil
+	}
+
+	var (
+		root  = &TreeNode{Val: nums[0]}
+		queue = []*TreeNode{root}
+	)
+
+	for i := 1; i < len(nums) && len(queue) > 0; i++ {
+		var (
+			r           = queue[0]
+			left, right *TreeNode
+		)
+		queue = queue[1:]
+		if nums[i] != -1 {
+			left = &TreeNode{Val: nums[i]}
+			r.Left = left
+			queue = append(queue, left)
+		}
+		i++
+
+		if i == len(nums) {
+			continue
+		}
+
+		if nums[i] != -1 {
+			right = &TreeNode{Val: nums[i]}
+			r.Right = right
+			queue = append(queue, right)
+		}
+	}
+
+	return root
+}
+
 // Insert 添加节点
 func Insert(num int) {
 	var node *TreeNode
@@ -46,58 +88,6 @@ func Insert(num int) {
 			cur = cur.Right
 		}
 	}
-}
-
-// PreOrder1 前序遍历的递归实现(先根遍历)
-func PreOrder1(root *TreeNode) {
-	if root == nil {
-		return
-	}
-	fmt.Println(root.Val)
-
-	PreOrder1(root.Left)
-	PreOrder1(root.Right)
-	return
-}
-
-// PreOrder2 前序遍历的递归实现(先根遍历)
-func PreOrder2(root *TreeNode) []int {
-	var (
-		preorder func(root *TreeNode)
-		sli      []int
-	)
-	preorder = func(root *TreeNode) {
-		if root == nil {
-			return
-		}
-		sli = append(sli, root.Val)
-		preorder(root.Left)
-		preorder(root.Right)
-	}
-	preorder(root)
-	return sli
-}
-
-// PreOrder3 前序遍历的循环实现(先根遍历)
-func PreOrder3(root *TreeNode) []int {
-	var (
-		head  = root
-		stack []*TreeNode // 1.初始化栈
-		sli   []int
-	)
-
-	for head != nil || len(stack) > 0 {
-		if head != nil { // 处理当前节点
-			sli = append(sli, head.Val) // 2.输出根节点
-			stack = append(stack, head) // 3.将当前节点放入栈中
-			head = head.Left            // 4. 处理左子树
-		} else { // 处理栈中元素
-			head = stack[len(stack)-1] // 栈顶元素(后进先出)
-			stack = stack[:len(stack)-1]
-			head = head.Right
-		}
-	}
-	return sli
 }
 
 // InOrder1 中序遍历(先左子树，再根节点，再右子树)

@@ -2,6 +2,7 @@ package tree
 
 import (
 	"encoding/json"
+	"goalgorithms/common"
 	"log"
 	"testing"
 )
@@ -37,13 +38,13 @@ func TestPermute(t *testing.T) {
 	log.Println(permute([]int{1, 2, 3}))
 }
 
-func TestGenerateTree(t *testing.T) {
+func TestBuildBinaryTree(t *testing.T) {
 	var list = [][]int{
 		{4, 3, 8, 1, 5, 9, 2, 7, 10, 6},
 		{3, 2, 3, -1, 3, -1, 1},
 	}
 	for _, nums := range list {
-		tree := GenerateTree(nums)
+		tree := BuildBinaryTree(nums)
 		res := LevelOrder1(tree)
 		t.Logf("org:%+v, res:%+v", nums, res)
 	}
@@ -54,14 +55,129 @@ func TestPermuteUnique(t *testing.T) {
 	log.Println(PermuteUnique(list))
 }
 
-func TestPreOrder(t *testing.T) {
-	res1 := PreOrder2(root)
-	log.Println("res: ", res1)
-	log.Println("--------")
-	res := PreOrder3(root)
-	log.Println("res: ", res)
+func TestPreorderTraversal(t *testing.T) {
+	var list = []common.Item6{
+		{
+			Nums:     []int{1, 2, 3, 4, 5, 6, 7},
+			Expected: []int{1, 2, 4, 5, 3, 6, 7},
+		},
+		{
+			Nums:     []int{1, -1, 2, 3},
+			Expected: []int{1, 2, 3},
+		},
+		{
+			Nums:     []int{},
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{1},
+			Expected: []int{1},
+		},
+		{
+			Nums:     []int{1, 2},
+			Expected: []int{1, 2},
+		},
+		{
+			Nums:     []int{1, -1, 2},
+			Expected: []int{1, 2},
+		},
+	}
 
+	var res []int
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		res = preorderTraversal1(root)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		res = preorderTraversal2(root)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		res = preorderTraversal3(root)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
 }
+
+func TestPostorderTraversal(t *testing.T) {
+	var list = []common.Item6{
+		{
+			Nums:     []int{1, 2, 3, 4, 5, 6, 7},
+			Expected: []int{4, 5, 2, 6, 7, 3, 1},
+		},
+		{
+			Nums:     []int{1, -1, 2, 3},
+			Expected: []int{3, 2, 1},
+		},
+		{
+			Nums:     []int{},
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{1},
+			Expected: []int{1},
+		},
+		{
+			Nums:     []int{1, 2},
+			Expected: []int{2, 1},
+		},
+		{
+			Nums:     []int{1, -1, 2},
+			Expected: []int{2, 1},
+		},
+	}
+
+	var res []int
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		res = postorderTraversal1(root)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		//res = preorderTraversal2(root)
+		//t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		//res = preorderTraversal3(root)
+		//t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestInorderTraversal(t *testing.T) {
+	var list = []common.Item6{
+		{
+			Nums:     []int{1, 2, 3, 4, 5, 6, 7},
+			Expected: []int{1, 2, 4, 5, 3, 6, 7},
+		},
+		{
+			Nums:     []int{1, -1, 2, 3},
+			Expected: []int{1, 2, 3},
+		},
+		{
+			Nums:     []int{},
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{1},
+			Expected: []int{1},
+		},
+		{
+			Nums:     []int{1, 2},
+			Expected: []int{1, 2},
+		},
+		{
+			Nums:     []int{1, -1, 2},
+			Expected: []int{1, 2},
+		},
+	}
+
+	var res []int
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		res = inorderTraversal1(root)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		//res = preorderTraversal2(root)
+		//t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		//res = preorderTraversal3(root)
+		//t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
 func TestInOrder(t *testing.T) {
 	InOrder1(root)
 	res := InOrder2(root)
@@ -82,36 +198,38 @@ func TestLevelOrder(t *testing.T) {
 	log.Println("res: ", res)
 }
 
+// Todo
 func TestBuildTree(t *testing.T) {
-	preOrder := PreOrder2(root)
-	log.Println("preOrder: ", preOrder)
-	inOrder := InOrder2(root)
-	log.Println(" inOrder: ", inOrder)
-
-	tree := buildTree11(preOrder, inOrder)
-	//log.Println("res: ", res)
-	log.Println("--------- ")
-
-	preOrder2 := PreOrder2(tree)
-	log.Println("tree preOrder: ", preOrder2)
-	inOrder2 := InOrder2(tree)
-	log.Println("tree inOrder: ", inOrder2)
+	//preOrder := PreOrder2(root)
+	//log.Println("preOrder: ", preOrder)
+	//inOrder := InOrder2(root)
+	//log.Println(" inOrder: ", inOrder)
+	//
+	//tree := buildTree11(preOrder, inOrder)
+	////log.Println("res: ", res)
+	//log.Println("--------- ")
+	//
+	//preOrder2 := PreOrder2(tree)
+	//log.Println("tree preOrder: ", preOrder2)
+	//inOrder2 := InOrder2(tree)
+	//log.Println("tree inOrder: ", inOrder2)
 }
 
+// TODO
 func TestPostBuildTree(t *testing.T) {
-	preOrder := PreOrder2(root)
-	log.Println("preOrder: ", preOrder)
-	inOrder := InOrder2(root)
-	log.Println(" inOrder: ", inOrder)
-
-	tree := buildTree11(preOrder, inOrder)
-	//log.Println("res: ", res)
-	log.Println("--------- ")
-
-	preOrder2 := PreOrder2(tree)
-	log.Println("tree preOrder: ", preOrder2)
-	inOrder2 := InOrder2(tree)
-	log.Println("tree inOrder: ", inOrder2)
+	//preOrder := PreOrder2(root)
+	//log.Println("preOrder: ", preOrder)
+	//inOrder := InOrder2(root)
+	//log.Println(" inOrder: ", inOrder)
+	//
+	//tree := buildTree11(preOrder, inOrder)
+	////log.Println("res: ", res)
+	//log.Println("--------- ")
+	//
+	//preOrder2 := PreOrder2(tree)
+	//log.Println("tree preOrder: ", preOrder2)
+	//inOrder2 := InOrder2(tree)
+	//log.Println("tree inOrder: ", inOrder2)
 }
 
 func TestBuildPathTree(t *testing.T) {
