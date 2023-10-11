@@ -30,3 +30,8 @@ type Item5 struct {
 type Item6 struct {
 	Nums, Expected []int
 }
+
+type Item7 struct {
+	Nums     []int
+	Expected [][]int
+}

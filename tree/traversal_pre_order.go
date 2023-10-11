@@ -20,7 +20,7 @@ package tree
 //前序遍历（根左右）
 
 // 递归遍历
-func preorderTraversal1(root *TreeNode) []int {
+func preOrderTraversal1(root *TreeNode) []int {
 	var (
 		ans = make([]int, 0)
 		f   func(root *TreeNode)
@@ -39,7 +39,7 @@ func preorderTraversal1(root *TreeNode) []int {
 }
 
 // 循环实现(使用栈先添加右子节点到栈中)
-func preorderTraversal2(root *TreeNode) []int {
+func preOrderTraversal2(root *TreeNode) []int {
 	if root == nil {
 		return []int{}
 	}
@@ -76,7 +76,7 @@ func preorderTraversal2(root *TreeNode) []int {
 }
 
 // 循环遍历(添加当前节点到栈中)
-func preorderTraversal3(root *TreeNode) []int {
+func preOrderTraversal3(root *TreeNode) []int {
 	//一直沿着左子节点遍历，并将当前节点加入栈中,遍历到左子叶子节点时，再依次取出栈顶元素处理其右子节点
 	var (
 		cur   = root

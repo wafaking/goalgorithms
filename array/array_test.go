@@ -118,16 +118,12 @@ func TestThreeSum(t *testing.T) {
 }
 
 func TestThreeSumClosest(t *testing.T) {
-	var samples = []struct {
-		Nums     []int
-		Target   int
-		Expected int
-	}{
+	var list = []common.Item3{
 		{Nums: []int{-1, 2, 1, -4}, Target: 1, Expected: 2},
 		{Nums: []int{0, 0, 0}, Target: 1, Expected: 0},
 		{Nums: []int{4, 0, 5, -5, 3, 3, 0, -4, -5}, Target: -1, Expected: -1},
 	}
-	for _, item := range samples {
+	for _, item := range list {
 		res := threeSumClosest1(item.Nums, item.Target)
 		t.Logf("1--- %t, res: %d, Expected:%d", res == item.Expected, res, item.Expected)
 		res = threeSumClosest2(item.Nums, item.Target)
@@ -137,7 +133,7 @@ func TestThreeSumClosest(t *testing.T) {
 }
 
 func TestFourSumCount(t *testing.T) {
-	var samples = [][4][]int{
+	var list = [][4][]int{
 		{
 			{1, 2},
 			{-2, -1},
@@ -151,7 +147,7 @@ func TestFourSumCount(t *testing.T) {
 			{0},
 		},
 	}
-	for _, nums := range samples {
+	for _, nums := range list {
 		res := fourSumCount11(nums[0], nums[1], nums[2], nums[3])
 		t.Log("res: ", res)
 		t.Log("----------SPLIT------------")

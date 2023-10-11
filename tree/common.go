@@ -1,10 +1,7 @@
 package tree
 
-import (
-	"fmt"
-)
-
 var root *TreeNode
+var defaultNullTreeVal = -1
 
 // TreeNode Definition for a binary tree node.
 type TreeNode struct {
@@ -19,7 +16,7 @@ func BuildBinaryTree(nums []int) *TreeNode {
 		return nil
 	}
 
-	if nums[0] == -1 {
+	if nums[0] == defaultNullTreeVal {
 		return nil
 	}
 
@@ -34,7 +31,7 @@ func BuildBinaryTree(nums []int) *TreeNode {
 			left, right *TreeNode
 		)
 		queue = queue[1:]
-		if nums[i] != -1 {
+		if nums[i] != defaultNullTreeVal {
 			left = &TreeNode{Val: nums[i]}
 			r.Left = left
 			queue = append(queue, left)
@@ -45,7 +42,7 @@ func BuildBinaryTree(nums []int) *TreeNode {
 			continue
 		}
 
-		if nums[i] != -1 {
+		if nums[i] != defaultNullTreeVal {
 			right = &TreeNode{Val: nums[i]}
 			r.Right = right
 			queue = append(queue, right)
@@ -58,7 +55,7 @@ func BuildBinaryTree(nums []int) *TreeNode {
 // Insert 添加节点
 func Insert(num int) {
 	var node *TreeNode
-	if num == -1 {
+	if num == defaultNullTreeVal {
 		node = nil
 	} else {
 		node = &TreeNode{Val: num}
@@ -88,152 +85,4 @@ func Insert(num int) {
 			cur = cur.Right
 		}
 	}
-}
-
-// InOrder1 中序遍历(先左子树，再根节点，再右子树)
-func InOrder1(root *TreeNode) {
-	if root == nil {
-		return
-	}
-	InOrder1(root.Left)
-	fmt.Println(root.Val)
-	InOrder1(root.Right)
-}
-
-// InOrder2 中序遍历(先左子树，再根节点，再右子树)
-func InOrder2(root *TreeNode) []int {
-	var (
-		sli     []int
-		inOrder func(root *TreeNode)
-	)
-
-	inOrder = func(root *TreeNode) {
-		if root == nil {
-			return
-		}
-		inOrder(root.Left)
-		sli = append(sli, root.Val)
-		inOrder(root.Right)
-	}
-	inOrder(root)
-	return sli
-}
-
-// InOrder3 中序遍历(先左子树，再根节点，再右子树)
-func InOrder3(root *TreeNode) []int {
-	var (
-		sli   []int
-		stack []*TreeNode
-		head  = root
-	)
-
-	for head != nil || len(stack) > 0 {
-		if head != nil {
-			stack = append(stack, head)
-			head = head.Left
-		} else {
-			head = stack[len(stack)-1]
-			sli = append(sli, head.Val)
-			stack = stack[:len(stack)-1]
-			head = head.Right
-		}
-	}
-	return sli
-}
-
-// PostOrder1 后序遍历（先左子树，再右子树，最后根节点）
-func PostOrder1(root *TreeNode) {
-	if root == nil {
-		return
-	}
-	PostOrder1(root.Left)
-	PostOrder1(root.Right)
-	fmt.Println(root.Val)
-}
-
-// PostOrder2 后序遍历（先左子树，再右子树，最后根节点）
-func PostOrder2(root *TreeNode) []int {
-	var (
-		sli       []int
-		postOrder func(root *TreeNode)
-	)
-	postOrder = func(root *TreeNode) {
-		if root == nil {
-			return
-		}
-		postOrder(root.Left)
-		postOrder(root.Right)
-		sli = append(sli, root.Val)
-	}
-	postOrder(root)
-	return sli
-}
-
-// PostOrder3 后序遍历（先左子树，再右子树，最后根节点）
-//增加辅助保存上一次打印结果数组的节点，
-//当一个节点左右都是空的时候，就可以放入结果集
-//当上一个放入结果集的节点是他的孩子节点的时候，
-//注意:
-// 当节点的左右不为空时， 要先加入右孩子，再加入左孩子，这样才能先访问左孩子。
-func PostOrder3(root *TreeNode) []int {
-	var (
-		sli   []int
-		stack []*TreeNode
-		pre   *TreeNode //辅助节点存储上一次打印值的节点
-	)
-	if root == nil {
-		return sli
-	}
-	stack = append(stack, root)
-	for len(stack) > 0 {
-		cur := stack[len(stack)-1]
-		// 可以打印分两种情况：
-		// 1. 当前节点是叶子节点；
-		// 2. 上一个打印的节点有值，且上一个节点是当前节点的左子节点或右子节点(即当前节点的子节点已经打印过)
-		if (cur.Left == nil && cur.Right == nil) ||
-			(pre != nil && (pre == cur.Left || pre == cur.Right)) {
-			sli = append(sli, cur.Val)
-			pre = cur
-			stack = stack[:len(stack)-1]
-		} else {
-			// 这里添加，先添加右子节点，后添加左子节点
-			if cur.Right != nil {
-				stack = append(stack, cur.Right)
-			}
-			if cur.Left != nil {
-				stack = append(stack, cur.Left)
-			}
-		}
-	}
-	return sli
-}
-
-// LevelOrder1 层序遍历(宽度优先，借助队列实现)
-func LevelOrder1(root *TreeNode) []int {
-	var (
-		sli   []int
-		queue []*TreeNode
-	)
-	if root == nil {
-		return sli
-	}
-	queue = append(queue, root)
-	for len(queue) > 0 {
-		cur := queue[0] // 先进先出
-		queue = queue[1:]
-		if cur == nil {
-			sli = append(sli, -1)
-			continue
-		}
-
-		sli = append(sli, cur.Val)
-
-		//if cur.Left != nil {
-		queue = append(queue, cur.Left)
-		//}
-		//if cur.Right != nil {
-		queue = append(queue, cur.Right)
-		//}
-	}
-	return sli
 }
