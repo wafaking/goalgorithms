@@ -20,7 +20,7 @@ import "goalgorithms/common"
 // 最大深度：从根节点到叶子节点的最长路径，使用前序遍历
 // 最大高度：从叶子节点到根节点的最长路径，使用后序遍历
 
-// 前序遍历(深度优先遍历)
+// 深度优先遍历(后序遍历)
 func maxDepth1(root *TreeNode) int {
 	if root == nil {
 		return 0
@@ -44,7 +44,7 @@ func maxDepth1(root *TreeNode) int {
 	return getMaxDepth(root) + 1
 }
 
-// 前序遍历(深度优先)
+// 深度优先(后序遍历)
 func maxDepth2(root *TreeNode) int {
 	if root == nil {
 		return 0

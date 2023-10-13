@@ -386,10 +386,10 @@ func TestIsSymmetric3(t *testing.T) {
 
 func TestMaxDepth(t *testing.T) {
 	var list = []common.Item2{
-		//{
-		//	Nums:     []int{1, 2, 3},
-		//	Expected: 2,
-		//},
+		{
+			Nums:     []int{1, 2, 3},
+			Expected: 2,
+		},
 		{
 			Nums:     []int{1, 2, 3, 4, 5, 6, 7},
 			Expected: 3,
@@ -421,8 +421,51 @@ func TestMaxDepth(t *testing.T) {
 		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
 		res = maxDepth3(root)
 		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
-		//res = inOrderTraversal2(root)
-		//t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestMinDepth(t *testing.T) {
+	var list = []common.Item2{
+		{
+			Nums:     []int{1, 2, 3},
+			Expected: 2,
+		},
+		{
+			Nums:     []int{2, defaultNullTreeVal, 3, defaultNullTreeVal, 4, defaultNullTreeVal, 5, defaultNullTreeVal, 6},
+			Expected: 5,
+		},
+		{
+			Nums:     []int{3, 9, 20, defaultNullTreeVal, defaultNullTreeVal, 15, 7},
+			Expected: 2,
+		},
+		{
+			Nums:     []int{1, defaultNullTreeVal, 2},
+			Expected: 2,
+		},
+		{
+			Nums:     []int{1, 2, 3, defaultNullTreeVal, 3},
+			Expected: 2,
+		},
+		{
+			Nums:     []int{},
+			Expected: 0,
+		},
+		{
+			Nums:     []int{1},
+			Expected: 1,
+		},
+	}
+
+	var res int
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		res = minDepth1(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = minDepth2(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		//res = maxDepth3(root)
+		//t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
