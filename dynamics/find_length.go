@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 //最长重复子数组(leetcode-718)
 //给两个整数数组nums1和nums2，返回两个数组中公共的、长度最长的子数组的长度。
 
@@ -22,7 +24,7 @@ func findLength(nums1 []int, nums2 []int) int {
 		for j := 1; j < len(dp[0]); j++ {
 			if nums1[i-1] == nums2[j-1] { // 匹配
 				dp[i][j] = dp[i-1][j-1] + 1 // 取上一个匹配数量加1
-				maxLength = maxInTwo(maxLength, dp[i][j])
+				maxLength = common.MaxInTwo(maxLength, dp[i][j])
 			}
 		}
 	}

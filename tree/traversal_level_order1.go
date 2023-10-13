@@ -15,7 +15,7 @@ func levelOrder11(root *TreeNode) []int {
 		cur := queue[0] // 先进先出
 		queue = queue[1:]
 		if cur == nil {
-			sli = append(sli, -1)
+			sli = append(sli, defaultNullTreeVal)
 			continue
 		}
 

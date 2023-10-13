@@ -1,6 +1,7 @@
 package dynamics
 
 import (
+	"goalgorithms/common"
 	"testing"
 )
 
@@ -17,181 +18,181 @@ func TestCuttingRope(t *testing.T) {
 		// res := cuttingRope1(n)
 		// res := cuttingRope2(n)
 		res := cuttingRope3(n)
-		t.Logf("res: %t, n:%d, res:%d, expected:%d", res == expected, n, res, expected)
+		t.Logf("res: %t, n:%d, res:%d, Expected:%d", res == expected, n, res, expected)
 	}
 }
 
 func TestFindContentChildren(t *testing.T) {
-	var list = []item1{
+	var list = []common.Item11{
 		{
-			nums1:    []int{1, 2, 3},
-			nums2:    []int{1, 1},
-			expected: 1,
+			Nums1:    []int{1, 2, 3},
+			Nums2:    []int{1, 1},
+			Expected: 1,
 		},
 		{
-			nums1:    []int{1, 2},
-			nums2:    []int{1, 2, 3},
-			expected: 2,
+			Nums1:    []int{1, 2},
+			Nums2:    []int{1, 2, 3},
+			Expected: 2,
 		},
 		{
-			nums1:    []int{10, 9, 8, 7},
-			nums2:    []int{5, 6, 7, 8},
-			expected: 2,
+			Nums1:    []int{10, 9, 8, 7},
+			Nums2:    []int{5, 6, 7, 8},
+			Expected: 2,
 		},
 	}
 
 	for _, item := range list {
-		res := findContentChildren(item.nums1, item.nums2)
-		t.Logf("%t, res-expected: %d:%d", res == item.expected, res, item.expected)
+		res := findContentChildren(item.Nums1, item.Nums2)
+		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestClimbStairs(t *testing.T) {
-	var list = []item2{
+	var list = []common.Item4{
 		{
-			num:      2,
-			expected: 2,
+			Num:      2,
+			Expected: 2,
 		},
 		{
-			num:      3,
-			expected: 3,
+			Num:      3,
+			Expected: 3,
 		},
 		{
-			num:      4,
-			expected: 5,
+			Num:      4,
+			Expected: 5,
 		},
 	}
 
 	for _, item := range list {
-		res := climbStairs1(item.num)
-		t.Logf("%t, res-expected: %d:%d", res == item.expected, res, item.expected)
-		res = climbStairs2(item.num)
-		t.Logf("%t, res-expected: %d:%d", res == item.expected, res, item.expected)
+		res := climbStairs1(item.Num)
+		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
+		res = climbStairs2(item.Num)
+		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestMinCostClimbingStairs(t *testing.T) {
-	var list = []item3{
+	var list = []common.Item2{
 		{
-			nums:     []int{10, 15, 20},
-			expected: 15,
+			Nums:     []int{10, 15, 20},
+			Expected: 15,
 		},
 		{
-			nums:     []int{1, 100, 1, 1, 1, 100, 1, 1, 100, 1},
-			expected: 6,
+			Nums:     []int{1, 100, 1, 1, 1, 100, 1, 1, 100, 1},
+			Expected: 6,
 		},
 	}
 
 	for _, item := range list {
-		res := minCostClimbingStairs1(item.nums)
-		t.Logf("%t, res-expected: %d:%d", res == item.expected, res, item.expected)
-		res = minCostClimbingStairs2(item.nums)
-		t.Logf("%t, res-expected: %d:%d", res == item.expected, res, item.expected)
+		res := minCostClimbingStairs1(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
+		res = minCostClimbingStairs2(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestUniquePaths(t *testing.T) {
-	var list = []item4{
+	var list = []common.Item9{
 		{
-			num1:     3,
-			num2:     7,
-			expected: 28,
+			Num1:     3,
+			Num2:     7,
+			Expected: 28,
 		},
 		{
-			num1:     3,
-			num2:     2,
-			expected: 3,
+			Num1:     3,
+			Num2:     2,
+			Expected: 3,
 		},
 		{
-			num1:     7,
-			num2:     3,
-			expected: 28,
+			Num1:     7,
+			Num2:     3,
+			Expected: 28,
 		},
 		{
-			num1:     3,
-			num2:     3,
-			expected: 6,
+			Num1:     3,
+			Num2:     3,
+			Expected: 6,
 		},
 		{
-			num1:     1,
-			num2:     2,
-			expected: 1,
+			Num1:     1,
+			Num2:     2,
+			Expected: 1,
 		},
 		{
-			num1:     2,
-			num2:     1,
-			expected: 1,
+			Num1:     2,
+			Num2:     1,
+			Expected: 1,
 		},
 	}
 
 	for _, item := range list {
-		res := uniquePaths1(item.num1, item.num2)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = uniquePaths2(item.num1, item.num2)
-		t.Logf("%t, res-expected: %d:%d", res == item.expected, res, item.expected)
-		res = uniquePaths3(item.num1, item.num2)
-		t.Logf("%t, res-expected: %d:%d", res == item.expected, res, item.expected)
-		res = uniquePaths4(item.num1, item.num2)
-		t.Logf("%t, res-expected: %d:%d", res == item.expected, res, item.expected)
+		res := uniquePaths1(item.Num1, item.Num2)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = uniquePaths2(item.Num1, item.Num2)
+		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
+		res = uniquePaths3(item.Num1, item.Num2)
+		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
+		res = uniquePaths4(item.Num1, item.Num2)
+		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestUniquePathsWithObstacles(t *testing.T) {
-	var list = []item5{
+	var list = []common.Item12{
 		{
-			grid:     [][]int{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}},
-			expected: 2,
+			Grid:     [][]int{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}},
+			Expected: 2,
 		},
 		{
-			grid:     [][]int{{0, 1}, {0, 0}},
-			expected: 1,
+			Grid:     [][]int{{0, 1}, {0, 0}},
+			Expected: 1,
 		},
 		{
-			grid:     [][]int{{0, 0}},
-			expected: 1,
+			Grid:     [][]int{{0, 0}},
+			Expected: 1,
 		},
 		{
-			grid:     [][]int{{1, 0}},
-			expected: 0,
+			Grid:     [][]int{{1, 0}},
+			Expected: 0,
 		},
 		{
-			grid:     [][]int{{0}, {0}},
-			expected: 1,
+			Grid:     [][]int{{0}, {0}},
+			Expected: 1,
 		},
 		{
-			grid:     [][]int{{1}, {0}},
-			expected: 0,
+			Grid:     [][]int{{1}, {0}},
+			Expected: 0,
 		},
 		{
-			grid:     [][]int{{0, 1, 0}},
-			expected: 0,
+			Grid:     [][]int{{0, 1, 0}},
+			Expected: 0,
 		},
 		{
-			grid:     [][]int{{0, 0}, {1, 1}, {0, 0}},
-			expected: 0,
+			Grid:     [][]int{{0, 0}, {1, 1}, {0, 0}},
+			Expected: 0,
 		},
 		{
-			grid:     [][]int{{0, 0}, {0, 0}, {0, 1}},
-			expected: 0,
+			Grid:     [][]int{{0, 0}, {0, 0}, {0, 1}},
+			Expected: 0,
 		},
 		{
-			grid:     [][]int{{0, 0, 0}, {1, 1, 1}, {0, 0, 0}},
-			expected: 0,
+			Grid:     [][]int{{0, 0, 0}, {1, 1, 1}, {0, 0, 0}},
+			Expected: 0,
 		},
 		{
-			grid:     [][]int{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}},
-			expected: 0,
+			Grid:     [][]int{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}},
+			Expected: 0,
 		},
 		{
-			grid:     [][]int{{0, 0, 0, 0, 0}, {0, 0, 0, 0, 1}, {0, 0, 0, 1, 0}, {0, 0, 0, 0, 0}},
-			expected: 10,
+			Grid:     [][]int{{0, 0, 0, 0, 0}, {0, 0, 0, 0, 1}, {0, 0, 0, 1, 0}, {0, 0, 0, 0, 0}},
+			Expected: 10,
 		},
 		{
-			grid: [][]int{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0},
+			Grid: [][]int{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0},
 				{0, 0}, {1, 0}, {0, 0}, {0, 0}, {0, 0},
 				{0, 0}, {0, 0}, {1, 0}, {0, 0}, {0, 0},
 				{0, 0}, {0, 0}, {0, 1}, {0, 0}, {0, 0},
@@ -200,709 +201,709 @@ func TestUniquePathsWithObstacles(t *testing.T) {
 				{0, 0}, {0, 1}, {0, 0}, {0, 0}, {0, 0},
 				{0, 0}, {1, 0}, {0, 0}, {0, 0}, {0, 0},
 				{0, 0}},
-			expected: 0,
+			Expected: 0,
 		},
 	}
 
 	for _, item := range list {
-		res := uniquePathsWithObstacles1(item.grid)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = uniquePathsWithObstacles2(item.grid)
-		t.Logf("%t, res-expected: %d:%d", res == item.expected, res, item.expected)
-		res = uniquePathsWithObstacles3(item.grid)
-		t.Logf("%t, res-expected: %d:%d", res == item.expected, res, item.expected)
+		res := uniquePathsWithObstacles1(item.Grid)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = uniquePathsWithObstacles2(item.Grid)
+		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
+		res = uniquePathsWithObstacles3(item.Grid)
+		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestIntegerBreak(t *testing.T) {
-	var list = []item2{
+	var list = []common.Item4{
 		{
-			num:      2,
-			expected: 1,
+			Num:      2,
+			Expected: 1,
 		},
 		{
-			num:      3,
-			expected: 2,
+			Num:      3,
+			Expected: 2,
 		},
 		{
-			num:      4,
-			expected: 4,
+			Num:      4,
+			Expected: 4,
 		},
 		{
-			num:      5,
-			expected: 6,
+			Num:      5,
+			Expected: 6,
 		},
 		{
-			num:      6,
-			expected: 9,
+			Num:      6,
+			Expected: 9,
 		},
 		{
-			num:      7,
-			expected: 12,
+			Num:      7,
+			Expected: 12,
 		},
 		{
-			num:      8,
-			expected: 18,
+			Num:      8,
+			Expected: 18,
 		},
 		{
-			num:      9,
-			expected: 27,
+			Num:      9,
+			Expected: 27,
 		},
 		{
-			num:      10,
-			expected: 36,
+			Num:      10,
+			Expected: 36,
 		},
 		{
-			num:      11,
-			expected: 54,
+			Num:      11,
+			Expected: 54,
 		},
 		{
-			num:      12,
-			expected: 81,
+			Num:      12,
+			Expected: 81,
 		},
 	}
 
 	for _, item := range list {
-		res := integerBreak1(item.num)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res := integerBreak1(item.Num)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestRob(t *testing.T) {
-	var list = []item3{
-		//{nums: []int{}, expected: 0},
-		//{nums: []int{1}, expected: 1},
-		//{nums: []int{3, 1}, expected: 3},
-		//{nums: []int{1, 2, 4, 3, 0, 9}, expected: 14},
-		//{nums: []int{1, 2, 3, 1}, expected: 4},
-		{nums: []int{2, 7, 9, 3, 1}, expected: 12},
-		{nums: []int{2, 1, 1, 2}, expected: 4},
+	var list = []common.Item2{
+		//{Nums: []int{}, Expected: 0},
+		//{Nums: []int{1}, Expected: 1},
+		//{Nums: []int{3, 1}, Expected: 3},
+		//{Nums: []int{1, 2, 4, 3, 0, 9}, Expected: 14},
+		//{Nums: []int{1, 2, 3, 1}, Expected: 4},
+		{Nums: []int{2, 7, 9, 3, 1}, Expected: 12},
+		{Nums: []int{2, 1, 1, 2}, Expected: 4},
 	}
 	for _, item := range list {
-		res := rob11(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res := rob11(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
-		res = rob12(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = rob12(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
-		res = rob13(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = rob13(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestRob2(t *testing.T) {
-	var list = []item3{
-		{nums: []int{}, expected: 0},
-		{nums: []int{1}, expected: 1},
-		{nums: []int{1, 2}, expected: 2},
-		{nums: []int{3, 1}, expected: 3},
-		{nums: []int{2, 3, 2}, expected: 3},
-		{nums: []int{1, 2, 3}, expected: 3},
-		{nums: []int{1, 2, 1, 1}, expected: 3},
-		{nums: []int{1, 2, 3, 1}, expected: 4},
-		{nums: []int{2, 7, 9, 3, 1}, expected: 11},
-		{nums: []int{2, 1, 1, 2}, expected: 3},
-		//例1：输入：nums=[2,3,2], 输出：3,解释：你不能先偷窃1号房屋（金额=2），然后偷窃3号房屋（金额=2）,因为他们是相邻的。
-		//示例2：输入：nums=[1,2,3,1], 输出：4,解释：你可以先偷窃1号房屋（金额=1），然后偷窃3号房屋(金额=3)偷窃到的最高金额=1+3=4。
-		//示例3：输入：nums=[1,2,3],输出：3;
+	var list = []common.Item2{
+		{Nums: []int{}, Expected: 0},
+		{Nums: []int{1}, Expected: 1},
+		{Nums: []int{1, 2}, Expected: 2},
+		{Nums: []int{3, 1}, Expected: 3},
+		{Nums: []int{2, 3, 2}, Expected: 3},
+		{Nums: []int{1, 2, 3}, Expected: 3},
+		{Nums: []int{1, 2, 1, 1}, Expected: 3},
+		{Nums: []int{1, 2, 3, 1}, Expected: 4},
+		{Nums: []int{2, 7, 9, 3, 1}, Expected: 11},
+		{Nums: []int{2, 1, 1, 2}, Expected: 3},
+		//例1：输入：Nums=[2,3,2], 输出：3,解释：你不能先偷窃1号房屋（金额=2），然后偷窃3号房屋（金额=2）,因为他们是相邻的。
+		//示例2：输入：Nums=[1,2,3,1], 输出：4,解释：你可以先偷窃1号房屋（金额=1），然后偷窃3号房屋(金额=3)偷窃到的最高金额=1+3=4。
+		//示例3：输入：Nums=[1,2,3],输出：3;
 
 	}
 	for _, item := range list {
-		res := rob21(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res := rob21(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestRob3(t *testing.T) {
-	var list = []item3{
-		{nums: []int{}, expected: 0},
-		{nums: []int{1}, expected: 1},
-		{nums: []int{1, 2}, expected: 2},
-		{nums: []int{3, 1}, expected: 3},
-		{nums: []int{2, 3, 2}, expected: 3},
-		{nums: []int{1, 2, 3}, expected: 3},
-		{nums: []int{1, 2, 1, 1}, expected: 3},
-		{nums: []int{1, 2, 3, 1}, expected: 4},
-		{nums: []int{2, 7, 9, 3, 1}, expected: 11},
-		{nums: []int{2, 1, 1, 2}, expected: 3},
-		//例1：输入：nums=[2,3,2], 输出：3,解释：你不能先偷窃1号房屋（金额=2），然后偷窃3号房屋（金额=2）,因为他们是相邻的。
-		//示例2：输入：nums=[1,2,3,1], 输出：4,解释：你可以先偷窃1号房屋（金额=1），然后偷窃3号房屋(金额=3)偷窃到的最高金额=1+3=4。
-		//示例3：输入：nums=[1,2,3],输出：3;
+	var list = []common.Item2{
+		{Nums: []int{}, Expected: 0},
+		{Nums: []int{1}, Expected: 1},
+		{Nums: []int{1, 2}, Expected: 2},
+		{Nums: []int{3, 1}, Expected: 3},
+		{Nums: []int{2, 3, 2}, Expected: 3},
+		{Nums: []int{1, 2, 3}, Expected: 3},
+		{Nums: []int{1, 2, 1, 1}, Expected: 3},
+		{Nums: []int{1, 2, 3, 1}, Expected: 4},
+		{Nums: []int{2, 7, 9, 3, 1}, Expected: 11},
+		{Nums: []int{2, 1, 1, 2}, Expected: 3},
+		//例1：输入：Nums=[2,3,2], 输出：3,解释：你不能先偷窃1号房屋（金额=2），然后偷窃3号房屋（金额=2）,因为他们是相邻的。
+		//示例2：输入：Nums=[1,2,3,1], 输出：4,解释：你可以先偷窃1号房屋（金额=1），然后偷窃3号房屋(金额=3)偷窃到的最高金额=1+3=4。
+		//示例3：输入：Nums=[1,2,3],输出：3;
 
 	}
 	for _, item := range list {
-		res := rob21(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res := rob21(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestMaxValue(t *testing.T) {
-	var list = []item5{
+	var list = []common.Item12{
 		{
-			grid: [][]int{
+			Grid: [][]int{
 				{4, 2, 1},
 			},
-			expected: 7,
+			Expected: 7,
 		},
 		{
-			grid: [][]int{
+			Grid: [][]int{
 				{1},
 				{1},
 				{4},
 			},
-			expected: 6,
+			Expected: 6,
 		},
 		{
-			grid: [][]int{
+			Grid: [][]int{
 				{1, 3, 1},
 				{1, 5, 1},
 				{4, 2, 1},
 			},
-			expected: 12,
+			Expected: 12,
 		},
 	}
 	for _, item := range list {
-		res := maxValue12(item.grid)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res := maxValue12(item.Grid)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
-		res = maxValue11(item.grid)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxValue11(item.Grid)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 
 }
 
 func TestLengthOfLIS11(t *testing.T) {
-	var list = []item3{
+	var list = []common.Item2{
 		{
-			nums:     []int{10, 9, 2, 5, 3, 7, 101, 18},
-			expected: 4,
+			Nums:     []int{10, 9, 2, 5, 3, 7, 101, 18},
+			Expected: 4,
 		},
 		{
-			nums:     []int{0, 1, 0, 3, 2, 3},
-			expected: 4,
+			Nums:     []int{0, 1, 0, 3, 2, 3},
+			Expected: 4,
 		},
 		{
-			nums:     []int{7, 7, 7, 7, 7, 7, 7},
-			expected: 1,
+			Nums:     []int{7, 7, 7, 7, 7, 7, 7},
+			Expected: 1,
 		},
 	}
 	for _, item := range list {
-		res := lengthOfLIS11(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res := lengthOfLIS11(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
-		res = lengthOfLIS12(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = lengthOfLIS12(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
-		res = lengthOfLIS13(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = lengthOfLIS13(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
-		res = lengthOfLIS14(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = lengthOfLIS14(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
-		res = lengthOfLIS15(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = lengthOfLIS15(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 
 	}
 }
 
 func TestWeightBag1(t *testing.T) {
-	var list = []item6{
+	var list = []common.Item13{
 		{
-			weight:    []int{3, 2, 5, 5},
-			value:     []int{2, 8, 1, 3},
-			bagWeight: 6,
-			expected:  10,
+			Weight:    []int{3, 2, 5, 5},
+			Value:     []int{2, 8, 1, 3},
+			BagWeight: 6,
+			Expected:  10,
 		},
 		{
-			weight:    []int{1, 4, 4, 3},
-			value:     []int{2, 1, 3, 1},
-			bagWeight: 6,
-			expected:  5,
+			Weight:    []int{1, 4, 4, 3},
+			Value:     []int{2, 1, 3, 1},
+			BagWeight: 6,
+			Expected:  5,
 		},
 		{
-			weight:    []int{2, 3, 3, 1},
-			value:     []int{6, 8, 1, 9},
-			bagWeight: 6,
-			expected:  23,
+			Weight:    []int{2, 3, 3, 1},
+			Value:     []int{6, 8, 1, 9},
+			BagWeight: 6,
+			Expected:  23,
 		},
 		{
-			weight:    []int{3, 3, 2, 2, 5, 5, 5, 5},
-			value:     []int{2, 2, 8, 8, 1, 1, 3, 3},
-			bagWeight: 6,
-			expected:  16,
+			Weight:    []int{3, 3, 2, 2, 5, 5, 5, 5},
+			Value:     []int{2, 2, 8, 8, 1, 1, 3, 3},
+			BagWeight: 6,
+			Expected:  16,
 		},
 		{
-			weight:    []int{1, 1, 4, 4, 4, 4, 3, 3},
-			value:     []int{2, 2, 1, 1, 3, 3, 1, 1},
-			bagWeight: 6,
-			expected:  7,
+			Weight:    []int{1, 1, 4, 4, 4, 4, 3, 3},
+			Value:     []int{2, 2, 1, 1, 3, 3, 1, 1},
+			BagWeight: 6,
+			Expected:  7,
 		},
 		{
-			weight:    []int{2, 2, 3, 3, 3, 3, 1, 1},
-			value:     []int{6, 6, 8, 8, 1, 1, 9, 9},
-			bagWeight: 6,
-			expected:  30,
+			Weight:    []int{2, 2, 3, 3, 3, 3, 1, 1},
+			Value:     []int{6, 6, 8, 8, 1, 1, 9, 9},
+			BagWeight: 6,
+			Expected:  30,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = weightBag11(item.weight, item.value, item.bagWeight)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = weightBag13(item.weight, item.value, item.bagWeight)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = weightBag11(item.Weight, item.Value, item.BagWeight)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = weightBag13(item.Weight, item.Value, item.BagWeight)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestWeightBag2(t *testing.T) {
-	var list = []item7{
+	var list = []common.Item14{
 		{
-			weight:    []int{3, 2, 5, 5},
-			value:     []int{2, 8, 1, 3},
-			times:     []int{2, 2, 2, 2},
-			bagWeight: 6,
-			expected:  16,
+			Weight:    []int{3, 2, 5, 5},
+			Value:     []int{2, 8, 1, 3},
+			Times:     []int{2, 2, 2, 2},
+			BagWeight: 6,
+			Expected:  16,
 		},
 		{
-			weight:    []int{1, 4, 4, 3},
-			value:     []int{2, 1, 3, 1},
-			times:     []int{2, 2, 2, 2},
-			bagWeight: 6,
-			expected:  7,
+			Weight:    []int{1, 4, 4, 3},
+			Value:     []int{2, 1, 3, 1},
+			Times:     []int{2, 2, 2, 2},
+			BagWeight: 6,
+			Expected:  7,
 		},
 		{
-			weight:    []int{2, 3, 3, 1},
-			value:     []int{6, 8, 1, 9},
-			times:     []int{2, 2, 2, 2},
-			bagWeight: 6,
-			expected:  30,
+			Weight:    []int{2, 3, 3, 1},
+			Value:     []int{6, 8, 1, 9},
+			Times:     []int{2, 2, 2, 2},
+			BagWeight: 6,
+			Expected:  30,
 		},
 	}
 	for _, item := range list {
-		res := weightBag21(item.weight, item.value, item.times, item.bagWeight)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res := weightBag21(item.Weight, item.Value, item.Times, item.BagWeight)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestIsMatchRegx(t *testing.T) {
-	var list = []item8{
+	var list = []common.Item15{
 		{
-			s:        "abc",
-			p:        ".*c",
-			expected: true,
+			S:        "abc",
+			P:        ".*c",
+			Expected: true,
 		},
 		{
-			s:        "abc",
-			p:        "*.c",
-			expected: false,
+			S:        "abc",
+			P:        "*.c",
+			Expected: false,
 		},
 		{
-			s:        "AAAA",
-			p:        "BAAC*.",
-			expected: false,
+			S:        "AAAA",
+			P:        "BAAC*.",
+			Expected: false,
 		},
 		{
-			s:        "ACAB",
-			p:        "A.B*AB",
-			expected: true,
+			S:        "ACAB",
+			P:        "A.B*AB",
+			Expected: true,
 		},
 		{
-			s:        "ABAA",
-			p:        "A*CA.C",
-			expected: false,
+			S:        "ABAA",
+			P:        "A*CA.C",
+			Expected: false,
 		},
 		{
-			s:        "aa",
-			p:        "a",
-			expected: false,
+			S:        "aa",
+			P:        "a",
+			Expected: false,
 		},
 		{
-			s:        "aa",
-			p:        "a*",
-			expected: true,
+			S:        "aa",
+			P:        "a*",
+			Expected: true,
 		},
 		{
-			s:        "ab",
-			p:        ".*",
-			expected: true,
+			S:        "ab",
+			P:        ".*",
+			Expected: true,
 		},
 		{
-			s:        "ab",
-			p:        "..",
-			expected: true,
+			S:        "ab",
+			P:        "..",
+			Expected: true,
 		},
 		{
-			s:        "ab",
-			p:        "**",
-			expected: false,
+			S:        "ab",
+			P:        "**",
+			Expected: false,
 		},
 		{
-			s:        "aab",
-			p:        "c*a*b",
-			expected: true,
+			S:        "aab",
+			P:        "c*a*b",
+			Expected: true,
 		},
 	}
 	var res bool
 	for _, item := range list {
-		res = isMatchRegx1(item.s, item.p)
-		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.expected, res, item.expected, item)
+		res = isMatchRegx1(item.S, item.P)
+		t.Logf("%t, res-Expected: %t:%t, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestIsMatchWildCard(t *testing.T) {
-	var list = []item8{
+	var list = []common.Item15{
 		{
-			s:        "abc",
-			p:        "?*c",
-			expected: true,
+			S:        "abc",
+			P:        "?*c",
+			Expected: true,
 		},
 		{
-			s:        "abc",
-			p:        "*?c",
-			expected: true,
+			S:        "abc",
+			P:        "*?c",
+			Expected: true,
 		},
 		{
-			s:        "CABCB",
-			p:        "C?BC*",
-			expected: true,
+			S:        "CABCB",
+			P:        "C?BC*",
+			Expected: true,
 		},
 		{
-			s:        "AAAA",
-			p:        "BAAC*?",
-			expected: false,
+			S:        "AAAA",
+			P:        "BAAC*?",
+			Expected: false,
 		},
 		{
-			s:        "ACAB",
-			p:        "A?*AB",
-			expected: true,
+			S:        "ACAB",
+			P:        "A?*AB",
+			Expected: true,
 		},
 		{
-			s:        "aa",
-			p:        "a",
-			expected: false,
+			S:        "aa",
+			P:        "a",
+			Expected: false,
 		},
 		{
-			s:        "aa",
-			p:        "*",
-			expected: true,
+			S:        "aa",
+			P:        "*",
+			Expected: true,
 		},
 		{
-			s:        "aa",
-			p:        "a*",
-			expected: true,
+			S:        "aa",
+			P:        "a*",
+			Expected: true,
 		},
 		{
-			s:        "b",
-			p:        "?*",
-			expected: true,
+			S:        "b",
+			P:        "?*",
+			Expected: true,
 		},
 		{
-			s:        "ab",
-			p:        "?*",
-			expected: true,
+			S:        "ab",
+			P:        "?*",
+			Expected: true,
 		},
 		{
-			s:        "ab",
-			p:        "??",
-			expected: true,
+			S:        "ab",
+			P:        "??",
+			Expected: true,
 		},
 		{
-			s:        "ab",
-			p:        "**",
-			expected: true,
+			S:        "ab",
+			P:        "**",
+			Expected: true,
 		},
 		{
-			s:        "ab",
-			p:        "*",
-			expected: true,
+			S:        "ab",
+			P:        "*",
+			Expected: true,
 		},
 		{
-			s:        "aab",
-			p:        "c*a*b",
-			expected: false,
+			S:        "aab",
+			P:        "c*a*b",
+			Expected: false,
 		},
 		{
-			s:        "AC",
-			p:        "?*C",
-			expected: true,
+			S:        "AC",
+			P:        "?*C",
+			Expected: true,
 		},
 	}
 	var res bool
 	for _, item := range list {
-		res = isMatchWildCard(item.s, item.p)
-		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.expected, res, item.expected, item)
+		res = isMatchWildCard(item.S, item.P)
+		t.Logf("%t, res-Expected: %t:%t, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestLongestCommonSubsequence(t *testing.T) {
-	var list = []item9{
+	var list = []common.Item16{
 		{
-			text1:    "AAAT",
-			text2:    "ATACATAC",
-			expected: 4,
+			Text1:    "AAAT",
+			Text2:    "ATACATAC",
+			Expected: 4,
 		},
 		{
-			text1:    "abcde",
-			text2:    "ace",
-			expected: 3,
+			Text1:    "abcde",
+			Text2:    "ace",
+			Expected: 3,
 		},
 		{
-			text1:    "abc",
-			text2:    "abc",
-			expected: 3,
+			Text1:    "abc",
+			Text2:    "abc",
+			Expected: 3,
 		},
 		{
-			text1:    "abc",
-			text2:    "def",
-			expected: 0,
+			Text1:    "abc",
+			Text2:    "def",
+			Expected: 0,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = longestCommonSubsequence(item.text1, item.text2)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = longestCommonSubsequence(item.Text1, item.Text2)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestLongestCommonSubstring(t *testing.T) {
-	var list = []item9{
+	var list = []common.Item16{
 		{
-			text1:    "AAAT",
-			text2:    "ATACATAC",
-			expected: 2,
+			Text1:    "AAAT",
+			Text2:    "ATACATAC",
+			Expected: 2,
 		},
 		{
-			text1:    "bacde",
-			text2:    "ace",
-			expected: 2,
+			Text1:    "bacde",
+			Text2:    "ace",
+			Expected: 2,
 		},
 		{
-			text1:    "abc",
-			text2:    "abc",
-			expected: 3,
+			Text1:    "abc",
+			Text2:    "abc",
+			Expected: 3,
 		},
 		{
-			text1:    "abc",
-			text2:    "def",
-			expected: 0,
+			Text1:    "abc",
+			Text2:    "def",
+			Expected: 0,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = longestCommonSubstring(item.text1, item.text2)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = longestCommonSubstring(item.Text1, item.Text2)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestFindLength(t *testing.T) {
-	var list = []item1{
+	var list = []common.Item11{
 		{
-			nums1:    []int{1, 2, 3, 2, 1},
-			nums2:    []int{3, 2, 1, 4, 7},
-			expected: 3,
+			Nums1:    []int{1, 2, 3, 2, 1},
+			Nums2:    []int{3, 2, 1, 4, 7},
+			Expected: 3,
 			//示例2：输入：nums1=[0,0,0,0,0],nums2=[0,0,0,0,0]输出：5
 		},
 		{
-			nums1:    []int{0, 0, 0, 0, 0},
-			nums2:    []int{0, 0, 0, 0, 0},
-			expected: 5,
+			Nums1:    []int{0, 0, 0, 0, 0},
+			Nums2:    []int{0, 0, 0, 0, 0},
+			Expected: 5,
 		},
 		{
-			nums1:    []int{1, 2, 3},
-			nums2:    []int{1, 2},
-			expected: 2,
+			Nums1:    []int{1, 2, 3},
+			Nums2:    []int{1, 2},
+			Expected: 2,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = findLength(item.nums1, item.nums2)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = findLength(item.Nums1, item.Nums2)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestMinDistance(t *testing.T) {
-	var list = []item9{
+	var list = []common.Item16{
 		{
-			text1:    "TAAGC",
-			text2:    "GAACT",
-			expected: 3,
+			Text1:    "TAAGC",
+			Text2:    "GAACT",
+			Expected: 3,
 		},
 		{
-			text1:    "horse",
-			text2:    "ros",
-			expected: 3,
+			Text1:    "horse",
+			Text2:    "ros",
+			Expected: 3,
 		},
 		{
-			text1:    "intention",
-			text2:    "execution",
-			expected: 5,
+			Text1:    "intention",
+			Text2:    "execution",
+			Expected: 5,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = minDistance(item.text1, item.text2)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = minDistance(item.Text1, item.Text2)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestCoinChange(t *testing.T) {
-	var list = []item10{
+	var list = []common.Item3{
 		{
-			nums:     []int{2},
-			target:   3,
-			expected: -1,
+			Nums:     []int{2},
+			Target:   3,
+			Expected: -1,
 		},
 		{
-			nums:     []int{1},
-			target:   0,
-			expected: 0,
+			Nums:     []int{1},
+			Target:   0,
+			Expected: 0,
 		},
 		{
-			nums:     []int{1, 2, 5},
-			target:   11,
-			expected: 3,
+			Nums:     []int{1, 2, 5},
+			Target:   11,
+			Expected: 3,
 		},
 		{
-			nums:     []int{5, 2, 1},
-			target:   11,
-			expected: 3,
+			Nums:     []int{5, 2, 1},
+			Target:   11,
+			Expected: 3,
 		},
 		{
-			nums:     []int{1, 2, 3, 4},
-			target:   6,
-			expected: 2,
+			Nums:     []int{1, 2, 3, 4},
+			Target:   6,
+			Expected: 2,
 		},
 		{
-			nums:     []int{5, 7, 2, 1, 6},
-			target:   6,
-			expected: 1,
+			Nums:     []int{5, 7, 2, 1, 6},
+			Target:   6,
+			Expected: 1,
 		},
 		{
-			nums:     []int{186, 419, 83, 408},
-			target:   6249,
-			expected: 20,
+			Nums:     []int{186, 419, 83, 408},
+			Target:   6249,
+			Expected: 20,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = coinChange(item.nums, item.target)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = coinChange(item.Nums, item.Target)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestChange(t *testing.T) {
-	var list = []item10{
+	var list = []common.Item3{
 		{
-			nums:     []int{2},
-			target:   3,
-			expected: 0,
+			Nums:     []int{2},
+			Target:   3,
+			Expected: 0,
 		},
 		{
-			nums:     []int{1},
-			target:   0,
-			expected: 1,
+			Nums:     []int{1},
+			Target:   0,
+			Expected: 1,
 		},
 		{
-			nums:     []int{1},
-			target:   5,
-			expected: 1,
+			Nums:     []int{1},
+			Target:   5,
+			Expected: 1,
 		},
 		{
-			nums:     []int{5},
-			target:   10,
-			expected: 1,
+			Nums:     []int{5},
+			Target:   10,
+			Expected: 1,
 		},
 		{
-			nums:     []int{1, 2, 5},
-			target:   5,
-			expected: 4,
+			Nums:     []int{1, 2, 5},
+			Target:   5,
+			Expected: 4,
 		},
 		{
-			nums:     []int{5, 2, 1},
-			target:   5,
-			expected: 4,
+			Nums:     []int{5, 2, 1},
+			Target:   5,
+			Expected: 4,
 		},
 		{
-			nums:     []int{7},
-			target:   0,
-			expected: 1,
+			Nums:     []int{7},
+			Target:   0,
+			Expected: 1,
 		},
 		{
-			nums:     []int{10},
-			target:   10,
-			expected: 1,
+			Nums:     []int{10},
+			Target:   10,
+			Expected: 1,
 		},
 		{
-			nums:     []int{7},
-			target:   0,
-			expected: 1,
+			Nums:     []int{7},
+			Target:   0,
+			Expected: 1,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = change1(item.target, item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = change2(item.target, item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = change1(item.Target, item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = change2(item.Target, item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestCanPartition(t *testing.T) {
-	var list = []item11{
+	var list = []common.Item8{
 		{
-			nums:     []int{1, 0, 1},
-			expected: true,
+			Nums:     []int{1, 0, 1},
+			Expected: true,
 		},
 		{
-			nums:     []int{1, 2, 3, 2},
-			expected: true,
+			Nums:     []int{1, 2, 3, 2},
+			Expected: true,
 		},
 		{
-			nums:     []int{1, 3, 5, 3},
-			expected: true,
+			Nums:     []int{1, 3, 5, 3},
+			Expected: true,
 		},
 		{
-			nums:     []int{1, 5, 11, 5},
-			expected: true,
+			Nums:     []int{1, 5, 11, 5},
+			Expected: true,
 		},
 		{
-			nums:     []int{1, 2, 3, 5},
-			expected: false,
+			Nums:     []int{1, 2, 3, 5},
+			Expected: false,
 		},
 		{
-			nums:     []int{1, 6},
-			expected: false,
+			Nums:     []int{1, 6},
+			Expected: false,
 		},
 		{
-			nums:     []int{2},
-			expected: false,
+			Nums:     []int{2},
+			Expected: false,
 		},
 		{
-			nums:     []int{1, 2, 2},
-			expected: false,
+			Nums:     []int{1, 2, 2},
+			Expected: false,
 		},
 		{
-			nums:     []int{1, 2, 5},
-			expected: false,
+			Nums:     []int{1, 2, 5},
+			Expected: false,
 		},
 		//{
-		//	nums: []int{100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+		//	Nums: []int{100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
 		//		100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
 		//		100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
 		//		100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
@@ -919,424 +920,424 @@ func TestCanPartition(t *testing.T) {
 		//		100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
 		//		100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
 		//		100, 100, 100, 100, 100, 100, 99, 97},
-		//	expected: false,
+		//	Expected: false,
 		//},
 	}
 
 	var res bool
 	for _, item := range list {
-		res = canPartition1(item.nums)
-		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.expected, res, item.expected, item)
-		res = canPartition2(item.nums)
-		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.expected, res, item.expected, item)
-		res = canPartition3(item.nums)
-		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.expected, res, item.expected, item)
+		res = canPartition1(item.Nums)
+		t.Logf("%t, res-Expected: %t:%t, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = canPartition2(item.Nums)
+		t.Logf("%t, res-Expected: %t:%t, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = canPartition3(item.Nums)
+		t.Logf("%t, res-Expected: %t:%t, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestFindTargetSumWays(t *testing.T) {
-	var list = []item10{
+	var list = []common.Item3{
 		{
-			nums:     []int{1, 1, 1, 1, 1},
-			target:   3,
-			expected: 5,
+			Nums:     []int{1, 1, 1, 1, 1},
+			Target:   3,
+			Expected: 5,
 		},
 		{
-			nums:     []int{1},
-			target:   1,
-			expected: 1,
+			Nums:     []int{1},
+			Target:   1,
+			Expected: 1,
 		},
 		{
-			nums:     []int{1},
-			target:   2,
-			expected: 0,
+			Nums:     []int{1},
+			Target:   2,
+			Expected: 0,
 		},
 		{
-			nums:     []int{1, 0},
-			target:   1,
-			expected: 2,
+			Nums:     []int{1, 0},
+			Target:   1,
+			Expected: 2,
 		},
 		{
-			nums:     []int{0, 0, 0, 0, 0, 0, 0, 0, 1},
-			target:   1,
-			expected: 256,
+			Nums:     []int{0, 0, 0, 0, 0, 0, 0, 0, 1},
+			Target:   1,
+			Expected: 256,
 		},
 		{
-			nums:     []int{1, 2, 1},
-			target:   0,
-			expected: 2,
+			Nums:     []int{1, 2, 1},
+			Target:   0,
+			Expected: 2,
 		},
 	}
 
 	var res int
 	for _, item := range list {
-		res = findTargetSumWays11(item.nums, item.target)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = findTargetSumWays12(item.nums, item.target)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = findTargetSumWays13(item.nums, item.target)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = findTargetSumWays11(item.Nums, item.Target)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = findTargetSumWays12(item.Nums, item.Target)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = findTargetSumWays13(item.Nums, item.Target)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestFindMaxForm(t *testing.T) {
-	var list = []item13{
+	var list = []common.Item10{
 		{
-			str: []string{"10", "0001", "111001", "1", "0"},
-			item4: item4{
-				num1:     5,
-				num2:     3,
-				expected: 4,
+			Str: []string{"10", "0001", "111001", "1", "0"},
+			Item9: common.Item9{
+				Num1:     5,
+				Num2:     3,
+				Expected: 4,
 			},
 		},
 		{
-			str: []string{"10", "0", "1"},
-			item4: item4{
-				num1:     1,
-				num2:     1,
-				expected: 2,
+			Str: []string{"10", "0", "1"},
+			Item9: common.Item9{
+				Num1:     1,
+				Num2:     1,
+				Expected: 2,
 			},
 		},
 	}
 
 	var res int
 	for _, item := range list {
-		res = findMaxForm1(item.str, item.num1, item.num2)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = findMaxForm1(item.Str, item.Num1, item.Num2)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestIsSubsequence(t *testing.T) {
-	var list = []item8{
+	var list = []common.Item15{
 		{
-			s:        "abc",
-			p:        "ahbgdc",
-			expected: true,
+			S:        "abc",
+			P:        "ahbgdc",
+			Expected: true,
 		},
 		{
-			s:        "axc",
-			p:        "ahbgdc",
-			expected: false,
+			S:        "axc",
+			P:        "ahbgdc",
+			Expected: false,
 		},
 		{
-			s:        "",
-			p:        "ahbgdc",
-			expected: true,
+			S:        "",
+			P:        "ahbgdc",
+			Expected: true,
 		},
 		{
-			s:        "aaaaaa",
-			p:        "bbaaaa",
-			expected: false,
+			S:        "aaaaaa",
+			P:        "bbaaaa",
+			Expected: false,
 		},
 		{
-			s:        "bb",
-			p:        "ahbgdc",
-			expected: false,
+			S:        "bb",
+			P:        "ahbgdc",
+			Expected: false,
 		},
 	}
 	var res bool
 	for _, item := range list {
-		res = isSubsequence1(item.s, item.p)
-		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.expected, res, item.expected, item)
-		res = isSubsequence3(item.s, item.p)
-		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.expected, res, item.expected, item)
-		res = isSubsequence4(item.s, item.p)
-		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.expected, res, item.expected, item)
+		res = isSubsequence1(item.S, item.P)
+		t.Logf("%t, res-Expected: %t:%t, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = isSubsequence3(item.S, item.P)
+		t.Logf("%t, res-Expected: %t:%t, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = isSubsequence4(item.S, item.P)
+		t.Logf("%t, res-Expected: %t:%t, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestIsSubstring(t *testing.T) {
-	var list = []item8{
+	var list = []common.Item15{
 		{
-			s:        "abc",
-			p:        "ahbgdc",
-			expected: false,
+			S:        "abc",
+			P:        "ahbgdc",
+			Expected: false,
 		},
 		{
-			s:        "hbg",
-			p:        "ahbgdc",
-			expected: true,
+			S:        "hbg",
+			P:        "ahbgdc",
+			Expected: true,
 		},
 		{
-			s:        "hbg",
-			p:        "hbg",
-			expected: true,
+			S:        "hbg",
+			P:        "hbg",
+			Expected: true,
 		},
 		{
-			s:        "axc",
-			p:        "ahbgdc",
-			expected: false,
+			S:        "axc",
+			P:        "ahbgdc",
+			Expected: false,
 		},
 		{
-			s:        "",
-			p:        "ahbgdc",
-			expected: true,
+			S:        "",
+			P:        "ahbgdc",
+			Expected: true,
 		},
 	}
 	var res bool
 	for _, item := range list {
-		res = isSubstring1(item.s, item.p)
-		t.Logf("%t, res-expected: %t:%t, item:%+v", res == item.expected, res, item.expected, item)
+		res = isSubstring1(item.S, item.P)
+		t.Logf("%t, res-Expected: %t:%t, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestTwoEggDrop(t *testing.T) {
-	var list = []item2{
+	var list = []common.Item4{
 		{
-			num:      1,
-			expected: 1,
+			Num:      1,
+			Expected: 1,
 		},
 		{
-			num:      2,
-			expected: 2,
+			Num:      2,
+			Expected: 2,
 		},
 		{
-			num:      3,
-			expected: 2,
+			Num:      3,
+			Expected: 2,
 		},
 		{
-			num:      4,
-			expected: 3,
+			Num:      4,
+			Expected: 3,
 		},
 		{
-			num:      5,
-			expected: 3,
+			Num:      5,
+			Expected: 3,
 		},
 		{
-			num:      100,
-			expected: 14,
+			Num:      100,
+			Expected: 14,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = twoEggDrop1(item.num)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = twoEggDrop2(item.num)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = twoEggDrop3(item.num)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = twoEggDrop4(item.num)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = twoEggDrop1(item.Num)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = twoEggDrop2(item.Num)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = twoEggDrop3(item.Num)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = twoEggDrop4(item.Num)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestSuperEggDrop(t *testing.T) {
-	var list = []item4{
+	var list = []common.Item9{
 		{
-			num1:     1,
-			num2:     2,
-			expected: 2,
+			Num1:     1,
+			Num2:     2,
+			Expected: 2,
 		},
 		{
-			num1:     3,
-			num2:     7,
-			expected: 3,
+			Num1:     3,
+			Num2:     7,
+			Expected: 3,
 		},
 		{
-			num1:     2,
-			num2:     6,
-			expected: 3,
+			Num1:     2,
+			Num2:     6,
+			Expected: 3,
 		},
 		{
-			num1:     3,
-			num2:     14,
-			expected: 4,
+			Num1:     3,
+			Num2:     14,
+			Expected: 4,
 		},
 		{
-			num1:     7,
-			num2:     10000,
-			expected: 15,
+			Num1:     7,
+			Num2:     10000,
+			Expected: 15,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = superEggDrop1(item.num1, item.num2)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = superEggDrop2(item.num1, item.num2)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = superEggDrop3(item.num1, item.num2)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = superEggDrop4(item.num1, item.num2)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = superEggDrop1(item.Num1, item.Num2)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = superEggDrop2(item.Num1, item.Num2)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = superEggDrop3(item.Num1, item.Num2)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = superEggDrop4(item.Num1, item.Num2)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestLastStoneWeight1(t *testing.T) {
-	var list = []item3{
+	var list = []common.Item2{
 		{
-			nums:     []int{2, 7, 4, 1, 8, 1},
-			expected: 1,
+			Nums:     []int{2, 7, 4, 1, 8, 1},
+			Expected: 1,
 		},
 		{
-			nums:     []int{1},
-			expected: 1,
+			Nums:     []int{1},
+			Expected: 1,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = lastStoneWeight1(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = lastStoneWeight1(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestMaxProfit1(t *testing.T) {
-	var list = []item3{
+	var list = []common.Item2{
 		{
-			nums:     []int{7, 1, 5, 3, 6, 4},
-			expected: 5,
+			Nums:     []int{7, 1, 5, 3, 6, 4},
+			Expected: 5,
 		},
 		{
-			nums:     []int{7, 6, 4, 3, 1},
-			expected: 0,
+			Nums:     []int{7, 6, 4, 3, 1},
+			Expected: 0,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = maxProfit11(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = maxProfit12(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = maxProfit13(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxProfit11(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = maxProfit12(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = maxProfit13(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestMaxProfit2(t *testing.T) {
-	var list = []item3{
+	var list = []common.Item2{
 		{
-			nums:     []int{7, 1, 5, 3, 6, 4},
-			expected: 7,
+			Nums:     []int{7, 1, 5, 3, 6, 4},
+			Expected: 7,
 		},
 		{
-			nums:     []int{1, 2, 3, 4, 5},
-			expected: 4,
+			Nums:     []int{1, 2, 3, 4, 5},
+			Expected: 4,
 		},
 		{
-			nums:     []int{7, 6, 4, 3, 1},
-			expected: 0,
+			Nums:     []int{7, 6, 4, 3, 1},
+			Expected: 0,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = maxProfit21(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = maxProfit22(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		//res = maxProfit13(item.nums)
-		//t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxProfit21(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = maxProfit22(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		//res = maxProfit13(item.Nums)
+		//t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestMaxProfit3(t *testing.T) {
-	var list = []item3{
+	var list = []common.Item2{
 		{
-			nums:     []int{3, 3, 5, 0, 0, 3, 1, 4},
-			expected: 6,
+			Nums:     []int{3, 3, 5, 0, 0, 3, 1, 4},
+			Expected: 6,
 		},
 		{
-			nums:     []int{1, 2, 3, 4, 5},
-			expected: 4,
+			Nums:     []int{1, 2, 3, 4, 5},
+			Expected: 4,
 		},
 		{
-			nums:     []int{7, 6, 4, 3, 1},
-			expected: 0,
+			Nums:     []int{7, 6, 4, 3, 1},
+			Expected: 0,
 		},
 		{
-			nums:     []int{1},
-			expected: 0,
+			Nums:     []int{1},
+			Expected: 0,
 		},
 	}
 	var res int
 	for _, item := range list {
-		res = maxProfit31(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = maxProfit32(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxProfit31(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = maxProfit32(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestMaxProfit4(t *testing.T) {
-	var list = []item10{
+	var list = []common.Item3{
 		{
-			nums:     []int{2, 4, 1},
-			target:   2,
-			expected: 2,
+			Nums:     []int{2, 4, 1},
+			Target:   2,
+			Expected: 2,
 		},
 		{
-			nums:     []int{3, 2, 6, 5, 0, 3},
-			target:   2,
-			expected: 7,
+			Nums:     []int{3, 2, 6, 5, 0, 3},
+			Target:   2,
+			Expected: 7,
 		},
 		{
-			nums:     []int{2, 4, 1, 8, 2, 5, 9, 11},
-			target:   3,
-			expected: 18,
+			Nums:     []int{2, 4, 1, 8, 2, 5, 9, 11},
+			Target:   3,
+			Expected: 18,
 		},
 	}
 
 	var res int
 	for _, item := range list {
-		res = maxProfit41(item.target, item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = maxProfit42(item.target, item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxProfit41(item.Target, item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = maxProfit42(item.Target, item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestMaxProfit5(t *testing.T) {
-	var list = []item3{
+	var list = []common.Item2{
 		{
-			nums:     []int{1, 2, 3, 0, 2},
-			expected: 3,
+			Nums:     []int{1, 2, 3, 0, 2},
+			Expected: 3,
 		},
 		{
-			nums:     []int{1},
-			expected: 0,
+			Nums:     []int{1},
+			Expected: 0,
 		},
 	}
 
 	var res int
 	for _, item := range list {
-		res = maxProfit51(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = maxProfit52(item.nums)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxProfit51(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = maxProfit52(item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
 
 func TestMaxProfit6(t *testing.T) {
-	var list = []item10{
+	var list = []common.Item3{
 		{
-			nums:     []int{1, 3, 2, 8, 4, 9},
-			target:   2,
-			expected: 8,
+			Nums:     []int{1, 3, 2, 8, 4, 9},
+			Target:   2,
+			Expected: 8,
 		},
 		{
-			nums:     []int{1, 3, 7, 5, 10, 3},
-			target:   3,
-			expected: 6,
+			Nums:     []int{1, 3, 7, 5, 10, 3},
+			Target:   3,
+			Expected: 6,
 		},
 	}
 
 	var res int
 	for _, item := range list {
-		res = maxProfit61(item.nums, item.target)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
-		res = maxProfit62(item.nums, item.target)
-		t.Logf("%t, res-expected: %d:%d, item:%+v", res == item.expected, res, item.expected, item)
+		res = maxProfit61(item.Nums, item.Target)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = maxProfit62(item.Nums, item.Target)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }

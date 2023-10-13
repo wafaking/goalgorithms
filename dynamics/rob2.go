@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 // 打家劫舍II(leetcode-213)
 // 一个小偷计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都围成一圈，这意味着第一个房屋和最后一个房屋是紧挨着的。
 // 同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
@@ -15,16 +17,16 @@ func rob21(nums []int) int {
 	} else if len(nums) == 1 {
 		return nums[0]
 	} else if len(nums) == 2 {
-		return maxInTwo(nums[0], nums[1])
+		return common.MaxInTwo(nums[0], nums[1])
 	}
 
 	var rob = func(nums []int) int {
-		var pre, cur = nums[0], maxInTwo(nums[0], nums[1])
+		var pre, cur = nums[0], common.MaxInTwo(nums[0], nums[1])
 		for i := 2; i < len(nums); i++ {
-			pre, cur = cur, maxInTwo(pre+nums[i], cur)
+			pre, cur = cur, common.MaxInTwo(pre+nums[i], cur)
 		}
-		return maxInTwo(pre, cur)
+		return common.MaxInTwo(pre, cur)
 	}
 	//nums[1:]表示不偷第一间，num[:len(nums)-1]表示偷第一间不偷最后一间
-	return maxInTwo(rob(nums[1:]), rob(nums[0:len(nums)-1]))
+	return common.MaxInTwo(rob(nums[1:]), rob(nums[0:len(nums)-1]))
 }

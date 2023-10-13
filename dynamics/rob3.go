@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 // 打家劫舍III(leetcode-337)
 // 小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为root。
 // 除了root之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，
@@ -33,9 +35,9 @@ func rob31(root *TreeNode) int {
 		// 不选当前节点,则可以选子节点(则左子树选与不选取大值)
 		// 即选左子树不一定是最大值，因为选左子树时，左子树的子节点不能选，会影响结果
 		// 右子树同理
-		notRob := maxInTwo(lRob, lNotRob) + maxInTwo(rRob, rNotRob)
+		notRob := common.MaxInTwo(lRob, lNotRob) + common.MaxInTwo(rRob, rNotRob)
 		return rob, notRob
 	}
 
-	return maxInTwo(dfs(root))
+	return common.MaxInTwo(dfs(root))
 }

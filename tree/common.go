@@ -10,6 +10,12 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+// NTreeNode Definition for a Node.
+type NTreeNode struct {
+	Val      int
+	Children []*NTreeNode
+}
+
 // BuildBinaryTree 构建二叉树(使用队列)
 func BuildBinaryTree(nums []int) *TreeNode {
 	if len(nums) == 0 {

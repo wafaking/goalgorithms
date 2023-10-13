@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 //编辑距离(leetcode-72)
 //给定两个单词word1和word2，请返回将word1转换成word2所使用的最少操作数。
 //你可以对一个单词进行如下三种操作：插入一个字符、删除一个字符、替换一个字符
@@ -36,9 +38,9 @@ func minDistance(word1 string, word2 string) int {
 		for j := 1; j < len(dp[0]); j++ {
 			if word1[i-1] == word2[j-1] { // 匹配
 				// 取word1上一个字符操作数、word1前一个字操作数+1、word2前一个字符操作数+1中的最小值
-				dp[i][j] = minInThree(dp[i-1][j-1], dp[i][j-1]+1, dp[i-1][j]+1)
+				dp[i][j] = common.MinInThree(dp[i-1][j-1], dp[i][j-1]+1, dp[i-1][j]+1)
 			} else {
-				dp[i][j] = minInThree(dp[i-1][j-1]+1, dp[i][j-1]+1, dp[i-1][j]+1)
+				dp[i][j] = common.MinInThree(dp[i-1][j-1]+1, dp[i][j-1]+1, dp[i-1][j]+1)
 			}
 		}
 	}

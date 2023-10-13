@@ -15,10 +15,44 @@ package tree
  * }
  */
 
-// TODO
-func levelOrderBottom(root *TreeNode) [][]int {
+// 宽度优先遍历(将正常结果逆序)
+func levelOrderBottom1(root *TreeNode) [][]int {
+	if root == nil {
+		return [][]int{}
+	}
 	var (
-		ans = make([][]int, 0)
+		ans      = make([][]int, 0)
+		queue    = []*TreeNode{root}
+		elements = make([]int, 0)
+		cur      *TreeNode
+		count    = 1
 	)
+	for {
+		if count == 0 {
+			ans = append(ans, elements)
+			count = len(queue)
+			elements = nil
+			if len(queue) == 0 {
+				break
+			}
+			continue
+		}
+
+		cur = queue[0]
+		queue = queue[1:]
+		elements = append(elements, cur.Val)
+		count--
+
+		if cur.Left != nil {
+			queue = append(queue, cur.Left)
+		}
+		if cur.Right != nil {
+			queue = append(queue, cur.Right)
+		}
+	}
+	n := len(ans)
+	for i := 0; i < n>>1; i++ {
+		ans[i], ans[n-1-i] = ans[n-1-i], ans[i]
+	}
 	return ans
 }

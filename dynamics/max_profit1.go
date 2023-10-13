@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 //买卖股票的最佳时机(leetcode-121)
 //给定数组prices，第i个元素prices[i]表示一支给定股票第i天的价格。
 //你只能选择某一天买入这只股票，并选择在未来的某一个不同的日子卖出该股票。设计一个算法来计算你所能获取的最大利润。
@@ -15,7 +17,7 @@ func maxProfit11(prices []int) int {
 	var max int
 	for i := 0; i < len(prices); i++ {
 		for j := i + 1; j < len(prices); j++ {
-			max = maxInTwo(max, prices[j]-prices[i])
+			max = common.MaxInTwo(max, prices[j]-prices[i])
 		}
 	}
 	return max
@@ -26,9 +28,9 @@ func maxProfit12(prices []int) int {
 	var min, max = prices[0], 0
 	for i := 0; i < len(prices); i++ {
 		// 每次取最大值
-		max = maxInTwo(prices[i]-min, max)
+		max = common.MaxInTwo(prices[i]-min, max)
 		// 不断取最小数值
-		min = minInTwo(min, prices[i])
+		min = common.MinInTwo(min, prices[i])
 	}
 	return max
 }
@@ -51,11 +53,11 @@ func maxProfit13(prices []int) int {
 	for i := 1; i < n; i++ {
 		// dp[i-1][0]表示第i-1天也未持有股票
 		// prices[i]+dp[i-1][0]表示第i天卖出股票后未持有,dp[i-1][1]表示前一天持有股票的收益
-		dp[i][0] = maxInTwo(dp[i-1][0], prices[i]+dp[i-1][1])
+		dp[i][0] = common.MaxInTwo(dp[i-1][0], prices[i]+dp[i-1][1])
 
 		// dp[i-1][1]表示第i-1天持有股票
 		//  -prices[i]表示第i天买入股票的收益
-		dp[i][1] = maxInTwo(dp[i-1][1], -prices[i])
+		dp[i][1] = common.MaxInTwo(dp[i-1][1], -prices[i])
 	}
-	return maxInTwo(dp[n-1][0], dp[n-1][1])
+	return common.MaxInTwo(dp[n-1][0], dp[n-1][1])
 }

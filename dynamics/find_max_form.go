@@ -1,6 +1,9 @@
 package dynamics
 
-import "strings"
+import (
+	"goalgorithms/common"
+	"strings"
+)
 
 //一和零(leetcode-474)
 //给你一个二进制字符串数组strs和两个整数m和n。
@@ -32,7 +35,7 @@ func findMaxForm1(strs []string, m int, n int) int {
 					// 选择此字符串与不选的最大值
 					// 不选：dp[i-1][j][k]
 					// 选：dp[i-1][j-cnt0][k-cnt1]+1
-					dp[i][j][k] = maxInTwo(dp[i-1][j][k], dp[i-1][j-cnt0][k-cnt1]+1)
+					dp[i][j][k] = common.MaxInTwo(dp[i-1][j][k], dp[i-1][j-cnt0][k-cnt1]+1)
 				} else { // 不满足条件,则不选此元素
 					dp[i][j][k] = dp[i-1][j][k]
 				}

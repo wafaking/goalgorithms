@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 //买卖股票的最佳时机III(leetcode-123)
 //给定一个数组，它的第i个元素是一支给定的股票在第i天的价格。
 //设计一个算法来计算你所能获取的最大利润。你最多可以完成两笔交易。
@@ -29,16 +31,16 @@ func maxProfit31(prices []int) int {
 	dp[0][3] = 0          // 第二次未持有股票
 	for i := 1; i < n; i++ {
 		// 第一次持有股票: 今天买入 vs 之前已经买入
-		dp[i][0] = maxInTwo(-prices[i], dp[i-1][0])
+		dp[i][0] = common.MaxInTwo(-prices[i], dp[i-1][0])
 		// 第一次未持有: 今天卖出 vs 之前已经卖出
-		dp[i][1] = maxInTwo(prices[i]+dp[i-1][0], dp[i-1][1])
+		dp[i][1] = common.MaxInTwo(prices[i]+dp[i-1][0], dp[i-1][1])
 		// 第二次持有股票: 今天持有 vs 之前已经持有
-		dp[i][2] = maxInTwo(-prices[i]+dp[i-1][1], dp[i-1][2])
+		dp[i][2] = common.MaxInTwo(-prices[i]+dp[i-1][1], dp[i-1][2])
 		// 第二次未持有： 今天卖出 vs 之前已经卖出
-		dp[i][3] = maxInTwo(prices[i]+dp[i-1][2], dp[i-1][3])
+		dp[i][3] = common.MaxInTwo(prices[i]+dp[i-1][2], dp[i-1][3])
 	}
 
-	return maxInTwo(maxInTwo(dp[n-1][0], dp[n-1][1]), maxInTwo(dp[n-1][2], dp[n-1][3]))
+	return common.MaxInTwo(common.MaxInTwo(dp[n-1][0], dp[n-1][1]), common.MaxInTwo(dp[n-1][2], dp[n-1][3]))
 }
 
 // 动态规划(一维数组)
@@ -51,13 +53,13 @@ func maxProfit32(prices []int) int {
 	)
 	for i := 1; i < len(prices); i++ {
 		// 第一次持有股票: 今天买入 vs 之前已经买入
-		buy1 = maxInTwo(-prices[i], buy1)
+		buy1 = common.MaxInTwo(-prices[i], buy1)
 		// 第一次未持有: 今天卖出 vs 之前已经卖出
-		sell1 = maxInTwo(prices[i]+buy1, sell1)
+		sell1 = common.MaxInTwo(prices[i]+buy1, sell1)
 		// 第二次持有股票: 今天持有 vs 之前已经持有
-		buy2 = maxInTwo(-prices[i]+sell1, buy2)
+		buy2 = common.MaxInTwo(-prices[i]+sell1, buy2)
 		// 第二次未持有： 今天卖出 vs 之前已经卖出
-		sell2 = maxInTwo(prices[i]+buy2, sell2)
+		sell2 = common.MaxInTwo(prices[i]+buy2, sell2)
 	}
-	return maxInTwo(maxInTwo(buy1, sell1), maxInTwo(buy2, sell2))
+	return common.MaxInTwo(common.MaxInTwo(buy1, sell1), common.MaxInTwo(buy2, sell2))
 }

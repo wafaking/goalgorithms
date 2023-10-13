@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 // 礼物的最大价值(sword-47)
 // 在一个m*n的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于0）。
 // 你可以从棋盘的左上角开始拿格子里的礼物，并每次向右或者向下移动一格、直到到达棋盘的右下角。
@@ -22,12 +24,6 @@ func maxValue11(grid [][]int) int {
 	if len(grid[0]) == 0 {
 		return 0
 	}
-	var maxInTwo = func(a, b int) int {
-		if a > b {
-			return a
-		}
-		return b
-	}
 
 	for i := 1; i < len(grid[0]); i++ {
 		grid[0][i] = grid[0][i-1] + grid[0][i]
@@ -38,7 +34,7 @@ func maxValue11(grid [][]int) int {
 
 	for i := 1; i < len(grid); i++ {
 		for j := 1; j < len(grid[0]); j++ {
-			grid[i][j] = maxInTwo(grid[i][j-1], grid[i-1][j]) + grid[i][j]
+			grid[i][j] = common.MaxInTwo(grid[i][j-1], grid[i-1][j]) + grid[i][j]
 		}
 	}
 
@@ -56,12 +52,6 @@ func maxValue12(grid [][]int) int {
 		return 0
 	}
 	var (
-		maxInTwo = func(a, b int) int {
-			if a > b {
-				return a
-			}
-			return b
-		}
 		pre = make([]int, len(grid[0]))
 		cur = make([]int, len(grid[0]))
 	)
@@ -81,7 +71,7 @@ func maxValue12(grid [][]int) int {
 				cur[0] = pre[0] + grid[i][0]
 				continue
 			}
-			cur[j] = maxInTwo(cur[j-1], pre[j]) + grid[i][j]
+			cur[j] = common.MaxInTwo(cur[j-1], pre[j]) + grid[i][j]
 		}
 
 		copy(pre, cur)

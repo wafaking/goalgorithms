@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 // 最长公共子序列(leetcode-1143)
 // 给定两个字符串text1和text2，返回这两个字符串的最长公共子序列的长度。如果不存在公共子序列，返回0。
 // 一个字符串的子序列是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。
@@ -26,7 +28,7 @@ func longestCommonSubsequence(text1 string, text2 string) int {
 				dp[i][j] = dp[i-1][j-1] + 1 // 取上一个匹配数量加1
 			} else { // 不匹配
 				// 则取max(text1当前字符与text2上一个字符匹配数量,text1上一个字符与text2当前字符匹配数量)
-				dp[i][j] = maxInTwo(dp[i-1][j], dp[i][j-1])
+				dp[i][j] = common.MaxInTwo(dp[i-1][j], dp[i][j-1])
 			}
 		}
 	}

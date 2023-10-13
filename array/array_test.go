@@ -590,7 +590,7 @@ func TestKthLargest(t *testing.T) {
 	// [4, 5, 8, 2, 3, 5, 10, 9, 4]---> 8
 	var kth = Constructor(3, nums)
 	for _, item := range list {
-		res := kth.Add(item.Target)
+		res := kth.Add(item.Num)
 		t.Logf("%t, Expected: %d, res:%d", res == item.Expected, item.Expected, res)
 	}
 }

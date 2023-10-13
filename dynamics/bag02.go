@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 // (多重背包问题)有n件物品和一个最多能背重量为w的背包。第i件物品的重量是weight[i]，得到的价值是value[i]。
 // 每件物品只能用times[i]次，求解将哪些物品装入背包里物品价值总和最大。
 
@@ -35,7 +37,7 @@ func weightBag21(weight, value, times []int, bagWeight int) int {
 			if j < newWeight[i-1] { // 大于背包重量，装不下
 				cur[j] = pre[j]
 			} else {
-				cur[j] = maxInTwo(pre[j], newValue[i-1]+pre[j-newWeight[i-1]])
+				cur[j] = common.MaxInTwo(pre[j], newValue[i-1]+pre[j-newWeight[i-1]])
 			}
 		}
 		copy(pre, cur)

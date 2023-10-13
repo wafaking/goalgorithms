@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 // (0/1背包问题)有n件物品和一个最多能背重量为w的背包。第i件物品的重量是weight[i]，得到的价值是value[i]。
 // 每件物品只能用一次，求解将哪些物品装入背包里物品价值总和最大。
 
@@ -29,11 +31,11 @@ func weightBag11(weight, value []int, bagWeight int) int {
 				//				即dp上一行，第j-weight[i-1]列
 				// value[i-weight]表示
 				// weight[i-1]表示第j件商品的重量
-				pre := dp[i-1][j]                            // 前i-1件物品的最大价值dp[i-1][j]；
-				curValue := value[i-1]                       // 第i件物品的价值
-				leftWeight := j - weight[i-1]                // 剩余重量
-				leftValue := dp[i-1][leftWeight]             // 剩余重量对应的最大价值
-				dp[i][j] = maxInTwo(pre, curValue+leftValue) // 两者取最大价值
+				pre := dp[i-1][j]                                   // 前i-1件物品的最大价值dp[i-1][j]；
+				curValue := value[i-1]                              // 第i件物品的价值
+				leftWeight := j - weight[i-1]                       // 剩余重量
+				leftValue := dp[i-1][leftWeight]                    // 剩余重量对应的最大价值
+				dp[i][j] = common.MaxInTwo(pre, curValue+leftValue) // 两者取最大价值
 			}
 		}
 	}
@@ -56,7 +58,7 @@ func weightBag13(weight, value []int, bagWeight int) int {
 		// 此处选择从最大背包的重量开始递减,因为0/1背包问题物品不能重复
 		for j := bagWeight; j > 0; j-- {
 			if w <= j {
-				dp[j] = maxInTwo(dp[j], dp[j-weight[i]]+value[i])
+				dp[j] = common.MaxInTwo(dp[j], dp[j-weight[i]]+value[i])
 			}
 		}
 	}

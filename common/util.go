@@ -23,3 +23,43 @@ func DiffDoubleSlice(sli1, sli2 [][]int) bool {
 	}
 	return true
 }
+
+func MaxInTwo(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func MaxInNums(l ...int) int {
+	for i := 1; i < len(l); i++ {
+		if l[0] < l[i] {
+			l[0] = l[i]
+		}
+	}
+	return l[0]
+}
+
+func MinInTwo(a, b int) int {
+	if a > b {
+		return b
+	}
+	return a
+}
+
+func MinInThree(a, b, c int) int {
+	if a > b {
+		a = b
+	}
+	if a > c {
+		return c
+	}
+	return a
+}
+
+func Abs(num int) int {
+	if num > 0 {
+		return num
+	}
+	return -num
+}

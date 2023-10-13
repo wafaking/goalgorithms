@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 //买卖股票的最佳时机含手续费(leetcode-714)
 //给定一个整数数组prices，其中prices[i]表示第i天的股票价格；整数fee代表了交易股票的手续费用。
 //你可以无限次地完成交易，但是你每笔交易都需要付手续费。如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了。
@@ -22,8 +24,8 @@ func maxProfit61(prices []int, fee int) int {
 
 	var buy, sell = -prices[0], 0
 	for i := 1; i < len(prices); i++ {
-		sell = maxInTwo(sell, prices[i]+buy-fee)
-		buy = maxInTwo(buy, -prices[i]+sell)
+		sell = common.MaxInTwo(sell, prices[i]+buy-fee)
+		buy = common.MaxInTwo(buy, -prices[i]+sell)
 	}
 
 	return sell

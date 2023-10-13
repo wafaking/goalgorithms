@@ -1,6 +1,9 @@
 package dynamics
 
-import "math"
+import (
+	"goalgorithms/common"
+	"math"
+)
 
 //零钱兑换(leetcode-322)
 //给你一个整数数组coins，表示不同面额的硬币；以及一个整数amount，表示总金额。
@@ -31,7 +34,7 @@ func coinChange(coins []int, amount int) int {
 				dp[i][j] = dp[i-1][j]
 			} else {
 				//dp[i][j-coins[i-1]]表示选用此硬币后剩余的钱对应的最少需要的硬币数量
-				dp[i][j] = minInTwo(dp[i-1][j], 1+dp[i][j-coins[i-1]])
+				dp[i][j] = common.MinInTwo(dp[i-1][j], 1+dp[i][j-coins[i-1]])
 			}
 		}
 	}

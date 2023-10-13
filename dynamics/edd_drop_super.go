@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 //鸡蛋掉落(leetcode-887)
 //给你k枚相同的鸡蛋和一栋从第1层到第n层共有n层楼的建筑。
 //已知存在楼层f(0<=f<=n),任何从高于f的楼层落下的鸡蛋都会碎，从f楼层或比它低的楼层落下的鸡蛋都不会破。
@@ -49,7 +51,7 @@ func superEggDrop1(k int, n int) int {
 				// 分鸡蛋碎了和没碎两种情况
 				//1.碎了(鸡蛋数-1，楼层数-1),dp[i][j] = dp[i-1][j-1]
 				//2.没碎(鸡蛋数不变，楼层数-m),dp[i][j] = dp[i][j-m]
-				dp[i][j] = minInTwo(1+maxInTwo(dp[i-1][m-1], dp[i][j-m]), dp[i][j])
+				dp[i][j] = common.MinInTwo(1+common.MaxInTwo(dp[i-1][m-1], dp[i][j-m]), dp[i][j])
 			}
 		}
 	}
@@ -99,7 +101,7 @@ func superEggDrop2(k int, n int) int {
 			// 分鸡蛋碎了和没碎两种情况
 			//1.碎了(鸡蛋数-1，楼层数-1),dp[i][j] = dp[i-1][j-1]
 			//2.没碎(鸡蛋数不变，楼层数-m),dp[i][j] = dp[i][j-m]
-			dp[i][j] = minInTwo(1+maxInTwo(dp[i-1][l-1], dp[i][j-l]), dp[i][j])
+			dp[i][j] = common.MinInTwo(1+common.MaxInTwo(dp[i-1][l-1], dp[i][j-l]), dp[i][j])
 		}
 	}
 
@@ -146,7 +148,7 @@ func superEggDrop3(k int, n int) int {
 			// 分鸡蛋碎了和没碎两种情况
 			//1.碎了(鸡蛋数-1，楼层数-1),dp[i][j] = dp[i-1][j-1]
 			//2.没碎(鸡蛋数不变，楼层数-m),dp[i][j] = dp[i][j-m]
-			even[j] = minInTwo(1+maxInTwo(odd[l-1], even[j-l]), even[j])
+			even[j] = common.MinInTwo(1+common.MaxInTwo(odd[l-1], even[j-l]), even[j])
 		}
 		copy(odd, even)
 	}

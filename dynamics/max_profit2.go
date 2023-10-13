@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 //买卖股票的最佳时机II(leetcode-122)
 //给你一个整数数组prices，其中prices[i]表示某支股票第i天的价格。
 //在每一天，你可以决定是否购买和/或出售股票。你在任何时候最多只能持有一股股票。你也可以先购买，然后在同一天出售。
@@ -36,13 +38,13 @@ func maxProfit22(prices []int) int {
 		// 1. 第i天没有股票的情况：今天本来就未持有股票和今天卖出股票后未持有股票
 		// dp[i-1][0]:今天未持有股票，因此取前一天未持有股票的收益
 		//prices[i]+dp[i-1][1]: 今天卖出股票的收益：今天的价格+昨天持有股票的收益(即-price[i-1])
-		dp[i][0] = maxInTwo(dp[i-1][0], prices[i]+dp[i-1][1])
+		dp[i][0] = common.MaxInTwo(dp[i-1][0], prices[i]+dp[i-1][1])
 
 		// 1. 第i天持有股票的情况：今天本来就持有股票和今天刚买入股票两种情况
 		// dp[i-1][0]:今天未持有股票，因此取前一天未持有股票的收益
 		//prices[i]+dp[i-1][1]: 今天卖出股票的收益：今天的价格+昨天持有股票的收益(即-price[i-1])
-		dp[i][1] = maxInTwo(-prices[i]+dp[i-1][0], dp[i-1][1])
+		dp[i][1] = common.MaxInTwo(-prices[i]+dp[i-1][0], dp[i-1][1])
 
 	}
-	return maxInTwo(dp[n-1][0], dp[n-1][1])
+	return common.MaxInTwo(dp[n-1][0], dp[n-1][1])
 }

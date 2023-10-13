@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 // 最长公共子串
 
 // 给定两个字符串text1和text2，返回这两个字符串的最长公共子串的长度。如果不存在公共子串，返回0。
@@ -30,7 +32,7 @@ func longestCommonSubstring(text1 string, text2 string) int {
 		for j := 1; j < len(dp[0]); j++ {
 			if text1[i-1] == text2[j-1] { // 匹配
 				dp[i][j] = dp[i-1][j-1] + 1 // 取上一个匹配数量加1
-				maxLength = maxInTwo(maxLength, dp[i][j])
+				maxLength = common.MaxInTwo(maxLength, dp[i][j])
 			}
 		}
 	}

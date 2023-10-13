@@ -32,7 +32,7 @@ func lastStoneWeightII(stones []int) int {
 	//
 	//for left < right {
 	//	temp = stones[left] + stones[right]
-	//	diff = abs(mid - temp)
+	//	diff = common.Abs(mid - temp)
 	//	if diff==0{
 	//		return 0
 	//	}else if

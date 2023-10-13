@@ -1,5 +1,7 @@
 package dynamics
 
+import "goalgorithms/common"
+
 // 最长递增子序列(leetcode-300)
 // 给你一个整数数组nums，找到其中最长严格递增子序列的长度。
 // 子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。
@@ -16,13 +18,7 @@ func lengthOfLIS11(nums []int) int {
 	var (
 		maxNum = 1
 		// dp[i]表示前i个元素中的最长递增子数列数，一定包含nums[i]
-		dp       = make([]int, len(nums))
-		maxInTwo = func(a, b int) int {
-			if a > b {
-				return a
-			}
-			return b
-		}
+		dp = make([]int, len(nums))
 	)
 	for i := range dp {
 		// 初始化都为1,即最短递增子序列只有一个元素
@@ -31,13 +27,13 @@ func lengthOfLIS11(nums []int) int {
 	for i := 1; i < len(nums); i++ {
 		for j := 0; j < i; j++ {
 			if nums[j] < nums[i] {
-				dp[i] = maxInTwo(dp[j]+1, dp[i])
+				dp[i] = common.MaxInTwo(dp[j]+1, dp[i])
 			}
 		}
-		maxNum = maxInTwo(maxNum, dp[i])
+		maxNum = common.MaxInTwo(maxNum, dp[i])
 	}
 	//for _, v := range dp {
-	//	maxNum = maxInTwo(v, maxNum)
+	//	maxNum = common.MaxInTwo(v, maxNum)
 	//}
 
 	return maxNum
@@ -49,18 +45,12 @@ func lengthOfLIS12(nums []int) int {
 		return 0
 	}
 	var (
-		maxNum   = 0 // 初始化为0,最后都加1即可
-		dp       = make([]int, len(nums))
-		maxInTwo = func(a, b int) int {
-			if a > b {
-				return a
-			}
-			return b
-		}
-		dfs = func(i int) {
+		maxNum = 0 // 初始化为0,最后都加1即可
+		dp     = make([]int, len(nums))
+		dfs    = func(i int) {
 			for j := 0; j < i; j++ {
 				if nums[j] < nums[i] {
-					dp[i] = maxInTwo(dp[j]+1, dp[i])
+					dp[i] = common.MaxInTwo(dp[j]+1, dp[i])
 				}
 			}
 		}
@@ -70,7 +60,7 @@ func lengthOfLIS12(nums []int) int {
 		dfs(i)
 	}
 	for _, v := range dp {
-		maxNum = maxInTwo(v, maxNum)
+		maxNum = common.MaxInTwo(v, maxNum)
 	}
 
 	return maxNum + 1
@@ -84,22 +74,16 @@ func lengthOfLIS13(nums []int) int {
 	var (
 		maxLength int
 		dp        = make([]int, len(nums))
-		maxInTwo  = func(a, b int) int {
-			if a > b {
-				return a
-			}
-			return b
-		}
 	)
 
 	for i, x := range nums {
 		for j, y := range nums[:i] {
 			if y < x {
-				dp[i] = maxInTwo(dp[i], dp[j])
+				dp[i] = common.MaxInTwo(dp[i], dp[j])
 			}
 		}
 		dp[i]++
-		maxLength = maxInTwo(maxLength, dp[i])
+		maxLength = common.MaxInTwo(maxLength, dp[i])
 	}
 	return maxLength
 }
