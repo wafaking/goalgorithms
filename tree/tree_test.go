@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"goalgorithms/common"
 	"log"
+	"sort"
 	"testing"
 )
 
@@ -79,11 +80,11 @@ func TestPreorderTraversal(t *testing.T) {
 	for _, item := range list {
 		root := BuildBinaryTree(item.Nums)
 		res = preOrderTraversal1(root)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(res, item.Expected), res, item)
 		res = preOrderTraversal2(root)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(res, item.Expected), res, item)
 		res = preOrderTraversal3(root)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(res, item.Expected), res, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
@@ -120,11 +121,11 @@ func TestPostorderTraversal(t *testing.T) {
 	for _, item := range list {
 		root := BuildBinaryTree(item.Nums)
 		res = postOrderTraversal1(root)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(res, item.Expected), res, item)
 		res = postOrderTraversal2(root)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(res, item.Expected), res, item)
 		res = postOrderTraversal3(root)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(res, item.Expected), res, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
@@ -161,17 +162,18 @@ func TestInOrderTraversal(t *testing.T) {
 	for _, item := range list {
 		root := BuildBinaryTree(item.Nums)
 		res = inOrderTraversal1(root)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(res, item.Expected), res, item)
 		res = inOrderTraversal2(root)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(res, item.Expected), res, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
 
-func TestLevelOrder21(t *testing.T) {
+func TestLevelOrder2(t *testing.T) {
+	defaultNullTreeVal = -99999
 	var list = []common.Item7{
 		{
-			Nums:     []int{5, 4, 8, 11, -1, 13, 4, 7, 2, -1, -1, 5, 1},
+			Nums:     []int{5, 4, 8, 11, defaultNullTreeVal, 13, 4, 7, 2, defaultNullTreeVal, defaultNullTreeVal, 5, 1},
 			Expected: [][]int{{5}, {4, 8}, {11, 13, 4}, {7, 2, 5, 1}},
 		},
 		{
@@ -179,17 +181,19 @@ func TestLevelOrder21(t *testing.T) {
 			Expected: [][]int{{4}, {3, 8}, {1, 5, 9, 2}, {7, 10, 6}},
 		},
 		{
-			Nums:     []int{3, 2, 3, -1, 3, -1, 1},
+			Nums:     []int{3, 2, 3, defaultNullTreeVal, 3, defaultNullTreeVal, 1},
 			Expected: [][]int{{3}, {2, 3}, {3, 1}},
 		},
 	}
 
-	//[0,2,4,1,null,3,-1,5,1,null,6,null,8]
-	defaultNullTreeVal = -99999
+	var res = make([][]int, 0)
 	for _, item := range list {
 		tree := BuildBinaryTree(item.Nums)
-		res := levelOrder21(tree)
-		t.Logf("%t, res:%+v, item:%+v", common.DiffDoubleSlice(item.Expected, res), res, item)
+		res = levelOrder21(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffDoubleIntSlice(item.Expected, res), res, item)
+		res = levelOrder22(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffDoubleIntSlice(item.Expected, res), res, item)
+		t.Log("--------------------------")
 	}
 }
 
@@ -214,7 +218,7 @@ func TestLevelOrderBottom(t *testing.T) {
 	for _, item := range list {
 		tree := BuildBinaryTree(item.Nums)
 		res := levelOrderBottom1(tree)
-		t.Logf("%t, res:%+v, item:%+v", common.DiffDoubleSlice(item.Expected, res), res, item)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffDoubleIntSlice(item.Expected, res), res, item)
 	}
 }
 
@@ -342,7 +346,7 @@ func TestInvertTree(t *testing.T) {
 		root := BuildBinaryTree(item.Nums)
 		res = invertTree1(root)
 		listVals = levelOrder11(res)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(listVals, item.Expected), listVals, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(listVals, item.Expected), listVals, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
@@ -378,8 +382,6 @@ func TestIsSymmetric3(t *testing.T) {
 		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
 		res = isSymmetric3(root)
 		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
-		//res = inOrderTraversal2(root)
-		//t.Logf("res: %v, %+v, item:%+v", common.DiffSlice(res, item.Expected), res, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
@@ -509,6 +511,84 @@ func TestCountNodes(t *testing.T) {
 		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
 		res = countNodes2(root)
 		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestIsBalanced1(t *testing.T) {
+	var list = []common.Item8{
+		{
+			Nums:     []int{3, 9, 20, defaultNullTreeVal, defaultNullTreeVal, 15, 7},
+			Expected: true,
+		},
+		{
+			Nums:     []int{1, 2, 2, 3, 3, defaultNullTreeVal, defaultNullTreeVal, 4, 4},
+			Expected: false,
+		},
+		{
+			Nums:     []int{1, 2, 2, -1, 3, -1, 3},
+			Expected: true,
+		},
+		{
+			Nums:     []int{},
+			Expected: true,
+		},
+		{
+			Nums:     []int{1},
+			Expected: true,
+		},
+	}
+
+	var res bool
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		res = isBalanced1(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = isBalanced2(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestBinaryTreePaths1(t *testing.T) {
+	var list = []common.Item17{
+		{
+			Nums:     []int{1, 2, 3, 4, 5},
+			Expected: []string{"1->2->4", "1->2->5", "1->3"},
+		},
+		{
+			Nums:     []int{1, 2, 3, defaultNullTreeVal, 5},
+			Expected: []string{"1->2->5", "1->3"},
+		},
+		{
+			Nums:     []int{1, 2, 2, -1, 3, -1, 3},
+			Expected: []string{"1->2->3", "1->2->3"},
+		},
+		{
+			Nums:     []int{},
+			Expected: []string{},
+		},
+		{
+			Nums:     []int{1},
+			Expected: []string{"1"},
+		},
+	}
+
+	var res []string
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		res = binaryTreePaths1(root)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffStrSlice(res, item.Expected), res, item)
+		res = binaryTreePaths2(root)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffStrSlice(res, item.Expected), res, item)
+		res = binaryTreePaths3(root)
+		sort.Strings(res)
+		sort.Strings(item.Expected)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffStrSlice(res, item.Expected), res, item)
+		res = binaryTreePaths4(root)
+		sort.Strings(res)
+		sort.Strings(item.Expected)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffStrSlice(res, item.Expected), res, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }

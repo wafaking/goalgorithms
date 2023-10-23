@@ -82,3 +82,8 @@ type Item16 struct {
 	Text1, Text2 string
 	Expected     int
 }
+
+type Item17 struct {
+	Nums     []int
+	Expected []string
+}

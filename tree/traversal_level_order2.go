@@ -57,21 +57,21 @@ func levelOrder21(root *TreeNode) [][]int {
 	return ans
 }
 
-// 层序遍历
+// 层序遍历(TODO)
 func levelOrder22(root *TreeNode) [][]int {
 	if root == nil {
 		return [][]int{}
 	}
 	var (
-		ret = make([][]int, 0)
-		q   = []*TreeNode{root}
+		ret   = make([][]int, 0)
+		queue = []*TreeNode{root}
 	)
 
-	for i := 0; len(q) > 0; i++ {
+	for i := 0; len(queue) > 0; i++ {
 		ret = append(ret, []int{})
 		var p = make([]*TreeNode, 0)
-		for j := 0; j < len(q); j++ {
-			node := q[j]
+		for j := 0; j < len(queue); j++ {
+			node := queue[j]
 			ret[i] = append(ret[i], node.Val)
 			if node.Left != nil {
 				p = append(p, node.Left)
@@ -80,7 +80,7 @@ func levelOrder22(root *TreeNode) [][]int {
 				p = append(p, node.Right)
 			}
 		}
-		q = p
+		queue = p
 	}
 	return ret
 }
