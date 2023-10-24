@@ -87,3 +87,9 @@ type Item17 struct {
 	Nums     []int
 	Expected []string
 }
+
+type Item18 struct {
+	Nums     []int
+	Target   int
+	Expected bool
+}

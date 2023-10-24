@@ -14,7 +14,86 @@ package tree
  *     Right *TreeNode
  * }
  */
-// TODO
-func sumOfLeftLeaves(root *TreeNode) int {
-	return 0
+
+// 深度优先递归+前序遍历
+func sumOfLeftLeaves1(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	var (
+		ans int
+		f   func(pre, cur *TreeNode)
+	)
+	f = func(pre, cur *TreeNode) {
+		if cur == nil {
+			return
+		}
+		// 中
+		if cur.Left == nil && cur.Right == nil {
+			if pre != nil && pre.Left == cur {
+				ans += cur.Val
+			}
+		}
+
+		// 左
+		f(cur, cur.Left)
+		// 右
+		f(cur, cur.Right)
+	}
+	f(nil, root)
+	return ans
+}
+
+// 深度优先递归(后序遍历)
+func sumOfLeftLeaves2(root *TreeNode) int {
+	var (
+		f func(root *TreeNode) int
+	)
+
+	f = func(root *TreeNode) int {
+		if root == nil { // 当前节点不存在
+			return 0
+		} else if root.Left == nil && root.Right == nil {
+			// 当前节点是叶子节点
+			return 0
+		}
+
+		// 当前节点的左子节点是叶子节点
+		leftLeave := f(root.Left) // 左
+		if root.Left != nil && root.Left.Left == nil && root.Left.Right == nil {
+			leftLeave = root.Left.Val
+		}
+
+		rightLeave := f(root.Right)   //右
+		return leftLeave + rightLeave //中
+	}
+
+	return f(root)
+}
+
+// 宽度优先遍历
+func sumOfLeftLeaves3(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	var (
+		queue = []*TreeNode{root}
+		ans   int
+	)
+	for len(queue) > 0 {
+		cur := queue[0]
+		queue = queue[1:]
+		// 当前节点的左子节点是叶子节点
+		if cur.Left != nil && cur.Left.Left == nil && cur.Left.Right == nil {
+			ans += cur.Left.Val
+		}
+
+		if cur.Left != nil {
+			queue = append(queue, cur.Left)
+		}
+		if cur.Right != nil {
+			queue = append(queue, cur.Right)
+		}
+	}
+	return ans
 }

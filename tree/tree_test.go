@@ -592,3 +592,105 @@ func TestBinaryTreePaths1(t *testing.T) {
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
+
+func TestSumOfLeftLeaves(t *testing.T) {
+	var list = []common.Item2{
+		{
+			Nums:     []int{1, 2, 3, 4, 5, 6, 7},
+			Expected: 10,
+		},
+		{
+			Nums:     []int{1, 2, 3, 4},
+			Expected: 4,
+		},
+		{
+			Nums:     []int{2, defaultNullTreeVal, 3, defaultNullTreeVal, 4, defaultNullTreeVal, 5, defaultNullTreeVal, 6},
+			Expected: 0,
+		},
+		{
+			Nums:     []int{3, 9, 20, defaultNullTreeVal, defaultNullTreeVal, 15, 7},
+			Expected: 24,
+		},
+		{
+			Nums:     []int{1, 2, 3, defaultNullTreeVal, 4, 5, 6, 7, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal, 8},
+			Expected: 20,
+		},
+		{
+			Nums:     []int{1, defaultNullTreeVal, 2},
+			Expected: 0,
+		},
+		{
+			Nums:     []int{},
+			Expected: 0,
+		},
+		{
+			Nums:     []int{1},
+			Expected: 0,
+		},
+	}
+
+	var res int
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		res = sumOfLeftLeaves1(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = sumOfLeftLeaves2(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = sumOfLeftLeaves3(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestHasPathSum(t *testing.T) {
+	defaultNullTreeVal = -99999
+	var list = []common.Item18{
+		{
+			Nums:     []int{3, 9, 20, defaultNullTreeVal, defaultNullTreeVal, 15, 7},
+			Target:   30,
+			Expected: true,
+		},
+		{
+			Nums:     []int{3, 9, 20, defaultNullTreeVal, defaultNullTreeVal, 15, 7},
+			Target:   12,
+			Expected: true,
+		},
+		{
+			Nums:     []int{5, 4, 8, 11, defaultNullTreeVal, 13, 4, 7, 2, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal, 1},
+			Target:   22,
+			Expected: true,
+		},
+		{
+			Nums:     []int{1, -2, -3, 1, 3, -2, defaultNullTreeVal, -1},
+			Target:   -4,
+			Expected: true,
+		},
+		{
+			Nums:     []int{1, 2, 3},
+			Target:   6,
+			Expected: false,
+		},
+		{
+			Nums:     []int{},
+			Target:   0,
+			Expected: false,
+		},
+		{
+			Nums:     []int{1},
+			Target:   1,
+			Expected: true,
+		},
+	}
+
+	var res bool
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		res = hasPathSum1(root, item.Target)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = hasPathSum2(root, item.Target)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = hasPathSum3(root, item.Target)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
