@@ -654,10 +654,10 @@ func TestSortColors(t *testing.T) {
 		var nums = make([]int, len(item.Nums))
 		copy(nums, item.Nums)
 		sortColors1(nums)
-		t.Logf("res: %v, item:%+v", common.DiffIntSlice(nums, item.Expected), item)
+		t.Logf("res: %v, item:%+v", common.DiffTwoIntSlice(nums, item.Expected), item)
 		copy(nums, item.Nums)
 		sortColors2(nums)
-		t.Logf("res: %v, item:%+v", common.DiffIntSlice(nums, item.Expected), item)
+		t.Logf("res: %v, item:%+v", common.DiffTwoIntSlice(nums, item.Expected), item)
 		t.Log("--------------------SPLIT--------------------")
 	}
 }
@@ -686,15 +686,15 @@ func TestSortArray(t *testing.T) {
 		res = make([]int, len(item.Nums))
 		copy(res, item.Nums)
 		res = sortArray1(res)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(res, item.Expected), res, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
 
 		copy(res, item.Nums)
 		res = sortArray2(res)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(res, item.Expected), res, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
 
 		copy(res, item.Nums)
 		res = sortArray3(res)
-		t.Logf("res: %v, %+v, item:%+v", common.DiffIntSlice(res, item.Expected), res, item)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
 		t.Log("--------------------SPLIT--------------------")
 	}
 }

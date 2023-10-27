@@ -19,15 +19,6 @@ package tree
 //	-空数组，无子节点。
 //示例2：输入：nums=[3,2,1]输出：[3,null,2,null,1]
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-
 // TODO
 func constructMaximumBinaryTree(nums []int) *TreeNode {
 	return nil

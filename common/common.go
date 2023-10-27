@@ -93,3 +93,13 @@ type Item18 struct {
 	Target   int
 	Expected bool
 }
+
+type Item19 struct {
+	Nums1, Nums2 []int
+	Expected     []int
+}
+
+type Item20 struct {
+	Nums     []int
+	Expected []int
+}

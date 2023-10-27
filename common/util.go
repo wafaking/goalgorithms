@@ -1,6 +1,6 @@
 package common
 
-func DiffIntSlice(sli1, sli2 []int) bool {
+func DiffTwoIntSlice(sli1, sli2 []int) bool {
 	if len(sli1) != len(sli2) {
 		return false
 	}
@@ -12,19 +12,19 @@ func DiffIntSlice(sli1, sli2 []int) bool {
 	return true
 }
 
-func DiffDoubleIntSlice(sli1, sli2 [][]int) bool {
+func DiffTwoDoubleIntSlice(sli1, sli2 [][]int) bool {
 	if len(sli1) != len(sli2) {
 		return false
 	}
 	for i := range sli1 {
-		if !DiffIntSlice(sli1[i], sli2[i]) {
+		if !DiffTwoIntSlice(sli1[i], sli2[i]) {
 			return false
 		}
 	}
 	return true
 }
 
-func DiffStrSlice(sli1, sli2 []string) bool {
+func DiffTwoStrSlice(sli1, sli2 []string) bool {
 	if len(sli1) != len(sli2) {
 		return false
 	}

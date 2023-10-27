@@ -35,10 +35,8 @@ func sumOfLeftLeaves1(root *TreeNode) int {
 			}
 		}
 
-		// 左
-		f(cur, cur.Left)
-		// 右
-		f(cur, cur.Right)
+		f(cur, cur.Left)  // 左
+		f(cur, cur.Right) // 右
 	}
 	f(nil, root)
 	return ans

@@ -210,10 +210,10 @@ func TestQuickSort2Ways(t *testing.T) {
 		var nums = make([]int, len(item.Nums))
 		copy(nums, item.Nums)
 		QuickSort2Ways(nums)
-		t.Logf("res: %v, %+v, , item:%+v", common.DiffIntSlice(nums, item.Expected), nums, item)
+		t.Logf("res: %v, %+v, , item:%+v", common.DiffTwoIntSlice(nums, item.Expected), nums, item)
 		copy(nums, item.Nums)
 		QuickSort3Ways(nums)
-		t.Logf("res: %v, item:%+v", common.DiffIntSlice(nums, item.Expected), item)
+		t.Logf("res: %v, item:%+v", common.DiffTwoIntSlice(nums, item.Expected), item)
 		t.Log("--------------------SPLIT--------------------")
 	}
 }

@@ -16,27 +16,33 @@ package tree
 Output: [3,9,20,null,null,15,7]
 */
 
+// 递归
 func buildTree11(preorder []int, inorder []int) *TreeNode {
-	var (
-		root     *TreeNode
-		endIndex int
-	)
 	if len(preorder) == 0 || len(inorder) == 0 {
-		return root
+		return nil
 	}
 
-	// [1,2,4,7,3,5,6,8]
-	// [4,7,2,1,5,3,8,6]
-	root = &TreeNode{Val: preorder[0]}
-	for i := 0; i < len(inorder); i++ {
-		if preorder[0] == inorder[i] {
-			endIndex = i // 获取中序根节点的索引位置
+	var (
+		root = &TreeNode{Val: preorder[0]}
+		idx  int // 根节点在中序序列中的位置
+	)
+
+	// 查找根节点在中序序列中的位置
+	for ; idx < len(inorder); idx++ {
+		if inorder[idx] == preorder[0] {
 			break
 		}
 	}
-	root.Left = buildTree11(preorder[1:len(inorder[:endIndex])+1], inorder[:endIndex])
-	root.Right = buildTree11(preorder[len(inorder[:endIndex])+1:], inorder[endIndex+1:]) // 注意此处preorder的索引
+	//idx同时也表明了中序序列中根节点前有idx个左节点，
+	//因此在前序序列中根节点(第一个)的后面的idx个元素都是左节点
+	root.Left = buildTree11(preorder[1:1+idx], inorder[:idx])
+	root.Right = buildTree11(preorder[1+idx:], inorder[idx+1:])
 	return root
+}
+
+// TODO ---迭代法
+func buildTree12(preorder []int, inorder []int) *TreeNode {
+	return nil
 }
 
 func buildTree13(preorder []int, inorder []int) *TreeNode {
