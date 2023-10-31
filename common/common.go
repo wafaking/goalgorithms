@@ -103,3 +103,9 @@ type Item20 struct {
 	Nums     []int
 	Expected []int
 }
+
+type Item21 struct {
+	Nums     []int
+	Target   int
+	Expected []int
+}

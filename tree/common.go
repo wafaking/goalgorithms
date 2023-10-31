@@ -1,7 +1,9 @@
 package tree
 
-var root *TreeNode
-var defaultNullTreeVal = -1
+var (
+	root               *TreeNode
+	defaultNullTreeVal = -1
+)
 
 // TreeNode Definition for a binary tree node.
 type TreeNode struct {

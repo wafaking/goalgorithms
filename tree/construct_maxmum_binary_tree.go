@@ -19,7 +19,48 @@ package tree
 //	-空数组，无子节点。
 //示例2：输入：nums=[3,2,1]输出：[3,null,2,null,1]
 
-// TODO
-func constructMaximumBinaryTree(nums []int) *TreeNode {
-	return nil
+// 传递数组
+func constructMaximumBinaryTree1(nums []int) *TreeNode {
+	var f func(nums []int) *TreeNode
+	f = func(nums []int) *TreeNode {
+		if len(nums) == 0 {
+			return nil
+		}
+		var idx int
+		for i := 1; i < len(nums); i++ {
+			if nums[i] > nums[idx] {
+				idx = i
+			}
+		}
+		var root = &TreeNode{Val: nums[idx]}
+		root.Left = f(nums[:idx])
+		root.Right = f(nums[idx+1:])
+		return root
+	}
+
+	return f(nums)
+}
+
+// 传递指针
+func constructMaximumBinaryTree2(nums []int) *TreeNode {
+	// l<r 左闭右开区间
+	var f func(l, r int) *TreeNode
+	f = func(l, r int) *TreeNode {
+		if l >= r {
+			return nil
+		}
+		var idx = l // 记录最大值位置
+		for i := l + 1; i < r; i++ {
+			if nums[i] > nums[idx] {
+				idx = i
+			}
+		}
+
+		var root = &TreeNode{Val: nums[idx]}
+		root.Left = f(l, idx)
+		root.Right = f(idx+1, r)
+		return root
+	}
+
+	return f(0, len(nums))
 }

@@ -377,7 +377,7 @@ func TestInvertTree(t *testing.T) {
 	}
 }
 
-func TestIsSymmetric3(t *testing.T) {
+func TestIsSymmetric(t *testing.T) {
 	var list = []common.Item8{
 		{
 			Nums:     []int{1, 2, 3, 4, 5, 6, 7},
@@ -541,7 +541,7 @@ func TestCountNodes(t *testing.T) {
 	}
 }
 
-func TestIsBalanced1(t *testing.T) {
+func TestIsBalanced(t *testing.T) {
 	var list = []common.Item8{
 		{
 			Nums:     []int{3, 9, 20, defaultNullTreeVal, defaultNullTreeVal, 15, 7},
@@ -874,6 +874,177 @@ func TestLongestUnivaluePath(t *testing.T) {
 	for _, item := range list {
 		root := BuildBinaryTree(item.Nums)
 		res = longestUnivaluePath(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestConstructMaximumBinaryTree(t *testing.T) {
+	defaultNullTreeVal = -99999
+	var list = []common.Item20{
+		{
+			Nums:     []int{3, 2, 1},
+			Expected: []int{3, defaultNullTreeVal, 2, defaultNullTreeVal, 1},
+		},
+		{
+			Nums:     []int{3, 2, 1, 6, 0, 5},
+			Expected: []int{6, 3, 5, defaultNullTreeVal, 2, 0, defaultNullTreeVal, defaultNullTreeVal, 1},
+		},
+		{
+			Nums:     []int{},
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{1},
+			Expected: []int{1},
+		},
+	}
+
+	var res []int
+	for _, item := range list {
+		root = constructMaximumBinaryTree1(item.Nums)
+		res = levelOrder11(root)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		root = constructMaximumBinaryTree2(item.Nums)
+		res = levelOrder11(root)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestMergeTrees(t *testing.T) {
+	defaultNullTreeVal = -99999
+	var list = []common.Item19{
+		{
+			Nums1:    []int{1, 3, 2, 5},
+			Nums2:    []int{2, 1, 3, defaultNullTreeVal, 4, defaultNullTreeVal, 7},
+			Expected: []int{3, 4, 5, 5, 4, defaultNullTreeVal, 7},
+		},
+		{
+			Nums1:    []int{1},
+			Nums2:    []int{1, 2},
+			Expected: []int{2, 2},
+		},
+		{
+			Nums1:    []int{1, 2, defaultNullTreeVal, 3},
+			Nums2:    []int{1, defaultNullTreeVal, 2, defaultNullTreeVal, 3},
+			Expected: []int{2, 2, 2, 3, defaultNullTreeVal, defaultNullTreeVal, 3},
+		},
+		{
+			Nums1:    []int{1},
+			Nums2:    []int{},
+			Expected: []int{1},
+		},
+		{
+			Nums1:    []int{},
+			Nums2:    []int{1},
+			Expected: []int{1},
+		},
+		{
+			Nums1:    []int{1, defaultNullTreeVal, 2, defaultNullTreeVal, 3},
+			Nums2:    []int{1, 2},
+			Expected: []int{2, 2, 2, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal, 3},
+		},
+	}
+
+	var (
+		root, root1, root2 *TreeNode
+		res                []int
+	)
+	for _, item := range list {
+		root1 = BuildBinaryTree(item.Nums1)
+		root2 = BuildBinaryTree(item.Nums2)
+		root = mergeTrees1(root1, root2)
+		res = levelOrder11(root)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		root1 = BuildBinaryTree(item.Nums1)
+		root2 = BuildBinaryTree(item.Nums2)
+		root = mergeTrees2(root1, root2)
+		res = levelOrder11(root)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestSearchBST(t *testing.T) {
+	defaultNullTreeVal = -99999
+	var list = []common.Item21{
+		{
+			Nums:     []int{4, 2, 7, 1, 3},
+			Target:   2,
+			Expected: []int{2, 1, 3},
+		},
+		{
+			Nums:     []int{4, 2, 7, 1, 3},
+			Target:   5,
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{1, defaultNullTreeVal, 2, defaultNullTreeVal, 3, defaultNullTreeVal, 4, defaultNullTreeVal, 5},
+			Target:   4,
+			Expected: []int{4, defaultNullTreeVal, 5},
+		},
+	}
+
+	var (
+		res        = make([]int, 0)
+		root, node *TreeNode
+	)
+	for _, item := range list {
+		root = BuildBinaryTree(item.Nums)
+		node = searchBST1(root, item.Target)
+		res = levelOrder11(node)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		//tree := BuildBinaryTree(item.Nums)
+		node = searchBST2(root, item.Target)
+		res = levelOrder11(node)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		node = searchBST3(root, item.Target)
+		res = levelOrder11(node)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		t.Log("--------------------------")
+	}
+}
+
+func TestIsValidBST(t *testing.T) {
+	var list = []common.Item8{
+		{
+			Nums:     []int{2, 1, 3},
+			Expected: true,
+		},
+		//示例2：输入：root=[5,1,4,null,null,3,6]输出：false,解释：
+		{
+			Nums:     []int{5, 1, 4, defaultNullTreeVal, defaultNullTreeVal, 3, 6},
+			Expected: false,
+		},
+		{
+			Nums:     []int{10, 8, 16, 3, 13, 7, 12, 2, 9},
+			Expected: false,
+		},
+		{
+			Nums:     []int{2, 2, 2},
+			Expected: false,
+		},
+		{
+			Nums:     []int{},
+			Expected: true,
+		},
+		{
+			Nums:     []int{1},
+			Expected: true,
+		},
+	}
+
+	var res bool
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		res = isValidBST1(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = isValidBST2(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = isValidBST3(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = isValidBST4(root)
 		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}
