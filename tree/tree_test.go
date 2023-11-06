@@ -1049,3 +1049,67 @@ func TestIsValidBST(t *testing.T) {
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
+
+func TestGetMinimumDifference(t *testing.T) {
+	var list = []common.Item2{
+		{
+			Nums:     []int{4, 2, 6, 1, 3},
+			Expected: 1,
+		},
+		{
+			Nums:     []int{1, 0, 48, defaultNullTreeVal, defaultNullTreeVal, 12, 49},
+			Expected: 1,
+		},
+		{
+			Nums:     []int{1, defaultNullTreeVal, 2},
+			Expected: 1,
+		},
+		{
+			Nums:     []int{236, 104, 701, defaultNullTreeVal, 227, defaultNullTreeVal, 911},
+			Expected: 9,
+		},
+	}
+
+	var res int
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		res = getMinimumDifference1(root)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestFindMode(t *testing.T) {
+	var list = []common.Item20{
+		{
+			Nums:     []int{1, defaultNullTreeVal, 2, 2},
+			Expected: []int{2},
+		},
+		{
+			Nums:     []int{0},
+			Expected: []int{0},
+		},
+		{
+			Nums:     []int{10, 8, 15, 8, 8, defaultNullTreeVal, 15},
+			Expected: []int{8},
+		},
+		{
+			Nums:     []int{10, 8, 15, 8, 8, 15, 15},
+			Expected: []int{8, 15},
+		},
+		{
+			Nums:     []int{1, defaultNullTreeVal, 2},
+			Expected: []int{1, 2},
+		},
+	}
+
+	var res = make([]int, 0)
+	for _, item := range list {
+		tree := BuildBinaryTree(item.Nums)
+		res = findMode1(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		res = findMode2(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		t.Log("--------------------------")
+	}
+}

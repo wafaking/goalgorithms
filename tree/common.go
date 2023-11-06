@@ -2,7 +2,7 @@ package tree
 
 var (
 	root               *TreeNode
-	defaultNullTreeVal = -1
+	defaultNullTreeVal = -99999
 )
 
 // TreeNode Definition for a binary tree node.
