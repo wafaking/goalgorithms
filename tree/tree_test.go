@@ -170,7 +170,6 @@ func TestInOrderTraversal(t *testing.T) {
 }
 
 func TestLevelOrder1(t *testing.T) {
-	defaultNullTreeVal = -99999
 	var list = []common.Item20{
 		{
 			Nums:     []int{5, 4, 8, 11, defaultNullTreeVal, 13, 4, 7, 2, defaultNullTreeVal, defaultNullTreeVal, 5, 1},
@@ -196,7 +195,6 @@ func TestLevelOrder1(t *testing.T) {
 }
 
 func TestLevelOrder2(t *testing.T) {
-	defaultNullTreeVal = -99999
 	var list = []common.Item7{
 		{
 			Nums:     []int{5, 4, 8, 11, defaultNullTreeVal, 13, 4, 7, 2, defaultNullTreeVal, defaultNullTreeVal, 5, 1},
@@ -669,7 +667,6 @@ func TestSumOfLeftLeaves(t *testing.T) {
 }
 
 func TestHasPathSum(t *testing.T) {
-	defaultNullTreeVal = -99999
 	var list = []common.Item18{
 		{
 			Nums:     []int{3, 9, 20, defaultNullTreeVal, defaultNullTreeVal, 15, 7},
@@ -723,7 +720,6 @@ func TestHasPathSum(t *testing.T) {
 
 // TODO
 func TestBuildTreeByPrIn(t *testing.T) {
-	defaultNullTreeVal = -99999
 	var list = []common.Item19{
 		{
 			Nums1:    []int{3, 9, 20, 15, 7},
@@ -756,7 +752,6 @@ func TestBuildTreeByPrIn(t *testing.T) {
 
 // TODO
 func TestBuildTreeByPostIn(t *testing.T) {
-	defaultNullTreeVal = -99999
 	var list = []common.Item19{
 		{
 			Nums1:    []int{9, 3, 15, 20, 7},
@@ -880,7 +875,6 @@ func TestLongestUnivaluePath(t *testing.T) {
 }
 
 func TestConstructMaximumBinaryTree(t *testing.T) {
-	defaultNullTreeVal = -99999
 	var list = []common.Item20{
 		{
 			Nums:     []int{3, 2, 1},
@@ -913,7 +907,6 @@ func TestConstructMaximumBinaryTree(t *testing.T) {
 }
 
 func TestMergeTrees(t *testing.T) {
-	defaultNullTreeVal = -99999
 	var list = []common.Item19{
 		{
 			Nums1:    []int{1, 3, 2, 5},
@@ -967,7 +960,6 @@ func TestMergeTrees(t *testing.T) {
 }
 
 func TestSearchBST(t *testing.T) {
-	defaultNullTreeVal = -99999
 	var list = []common.Item21{
 		{
 			Nums:     []int{4, 2, 7, 1, 3},
@@ -1111,5 +1103,110 @@ func TestFindMode(t *testing.T) {
 		res = findMode2(tree)
 		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
 		t.Log("--------------------------")
+	}
+}
+
+func TestLowestCommonAncestor(t *testing.T) {
+	var list = []common.Item22{
+		{
+			Item2: common.Item2{
+				Nums:     []int{3, 5, 1, 6, 2, 0, 8, defaultNullTreeVal, defaultNullTreeVal, 7, 4},
+				Expected: 3,
+			},
+			Nums1: []int{5, 6, 2, defaultNullTreeVal, defaultNullTreeVal, 7, 4},
+			Nums2: []int{1, 0, 8},
+		},
+		{
+			Item2: common.Item2{
+				Nums:     []int{3, 5, 1, 6, 2, 0, 8, defaultNullTreeVal, defaultNullTreeVal, 7, 4},
+				Expected: 5,
+			},
+			Nums1: []int{5, 6, 2, defaultNullTreeVal, defaultNullTreeVal, 7, 4},
+			Nums2: []int{4},
+		},
+		{
+			Item2: common.Item2{
+				Nums:     []int{1, 2},
+				Expected: 1,
+			},
+			Nums1: []int{1, 2},
+			Nums2: []int{2},
+		},
+	}
+
+	var (
+		res, p, q = new(TreeNode), new(TreeNode), new(TreeNode)
+	)
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		p = BuildBinaryTree(item.Nums1)
+		q = BuildBinaryTree(item.Nums2)
+		res = lowestCommonAncestor1(root, p, q)
+		t.Logf("%t, res: %+v, item:%+v", res.Val == item.Expected, res.Val, item)
+		res = lowestCommonAncestor2(root, p, q)
+		t.Logf("%t, res: %+v, item:%+v", res.Val == item.Expected, res.Val, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestLowestCommonAncestorBST(t *testing.T) {
+
+	var list = []common.Item22{
+		{
+			Item2: common.Item2{
+				Nums:     []int{6, 2, 8, 0, 4, 7, 9, defaultNullTreeVal, defaultNullTreeVal, 3, 5},
+				Expected: 6,
+			},
+			Nums1: []int{2, 0, 4, defaultNullTreeVal, defaultNullTreeVal, 3, 5},
+			Nums2: []int{8, 7, 9},
+		},
+		{
+			Item2: common.Item2{
+				Nums:     []int{6, 2, 8, 0, 4, 7, 9, defaultNullTreeVal, defaultNullTreeVal, 3, 5},
+				Expected: 2,
+			},
+			Nums1: []int{2, 0, 4, defaultNullTreeVal, defaultNullTreeVal, 3, 5},
+			Nums2: []int{4, 3, 5},
+		},
+		{
+			Item2: common.Item2{
+				Nums:     []int{6, 2, 8, 0, 4, 7, 9, defaultNullTreeVal, defaultNullTreeVal, 3, 5},
+				Expected: 2,
+			},
+			Nums1: []int{0},
+			Nums2: []int{4, 3, 5},
+		},
+		{
+			Item2: common.Item2{
+				Nums:     []int{6, 2, 8, 0, 4, 7, 9, defaultNullTreeVal, defaultNullTreeVal, 3, 5},
+				Expected: 6,
+			},
+			Nums1: []int{3},
+			Nums2: []int{9},
+		},
+		{
+			Item2: common.Item2{
+				Nums:     []int{6, 2, 8, 0, 4, 7, 9, defaultNullTreeVal, defaultNullTreeVal, 3, 5},
+				Expected: 4,
+			},
+			Nums1: []int{3},
+			Nums2: []int{5},
+		},
+	}
+
+	var (
+		res, p, q = new(TreeNode), new(TreeNode), new(TreeNode)
+	)
+	for _, item := range list {
+		root := BuildBinaryTree(item.Nums)
+		p = BuildBinaryTree(item.Nums1)
+		q = BuildBinaryTree(item.Nums2)
+		res = lowestCommonAncestorBST1(root, p, q)
+		t.Logf("%t, res: %+v, item:%+v", res.Val == item.Expected, res.Val, item)
+		res = lowestCommonAncestorBST2(root, p, q)
+		t.Logf("%t, res: %+v, item:%+v", res.Val == item.Expected, res.Val, item)
+		res = lowestCommonAncestorBST3(root, p, q)
+		t.Logf("%t, res: %+v, item:%+v", res.Val == item.Expected, res.Val, item)
+		t.Log("--------------------SPLIT--------------------------")
 	}
 }
