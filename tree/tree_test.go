@@ -1210,3 +1210,101 @@ func TestLowestCommonAncestorBST(t *testing.T) {
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
+
+func TestInsertIntoBST(t *testing.T) {
+	var list = []common.Item21{
+		{
+			Nums:     []int{4, 2, 7, 1, 3},
+			Target:   5,
+			Expected: []int{4, 2, 7, 1, 3, 5},
+		},
+		{
+			Nums:     []int{40, 20, 60, 10, 30, 50, 70},
+			Target:   25,
+			Expected: []int{40, 20, 60, 10, 30, 50, 70, defaultNullTreeVal, defaultNullTreeVal, 25},
+		},
+		{
+			Nums:     []int{4, 2, 7, 1, 3, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal},
+			Target:   5,
+			Expected: []int{4, 2, 7, 1, 3, 5},
+		},
+		{
+			Nums:     []int{3, 1, 5},
+			Target:   2,
+			Expected: []int{3, 1, 5, defaultNullTreeVal, 2},
+		},
+	}
+
+	var (
+		res        = make([]int, 0)
+		root, node *TreeNode
+	)
+	for _, item := range list {
+		root = BuildBinaryTree(item.Nums)
+		node = insertIntoBST1(root, item.Target)
+		res = levelOrder11(node)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		root = BuildBinaryTree(item.Nums)
+		node = insertIntoBST2(root, item.Target)
+		res = levelOrder11(node)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
+}
+
+func TestDeleteNode(t *testing.T) {
+	var list = []common.Item21{
+		{
+			//示例1:输入：root=[5,3,6,2,4,null,7],key=3,输出：[5,4,6,2,null,null,7]
+			//解释：给定需要删除的节点值是3，所以我们首先找到3这个节点，然后删除它。
+			//一个正确的答案是[5,4,6,2,null,null,7],如下图所示。
+			//另一个正确答案是[5,2,6,null,4,null,7]。
+			//示例2:输入:root=[5,3,6,2,4,null,7],key=0输出:[5,3,6,2,4,null,7]解释:二叉树不包含值为0的节点
+			//示例3:输入:root=[],key=0输出:[]
+
+			Nums:     []int{5, 3, 6, 2, 4, defaultNullTreeVal, 7},
+			Target:   3,
+			Expected: []int{5, 4, 6, 2, defaultNullTreeVal, defaultNullTreeVal, 7},
+		},
+		{
+			Nums:     []int{5, 3, 6, 2, 4, defaultNullTreeVal, 7},
+			Target:   0,
+			Expected: []int{5, 3, 6, 2, 4, defaultNullTreeVal, 7},
+		},
+		{
+			Nums:     []int{},
+			Target:   0,
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{0},
+			Target:   0,
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{10, 6, 13, 3, 8, defaultNullTreeVal, defaultNullTreeVal, 1, 4, 7, 9},
+			Target:   6,
+			Expected: []int{10, 3, 13, 1, 8, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal, 7, 9, 4},
+		},
+	}
+
+	var (
+		res        = make([]int, 0)
+		root, node *TreeNode
+	)
+	for _, item := range list {
+		root = BuildBinaryTree(item.Nums)
+		node = deleteNode1(root, item.Target)
+		res = levelOrder11(node)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		root = BuildBinaryTree(item.Nums)
+		node = deleteNode2(root, item.Target)
+		res = levelOrder11(node)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		root = BuildBinaryTree(item.Nums)
+		node = deleteNode3(root, item.Target)
+		res = levelOrder11(node)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
+}
