@@ -114,3 +114,9 @@ type Item22 struct {
 	Item2
 	Nums1, Nums2 []int
 }
+
+type Item23 struct {
+	Nums       []int
+	Num1, Num2 int
+	Expected   []int
+}
