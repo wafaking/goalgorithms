@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //最大二叉树II(leetcode-998)
 //最大树定义：一棵树，并满足：其中每个节点的值都大于其子树中的任何其他值。
 //给你最大树的根节点root和一个整数val。
@@ -20,7 +22,7 @@ package tree
 //解释：a=[2,1,5,3],b=[2,1,5,3,4]
 
 // TODO ---
-func insertIntoMaxTree(root *TreeNode, val int) *TreeNode {
+func insertIntoMaxTree(root *common.TreeNode, val int) *common.TreeNode {
 
 	return nil
 }

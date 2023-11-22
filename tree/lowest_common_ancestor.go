@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //二叉树的最近公共祖先(leetcode-236)
 //给定一个二叉树,找到该树中两个指定节点的最近公共祖先。
 //最近公共祖先定义：对于有根树T的两个节点p、q，最近公共祖先表示为一个节点x，满足x是p、q的祖先且x的深度尽可能大(一个节点也可以是它自己的祖先)。
@@ -11,10 +13,10 @@ package tree
 //示例3：输入：root=[1,2],p=1,q=2输出：1
 
 // 后序遍历(向上查找公共父节点)
-func lowestCommonAncestor1(root, p, q *TreeNode) *TreeNode {
+func lowestCommonAncestor1(root, p, q *common.TreeNode) *common.TreeNode {
 
-	var f func(root *TreeNode) *TreeNode
-	f = func(root *TreeNode) *TreeNode {
+	var f func(root *common.TreeNode) *common.TreeNode
+	f = func(root *common.TreeNode) *common.TreeNode {
 		if root == nil {
 			return nil
 		} else if root.Val == p.Val || root.Val == q.Val {
@@ -39,13 +41,13 @@ func lowestCommonAncestor1(root, p, q *TreeNode) *TreeNode {
 }
 
 // 存储父节点
-func lowestCommonAncestor2(root, p, q *TreeNode) *TreeNode {
+func lowestCommonAncestor2(root, p, q *common.TreeNode) *common.TreeNode {
 	var (
-		m       = map[int]*TreeNode{root.Val: nil} // 存储节点的父节点
-		visited = make(map[int]struct{}, 0)        // 存储p节点查找父节点的记录
-		f       func(root *TreeNode)
+		m       = map[int]*common.TreeNode{root.Val: nil} // 存储节点的父节点
+		visited = make(map[int]struct{}, 0)               // 存储p节点查找父节点的记录
+		f       func(root *common.TreeNode)
 	)
-	f = func(root *TreeNode) {
+	f = func(root *common.TreeNode) {
 		if root == nil {
 			return
 		}

@@ -1,6 +1,9 @@
 package tree
 
-import "math"
+import (
+	"goalgorithms/common"
+	"math"
+)
 
 //验证二叉搜索树(leetcode-98)
 //给你一个二叉树的根节点root，判断其是否是一个有效的二叉搜索树。
@@ -13,12 +16,12 @@ import "math"
 //	根节点的值是5，但是右子节点的值是4。
 
 // 中序遍历(再判断有序数组)
-func isValidBST1(root *TreeNode) bool {
+func isValidBST1(root *common.TreeNode) bool {
 	var (
-		f    func(root *TreeNode) bool
+		f    func(root *common.TreeNode) bool
 		nums = make([]int, 0, 1) // 用来存储前一个节点的值
 	)
-	f = func(root *TreeNode) bool {
+	f = func(root *common.TreeNode) bool {
 		if root == nil {
 			return true
 		}
@@ -42,14 +45,14 @@ func isValidBST1(root *TreeNode) bool {
 }
 
 // 中序遍历(记录前一个节点，方法同1)
-func isValidBST2(root *TreeNode) bool {
+func isValidBST2(root *common.TreeNode) bool {
 	var (
-		pre *TreeNode
-		f   func(root *TreeNode) bool
+		pre *common.TreeNode
+		f   func(root *common.TreeNode) bool
 	)
 
 	// pre节点用于记录前一个节点的值
-	f = func(root *TreeNode) bool {
+	f = func(root *common.TreeNode) bool {
 		if root == nil {
 			return true
 		}
@@ -71,11 +74,11 @@ func isValidBST2(root *TreeNode) bool {
 }
 
 // 前序遍历
-func isValidBST3(root *TreeNode) bool {
+func isValidBST3(root *common.TreeNode) bool {
 	// left,right用于标记当前节点值的范围
-	var f func(root *TreeNode, left, right int) bool
+	var f func(root *common.TreeNode, left, right int) bool
 
-	f = func(root *TreeNode, left, right int) bool {
+	f = func(root *common.TreeNode, left, right int) bool {
 		if root == nil {
 			return true
 		}
@@ -91,9 +94,9 @@ func isValidBST3(root *TreeNode) bool {
 }
 
 // 中序遍历(迭代实现)
-func isValidBST4(root *TreeNode) bool {
+func isValidBST4(root *common.TreeNode) bool {
 	var (
-		stack = make([]*TreeNode, 0)
+		stack = make([]*common.TreeNode, 0)
 		min   = math.MinInt64
 	)
 	for len(stack) > 0 || root != nil {

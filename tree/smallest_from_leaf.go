@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //从叶结点开始的最小字符串(leetcode-988)
 //给定一颗根结点为root的二叉树，树中的每一个结点都有一个[0,25]范围内的值，分别代表字母'a'到'z'。
 //返回按字典序最小的字符串，该字符串从这棵树的一个叶结点开始，到根结点结束。
@@ -10,6 +12,6 @@ package tree
 //示例2：输入：root=[25,1,3,1,3,0,2]输出："adz"
 //示例3：输入：root=[2,2,1,null,1,0,null,0]输出："abc"
 
-func smallestFromLeaf1(root *TreeNode) string {
+func smallestFromLeaf1(root *common.TreeNode) string {
 	return ""
 }

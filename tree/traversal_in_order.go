@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //二叉树的中序遍历(leetcode-94)
 //给定一个二叉树的根节点root，返回它的中序遍历。
 //示例1：输入：root=[1,null,2,3],输出：[1,3,2]
@@ -10,18 +12,18 @@ package tree
  * Definition for a binary tree node.
  * type TreeNode struct {
  *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
+ *     Left *common.TreeNode
+ *     Right *common.TreeNode
  * }
  */
 
 // 递归遍历(左中右)
-func inOrderTraversal1(root *TreeNode) []int {
+func inOrderTraversal1(root *common.TreeNode) []int {
 	var (
 		ans = make([]int, 0)
-		f   func(root *TreeNode)
+		f   func(root *common.TreeNode)
 	)
-	f = func(root *TreeNode) {
+	f = func(root *common.TreeNode) {
 		if root == nil {
 			return
 		}
@@ -34,14 +36,14 @@ func inOrderTraversal1(root *TreeNode) []int {
 }
 
 // 循环遍历
-func inOrderTraversal2(root *TreeNode) []int {
+func inOrderTraversal2(root *common.TreeNode) []int {
 	if root == nil {
 		return []int{}
 	}
 	var (
 		ans   = make([]int, 0)
 		cur   = root
-		stack = make([]*TreeNode, 0)
+		stack = make([]*common.TreeNode, 0)
 	)
 
 	for len(stack) > 0 || cur != nil {
@@ -58,7 +60,7 @@ func inOrderTraversal2(root *TreeNode) []int {
 	return ans
 }
 
-func inorderTraversal3(root *TreeNode) (res []int) {
+func inorderTraversal3(root *common.TreeNode) (res []int) {
 	for root != nil {
 		if root.Left != nil {
 			// predecessor 节点表示当前 root 节点向左走一步，然后一直向右走至无法走为止的节点

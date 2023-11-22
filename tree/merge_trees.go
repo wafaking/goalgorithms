@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //合并二叉树(leetcode-617)
 //给你两棵二叉树：root1和root2。
 //将其中一棵覆盖到另一棵之上时，两棵树上的一些节点将会重叠（而另一些不会）。你需要将这两棵树合并成一棵新二叉树。
@@ -9,7 +11,7 @@ package tree
 //示例2：输入：root1=[1],root2=[1,2]输出：[2,2]
 
 // 深度优先(合并到root1上)
-func mergeTrees1(root1 *TreeNode, root2 *TreeNode) *TreeNode {
+func mergeTrees1(root1 *common.TreeNode, root2 *common.TreeNode) *common.TreeNode {
 	if root1 == nil {
 		return root2
 	}
@@ -25,7 +27,7 @@ func mergeTrees1(root1 *TreeNode, root2 *TreeNode) *TreeNode {
 }
 
 // 广度优先
-func mergeTrees2(root1 *TreeNode, root2 *TreeNode) *TreeNode {
+func mergeTrees2(root1 *common.TreeNode, root2 *common.TreeNode) *common.TreeNode {
 	if root1 == nil {
 		return root2
 	}
@@ -33,8 +35,8 @@ func mergeTrees2(root1 *TreeNode, root2 *TreeNode) *TreeNode {
 		return root1
 	}
 	var (
-		queue1 = []*TreeNode{root1}
-		queue2 = []*TreeNode{root2}
+		queue1 = []*common.TreeNode{root1}
+		queue2 = []*common.TreeNode{root2}
 	)
 
 	for len(queue1) > 0 && len(queue2) > 0 {

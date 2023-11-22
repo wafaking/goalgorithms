@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //二叉搜索树中的搜索(leetcode-700)
 //给定二叉搜索树（BST）的根节点root和一个整数值val。
 //你需要在BST中找到节点值等于val的节点。返回以该节点为根的子树。如果节点不存在，则返回null。
@@ -7,9 +9,9 @@ package tree
 //示例2:输入：root=[4,2,7,1,3],val=5输出：[]
 
 // 深度遍历
-func searchBST1(root *TreeNode, val int) *TreeNode {
-	var f func(root *TreeNode) *TreeNode
-	f = func(root *TreeNode) *TreeNode {
+func searchBST1(root *common.TreeNode, val int) *common.TreeNode {
+	var f func(root *common.TreeNode) *common.TreeNode
+	f = func(root *common.TreeNode) *common.TreeNode {
 		if root == nil {
 			return nil
 		}
@@ -26,11 +28,11 @@ func searchBST1(root *TreeNode, val int) *TreeNode {
 }
 
 // 广度优先
-func searchBST2(root *TreeNode, val int) *TreeNode {
+func searchBST2(root *common.TreeNode, val int) *common.TreeNode {
 	if root == nil {
 		return nil
 	}
-	var queue = []*TreeNode{root}
+	var queue = []*common.TreeNode{root}
 	for len(queue) > 0 {
 		cur := queue[0]
 		queue = queue[1:]
@@ -46,7 +48,7 @@ func searchBST2(root *TreeNode, val int) *TreeNode {
 }
 
 // 迭代
-func searchBST3(root *TreeNode, val int) *TreeNode {
+func searchBST3(root *common.TreeNode, val int) *common.TreeNode {
 	for root != nil {
 		if root.Val == val {
 			return root

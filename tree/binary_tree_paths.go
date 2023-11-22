@@ -1,6 +1,7 @@
 package tree
 
 import (
+	"goalgorithms/common"
 	"strconv"
 	"strings"
 )
@@ -11,27 +12,18 @@ import (
 //示例1：输入：root=[1,2,3,null,5]输出：["1->2->5","1->3"]
 //示例2：输入：root=[1]输出：["1"]
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-
 // 回溯+递归(前序遍历，深度优先遍历)
-func binaryTreePaths1(root *TreeNode) []string {
+func binaryTreePaths1(root *common.TreeNode) []string {
 	if root == nil {
 		return []string{}
 	}
 	var (
 		numList = make([]string, 0)
 		ans     = make([]string, 0)
-		f       func(root *TreeNode)
+		f       func(root *common.TreeNode)
 	)
 
-	f = func(root *TreeNode) {
+	f = func(root *common.TreeNode) {
 		if root == nil {
 			return
 		}
@@ -62,13 +54,13 @@ func binaryTreePaths1(root *TreeNode) []string {
 }
 
 // 深度优先搜索(节省内存版)
-func binaryTreePaths2(root *TreeNode) []string {
+func binaryTreePaths2(root *common.TreeNode) []string {
 	var (
 		ans            = make([]string, 0)
-		constructPaths func(root *TreeNode, path string)
+		constructPaths func(root *common.TreeNode, path string)
 	)
 
-	constructPaths = func(root *TreeNode, path string) {
+	constructPaths = func(root *common.TreeNode, path string) {
 		if root != nil {
 			pathSB := path
 			pathSB += strconv.Itoa(root.Val)
@@ -87,13 +79,13 @@ func binaryTreePaths2(root *TreeNode) []string {
 }
 
 //宽度优先遍历
-func binaryTreePaths3(root *TreeNode) []string {
+func binaryTreePaths3(root *common.TreeNode) []string {
 	if root == nil {
 		return []string{}
 	}
 	var (
 		ans      = make([]string, 0)
-		queue    = []*TreeNode{root}
+		queue    = []*common.TreeNode{root}
 		ansQueue = []string{strconv.Itoa(root.Val)} // 存放临时结果,也queue一一对应
 	)
 	for len(queue) > 0 {
@@ -124,12 +116,12 @@ func binaryTreePaths3(root *TreeNode) []string {
 }
 
 //宽度优先遍历(节省内存版)
-func binaryTreePaths4(root *TreeNode) []string {
+func binaryTreePaths4(root *common.TreeNode) []string {
 	var paths = make([]string, 0)
 	if root == nil {
 		return paths
 	}
-	nodeQueue := []*TreeNode{}
+	nodeQueue := []*common.TreeNode{}
 	pathQueue := []string{}
 	nodeQueue = append(nodeQueue, root)
 	pathQueue = append(pathQueue, strconv.Itoa(root.Val))

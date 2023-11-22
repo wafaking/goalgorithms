@@ -15,13 +15,13 @@ import "goalgorithms/common"
 // TreeNode Definition for a binary tree node.
 type TreeNode struct {
 	Val   int
-	Left  *TreeNode
-	Right *TreeNode
+	Left  *common.TreeNode
+	Right *common.TreeNode
 }
 
-func rob31(root *TreeNode) int {
-	var dfs func(node *TreeNode) (int, int)
-	dfs = func(node *TreeNode) (int, int) {
+func rob31(root *common.TreeNode) int {
+	var dfs func(node *common.TreeNode) (int, int)
+	dfs = func(node *common.TreeNode) (int, int) {
 		if node == nil { // 边界条件
 			return 0, 0 // 不存在，怎么选都是0
 		}

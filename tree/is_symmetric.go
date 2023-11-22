@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //对称二叉树(leetcode-101)
 //给你一个二叉树的根节点root，检查它是否轴对称。
 //示例1：输入：root=[1,2,2,3,4,4,3]输出：true
@@ -9,8 +11,8 @@ package tree
  * Definition for a binary tree node.
  * type TreeNode struct {
  *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
+ *     Left *common.TreeNode
+ *     Right *common.TreeNode
  * }
  */
 
@@ -23,19 +25,19 @@ package tree
 */
 
 // 反转二叉树，再比对(TODO)
-func isSymmetric1(root *TreeNode) bool {
+func isSymmetric1(root *common.TreeNode) bool {
 	return false
 }
 
 // 层序遍历后，判断每层结果
-func isSymmetric2(root *TreeNode) bool {
+func isSymmetric2(root *common.TreeNode) bool {
 	if root == nil {
 		return true
 	}
 	var (
-		queue            = []*TreeNode{root}
+		queue            = []*common.TreeNode{root}
 		count            = 1
-		cur              *TreeNode
+		cur              *common.TreeNode
 		elements         = make([]int, 0)
 		isSymmetricArray func(list []int) bool
 	)
@@ -82,13 +84,13 @@ func isSymmetric2(root *TreeNode) bool {
 }
 
 // 递归
-func isSymmetric3(root *TreeNode) bool {
+func isSymmetric3(root *common.TreeNode) bool {
 	if root == nil {
 		return true
 	}
 
-	var cmp func(l, r *TreeNode) bool
-	cmp = func(l, r *TreeNode) bool {
+	var cmp func(l, r *common.TreeNode) bool
+	cmp = func(l, r *common.TreeNode) bool {
 		if l == nil && r == nil {
 			return true
 		} else if l == nil && r != nil {

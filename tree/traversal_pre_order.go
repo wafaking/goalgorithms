@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //二叉树的前序遍历(leetcode-144)
 //给你二叉树的根节点root，返回它节点值的前序遍历。
 //示例1：输入：root=[1,null,2,3]输出：[1,2,3]
@@ -12,21 +14,21 @@ package tree
  * Definition for a binary tree node.
  * type TreeNode struct {
  *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
+ *     Left *common.TreeNode
+ *     Right *common.TreeNode
  * }
  */
 
 //前序遍历（根左右）
 
 // 递归遍历
-func preOrderTraversal1(root *TreeNode) []int {
+func preOrderTraversal1(root *common.TreeNode) []int {
 	var (
 		ans = make([]int, 0)
-		f   func(root *TreeNode)
+		f   func(root *common.TreeNode)
 	)
 
-	f = func(root *TreeNode) {
+	f = func(root *common.TreeNode) {
 		if root == nil {
 			return
 		}
@@ -39,13 +41,13 @@ func preOrderTraversal1(root *TreeNode) []int {
 }
 
 // 循环实现(使用栈先添加右子节点到栈中)
-func preOrderTraversal2(root *TreeNode) []int {
+func preOrderTraversal2(root *common.TreeNode) []int {
 	if root == nil {
 		return []int{}
 	}
 	var (
 		ans   = make([]int, 0)
-		stack = make([]*TreeNode, 0)
+		stack = make([]*common.TreeNode, 0)
 	)
 
 	var cur = root
@@ -76,11 +78,11 @@ func preOrderTraversal2(root *TreeNode) []int {
 }
 
 // 循环遍历(添加当前节点到栈中)
-func preOrderTraversal3(root *TreeNode) []int {
+func preOrderTraversal3(root *common.TreeNode) []int {
 	//一直沿着左子节点遍历，并将当前节点加入栈中,遍历到左子叶子节点时，再依次取出栈顶元素处理其右子节点
 	var (
 		cur   = root
-		stack []*TreeNode // 1.初始化栈
+		stack []*common.TreeNode // 1.初始化栈
 		sli   []int
 	)
 

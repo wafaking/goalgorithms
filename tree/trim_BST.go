@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //修剪二叉搜索树(leetcode-669)
 //给你二叉搜索树的根节点root，同时给定最小边界low和最大边界high。通过修剪二叉搜索树，
 //使得所有节点的值在[low,high]中。修剪树不应该改变保留在树中的元素的相对结构(如果没有被移除，原有的父代子代关系都应当保留)。
@@ -9,7 +11,7 @@ package tree
 //示例2：输入：root=[3,0,4,null,2,null,null,1],low=1,high=3输出：[3,2,null,1]
 
 // 递归(前序)
-func trimBST1(root *TreeNode, low int, high int) *TreeNode {
+func trimBST1(root *common.TreeNode, low int, high int) *common.TreeNode {
 	if root == nil {
 		return nil
 	}
@@ -24,7 +26,7 @@ func trimBST1(root *TreeNode, low int, high int) *TreeNode {
 }
 
 // 迭代
-func trimBST2(root *TreeNode, low int, high int) *TreeNode {
+func trimBST2(root *common.TreeNode, low int, high int) *common.TreeNode {
 	// 找到处于low与high之间的节点
 	for {
 		switch {

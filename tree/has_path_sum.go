@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //路径总和(leetcode-112)
 //给定二叉树的根节点root和目标和的整数targetSum。判断该树中是否存在根节点到叶子节点的路径，
 //这条路径上所有节点值相加等于目标和targetSum。如果存在，返回true；否则，返回false。
@@ -15,10 +17,10 @@ package tree
 //解释：由于树是空的，所以不存在根节点到叶子节点的路径。
 
 // 深度优先遍历
-func hasPathSum1(root *TreeNode, targetSum int) bool {
+func hasPathSum1(root *common.TreeNode, targetSum int) bool {
 
-	var f func(root *TreeNode) bool
-	f = func(root *TreeNode) bool {
+	var f func(root *common.TreeNode) bool
+	f = func(root *common.TreeNode) bool {
 		if root == nil {
 			return false
 		}
@@ -53,7 +55,7 @@ func hasPathSum1(root *TreeNode, targetSum int) bool {
 }
 
 // 递归深度优先(简便写法)
-func hasPathSum2(root *TreeNode, sum int) bool {
+func hasPathSum2(root *common.TreeNode, sum int) bool {
 	if root == nil {
 		return false
 	}
@@ -64,13 +66,13 @@ func hasPathSum2(root *TreeNode, sum int) bool {
 }
 
 // 广度优先遍历
-func hasPathSum3(root *TreeNode, targetSum int) bool {
+func hasPathSum3(root *common.TreeNode, targetSum int) bool {
 	if root == nil {
 		return false
 	}
 
 	var (
-		nodeQueue  = []*TreeNode{root}
+		nodeQueue  = []*common.TreeNode{root}
 		valueQueue = []int{targetSum - root.Val}
 	)
 	for len(nodeQueue) > 0 {

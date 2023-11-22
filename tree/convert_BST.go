@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //把二叉搜索树转换为累加树(leetcode-538/1038)
 //给出二叉搜索树的根节点，该树的节点值各不相同，请你将其转换为累加树（GreaterSumTree），
 //使每个节点node的新值等于原树中大于或等于node.val的值之和,
@@ -15,12 +17,12 @@ package tree
 //示例4：输入：root=[3,2,4,1]输出：[7,9,4,10]
 
 // 先右节点的中序遍历
-func convertBST1(root *TreeNode) *TreeNode {
+func convertBST1(root *common.TreeNode) *common.TreeNode {
 	var (
-		f   func(root *TreeNode)
-		pre *TreeNode
+		f   func(root *common.TreeNode)
+		pre *common.TreeNode
 	)
-	f = func(root *TreeNode) {
+	f = func(root *common.TreeNode) {
 		if root == nil {
 			return
 		}
@@ -36,7 +38,7 @@ func convertBST1(root *TreeNode) *TreeNode {
 }
 
 // Morris 遍历(TODO)
-func convertBST2(root *TreeNode) *TreeNode {
+func convertBST2(root *common.TreeNode) *common.TreeNode {
 	sum := 0
 	node := root
 	for node != nil {
@@ -60,7 +62,7 @@ func convertBST2(root *TreeNode) *TreeNode {
 	return root
 }
 
-func getSuccessor(node *TreeNode) *TreeNode {
+func getSuccessor(node *common.TreeNode) *common.TreeNode {
 	succ := node.Right
 	for succ.Left != nil {
 		if succ.Left == node {

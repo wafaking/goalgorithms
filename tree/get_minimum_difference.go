@@ -1,6 +1,7 @@
 package tree
 
 import (
+	"goalgorithms/common"
 	"math"
 )
 
@@ -11,7 +12,7 @@ import (
 //示例2：输入：root=[1,0,48,null,null,12,49]输出：1
 
 // 中序遍历
-func getMinimumDifference1(root *TreeNode) int {
+func getMinimumDifference1(root *common.TreeNode) int {
 	// 由于是二叉搜索树，因此左子孙节点的值一定小于当前节点，右子孙节点的值一定大于当前节点
 	// 因此，与当前节点差值最小的节点有几种情况：
 	// 1. 与左、右子节点的差值：求左、中、右相邻差值即可;
@@ -20,12 +21,12 @@ func getMinimumDifference1(root *TreeNode) int {
 	// 因此：中序遍历正好满足：
 
 	var (
-		f   func(root *TreeNode)
+		f   func(root *common.TreeNode)
 		min = math.MaxInt64
 		pre = -1
 	)
 
-	f = func(root *TreeNode) {
+	f = func(root *common.TreeNode) {
 		if root == nil {
 			return
 		}

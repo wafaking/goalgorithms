@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 // 给定一个二叉树，返回它的右视图所能看到的节点值（按从顶部到底部的顺序）【leetcode199/sword2-46 】
 /*
 		  1              <---
@@ -16,13 +18,13 @@ package tree
 // rightSideView1 法一：深度优先搜索
 // 思路：对树进行深度优先搜索，在搜索过程中，我们总是先访问右子树。那么对于每一层来说，我们在这层见到的第一个结点一定是最右边的结点。
 // 这样一来，我们可以存储在每个深度访问的第一个结点，一旦我们知道了树的层数，就可以得到最终的结果数组。
-func rightSideView1(root *TreeNode) []int {
+func rightSideView1(root *common.TreeNode) []int {
 	var (
 		res []int // 用来储存结果
-		f   func(node *TreeNode, depth int)
+		f   func(node *common.TreeNode, depth int)
 	)
 
-	f = func(node *TreeNode, depth int) {
+	f = func(node *common.TreeNode, depth int) {
 		if node == nil {
 			return
 		}
@@ -39,10 +41,10 @@ func rightSideView1(root *TreeNode) []int {
 
 // rightSideView2 法二：广度优先遍历
 // 思路：一层一层遍历，每层的最后一个元素就是右视图中看到的元素
-func rightSideView2(root *TreeNode) []int {
+func rightSideView2(root *common.TreeNode) []int {
 	var (
-		res   []int       // 结果集
-		queue []*TreeNode // 队列，用于存储每一层的元素
+		res   []int              // 结果集
+		queue []*common.TreeNode // 队列，用于存储每一层的元素
 	)
 	if root == nil {
 		return res

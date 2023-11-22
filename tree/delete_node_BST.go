@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //删除二叉搜索树中的节点(leetcode-450)
 //给定一个二叉搜索树的根节点root和一个值key，删除二叉搜索树中的key对应的节点，并保证二叉搜索树的性质不变。
 //返回二叉搜索树（有可能被更新）的根节点的引用。
@@ -21,9 +23,9 @@ package tree
 */
 
 // 递归
-func deleteNode1(root *TreeNode, key int) *TreeNode {
-	var f func(root *TreeNode) *TreeNode
-	f = func(root *TreeNode) *TreeNode {
+func deleteNode1(root *common.TreeNode, key int) *common.TreeNode {
+	var f func(root *common.TreeNode) *common.TreeNode
+	f = func(root *common.TreeNode) *common.TreeNode {
 		switch {
 		case root == nil:
 			return nil
@@ -56,7 +58,7 @@ func deleteNode1(root *TreeNode, key int) *TreeNode {
 }
 
 // 递归
-func deleteNode2(root *TreeNode, key int) *TreeNode {
+func deleteNode2(root *common.TreeNode, key int) *common.TreeNode {
 	switch {
 	case root == nil:
 		return nil
@@ -85,10 +87,10 @@ func deleteNode2(root *TreeNode, key int) *TreeNode {
 }
 
 // 迭代(同法一的删除及移位方法)
-func deleteNode3(root *TreeNode, key int) *TreeNode {
+func deleteNode3(root *common.TreeNode, key int) *common.TreeNode {
 	var (
 		cur = root
-		pre *TreeNode
+		pre *common.TreeNode
 		// 用于记录当前节点是否是pre的左子节点
 		// 可以用if pre != nil && pre.Left != nil && pre.Left.Val == cur.Val代替
 		isLeft bool
@@ -150,8 +152,8 @@ func deleteNode3(root *TreeNode, key int) *TreeNode {
 }
 
 // 迭代(同法二的删除及移位方法)
-func deleteNode4(root *TreeNode, key int) *TreeNode {
-	var cur, curParent *TreeNode = root, nil
+func deleteNode4(root *common.TreeNode, key int) *common.TreeNode {
+	var cur, curParent *common.TreeNode = root, nil
 	for cur != nil && cur.Val != key {
 		curParent = cur
 		if cur.Val > key {

@@ -1,30 +1,23 @@
 package tree
 
+import "goalgorithms/common"
+
 //左叶子之和(leetcode-404)
 //给定二叉树的根节点root，返回所有左叶子之和。
 //示例1：输入:root=[3,9,20,null,null,15,7]输出:24
 //解释:在这个二叉树中，有两个左叶子，分别是9和15，所以返回24
 //示例2:输入:root=[1]输出:0
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-
 // 深度优先递归+前序遍历
-func sumOfLeftLeaves1(root *TreeNode) int {
+func sumOfLeftLeaves1(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 	var (
 		ans int
-		f   func(pre, cur *TreeNode)
+		f   func(pre, cur *common.TreeNode)
 	)
-	f = func(pre, cur *TreeNode) {
+	f = func(pre, cur *common.TreeNode) {
 		if cur == nil {
 			return
 		}
@@ -43,12 +36,12 @@ func sumOfLeftLeaves1(root *TreeNode) int {
 }
 
 // 深度优先递归(后序遍历)
-func sumOfLeftLeaves2(root *TreeNode) int {
+func sumOfLeftLeaves2(root *common.TreeNode) int {
 	var (
-		f func(root *TreeNode) int
+		f func(root *common.TreeNode) int
 	)
 
-	f = func(root *TreeNode) int {
+	f = func(root *common.TreeNode) int {
 		if root == nil { // 当前节点不存在
 			return 0
 		} else if root.Left == nil && root.Right == nil {
@@ -70,12 +63,12 @@ func sumOfLeftLeaves2(root *TreeNode) int {
 }
 
 // 宽度优先遍历
-func sumOfLeftLeaves3(root *TreeNode) int {
+func sumOfLeftLeaves3(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 	var (
-		queue = []*TreeNode{root}
+		queue = []*common.TreeNode{root}
 		ans   int
 	)
 	for len(queue) > 0 {

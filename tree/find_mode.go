@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //二叉搜索树中的众数(leetcode-501)
 //给你一个含重复值的二叉搜索树（BST）的根节点root，找出并返回BST中的所有众数（即，出现频率最高的元素）。
 //如果树中有不止一个众数，可以按任意顺序返回。注：树中节点的数目在范围[1, 10^4] 内;
@@ -11,15 +13,15 @@ package tree
 //示例2：输入：root=[0]输出：[0]
 
 // 中序遍历（记录前一个节点的指针）
-func findMode1(root *TreeNode) []int {
+func findMode1(root *common.TreeNode) []int {
 	var (
-		pre             *TreeNode //用于记录前一个节点的值
+		pre             *common.TreeNode //用于记录前一个节点的值
 		count, maxCount int
-		f               func(root *TreeNode)
+		f               func(root *common.TreeNode)
 		ans             = make([]int, 0)
 	)
 
-	f = func(root *TreeNode) {
+	f = func(root *common.TreeNode) {
 		if root == nil {
 			return
 		}
@@ -55,14 +57,14 @@ func findMode1(root *TreeNode) []int {
 }
 
 // 中序遍历（记录前一个节点的值）
-func findMode2(root *TreeNode) []int {
+func findMode2(root *common.TreeNode) []int {
 	var (
 		ans                   = make([]int, 0)
-		f                     func(root *TreeNode)
+		f                     func(root *common.TreeNode)
 		base, count, maxCount int
 	)
 
-	f = func(root *TreeNode) {
+	f = func(root *common.TreeNode) {
 		if root == nil {
 			return
 		}

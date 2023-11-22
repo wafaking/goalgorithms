@@ -9,23 +9,14 @@ import "goalgorithms/common"
 //示例2：输入：root=[1,2,2,3,3,null,null,4,4],输出：false
 //示例3：输入：root=[]输出：true
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-
 // 自下而上递归(后序遍历)
-func isBalanced1(root *TreeNode) bool {
+func isBalanced1(root *common.TreeNode) bool {
 	if root == nil {
 		return true
 	}
 
-	var getHeight func(root *TreeNode) int
-	getHeight = func(root *TreeNode) int {
+	var getHeight func(root *common.TreeNode) int
+	getHeight = func(root *common.TreeNode) int {
 		if root == nil {
 			return 0
 		}
@@ -48,13 +39,13 @@ func isBalanced1(root *TreeNode) bool {
 }
 
 // 自上而下递归(前序遍历)
-func isBalanced2(root *TreeNode) bool {
+func isBalanced2(root *common.TreeNode) bool {
 	if root == nil {
 		return true
 	}
-	var getHeight func(root *TreeNode) int
+	var getHeight func(root *common.TreeNode) int
 
-	getHeight = func(root *TreeNode) int {
+	getHeight = func(root *common.TreeNode) int {
 		if root == nil {
 			return 0
 		}

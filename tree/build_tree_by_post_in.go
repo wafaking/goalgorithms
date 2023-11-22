@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 // 从后序序与中序遍历序列构造二叉树(leetcode-106)
 // 根据后序遍历和中序遍历结果，构造二叉树(假设输入的前序遍历和中序遍历的结果中都不含重复的数字)。
 /*
@@ -16,12 +18,12 @@ Output: [3,9,20,null,null,15,7]
 */
 
 // 递归法
-func buildTree21(inorder []int, postorder []int) *TreeNode {
+func buildTree21(inorder []int, postorder []int) *common.TreeNode {
 	if len(inorder) == 0 || len(postorder) == 0 {
 		return nil
 	}
 	var (
-		root  = &TreeNode{Val: postorder[len(postorder)-1]}
+		root  = &common.TreeNode{Val: postorder[len(postorder)-1]}
 		pivot int
 	)
 	// 查找根节点在中序序列中的位置
@@ -37,10 +39,10 @@ func buildTree21(inorder []int, postorder []int) *TreeNode {
 }
 
 // 递归(双指针)
-func buildTree22(inorder []int, postorder []int) *TreeNode {
+func buildTree22(inorder []int, postorder []int) *common.TreeNode {
 	var (
 		idxMap    = map[int]int{}
-		treeBuild func(leftIndex, rightIndex int) *TreeNode
+		treeBuild func(leftIndex, rightIndex int) *common.TreeNode
 	)
 	// post [2 1 3 6 7 5 10 9 8 4]
 	//   in [1 2 3 4 5 6 7 8 9 10]
@@ -48,14 +50,14 @@ func buildTree22(inorder []int, postorder []int) *TreeNode {
 	for k, v := range postorder {
 		idxMap[v] = k // 节点元素不会有重复
 	}
-	treeBuild = func(inOrderLIndex, inOrderRIndex int) *TreeNode {
+	treeBuild = func(inOrderLIndex, inOrderRIndex int) *common.TreeNode {
 		if inOrderLIndex > inOrderRIndex { // 无剩余节点
 			return nil
 		}
 		//log.Println("lI, rI, postOrder:", inOrderLIndex, inOrderRIndex, postorder)
 		val := postorder[len(postorder)-1]       // 根节点值
 		postorder = postorder[:len(postorder)-1] // 注：每次要将上次的根节点去除
-		root := &TreeNode{Val: val}
+		root := &common.TreeNode{Val: val}
 		i := idxMap[val]
 
 		// 注：根据val的值将中序遍历划分成左、右子树
@@ -68,13 +70,13 @@ func buildTree22(inorder []int, postorder []int) *TreeNode {
 }
 
 // 迭代法 todo
-func buildTree24(inorder []int, postorder []int) *TreeNode {
+func buildTree24(inorder []int, postorder []int) *common.TreeNode {
 	//if len(inorder) == 0 || len(postorder) == 0 {
 	//	return nil
 	//}
 	//var (
 	//	postIdx = len(postorder) - 1
-	//	root    = &TreeNode{Val: postorder[postIdx]}
+	//	root    = &common.TreeNode{Val: postorder[postIdx]}
 	//)
 	//for postIdx >= 0 {
 	//	var idx int
@@ -93,12 +95,12 @@ func buildTree24(inorder []int, postorder []int) *TreeNode {
 }
 
 // 使用循环(TODO-----)
-func buildTree23(inorder []int, postorder []int) *TreeNode {
+func buildTree23(inorder []int, postorder []int) *common.TreeNode {
 	if len(postorder) == 0 {
 		return nil
 	}
-	root := &TreeNode{Val: postorder[len(postorder)-1]}
-	stack := []*TreeNode{root}
+	root := &common.TreeNode{Val: postorder[len(postorder)-1]}
+	stack := []*common.TreeNode{root}
 	idx := len(inorder) - 1
 
 	// post [2 1 3 6 7 5 10 9 8 4]
@@ -111,7 +113,7 @@ func buildTree23(inorder []int, postorder []int) *TreeNode {
 		curNode := stack[len(stack)-1]
 
 		if curNode.Val != inorder[idx] { // 等于当前值
-			curNode.Right = &TreeNode{Val: postVal}
+			curNode.Right = &common.TreeNode{Val: postVal}
 			stack = append(stack, curNode.Right)
 		} else {
 			for len(stack) > 0 && stack[len(stack)-1].Val == inorder[idx] {
@@ -119,7 +121,7 @@ func buildTree23(inorder []int, postorder []int) *TreeNode {
 				stack = stack[:len(stack)-1]
 				idx--
 			}
-			curNode.Left = &TreeNode{Val: postVal}
+			curNode.Left = &common.TreeNode{Val: postVal}
 			stack = append(stack, curNode.Left)
 		}
 	}

@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //二叉树的后序遍历(leetcode-145)
 //给你一棵二叉树的根节点root，返回其节点值的后序遍历。
 
@@ -11,18 +13,18 @@ package tree
  * Definition for a binary tree node.
  * type TreeNode struct {
  *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
+ *     Left *common.TreeNode
+ *     Right *common.TreeNode
  * }
  */
 
 // 递归遍历(左右中)
-func postOrderTraversal1(root *TreeNode) []int {
+func postOrderTraversal1(root *common.TreeNode) []int {
 	var (
 		ans = make([]int, 0)
-		f   func(root *TreeNode)
+		f   func(root *common.TreeNode)
 	)
-	f = func(root *TreeNode) {
+	f = func(root *common.TreeNode) {
 		if root == nil {
 			return
 		}
@@ -35,7 +37,7 @@ func postOrderTraversal1(root *TreeNode) []int {
 }
 
 // 循环遍历(左右中)：前序遍历再逆序
-func postOrderTraversal2(root *TreeNode) []int {
+func postOrderTraversal2(root *common.TreeNode) []int {
 	if root == nil {
 		return []int{}
 	}
@@ -43,7 +45,7 @@ func postOrderTraversal2(root *TreeNode) []int {
 	var (
 		ans   = make([]int, 0)
 		cur   = root
-		stack = []*TreeNode{root}
+		stack = []*common.TreeNode{root}
 	)
 
 	// 1.使用前序遍历，但顺序为:中右左
@@ -73,14 +75,14 @@ func postOrderTraversal2(root *TreeNode) []int {
 //当上一个放入结果集的节点是他的孩子节点的时候，
 //注意:
 // 当节点的左右不为空时， 要先加入右孩子，再加入左孩子，这样才能先访问左孩子。
-func postOrderTraversal3(root *TreeNode) []int {
+func postOrderTraversal3(root *common.TreeNode) []int {
 	if root == nil {
 		return []int{}
 	}
 	var (
 		sli   []int
-		stack = []*TreeNode{root}
-		pre   *TreeNode //辅助节点存储上一次打印值的节点
+		stack = []*common.TreeNode{root}
+		pre   *common.TreeNode //辅助节点存储上一次打印值的节点
 	)
 
 	for len(stack) > 0 {

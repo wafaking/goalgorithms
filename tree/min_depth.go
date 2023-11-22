@@ -9,23 +9,14 @@ import "goalgorithms/common"
 //示例1：输入：root=[3,9,20,null,null,15,7]输出：2
 //示例2：输入：root=[2,null,3,null,4,null,5,null,6]输出：5
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-
 // 深度遍历(后序遍历)
-func minDepth1(root *TreeNode) int {
+func minDepth1(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 
-	var getMinDepth func(root *TreeNode) int
-	getMinDepth = func(root *TreeNode) int {
+	var getMinDepth func(root *common.TreeNode) int
+	getMinDepth = func(root *common.TreeNode) int {
 		if root == nil || (root.Left == nil && root.Right == nil) {
 			return 0
 		}
@@ -42,12 +33,12 @@ func minDepth1(root *TreeNode) int {
 }
 
 // 宽度遍历(后序遍历)
-func minDepth2(root *TreeNode) int {
+func minDepth2(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 	var (
-		queue = []*TreeNode{root}
+		queue = []*common.TreeNode{root}
 		ans   = 1
 	)
 	for len(queue) > 0 {

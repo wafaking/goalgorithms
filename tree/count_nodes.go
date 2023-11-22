@@ -1,6 +1,9 @@
 package tree
 
-import "sort"
+import (
+	"goalgorithms/common"
+	"sort"
+)
 
 //完全二叉树的节点个数(leetcode-222)
 //给你一棵完全二叉树的根节点root，求出该树的节点个数。
@@ -10,23 +13,14 @@ import "sort"
 //示例2：输入：root=[]输出：0
 //示例3：输入：root=[1]输出：1
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-
 // 后序遍历
-func countNodes1(root *TreeNode) int {
+func countNodes1(root *common.TreeNode) int {
 	var (
 		count int
-		f     func(root *TreeNode)
+		f     func(root *common.TreeNode)
 	)
 
-	f = func(root *TreeNode) {
+	f = func(root *common.TreeNode) {
 		if root == nil {
 			return
 		}
@@ -39,12 +33,12 @@ func countNodes1(root *TreeNode) int {
 }
 
 // 循环遍历(判断节点是否是满二叉树)
-func countNodes2(root *TreeNode) int {
+func countNodes2(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
-	var f func(root *TreeNode) int
-	f = func(root *TreeNode) int {
+	var f func(root *common.TreeNode) int
+	f = func(root *common.TreeNode) int {
 		if root == nil {
 			return 0
 		}
@@ -72,7 +66,7 @@ func countNodes2(root *TreeNode) int {
 }
 
 // TODO(二分查找+位运算)
-func countNodes3(root *TreeNode) int {
+func countNodes3(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}

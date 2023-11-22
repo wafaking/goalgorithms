@@ -120,3 +120,8 @@ type Item23 struct {
 	Num1, Num2 int
 	Expected   []int
 }
+
+type Item24 struct {
+	NNode    *Node
+	Expected []int
+}

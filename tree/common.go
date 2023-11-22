@@ -1,25 +1,14 @@
 package tree
 
+import "goalgorithms/common"
+
 var (
-	root               *TreeNode
+	root               *common.TreeNode
 	defaultNullTreeVal = -99999
 )
 
-// TreeNode Definition for a binary tree node.
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-// NTreeNode Definition for a Node.
-type NTreeNode struct {
-	Val      int
-	Children []*NTreeNode
-}
-
 // BuildBinaryTree 构建二叉树(使用队列)
-func BuildBinaryTree(nums []int) *TreeNode {
+func BuildBinaryTree(nums []int) *common.TreeNode {
 	if len(nums) == 0 {
 		return nil
 	}
@@ -29,18 +18,18 @@ func BuildBinaryTree(nums []int) *TreeNode {
 	}
 
 	var (
-		root  = &TreeNode{Val: nums[0]}
-		queue = []*TreeNode{root}
+		root  = &common.TreeNode{Val: nums[0]}
+		queue = []*common.TreeNode{root}
 	)
 
 	for i := 1; i < len(nums) && len(queue) > 0; i++ {
 		var (
 			r           = queue[0]
-			left, right *TreeNode
+			left, right *common.TreeNode
 		)
 		queue = queue[1:]
 		if nums[i] != defaultNullTreeVal {
-			left = &TreeNode{Val: nums[i]}
+			left = &common.TreeNode{Val: nums[i]}
 			r.Left = left
 			queue = append(queue, left)
 		}
@@ -51,7 +40,7 @@ func BuildBinaryTree(nums []int) *TreeNode {
 		}
 
 		if nums[i] != defaultNullTreeVal {
-			right = &TreeNode{Val: nums[i]}
+			right = &common.TreeNode{Val: nums[i]}
 			r.Right = right
 			queue = append(queue, right)
 		}
@@ -62,11 +51,11 @@ func BuildBinaryTree(nums []int) *TreeNode {
 
 // Insert 添加节点
 func Insert(num int) {
-	var node *TreeNode
+	var node *common.TreeNode
 	if num == defaultNullTreeVal {
 		node = nil
 	} else {
-		node = &TreeNode{Val: num}
+		node = &common.TreeNode{Val: num}
 	}
 	if root == nil {
 		root = node

@@ -364,7 +364,7 @@ func TestInvertTree(t *testing.T) {
 	}
 
 	var (
-		res      *TreeNode
+		res      *common.TreeNode
 		listVals []int
 	)
 	for _, item := range list {
@@ -740,7 +740,7 @@ func TestBuildTreeByPrIn(t *testing.T) {
 	}
 
 	var (
-		root *TreeNode
+		root *common.TreeNode
 		res  []int
 	)
 	for _, item := range list {
@@ -772,7 +772,7 @@ func TestBuildTreeByPostIn(t *testing.T) {
 	}
 
 	var (
-		root *TreeNode
+		root *common.TreeNode
 		res  []int
 	)
 	for _, item := range list {
@@ -942,7 +942,7 @@ func TestMergeTrees(t *testing.T) {
 	}
 
 	var (
-		root, root1, root2 *TreeNode
+		root, root1, root2 *common.TreeNode
 		res                []int
 	)
 	for _, item := range list {
@@ -981,7 +981,7 @@ func TestSearchBST(t *testing.T) {
 
 	var (
 		res        = make([]int, 0)
-		root, node *TreeNode
+		root, node *common.TreeNode
 	)
 	for _, item := range list {
 		root = BuildBinaryTree(item.Nums)
@@ -1136,7 +1136,7 @@ func TestLowestCommonAncestor(t *testing.T) {
 	}
 
 	var (
-		res, p, q = new(TreeNode), new(TreeNode), new(TreeNode)
+		res, p, q = new(common.TreeNode), new(common.TreeNode), new(common.TreeNode)
 	)
 	for _, item := range list {
 		root := BuildBinaryTree(item.Nums)
@@ -1196,7 +1196,7 @@ func TestLowestCommonAncestorBST(t *testing.T) {
 	}
 
 	var (
-		res, p, q = new(TreeNode), new(TreeNode), new(TreeNode)
+		res, p, q = new(common.TreeNode), new(common.TreeNode), new(common.TreeNode)
 	)
 	for _, item := range list {
 		root := BuildBinaryTree(item.Nums)
@@ -1238,7 +1238,7 @@ func TestInsertIntoBST(t *testing.T) {
 
 	var (
 		res        = make([]int, 0)
-		root, node *TreeNode
+		root, node *common.TreeNode
 	)
 	for _, item := range list {
 		root = BuildBinaryTree(item.Nums)
@@ -1284,7 +1284,7 @@ func TestDeleteNode(t *testing.T) {
 
 	var (
 		res        = make([]int, 0)
-		root, node *TreeNode
+		root, node *common.TreeNode
 	)
 	for _, item := range list {
 		root = BuildBinaryTree(item.Nums)
@@ -1333,7 +1333,7 @@ func TestTrimBST(t *testing.T) {
 
 	var (
 		res        = make([]int, 0)
-		root, node *TreeNode
+		root, node *common.TreeNode
 	)
 	for _, item := range list {
 		root = BuildBinaryTree(item.Nums)
@@ -1366,7 +1366,7 @@ func TestSortedArrayToBST(t *testing.T) {
 
 	var (
 		res  = make([]int, 0)
-		tree *TreeNode
+		tree *common.TreeNode
 	)
 	for _, item := range list {
 		tree = sortedArrayToBST1(item.Nums)
@@ -1401,7 +1401,7 @@ func TestSortedListToBST(t *testing.T) {
 
 	var (
 		res      = make([]int, 0)
-		tree     *TreeNode
+		tree     *common.TreeNode
 		listNode *common.ListNode
 	)
 	for _, item := range list {
@@ -1444,7 +1444,7 @@ func TestConvertBST(t *testing.T) {
 
 	var (
 		res  = make([]int, 0)
-		tree *TreeNode
+		tree *common.TreeNode
 	)
 	for _, item := range list {
 		root = BuildBinaryTree(item.Nums)
@@ -1456,5 +1456,124 @@ func TestConvertBST(t *testing.T) {
 		res = levelOrder11(tree)
 		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
 		t.Log("--------------------------")
+	}
+}
+
+func TestPreorderN(t *testing.T) {
+	var list = []common.Item24{
+		//示例1：输入：root=[1,null,3,2,4,null,5,6]输出：[1,3,5,6,2,4]
+		{
+			Expected: []int{1, 3, 5, 6, 2, 4},
+			NNode: &common.Node{
+				Val: 1,
+				Children: []*common.Node{
+					{
+						Val: 3,
+						Children: []*common.Node{
+							{
+								Val:      5,
+								Children: nil,
+							},
+							{
+								Val:      6,
+								Children: nil,
+							},
+						},
+					},
+					{
+						Val:      2,
+						Children: nil,
+					},
+					{
+						Val:      4,
+						Children: nil,
+					},
+				},
+			},
+		},
+		{
+			//示例2：输入：root=[1,null,  2,3,4,5,null,    null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
+			//输出：[1,2,3,6,7,11,14,4,8,12,5,9,13,10]
+			Expected: []int{1, 2, 3, 6, 7, 11, 14, 4, 8, 12, 5, 9, 13, 10},
+			NNode: &common.Node{
+				Val: 1,
+				Children: []*common.Node{
+					{
+						Val:      2,
+						Children: nil,
+					},
+					{
+						Val: 3,
+						Children: []*common.Node{
+							{
+								Val:      6,
+								Children: nil,
+							},
+							{
+								Val: 7,
+								Children: []*common.Node{
+									{
+										Val: 11,
+										Children: []*common.Node{
+											{
+												Val:      14,
+												Children: nil,
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Val: 4,
+						Children: []*common.Node{
+							{
+								Val: 8,
+								Children: []*common.Node{
+									{
+										Val:      12,
+										Children: nil,
+									},
+								},
+							},
+						},
+					},
+					{
+						Val: 5,
+						Children: []*common.Node{
+							{
+								Val: 9,
+								Children: []*common.Node{
+									{
+										Val:      13,
+										Children: nil,
+									},
+								},
+							},
+							{
+								Val:      10,
+								Children: nil,
+							},
+						},
+					},
+				},
+			},
+		},
+		{
+			Expected: []int{},
+			NNode:    &common.Node{},
+		},
+	}
+
+	var res []int
+	for _, item := range list {
+		res = preorder1(item.NNode)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		res = preorder2(item.NNode)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		res = preorder3(item.NNode)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		t.Log("--------------------SPLIT--------------------------")
 	}
 }

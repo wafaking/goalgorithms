@@ -8,15 +8,15 @@ import "goalgorithms/common"
 //示例1:输入：root=[5,4,5,1,1,5]输出：2
 //示例2:输入：root=[1,4,5,4,4,5]输出：2
 
-func longestUnivaluePath(root *TreeNode) int {
+func longestUnivaluePath(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 	var (
 		ans int
-		f   func(root *TreeNode) int
+		f   func(root *common.TreeNode) int
 	)
-	f = func(root *TreeNode) int {
+	f = func(root *common.TreeNode) int {
 		if root == nil {
 			return 0
 		}

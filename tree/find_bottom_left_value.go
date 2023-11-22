@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //找树左下角的值(leetcode-513)
 //给定一个二叉树的根节点root，请找出该二叉树的最底层最左边节点的值。
 //假设二叉树中至少有一个节点。
@@ -7,12 +9,12 @@ package tree
 //示例2:输入:[1,2,3,4,null,5,6,null,null,7]输出:7
 
 // 宽度优先遍历(层序遍历)
-func findBottomLeftValue1(root *TreeNode) int {
+func findBottomLeftValue1(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 	var (
-		queue = []*TreeNode{root}
+		queue = []*common.TreeNode{root}
 		count = 1
 		ans   = root.Val
 	)
@@ -37,12 +39,12 @@ func findBottomLeftValue1(root *TreeNode) int {
 }
 
 // 宽度优先遍历(层序遍历，先右后左)
-func findBottomLeftValue2(root *TreeNode) int {
+func findBottomLeftValue2(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 	var (
-		queue = []*TreeNode{root}
+		queue = []*common.TreeNode{root}
 		ans   = root.Val
 	)
 	for len(queue) > 0 {
@@ -64,13 +66,13 @@ func findBottomLeftValue2(root *TreeNode) int {
 }
 
 // 深度优先遍历
-func findBottomLeftValue3(root *TreeNode) int {
+func findBottomLeftValue3(root *common.TreeNode) int {
 	var (
 		maxHeight int
 		ans       int
-		f         func(root *TreeNode, curHeight int)
+		f         func(root *common.TreeNode, curHeight int)
 	)
-	f = func(root *TreeNode, curHeight int) {
+	f = func(root *common.TreeNode, curHeight int) {
 		if root == nil {
 			return
 		}

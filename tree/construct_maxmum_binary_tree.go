@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //最大二叉树(leetcode-654)
 //给定一个不重复的整数数组nums。最大二叉树可以用下面的算法从nums递归地构建:
 //创建一个根节点，其值为nums中的最大值。
@@ -20,9 +22,9 @@ package tree
 //示例2：输入：nums=[3,2,1]输出：[3,null,2,null,1]
 
 // 传递数组
-func constructMaximumBinaryTree1(nums []int) *TreeNode {
-	var f func(nums []int) *TreeNode
-	f = func(nums []int) *TreeNode {
+func constructMaximumBinaryTree1(nums []int) *common.TreeNode {
+	var f func(nums []int) *common.TreeNode
+	f = func(nums []int) *common.TreeNode {
 		if len(nums) == 0 {
 			return nil
 		}
@@ -32,7 +34,7 @@ func constructMaximumBinaryTree1(nums []int) *TreeNode {
 				idx = i
 			}
 		}
-		var root = &TreeNode{Val: nums[idx]}
+		var root = &common.TreeNode{Val: nums[idx]}
 		root.Left = f(nums[:idx])
 		root.Right = f(nums[idx+1:])
 		return root
@@ -42,10 +44,10 @@ func constructMaximumBinaryTree1(nums []int) *TreeNode {
 }
 
 // 传递指针
-func constructMaximumBinaryTree2(nums []int) *TreeNode {
+func constructMaximumBinaryTree2(nums []int) *common.TreeNode {
 	// l<r 左闭右开区间
-	var f func(l, r int) *TreeNode
-	f = func(l, r int) *TreeNode {
+	var f func(l, r int) *common.TreeNode
+	f = func(l, r int) *common.TreeNode {
 		if l >= r {
 			return nil
 		}
@@ -56,7 +58,7 @@ func constructMaximumBinaryTree2(nums []int) *TreeNode {
 			}
 		}
 
-		var root = &TreeNode{Val: nums[idx]}
+		var root = &common.TreeNode{Val: nums[idx]}
 		root.Left = f(l, idx)
 		root.Right = f(idx+1, r)
 		return root

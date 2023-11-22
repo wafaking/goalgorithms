@@ -8,26 +8,17 @@ import "goalgorithms/common"
 //示例1：输入：root=[3,9,20,null,null,15,7],输出：3
 //示例2：输入：root=[1,null,2],输出：2
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-
 // 最大深度：从根节点到叶子节点的最长路径，使用前序遍历
 // 最大高度：从叶子节点到根节点的最长路径，使用后序遍历
 
 // 深度优先遍历(后序遍历)
-func maxDepth1(root *TreeNode) int {
+func maxDepth1(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 
-	var getMaxDepth func(root *TreeNode) int
-	getMaxDepth = func(root *TreeNode) int {
+	var getMaxDepth func(root *common.TreeNode) int
+	getMaxDepth = func(root *common.TreeNode) int {
 		if root == nil {
 			return 0
 		}
@@ -45,13 +36,13 @@ func maxDepth1(root *TreeNode) int {
 }
 
 // 深度优先(后序遍历)
-func maxDepth2(root *TreeNode) int {
+func maxDepth2(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 
-	var getMaxDepth func(root *TreeNode) int
-	getMaxDepth = func(root *TreeNode) int {
+	var getMaxDepth func(root *common.TreeNode) int
+	getMaxDepth = func(root *common.TreeNode) int {
 		if root == nil {
 			return 0
 		}
@@ -69,11 +60,11 @@ func maxDepth2(root *TreeNode) int {
 }
 
 // 宽度优先遍历
-func maxDepth3(root *TreeNode) int {
+func maxDepth3(root *common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
-	queue := make([]*TreeNode, 0)
+	queue := make([]*common.TreeNode, 0)
 	queue = append(queue, root)
 	ans := 0
 	for len(queue) > 0 {

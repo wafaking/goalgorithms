@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //二叉搜索树中的插入操作(leetcode-701)
 //给定二叉搜索树（BST）的根节点root和要插入树中的值value，将值插入二叉搜索树。返回插入后二叉搜索树的根节点。
 //输入数据保证，新值和原始二叉搜索树中的任意节点值都不同。
@@ -10,21 +12,21 @@ package tree
 //示例3：输入：root=[4,2,7,1,3,null,null,null,null,null,null],val=5输出：[4,2,7,1,3,5]
 
 // 循环
-func insertIntoBST1(root *TreeNode, val int) *TreeNode {
+func insertIntoBST1(root *common.TreeNode, val int) *common.TreeNode {
 	if root == nil {
-		return &TreeNode{Val: val}
+		return &common.TreeNode{Val: val}
 	}
 	var cur = root
 	for cur != nil {
 		if val <= cur.Val {
 			if cur.Left == nil {
-				cur.Left = &TreeNode{Val: val}
+				cur.Left = &common.TreeNode{Val: val}
 				break
 			}
 			cur = cur.Left
 		} else {
 			if cur.Right == nil {
-				cur.Right = &TreeNode{Val: val}
+				cur.Right = &common.TreeNode{Val: val}
 				break
 			}
 			cur = cur.Right
@@ -35,9 +37,9 @@ func insertIntoBST1(root *TreeNode, val int) *TreeNode {
 }
 
 // 递归
-func insertIntoBST2(root *TreeNode, val int) *TreeNode {
+func insertIntoBST2(root *common.TreeNode, val int) *common.TreeNode {
 	if root == nil {
-		return &TreeNode{Val: val}
+		return &common.TreeNode{Val: val}
 	}
 	if val <= root.Val {
 		root.Left = insertIntoBST2(root.Left, val)

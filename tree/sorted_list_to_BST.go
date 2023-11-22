@@ -12,18 +12,18 @@ import (
 //示例2:输入:head=[]输出:[]
 
 // 将链表转换成有序数组，再参考sortedArrayToBST1转换成二叉搜索树
-func sortedListToBST1(head *common.ListNode) *TreeNode {
+func sortedListToBST1(head *common.ListNode) *common.TreeNode {
 	var list = make([]int, 0)
 	for cur := head; cur != nil; cur = cur.Next {
 		list = append(list, cur.Val)
 	}
-	var f func(l, r int) *TreeNode
-	f = func(l, r int) *TreeNode {
+	var f func(l, r int) *common.TreeNode
+	f = func(l, r int) *common.TreeNode {
 		if l >= r {
 			return nil
 		}
 		mid := l + (r-l)>>1
-		root := &TreeNode{Val: list[mid]}
+		root := &common.TreeNode{Val: list[mid]}
 		root.Left = f(l, mid)
 		root.Right = f(mid+1, r)
 		return root
@@ -32,9 +32,9 @@ func sortedListToBST1(head *common.ListNode) *TreeNode {
 }
 
 // 分治(方法同法一，但每次都查找中间节点)
-func sortedListToBST2(head *common.ListNode) *TreeNode {
+func sortedListToBST2(head *common.ListNode) *common.TreeNode {
 	var (
-		f       func(head, end *common.ListNode) *TreeNode
+		f       func(head, end *common.ListNode) *common.TreeNode
 		findMid = func(head, end *common.ListNode) *common.ListNode {
 			// head,end为前闭后开区间，因此不能包含end
 			slow, fast := head, head
@@ -46,13 +46,13 @@ func sortedListToBST2(head *common.ListNode) *TreeNode {
 		}
 	)
 
-	f = func(head, end *common.ListNode) *TreeNode {
+	f = func(head, end *common.ListNode) *common.TreeNode {
 		if head == end {
 			return nil
 		}
 
 		mid := findMid(head, end)
-		root := &TreeNode{Val: mid.Val}
+		root := &common.TreeNode{Val: mid.Val}
 		root.Left = f(head, mid)
 		root.Right = f(mid.Next, end)
 		return root
@@ -61,10 +61,10 @@ func sortedListToBST2(head *common.ListNode) *TreeNode {
 }
 
 // 分治+中序遍历优化(todo)
-func sortedListToBST3(head *common.ListNode) *TreeNode {
+func sortedListToBST3(head *common.ListNode) *common.TreeNode {
 	var (
 		globalHead = head
-		f          func(l, r int) *TreeNode
+		f          func(l, r int) *common.TreeNode
 		getLength  = func(head *common.ListNode) int {
 			var count int
 			for ; head != nil; head = head.Next {
@@ -73,12 +73,12 @@ func sortedListToBST3(head *common.ListNode) *TreeNode {
 			return count
 		}
 	)
-	f = func(l, r int) *TreeNode {
+	f = func(l, r int) *common.TreeNode {
 		if l > r {
 			return nil
 		}
 		mid := (l + r + 1) / 2
-		root := &TreeNode{}
+		root := &common.TreeNode{}
 		root.Left = f(l, mid-1)
 		root.Val = globalHead.Val
 		globalHead = globalHead.Next

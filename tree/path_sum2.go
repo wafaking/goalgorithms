@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //路径总和II(leetcode-113)
 //给你二叉树的根节点root和一个整数目标和targetSum，找出所有从根节点到叶子节点路径总和等于给定目标和的路径。
 //叶子节点是指没有子节点的节点。
@@ -7,16 +9,7 @@ package tree
 //示例2：输入：root=[1,2,3],targetSum=5输出：[]
 //示例3：输入：root=[1,2],targetSum=0输出：[]
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-
 // TODO ----
-func pathSum(root *TreeNode, targetSum int) [][]int {
+func pathSum(root *common.TreeNode, targetSum int) [][]int {
 	return nil
 }

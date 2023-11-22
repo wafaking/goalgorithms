@@ -1,5 +1,7 @@
 package tree
 
+import "goalgorithms/common"
+
 //二叉搜索树的最近公共祖先(leetcode-235)
 //给定一个二叉搜索树,找到该树中两个指定节点的最近公共祖先。
 //最近公共祖先：对于有根树T的两个结点p、q，最近公共祖先表示为一个结点x，满足x是p、q的祖先且x的深度尽可能大（一个节点也可以是它自己的祖先）。
@@ -10,9 +12,9 @@ package tree
 //解释:节点2和节点4的最近公共祖先是2,因为根据定义最近公共祖先节点可以为节点本身。
 
 // 后序遍历
-func lowestCommonAncestorBST1(root, p, q *TreeNode) *TreeNode {
-	var f func(root *TreeNode) *TreeNode
-	f = func(root *TreeNode) *TreeNode {
+func lowestCommonAncestorBST1(root, p, q *common.TreeNode) *common.TreeNode {
+	var f func(root *common.TreeNode) *common.TreeNode
+	f = func(root *common.TreeNode) *common.TreeNode {
 		if root == nil {
 			return nil
 		}
@@ -31,14 +33,14 @@ func lowestCommonAncestorBST1(root, p, q *TreeNode) *TreeNode {
 }
 
 // 两次遍历(获取父节点列表再逐一匹配最末相等的父节点)
-func lowestCommonAncestorBST2(root, p, q *TreeNode) *TreeNode {
+func lowestCommonAncestorBST2(root, p, q *common.TreeNode) *common.TreeNode {
 
 	var (
 		// 列出当前节点的所有的
-		listAncestors = func(node *TreeNode) []*TreeNode {
+		listAncestors = func(node *common.TreeNode) []*common.TreeNode {
 			var (
 				cur   = root
-				queue = []*TreeNode{root}
+				queue = []*common.TreeNode{root}
 			)
 			for cur.Val != node.Val {
 				if node.Val < cur.Val {
@@ -52,7 +54,7 @@ func lowestCommonAncestorBST2(root, p, q *TreeNode) *TreeNode {
 		}
 		queueP   = listAncestors(p)
 		queueQ   = listAncestors(q)
-		ancestor *TreeNode
+		ancestor *common.TreeNode
 	)
 	for i := 0; i < len(queueQ) && i < len(queueP); i++ {
 		// 找到最后一个相同的节点,就是公共祖先
@@ -65,7 +67,7 @@ func lowestCommonAncestorBST2(root, p, q *TreeNode) *TreeNode {
 }
 
 // 一次遍历
-func lowestCommonAncestorBST3(root, p, q *TreeNode) *TreeNode {
+func lowestCommonAncestorBST3(root, p, q *common.TreeNode) *common.TreeNode {
 	for {
 		if root.Val > p.Val && root.Val > q.Val {
 			root = root.Left

@@ -6,20 +6,9 @@ import (
 	"testing"
 )
 
-func TestMain(t *testing.M) {
-
-	//ssli := [][]int{
-	//	{1, 2, 2, 3, 3, 4, 5},
-	//	{8, 4, 0, 6, 5, 6, 5, 7, 9},
-	//	{1},
-	//	{},
-	//}
-	//for _, sli := range ssli {
-	//	SetListNode(sli)
-	//	PrintHead()
-	t.Run()
-	//}
-}
+//func TestMain(t *testing.M) {
+//	t.Run()
+//}
 
 func TestPrintListNode(t *testing.T) {
 	PrintHead()

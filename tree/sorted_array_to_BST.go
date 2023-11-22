@@ -1,6 +1,7 @@
 package tree
 
 import (
+	"goalgorithms/common"
 	"math/rand"
 	"time"
 )
@@ -14,17 +15,17 @@ import (
 //解释：[1,null,3]和[3,1]都是高度平衡二叉搜索树。
 
 // 中序遍历(选择中间位置作为根节点)
-func sortedArrayToBST1(nums []int) *TreeNode {
+func sortedArrayToBST1(nums []int) *common.TreeNode {
 
 	// l,r为左闭右开区间
-	var f func(l, r int) *TreeNode
-	f = func(l, r int) *TreeNode {
+	var f func(l, r int) *common.TreeNode
+	f = func(l, r int) *common.TreeNode {
 		if l >= r {
 			return nil
 		}
 		var (
 			mid  = l + (r-l)>>1
-			root = &TreeNode{Val: nums[mid]}
+			root = &common.TreeNode{Val: nums[mid]}
 		)
 		root.Left = f(l, mid)
 		root.Right = f(mid+1, r)
@@ -35,19 +36,19 @@ func sortedArrayToBST1(nums []int) *TreeNode {
 }
 
 // 中序遍历(随机选择中间左边或右边位置作为根节点)
-func sortedArrayToBST2(nums []int) *TreeNode {
+func sortedArrayToBST2(nums []int) *common.TreeNode {
 	rand.Seed(time.Now().UnixNano())
 	return helper(nums, 0, len(nums)-1)
 }
 
-func helper(nums []int, left, right int) *TreeNode {
+func helper(nums []int, left, right int) *common.TreeNode {
 	if left > right {
 		return nil
 	}
 
 	// 选择任意一个中间位置数字作为根节点
 	mid := (left + right + rand.Intn(2)) / 2
-	root := &TreeNode{Val: nums[mid]}
+	root := &common.TreeNode{Val: nums[mid]}
 	root.Left = helper(nums, left, mid-1)
 	root.Right = helper(nums, mid+1, right)
 	return root
