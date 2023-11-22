@@ -3,6 +3,7 @@ package tree
 import (
 	"encoding/json"
 	"goalgorithms/common"
+	"goalgorithms/link"
 	"log"
 	"sort"
 	"testing"
@@ -1372,6 +1373,86 @@ func TestSortedArrayToBST(t *testing.T) {
 		res = levelOrder11(tree)
 		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
 		tree = sortedArrayToBST2(item.Nums)
+		res = levelOrder11(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		t.Log("--------------------------")
+	}
+}
+
+func TestSortedListToBST(t *testing.T) {
+	var list = []common.Item20{
+		{
+			Nums:     []int{-10, -3, 0, 5, 9},
+			Expected: []int{0, -3, 9, -10, defaultNullTreeVal, 5},
+		},
+		{
+			Nums:     []int{},
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{1, 2, 3, 4, 5},
+			Expected: []int{3, 2, 4, 1, defaultNullTreeVal, defaultNullTreeVal, 5},
+		},
+		{
+			Nums:     []int{1, 3},
+			Expected: []int{3, 1},
+		},
+	}
+
+	var (
+		res      = make([]int, 0)
+		tree     *TreeNode
+		listNode *common.ListNode
+	)
+	for _, item := range list {
+		listNode = link.BuildListNode(item.Nums)
+		tree = sortedListToBST1(listNode)
+		res = levelOrder11(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		listNode = link.BuildListNode(item.Nums)
+		tree = sortedListToBST2(listNode)
+		res = levelOrder11(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		tree = sortedListToBST3(listNode)
+		res = levelOrder11(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		t.Log("--------------------------")
+	}
+}
+
+func TestConvertBST(t *testing.T) {
+	var list = []common.Item20{
+		{
+			Nums: []int{4, 1, 6, 0, 2, 5, 7, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal,
+				3, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal, 8},
+			Expected: []int{30, 36, 21, 36, 35, 26, 15, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal,
+				33, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal, 8},
+		},
+		{
+			Nums:     []int{0, defaultNullTreeVal, 1},
+			Expected: []int{1, defaultNullTreeVal, 1},
+		},
+		{
+			Nums:     []int{1, 0, 2},
+			Expected: []int{3, 3, 2},
+		},
+		{
+			Nums:     []int{3, 2, 4, 1},
+			Expected: []int{7, 9, 4, 10},
+		},
+	}
+
+	var (
+		res  = make([]int, 0)
+		tree *TreeNode
+	)
+	for _, item := range list {
+		root = BuildBinaryTree(item.Nums)
+		tree = convertBST1(root)
+		res = levelOrder11(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		root = BuildBinaryTree(item.Nums)
+		tree = convertBST2(root)
 		res = levelOrder11(tree)
 		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
 		t.Log("--------------------------")

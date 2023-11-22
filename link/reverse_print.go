@@ -1,11 +1,13 @@
 package link
 
+import "goalgorithms/common"
+
 // 从尾到头打印链表(sword-6)
 // 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
 // 示例1：输入：head = [1,3,2], 输出：[2,3,1]
 
 //法一： 顺序遍历，将元素添加至栈中，再将栈中元素输出；
-func reversePrint1(head *ListNode) []int {
+func reversePrint1(head *common.ListNode) []int {
 	var (
 		dummy = head
 		sli   []int
@@ -34,13 +36,13 @@ func reversePrint1(head *ListNode) []int {
 }
 
 //法二：使用defer打印(正确)
-func reversePrint2(head *ListNode) []int {
+func reversePrint2(head *common.ListNode) []int {
 	var (
 		cur        = head
 		ans        []int
-		handleNode func(node *ListNode)
+		handleNode func(node *common.ListNode)
 	)
-	handleNode = func(cur *ListNode) {
+	handleNode = func(cur *common.ListNode) {
 		for cur != nil {
 			defer func(v int) {
 				ans = append(ans, v)
@@ -53,13 +55,13 @@ func reversePrint2(head *ListNode) []int {
 }
 
 // 法四：使用递归
-func reversePrint3(head *ListNode) []int {
+func reversePrint3(head *common.ListNode) []int {
 	var (
 		cur       = head
-		printList = func(node *ListNode) {}
+		printList = func(node *common.ListNode) {}
 		ans       []int
 	)
-	printList = func(cur *ListNode) {
+	printList = func(cur *common.ListNode) {
 		if cur == nil {
 			return
 		}
@@ -73,7 +75,7 @@ func reversePrint3(head *ListNode) []int {
 }
 
 // reversePrint4 递归
-func reversePrint4(head *ListNode) []int {
+func reversePrint4(head *common.ListNode) []int {
 	if head == nil {
 		return []int{}
 	}

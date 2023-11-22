@@ -2,39 +2,17 @@ package link
 
 import (
 	"fmt"
+	"goalgorithms/common"
 	"log"
 )
 
-var head *ListNode
+var head *common.ListNode
 
-// ListNode 结构
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
-type item struct {
-	list1, list2, expected *ListNode
-}
-
-type array struct {
-	list1, list2, expected []int
-}
-
-type itemExt struct {
-	array
-	start, end int
-}
-
-func SetListNode(sli []int) {
-	head = makeListNode(sli)
-}
-
-func makeListNode(sli []int) *ListNode {
-	dummy := &ListNode{-1, nil}
+func BuildListNode(sli []int) *common.ListNode {
+	dummy := &common.ListNode{Val: -1}
 	cur := dummy
 	for _, v := range sli {
-		cur.Next = &ListNode{v, nil}
+		cur.Next = &common.ListNode{Val: v}
 		cur = cur.Next
 	}
 	return dummy.Next
@@ -52,10 +30,10 @@ func PrintHead() {
 	fmt.Println("***********************************")
 }
 
-func PrintList2(list *ListNode) []int {
+func PrintList2(list *common.ListNode) []int {
 	var (
 		cur = list
-		sli = []int{}
+		sli = make([]int, 0)
 	)
 
 	for cur != nil {
@@ -65,7 +43,7 @@ func PrintList2(list *ListNode) []int {
 	return sli
 }
 
-func PrintList(list *ListNode) {
+func PrintList(list *common.ListNode) {
 	var (
 		cur = list
 		sli = []int{}
@@ -81,7 +59,7 @@ func PrintList(list *ListNode) {
 // 链表添加尾部元素
 func addTailNode(val int) {
 	if head == nil {
-		head = &ListNode{Val: val, Next: nil}
+		head = &common.ListNode{Val: val, Next: nil}
 		return
 	}
 
@@ -89,7 +67,7 @@ func addTailNode(val int) {
 	for cur.Next != nil {
 		cur = cur.Next
 	}
-	cur.Next = &ListNode{Val: val}
+	cur.Next = &common.ListNode{Val: val}
 }
 
 func removeNode(val int) {

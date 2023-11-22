@@ -1,5 +1,7 @@
 package link
 
+import "goalgorithms/common"
+
 // 两数相加(leetcode-2)
 // 给定两个非空的链表，表示两个非负的整数。它们每位数字都是按照逆序的方式存储的，并且每个节点只能存储一位数字。
 // 请你将两个数相加，并以相同形式返回一个表示和的链表。
@@ -7,9 +9,9 @@ package link
 //示例 2： 输入：l1 = [0], l2 = [0],输出：[0]
 //示例 3： 输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9],输出：[8,9,9,9,0,0,0,1]
 
-func addTwoNumbers11(l1 *ListNode, l2 *ListNode) *ListNode {
+func addTwoNumbers11(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	var (
-		head               = &ListNode{Val: -1}
+		head               = &common.ListNode{Val: -1}
 		cur1, cur2, curNew = l1, l2, head
 		sign               int
 	)
@@ -31,7 +33,7 @@ func addTwoNumbers11(l1 *ListNode, l2 *ListNode) *ListNode {
 			sign = 0
 		}
 
-		curNew.Next = &ListNode{Val: temp}
+		curNew.Next = &common.ListNode{Val: temp}
 		curNew = curNew.Next
 	}
 	return head.Next

@@ -1,14 +1,16 @@
 package link
 
+import "goalgorithms/common"
+
 // 反转链表(leet-206/sword-24)
 // 定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
 // 示例: 输入: 1->2->3->4->5->NULL, 输出: 5->4->3->2->1->NULL
 
 // reverseList1 法一：循环赋值
-func reverseList1(head *ListNode) *ListNode {
+func reverseList1(head *common.ListNode) *common.ListNode {
 	var (
 		cur = head
-		pre *ListNode
+		pre *common.ListNode
 	)
 	for cur != nil {
 		next := cur.Next
@@ -20,7 +22,7 @@ func reverseList1(head *ListNode) *ListNode {
 }
 
 // reverseList2 法二：递归
-func reverseList2(head *ListNode) *ListNode {
+func reverseList2(head *common.ListNode) *common.ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
@@ -32,10 +34,10 @@ func reverseList2(head *ListNode) *ListNode {
 	return newHead
 }
 
-func reverseList3(head *ListNode) *ListNode {
+func reverseList3(head *common.ListNode) *common.ListNode {
 	var (
 		cur = head
-		pre *ListNode
+		pre *common.ListNode
 	)
 	//var new *Student //  5,4,3,2,1
 	for cur != nil {
@@ -44,10 +46,10 @@ func reverseList3(head *ListNode) *ListNode {
 	return pre
 }
 
-func reverseList4(head *ListNode) *ListNode {
+func reverseList4(head *common.ListNode) *common.ListNode {
 	var (
 		cur = head
-		pre *ListNode
+		pre *common.ListNode
 	)
 
 	// 1->2->3->4->5->null

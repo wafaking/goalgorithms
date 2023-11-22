@@ -1,15 +1,17 @@
 package link
 
+import "goalgorithms/common"
+
 // 反转链表II(leetcode-92)
 // 给定单链表的头指针head和两个整数left和right，其中left<=right 。请你反转从位置left到位置right的链表节点，返回反转后的链表 。
 // 示例1：输入：head=[1,2,3,4,5], left=2, right=4, 输出：[1,4,3,2,5]
 // 示例2：输入：head=[5], left=1, right=1, 输出：[5]
 
 // reverseBetween1 穿针引线(截取left-right节点并反转，再串联)
-func reverseBetween1(head *ListNode, left int, right int) *ListNode {
+func reverseBetween1(head *common.ListNode, left int, right int) *common.ListNode {
 	var (
 		// 因为头节点有可能发生变化，使用虚拟头节点可以避免复杂的分类讨论
-		dummy = &ListNode{Val: -1, Next: head}
+		dummy = &common.ListNode{Val: -1, Next: head}
 		pre   = dummy
 	)
 
@@ -33,7 +35,7 @@ func reverseBetween1(head *ListNode, left int, right int) *ListNode {
 
 	// 3. 反转链表(left-right节点)
 	var (
-		temp *ListNode
+		temp *common.ListNode
 		cur  = leftNode
 	)
 	for cur != nil {
@@ -51,10 +53,10 @@ func reverseBetween1(head *ListNode, left int, right int) *ListNode {
 }
 
 // reverseBetween2 一次遍历，将头节点插到前面(不考虑left及right超限问题)
-func reverseBetween2(head *ListNode, left int, right int) *ListNode {
+func reverseBetween2(head *common.ListNode, left int, right int) *common.ListNode {
 	var (
-		dummyHead = &ListNode{Val: -1, Next: head} // 新的头节点
-		pre       = dummyHead                      // left的前一节点
+		dummyHead = &common.ListNode{Val: -1, Next: head} // 新的头节点
+		pre       = dummyHead                             // left的前一节点
 	)
 
 	// 1. 找到pre节点

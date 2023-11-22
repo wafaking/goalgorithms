@@ -1,5 +1,7 @@
 package link
 
+import "goalgorithms/common"
+
 // 二进制链表转整数(leetcode-1290)
 // 给定单链表的头结点head。链表中每个结点的值不是0就是1。已知此链表是一个整数数字的二进制表示形式。
 // 请你返回该链表所表示数字的十进制值 。
@@ -8,7 +10,7 @@ package link
 // 示例3：输入：head=[1] 输出：1
 // 示例4：输入：head=[1,0,0,1,0,0,1,1,1,0,0,0,0,0,0] 输出：18880
 
-func getDecimalValue1(head *ListNode) int {
+func getDecimalValue1(head *common.ListNode) int {
 	var (
 		sli []int
 		sum int
@@ -33,7 +35,7 @@ func getDecimalValue1(head *ListNode) int {
 }
 
 // getDecimalValue2 使用二进制的方式解决
-func getDecimalValue2(head *ListNode) int {
+func getDecimalValue2(head *common.ListNode) int {
 	var res int
 	for temp := head; temp != nil; temp = temp.Next {
 		res = res<<1 | temp.Val
@@ -41,7 +43,7 @@ func getDecimalValue2(head *ListNode) int {
 	return res
 }
 
-func getDecimalValue3(head *ListNode) int {
+func getDecimalValue3(head *common.ListNode) int {
 	var res int
 	for temp := head; nil != temp; temp = temp.Next {
 		res = res*2 + temp.Val

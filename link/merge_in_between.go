@@ -1,5 +1,7 @@
 package link
 
+import "goalgorithms/common"
+
 // 合并两个链表(leetcode-1669)
 // 给定元素个数分别为n和m的链表list1和list2, 请将list1中
 // 下标从a到b的全部节点都删除，并将list2接在被删除节点的位置。
@@ -10,7 +12,7 @@ package link
 // 输出：[0,1,1000000,1000001,1000002,1000003,1000004,6]
 
 // 双指针法，记录pre, next位置，将list2.Next=next, pre.Next=list2
-func mergeInBetween1(list1 *ListNode, a int, b int, list2 *ListNode) *ListNode {
+func mergeInBetween1(list1 *common.ListNode, a int, b int, list2 *common.ListNode) *common.ListNode {
 	//1. 特殊案例
 	// 1.1 list1为空链表时，直接返回list2s
 	if list1 == nil {
@@ -31,10 +33,10 @@ func mergeInBetween1(list1 *ListNode, a int, b int, list2 *ListNode) *ListNode {
 
 	// 2. 双指针法，开始截取
 	var (
-		count   int                               // 记录第二个指针移动的位置
-		newHead = &ListNode{Val: -1, Next: list1} // 虚拟头节点，防止从0开始截取
-		pre     = newHead                         // 双指针的前一个指针
-		cur     = newHead.Next                    // 双指针的第二个指针（从list1第一个元素开始）
+		count   int                                      // 记录第二个指针移动的位置
+		newHead = &common.ListNode{Val: -1, Next: list1} // 虚拟头节点，防止从0开始截取
+		pre     = newHead                                // 双指针的前一个指针
+		cur     = newHead.Next                           // 双指针的第二个指针（从list1第一个元素开始）
 	)
 	for cur != nil {
 		if count == a-1 { // 记录截取位置的前一个节点
@@ -57,7 +59,7 @@ func mergeInBetween1(list1 *ListNode, a int, b int, list2 *ListNode) *ListNode {
 }
 
 // 将list链表添加到head链表的尾部
-func addTailList(head, list *ListNode) *ListNode {
+func addTailList(head, list *common.ListNode) *common.ListNode {
 	if head == nil {
 		return list
 	}
@@ -70,7 +72,7 @@ func addTailList(head, list *ListNode) *ListNode {
 }
 
 // mergeInBetween2 暂不考虑a,b小于0的情况
-func mergeInBetween2(list1 *ListNode, a int, b int, list2 *ListNode) *ListNode {
+func mergeInBetween2(list1 *common.ListNode, a int, b int, list2 *common.ListNode) *common.ListNode {
 	if list1 == nil {
 		return list2
 	}

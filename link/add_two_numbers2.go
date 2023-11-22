@@ -1,5 +1,7 @@
 package link
 
+import "goalgorithms/common"
+
 // 链表中的两数相加(sword2-25/leetcode-445)
 // 给定两个非空链表l1和l2来代表两个非负整数。数字最高位位于链表开始位置。
 // 它们的每个节点只存储一位数字。将这两数相加会返回一个新的链表。
@@ -14,13 +16,13 @@ package link
 //注意：本题与主站 445 题相同：https://leetcode-cn.com/problems/add-two-numbers-ii/
 
 // 法一：翻转链表
-func addTwoNumbers21(l1 *ListNode, l2 *ListNode) *ListNode {
+func addTwoNumbers21(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	ll1 := reverseLink(l1)
 	ll2 := reverseLink(l2)
 
 	var (
 		sign    int
-		newHead = &ListNode{Val: -1}
+		newHead = &common.ListNode{Val: -1}
 		cur     = newHead
 	)
 	for ll1 != nil || ll2 != nil || sign > 0 {
@@ -40,17 +42,17 @@ func addTwoNumbers21(l1 *ListNode, l2 *ListNode) *ListNode {
 		} else {
 			sign = 0
 		}
-		cur.Next = &ListNode{Val: temp}
+		cur.Next = &common.ListNode{Val: temp}
 		cur = cur.Next
 	}
 	return reverseLink(newHead.Next)
 }
 
-func reverseLink(head *ListNode) *ListNode {
+func reverseLink(head *common.ListNode) *common.ListNode {
 	if head == nil {
 		return head
 	}
-	var newHead *ListNode
+	var newHead *common.ListNode
 	for head != nil {
 		next := head.Next
 		head.Next = newHead
@@ -63,7 +65,7 @@ func reverseLink(head *ListNode) *ListNode {
 
 // 法二：借助列表实现(不改变原链表结果,用列表存放每个相加得出的结果)
 // 法二与法三相似，但一个是列表的概念，一个是栈的概念
-func addTwoNumbers22(l1 *ListNode, l2 *ListNode) *ListNode {
+func addTwoNumbers22(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	var (
 		sli1, sli2, sli []int
 		head1           = l1
@@ -105,11 +107,11 @@ func addTwoNumbers22(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 
 	var (
-		head = &ListNode{Val: -1}
+		head = &common.ListNode{Val: -1}
 		cur  = head
 	)
 	for lth := len(sli) - 1; lth >= 0; lth-- {
-		cur.Next = &ListNode{Val: sli[lth]}
+		cur.Next = &common.ListNode{Val: sli[lth]}
 		cur = cur.Next
 	}
 
@@ -117,11 +119,11 @@ func addTwoNumbers22(l1 *ListNode, l2 *ListNode) *ListNode {
 }
 
 // 法二：借助栈实现
-func addTwoNumbers23(l1 *ListNode, l2 *ListNode) *ListNode {
+func addTwoNumbers23(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	var (
 		stackA, stackB, stack []int
 		sign                  = 0
-		list                  = &ListNode{Val: -1}
+		list                  = &common.ListNode{Val: -1}
 		cur                   = list
 	)
 
@@ -147,13 +149,13 @@ func addTwoNumbers23(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 	for !isEmpty(stack) {
 		val, _ := pop(&stack)
-		cur.Next = &ListNode{Val: val}
+		cur.Next = &common.ListNode{Val: val}
 		cur = cur.Next
 	}
 	return list.Next
 }
 
-func appendListToStack(list *ListNode, stack []int) []int {
+func appendListToStack(list *common.ListNode, stack []int) []int {
 	for list != nil {
 		stack = append(stack, list.Val)
 		list = list.Next
