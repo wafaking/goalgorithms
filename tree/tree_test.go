@@ -1808,3 +1808,59 @@ func TestPostorderN(t *testing.T) {
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
+
+func TestRightSideView(t *testing.T) {
+	var list = []common.Item20{
+		{
+			Nums:     []int{1, 2, 3, defaultNullTreeVal, 5, defaultNullTreeVal, 4},
+			Expected: []int{1, 3, 4},
+		},
+		{
+			Nums:     []int{1, defaultNullTreeVal, 3},
+			Expected: []int{1, 3},
+		},
+		{
+			Nums:     []int{},
+			Expected: []int{},
+		},
+	}
+
+	var res = make([]int, 0)
+	for _, item := range list {
+		tree := BuildBinaryTree(item.Nums)
+		res = rightSideView1(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		res = rightSideView2(tree)
+		//t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		res = rightSideView3(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		t.Log("--------------------------")
+	}
+}
+
+func TestZigzagLevelOrder(t *testing.T) {
+	var list = []common.Item7{
+		{
+			Nums:     []int{3, 9, 20, defaultNullTreeVal, defaultNullTreeVal, 15, 7},
+			Expected: [][]int{{3}, {20, 9}, {15, 7}},
+		},
+		{
+			Nums:     []int{1},
+			Expected: [][]int{{1}},
+		},
+		{
+			Nums:     []int{},
+			Expected: [][]int{},
+		},
+	}
+
+	var res = make([][]int, 0)
+	for _, item := range list {
+		tree := BuildBinaryTree(item.Nums)
+		res = zigzagLevelOrder1(tree)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoDoubleIntSlice(item.Expected, res), res, item)
+		//res = zigzagLevelOrder2(tree)
+		//t.Logf("%t, res:%+v, item:%+v", common.DiffTwoDoubleIntSlice(item.Expected, res), res, item)
+		t.Log("--------------------------")
+	}
+}

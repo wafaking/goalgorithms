@@ -2,7 +2,7 @@ package tree
 
 import "goalgorithms/common"
 
-//给定一个二叉树，返回它的右视图所能看到的节点值(按从顶部到底部的顺序)(leetcode199/sword2-46)
+//给定一个二叉树，返回它的右视图所能看到的节点值(按从顶部到底部的顺序)(leetcode-199/sword2-46)
 //示例1:输入:[1,2,3,null,5,null,4]输出:[1,3,4]
 //示例2:输入:[1,null,3]输出:[1,3]
 //示例3:输入:[]输出:[]
@@ -71,4 +71,33 @@ func rightSideView2(root *common.TreeNode) []int {
 	}
 
 	return res
+}
+
+// 广度优先(将每层的最后一个元素添加)
+func rightSideView3(root *common.TreeNode) []int {
+	if root == nil {
+		return []int{}
+	}
+	var (
+		ans   = make([]int, 0)
+		queue = []*common.TreeNode{root}
+	)
+	for len(queue) > 0 {
+		tempQueue := queue
+		queue = nil
+		for i := 0; i < len(tempQueue); i++ {
+			cur := tempQueue[i]
+			if i == 0 {
+				ans = append(ans, cur.Val)
+			}
+			if cur.Right != nil {
+				queue = append(queue, cur.Right)
+			}
+			if cur.Left != nil {
+				queue = append(queue, cur.Left)
+			}
+		}
+	}
+
+	return ans
 }
