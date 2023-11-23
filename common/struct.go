@@ -6,9 +6,9 @@ type ListNode struct {
 	Next *ListNode
 }
 
-type Node struct {
+type NTreeNode struct {
 	Val      int
-	Children []*Node
+	Children []*NTreeNode
 }
 
 // TreeNode Definition for a binary tree node.

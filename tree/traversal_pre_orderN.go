@@ -23,12 +23,12 @@ import "goalgorithms/common"
 */
 
 // 递归
-func preorder1(root *common.Node) []int {
+func preorder1(root *common.NTreeNode) []int {
 	var (
 		ans = make([]int, 0)
-		f   func(root *common.Node)
+		f   func(root *common.NTreeNode)
 	)
-	f = func(root *common.Node) {
+	f = func(root *common.NTreeNode) {
 		if root == nil {
 			return
 		}
@@ -42,13 +42,13 @@ func preorder1(root *common.Node) []int {
 }
 
 // 迭代(使用栈)
-func preorder2(root *common.Node) []int {
+func preorder2(root *common.NTreeNode) []int {
 	if root == nil {
 		return []int{}
 	}
 	var (
 		ans   = make([]int, 0)
-		stack = []*common.Node{root}
+		stack = []*common.NTreeNode{root}
 	)
 	for len(stack) > 0 {
 		cur := stack[len(stack)-1]
@@ -62,12 +62,12 @@ func preorder2(root *common.Node) []int {
 }
 
 // TODO 迭代(使用map记录访问过的历史)
-func preorder3(root *common.Node) (ans []int) {
+func preorder3(root *common.NTreeNode) (ans []int) {
 	if root == nil {
 		return
 	}
-	st := make([]*common.Node, 0)
-	nextIndex := map[*common.Node]int{}
+	st := make([]*common.NTreeNode, 0)
+	nextIndex := map[*common.NTreeNode]int{}
 	node := root
 	for len(st) > 0 || node != nil {
 		for node != nil {

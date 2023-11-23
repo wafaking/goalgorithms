@@ -1461,15 +1461,14 @@ func TestConvertBST(t *testing.T) {
 
 func TestPreorderN(t *testing.T) {
 	var list = []common.Item24{
-		//示例1：输入：root=[1,null,3,2,4,null,5,6]输出：[1,3,5,6,2,4]
 		{
 			Expected: []int{1, 3, 5, 6, 2, 4},
-			NNode: &common.Node{
+			NNode: &common.NTreeNode{
 				Val: 1,
-				Children: []*common.Node{
+				Children: []*common.NTreeNode{
 					{
 						Val: 3,
-						Children: []*common.Node{
+						Children: []*common.NTreeNode{
 							{
 								Val:      5,
 								Children: nil,
@@ -1492,29 +1491,27 @@ func TestPreorderN(t *testing.T) {
 			},
 		},
 		{
-			//示例2：输入：root=[1,null,  2,3,4,5,null,    null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
-			//输出：[1,2,3,6,7,11,14,4,8,12,5,9,13,10]
 			Expected: []int{1, 2, 3, 6, 7, 11, 14, 4, 8, 12, 5, 9, 13, 10},
-			NNode: &common.Node{
+			NNode: &common.NTreeNode{
 				Val: 1,
-				Children: []*common.Node{
+				Children: []*common.NTreeNode{
 					{
 						Val:      2,
 						Children: nil,
 					},
 					{
 						Val: 3,
-						Children: []*common.Node{
+						Children: []*common.NTreeNode{
 							{
 								Val:      6,
 								Children: nil,
 							},
 							{
 								Val: 7,
-								Children: []*common.Node{
+								Children: []*common.NTreeNode{
 									{
 										Val: 11,
-										Children: []*common.Node{
+										Children: []*common.NTreeNode{
 											{
 												Val:      14,
 												Children: nil,
@@ -1527,10 +1524,10 @@ func TestPreorderN(t *testing.T) {
 					},
 					{
 						Val: 4,
-						Children: []*common.Node{
+						Children: []*common.NTreeNode{
 							{
 								Val: 8,
-								Children: []*common.Node{
+								Children: []*common.NTreeNode{
 									{
 										Val:      12,
 										Children: nil,
@@ -1541,10 +1538,10 @@ func TestPreorderN(t *testing.T) {
 					},
 					{
 						Val: 5,
-						Children: []*common.Node{
+						Children: []*common.NTreeNode{
 							{
 								Val: 9,
-								Children: []*common.Node{
+								Children: []*common.NTreeNode{
 									{
 										Val:      13,
 										Children: nil,
@@ -1562,7 +1559,7 @@ func TestPreorderN(t *testing.T) {
 		},
 		{
 			Expected: []int{},
-			NNode:    &common.Node{},
+			NNode:    &common.NTreeNode{},
 		},
 	}
 
@@ -1573,6 +1570,240 @@ func TestPreorderN(t *testing.T) {
 		res = preorder2(item.NNode)
 		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
 		res = preorder3(item.NNode)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestLevelOrderN(t *testing.T) {
+	var list = []common.Item25{
+		{
+			Expected: [][]int{{1}, {3, 2, 4}, {5, 6}},
+			NNode: &common.NTreeNode{
+				Val: 1,
+				Children: []*common.NTreeNode{
+					{
+						Val: 3,
+						Children: []*common.NTreeNode{
+							{
+								Val:      5,
+								Children: nil,
+							},
+							{
+								Val:      6,
+								Children: nil,
+							},
+						},
+					},
+					{
+						Val:      2,
+						Children: nil,
+					},
+					{
+						Val:      4,
+						Children: nil,
+					},
+				},
+			},
+		},
+		{
+			Expected: [][]int{{1}, {2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13}, {14}},
+			NNode: &common.NTreeNode{
+				Val: 1,
+				Children: []*common.NTreeNode{
+					{
+						Val:      2,
+						Children: nil,
+					},
+					{
+						Val: 3,
+						Children: []*common.NTreeNode{
+							{
+								Val:      6,
+								Children: nil,
+							},
+							{
+								Val: 7,
+								Children: []*common.NTreeNode{
+									{
+										Val: 11,
+										Children: []*common.NTreeNode{
+											{
+												Val:      14,
+												Children: nil,
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Val: 4,
+						Children: []*common.NTreeNode{
+							{
+								Val: 8,
+								Children: []*common.NTreeNode{
+									{
+										Val:      12,
+										Children: nil,
+									},
+								},
+							},
+						},
+					},
+					{
+						Val: 5,
+						Children: []*common.NTreeNode{
+							{
+								Val: 9,
+								Children: []*common.NTreeNode{
+									{
+										Val:      13,
+										Children: nil,
+									},
+								},
+							},
+							{
+								Val:      10,
+								Children: nil,
+							},
+						},
+					},
+				},
+			},
+		},
+		{
+			Expected: [][]int{},
+			NNode:    nil,
+		},
+	}
+
+	var res [][]int
+	for _, item := range list {
+		res = levelOrder1(item.NNode)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item)
+		res = levelOrder2(item.NNode)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item)
+		res = levelOrder3(item.NNode)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestPostorderN(t *testing.T) {
+	var list = []common.Item24{
+		{
+			Expected: []int{5, 6, 3, 2, 4, 1},
+			NNode: &common.NTreeNode{
+				Val: 1,
+				Children: []*common.NTreeNode{
+					{
+						Val: 3,
+						Children: []*common.NTreeNode{
+							{
+								Val:      5,
+								Children: nil,
+							},
+							{
+								Val:      6,
+								Children: nil,
+							},
+						},
+					},
+					{
+						Val:      2,
+						Children: nil,
+					},
+					{
+						Val:      4,
+						Children: nil,
+					},
+				},
+			},
+		},
+		{
+			Expected: []int{2, 6, 14, 11, 7, 3, 12, 8, 4, 13, 9, 10, 5, 1},
+			NNode: &common.NTreeNode{
+				Val: 1,
+				Children: []*common.NTreeNode{
+					{
+						Val:      2,
+						Children: nil,
+					},
+					{
+						Val: 3,
+						Children: []*common.NTreeNode{
+							{
+								Val:      6,
+								Children: nil,
+							},
+							{
+								Val: 7,
+								Children: []*common.NTreeNode{
+									{
+										Val: 11,
+										Children: []*common.NTreeNode{
+											{
+												Val:      14,
+												Children: nil,
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Val: 4,
+						Children: []*common.NTreeNode{
+							{
+								Val: 8,
+								Children: []*common.NTreeNode{
+									{
+										Val:      12,
+										Children: nil,
+									},
+								},
+							},
+						},
+					},
+					{
+						Val: 5,
+						Children: []*common.NTreeNode{
+							{
+								Val: 9,
+								Children: []*common.NTreeNode{
+									{
+										Val:      13,
+										Children: nil,
+									},
+								},
+							},
+							{
+								Val:      10,
+								Children: nil,
+							},
+						},
+					},
+				},
+			},
+		},
+		{
+			Expected: []int{},
+			NNode:    nil,
+		},
+	}
+
+	var res []int
+	for _, item := range list {
+		res = postorder1(item.NNode)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		res = postorder2(item.NNode)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		res = postorder3(item.NNode)
+		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		res = postorder4(item.NNode)
 		t.Logf("res: %v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}

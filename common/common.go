@@ -122,6 +122,11 @@ type Item23 struct {
 }
 
 type Item24 struct {
-	NNode    *Node
+	NNode    *NTreeNode
 	Expected []int
+}
+
+type Item25 struct {
+	NNode    *NTreeNode
+	Expected [][]int
 }
