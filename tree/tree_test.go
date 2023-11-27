@@ -704,6 +704,11 @@ func TestHasPathSum(t *testing.T) {
 			Target:   1,
 			Expected: true,
 		},
+		{
+			Nums:     []int{1, 2, 3, defaultNullTreeVal, defaultNullTreeVal, defaultNullTreeVal, 4},
+			Target:   8,
+			Expected: true,
+		},
 	}
 
 	var res bool
@@ -747,11 +752,13 @@ func TestBuildTreeByPrIn(t *testing.T) {
 		root = buildTree11(item.Nums1, item.Nums2)
 		res = levelOrder11(root)
 		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		root = buildTree12(item.Nums1, item.Nums2)
+		res = levelOrder11(root)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
 
-// TODO
 func TestBuildTreeByPostIn(t *testing.T) {
 	var list = []common.Item19{
 		{
@@ -780,9 +787,6 @@ func TestBuildTreeByPostIn(t *testing.T) {
 		res = levelOrder11(root)
 		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
 		root = buildTree22(item.Nums1, item.Nums2)
-		res = levelOrder11(root)
-		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
-		root = buildTree23(item.Nums1, item.Nums2)
 		res = levelOrder11(root)
 		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
 		t.Log("--------------------SPLIT--------------------------")
@@ -1862,5 +1866,70 @@ func TestZigzagLevelOrder(t *testing.T) {
 		//res = zigzagLevelOrder2(tree)
 		//t.Logf("%t, res:%+v, item:%+v", common.DiffTwoDoubleIntSlice(item.Expected, res), res, item)
 		t.Log("--------------------------")
+	}
+}
+
+func TestVerifyTreeOrder(t *testing.T) {
+	var list = []common.Item8{
+		{
+			Nums:     []int{4, 9, 6, 9, 8},
+			Expected: false,
+		},
+		{
+			Nums:     []int{1, 2, 2, 3, 4, 4, 3},
+			Expected: true,
+		},
+		{
+			Nums:     []int{4, 6, 5, 9, 8},
+			Expected: true,
+		},
+		{
+			Nums:     []int{},
+			Expected: true,
+		},
+	}
+
+	var res bool
+	for _, item := range list {
+		res = verifyTreeOrder1(item.Nums)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = verifyTreeOrder2(item.Nums)
+		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestPathSum2(t *testing.T) {
+	var list = []common.Item26{
+		{
+			Nums:     []int{5, 4, 8, 11, defaultNullTreeVal, 13, 4, 7, 2, defaultNullTreeVal, defaultNullTreeVal, 5, 1},
+			Target:   22,
+			Expected: [][]int{{5, 4, 11, 2}, {5, 8, 4, 5}},
+		},
+		{
+			Nums:     []int{1, 2, 3},
+			Target:   55,
+			Expected: [][]int{},
+		},
+		{
+			Nums:     []int{1, 2},
+			Target:   0,
+			Expected: [][]int{},
+		},
+	}
+
+	var (
+		res  = make([][]int, 0)
+		root *common.TreeNode
+	)
+	for _, item := range list {
+		root = BuildBinaryTree(item.Nums)
+		res = pathSum21(root, item.Target)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoDoubleIntSlice(item.Expected, res), res, item)
+		res = pathSum22(root, item.Target)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoDoubleIntSlice(item.Expected, res), res, item)
+		res = pathSum23(root, item.Target)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoDoubleIntSlice(item.Expected, res), res, item)
+		t.Log("--------------------SPLIT--------------------------")
 	}
 }

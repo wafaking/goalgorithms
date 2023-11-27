@@ -130,3 +130,9 @@ type Item25 struct {
 	NNode    *NTreeNode
 	Expected [][]int
 }
+
+type Item26 struct {
+	Nums     []int
+	Target   int
+	Expected [][]int
+}

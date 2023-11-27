@@ -44,32 +44,32 @@ func buildTree11(preorder []int, inorder []int) *common.TreeNode {
 
 // TODO ---迭代法
 func buildTree12(preorder []int, inorder []int) *common.TreeNode {
-	return nil
-}
-
-func buildTree13(preorder []int, inorder []int) *common.TreeNode {
 	if len(preorder) == 0 {
 		return nil
 	}
-	// [1,2,4,7,3,5,6,8]
-	// [4,7,2,1,5,3,8,6]
-	root := &common.TreeNode{preorder[0], nil, nil}
-	stack := []*common.TreeNode{}
-	stack = append(stack, root)
-	var inorderIndex int
+	var (
+		root  = &common.TreeNode{Val: preorder[0]}
+		stack = []*common.TreeNode{root}
+	)
+
+	//前序遍历:preorder = [3,9,20,15,7]
+	//中序遍历:inorder = [9,3,15,20,7]
+	var inorderIdx int
 	for i := 1; i < len(preorder); i++ {
 		preorderVal := preorder[i]
 		node := stack[len(stack)-1]
-		if node.Val != inorder[inorderIndex] {
-			node.Left = &common.TreeNode{preorderVal, nil, nil}
+		// 中序根节左侧的节点都是左子节点
+		// 前序遍历的最左子节点是中序遍历的第一个节点
+		if node.Val != inorder[inorderIdx] {
+			node.Left = &common.TreeNode{Val: preorderVal}
 			stack = append(stack, node.Left)
 		} else {
-			for len(stack) != 0 && stack[len(stack)-1].Val == inorder[inorderIndex] {
+			for len(stack) != 0 && stack[len(stack)-1].Val == inorder[inorderIdx] {
 				node = stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
-				inorderIndex++
+				inorderIdx++
 			}
-			node.Right = &common.TreeNode{preorderVal, nil, nil}
+			node.Right = &common.TreeNode{Val: preorderVal}
 			stack = append(stack, node.Right)
 		}
 	}
