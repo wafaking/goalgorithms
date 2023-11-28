@@ -6,6 +6,7 @@ package tree
 //示例1：输入:postorder=[4,9,6,9,8]输出:false
 //示例2：输入:postorder=[4,6,5,9,8]输出:true
 
+// 递归
 func verifyTreeOrder1(postorder []int) bool {
 	if len(postorder) <= 2 {
 		return true

@@ -1930,6 +1930,48 @@ func TestPathSum2(t *testing.T) {
 		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoDoubleIntSlice(item.Expected, res), res, item)
 		res = pathSum23(root, item.Target)
 		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoDoubleIntSlice(item.Expected, res), res, item)
+		res = pathSum24(root, item.Target)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoDoubleIntSlice(item.Expected, res), res, item)
+		t.Log("--------------------SPLIT--------------------------")
+	}
+}
+
+func TestPathSum3(t *testing.T) {
+	var list = []common.Item3{
+		{
+			Nums:     []int{10, 5, -3, 3, 2, defaultNullTreeVal, 11, 3, -2, defaultNullTreeVal, 1},
+			Target:   8,
+			Expected: 3,
+		},
+		{
+			Nums:     []int{5, 4, 8, 11, defaultNullTreeVal, 13, 4, 7, 2, defaultNullTreeVal, defaultNullTreeVal, 5, 1},
+			Target:   22,
+			Expected: 3,
+		},
+		{
+			Nums:     []int{1},
+			Target:   1,
+			Expected: 1,
+		},
+		{
+			Nums:     []int{},
+			Target:   0,
+			Expected: 0,
+		},
+	}
+
+	var (
+		res  int
+		root *common.TreeNode
+	)
+	for _, item := range list {
+		root = BuildBinaryTree(item.Nums)
+		res = pathSum31(root, item.Target)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = pathSum32(root, item.Target)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = pathSum33(root, item.Target)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
