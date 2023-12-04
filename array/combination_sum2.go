@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
+	"goalgorithms/common"
 	"sort"
 )
 
@@ -172,7 +173,7 @@ func combinationSum24(candidates []int, target int) (ans [][]int) {
 		dfs(pos+1, rest)
 
 		// 即rest还能对当前的数可以再累加多少次
-		most := min(rest/freq[pos][0], freq[pos][1])
+		most := common.MinInTwo(rest/freq[pos][0], freq[pos][1])
 		for i := 1; i <= most; i++ {
 			sequence = append(sequence, freq[pos][0])
 			dfs(pos+1, rest-i*freq[pos][0])
@@ -181,11 +182,4 @@ func combinationSum24(candidates []int, target int) (ans [][]int) {
 	}
 	dfs(0, target)
 	return
-}
-
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
 }

@@ -846,3 +846,58 @@ func TestSortedSquares(t *testing.T) {
 		t.Log("--------------split----------------split--------------")
 	}
 }
+
+func TestMinSubArrayLen(t *testing.T) {
+	var list = []common.Item3{
+		{
+			Nums:     []int{2, 3, 1, 2, 4, 3},
+			Target:   7,
+			Expected: 2,
+		},
+		{
+			Nums:     []int{1, 4, 4},
+			Target:   4,
+			Expected: 1,
+		},
+		{
+			Nums:     []int{1, 1, 1, 1, 1, 1, 1, 1},
+			Target:   11,
+			Expected: 0,
+		},
+		{
+			Nums:     []int{2, 3, 1, 2, 4, 3},
+			Target:   6,
+			Expected: 2,
+		},
+		{
+			Nums:     []int{2, 3, 1, 2, 4, 3},
+			Target:   2,
+			Expected: 1,
+		},
+		{
+			Nums:     []int{2, 3, 1, 2, 4, 3},
+			Target:   3,
+			Expected: 1,
+		},
+		{
+			Nums:     []int{1, 2, 3, 4, 5},
+			Target:   11,
+			Expected: 3,
+		},
+		{
+			Nums:     []int{},
+			Target:   0,
+			Expected: 0,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = minSubArrayLen1(item.Target, item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = minSubArrayLen2(item.Target, item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = minSubArrayLen3(item.Target, item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
