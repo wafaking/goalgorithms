@@ -768,3 +768,81 @@ func TestConstructorLRU(t *testing.T) {
 	res = lRUCache.Get(5)
 	t.Logf("%t, res:expect==%d:%d", res == 5, res, 5)
 }
+
+func TestRemoveElement(t *testing.T) {
+	var list = []common.Item3{
+		{
+			Nums:     []int{3, 2, 2, 3},
+			Target:   3,
+			Expected: 2,
+		},
+		{
+			Nums:     []int{},
+			Target:   1,
+			Expected: 0,
+		},
+		{
+			Nums:     []int{0, 1, 2, 2, 3, 0, 4, 2},
+			Target:   2,
+			Expected: 5,
+		},
+		{
+			Nums:     []int{5, 2, 1},
+			Target:   11,
+			Expected: 3,
+		},
+	}
+	var res int
+	for _, item := range list {
+		tempArray := make([]int, len(item.Nums))
+		copy(tempArray, item.Nums)
+		res = removeElement1(tempArray, item.Target)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		copy(tempArray, item.Nums)
+		res = removeElement2(tempArray, item.Target)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestSortedSquares(t *testing.T) {
+	var list = []common.Item20{
+		{
+			Nums:     []int{-6, -4, -3, -1, -1, 0, 3, 3, 10},
+			Expected: []int{0, 1, 1, 9, 9, 9, 16, 36, 100},
+		},
+		{
+			Nums:     []int{-4, -1, 0, 3, 10},
+			Expected: []int{0, 1, 9, 16, 100},
+		},
+		{
+			Nums:     []int{-7, -3, 2, 3, 11},
+			Expected: []int{4, 9, 9, 49, 121},
+		},
+		{
+			Nums:     []int{},
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{-1},
+			Expected: []int{1},
+		},
+	}
+	var res []int
+	for _, item := range list {
+		tempArray := make([]int, len(item.Nums))
+		copy(tempArray, item.Nums)
+		res = sortedSquares1(tempArray)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		copy(tempArray, item.Nums)
+		res = sortedSquares2(tempArray)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		copy(tempArray, item.Nums)
+		res = sortedSquares3(tempArray)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		copy(tempArray, item.Nums)
+		res = sortedSquares4(tempArray)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
