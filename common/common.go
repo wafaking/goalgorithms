@@ -142,3 +142,13 @@ type Item27 struct {
 	Target   int
 	Expected bool
 }
+
+type Item28 struct {
+	Grid     [][]int
+	Expected []int
+}
+
+type Item29 struct {
+	Num      int
+	Expected [][]int
+}

@@ -319,3 +319,63 @@ func TestGetDecimalValue(t *testing.T) {
 		t.Logf("res: %t, %d, list:%v", res == item.Expected[0], res, item.Nums1)
 	}
 }
+
+func TestRemoveElements(t *testing.T) {
+	var list = []common.Item1{
+		{
+			Nums:     []int{1, 2, 6, 3, 4, 5, 6},
+			Target:   6,
+			Expected: []int{1, 2, 3, 4, 5},
+		},
+		{
+			Nums:     []int{},
+			Target:   1,
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{7, 7, 7, 7},
+			Target:   7,
+			Expected: []int{},
+		},
+	}
+	var (
+		res  = make([]int, 0)
+		head = new(common.ListNode)
+	)
+	for _, item := range list {
+		head = removeElements1(BuildListNode(item.Nums), item.Target)
+		res = PrintList2(head)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestRemoveNthFromEnd(t *testing.T) {
+	var list = []common.Item1{
+		{
+			Nums:     []int{1, 2, 3, 4, 5},
+			Target:   2,
+			Expected: []int{1, 2, 3, 5},
+		},
+		{
+			Nums:     []int{1},
+			Target:   1,
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{1, 2},
+			Target:   1,
+			Expected: []int{1},
+		},
+	}
+	var (
+		res  = make([]int, 0)
+		head = new(common.ListNode)
+	)
+	for _, item := range list {
+		head = removeNthFromEnd(BuildListNode(item.Nums), item.Target)
+		res = PrintList2(head)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}

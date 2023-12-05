@@ -901,3 +901,49 @@ func TestMinSubArrayLen(t *testing.T) {
 		t.Log("--------------split----------------split--------------")
 	}
 }
+
+func TestSpiralOrder(t *testing.T) {
+	var list = []common.Item28{
+		{
+			Grid:     [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}},
+			Expected: []int{1, 2, 3, 6, 9, 8, 7, 4, 5},
+		},
+		{
+			Grid:     [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 11, 12}},
+			Expected: []int{1, 2, 3, 6, 9, 12, 11, 10, 7, 4, 5, 8},
+		},
+		{
+			Grid:     [][]int{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}},
+			Expected: []int{1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7},
+		},
+	}
+	var res = make([]int, 0)
+	for _, item := range list {
+		res = spiralOrder1(item.Grid)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		res = spiralOrder2(item.Grid)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		res = spiralOrder3(item.Grid)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestGenerateMatrix(t *testing.T) {
+	var list = []common.Item29{
+		{
+			Num:      3,
+			Expected: [][]int{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}},
+		},
+		{
+			Num:      1,
+			Expected: [][]int{{1}},
+		},
+	}
+	var res = make([][]int, 0)
+	for _, item := range list {
+		res = generateMatrix1(item.Num)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
