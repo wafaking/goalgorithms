@@ -359,6 +359,16 @@ func TestRemoveNthFromEnd(t *testing.T) {
 		},
 		{
 			Nums:     []int{1},
+			Target:   2,
+			Expected: []int{1},
+		},
+		{
+			Nums:     []int{},
+			Target:   2,
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{1},
 			Target:   1,
 			Expected: []int{},
 		},
@@ -373,9 +383,51 @@ func TestRemoveNthFromEnd(t *testing.T) {
 		head = new(common.ListNode)
 	)
 	for _, item := range list {
-		head = removeNthFromEnd(BuildListNode(item.Nums), item.Target)
+		head = removeNthFromEnd1(BuildListNode(item.Nums), item.Target)
+		res = PrintList2(head)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		head = removeNthFromEnd2(BuildListNode(item.Nums), item.Target)
+		res = PrintList2(head)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		head = removeNthFromEnd3(BuildListNode(item.Nums), item.Target)
+		res = PrintList2(head)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		head = removeNthFromEnd4(BuildListNode(item.Nums), item.Target)
 		res = PrintList2(head)
 		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
+
+//func TestHasCycle(t *testing.T) {
+//	var list = []common.Item8{
+//		{
+//			Nums:     []int{1, 2, 3, 4, 5, 6, 7},
+//			Expected: false,
+//		},
+//		{
+//			Nums:     []int{1, 2, 2, 3, 4, 4, 3},
+//			Expected: true,
+//		},
+//		{
+//			Nums:     []int{1, 2, 2, -1, 3, -1, 3},
+//			Expected: false,
+//		},
+//		{
+//			Nums:     []int{},
+//			Expected: true,
+//		},
+//		{
+//			Nums:     []int{1},
+//			Expected: true,
+//		},
+//	}
+//
+//	var res bool
+//	for _, item := range list {
+//		root := BuildListNode(item.Nums)
+//		res = hasCycle1(root)
+//		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
+//		t.Log("--------------------SPLIT--------------------------")
+//	}
+//}
