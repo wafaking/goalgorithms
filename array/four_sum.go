@@ -2,11 +2,12 @@ package array
 
 import "sort"
 
-// 四数之和(leetcode-18)
-// 给定数组nums和目标值target。请找出其中的四个数使得nums[a]+nums[b]+nums[c]+nums[d]==target
-// 示例1： 输入：nums=[1,0,-1,0,-2,2], target=0, 输出：[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
-// 示例2： 输入：nums = [2,2,2,2,2], target=8, 输出：[[2,2,2,2]]
+//四数之和(leetcode-18)
+//给定数组nums和目标值target。请找出其中的四个数使得nums[a]+nums[b]+nums[c]+nums[d]==target
+//示例1：输入：nums=[1,0,-1,0,-2,2],target=0,输出：[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+//示例2：输入：nums=[2,2,2,2,2],target=8,输出：[[2,2,2,2]]
 
+// 排序+双指针
 func fourSum(nums []int, target int) [][]int {
 	var res [][]int
 	sort.Ints(nums)

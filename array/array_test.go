@@ -62,11 +62,14 @@ func TestTwoSum21(t *testing.T) {
 		{[]int{2, 3, 4}, 6, []int{1, 3}},
 		{[]int{-1, 0}, -1, []int{1, 2}},
 	}
+	var res = make([]int, 0, 2)
 	for _, item := range list {
-		res := twoSum21(item.Nums, item.Target)
-		t.Logf("res: %v, Expected: %v", res, item.Expected)
+		res = twoSum21(item.Nums, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		res = twoSum22(item.Nums, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		t.Log("------------------SPLIT-----------------------")
 	}
-	t.Log("-----------SPLIT---------")
 }
 
 func TestFindRepeatNumber(t *testing.T) {
@@ -126,9 +129,9 @@ func TestThreeSumClosest(t *testing.T) {
 	}
 	for _, item := range list {
 		res := threeSumClosest1(item.Nums, item.Target)
-		t.Logf("1--- %t, res: %d, Expected:%d", res == item.Expected, res, item.Expected)
+		t.Logf("%t, res: %d, Expected:%d", res == item.Expected, res, item.Expected)
 		res = threeSumClosest2(item.Nums, item.Target)
-		t.Logf("2--- %t, res: %d, Expected:%d", res == item.Expected, res, item.Expected)
+		t.Logf("%t, res: %d, Expected:%d", res == item.Expected, res, item.Expected)
 		t.Log("----------SPLIT------------")
 	}
 }
@@ -892,6 +895,10 @@ func TestMinSubArrayLen(t *testing.T) {
 		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		res = minSubArrayLen3(item.Target, item.Nums)
 		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = minSubArrayLen4(item.Target, item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		//res = minSubArrayLen5(item.Target, item.Nums)
+		//t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
@@ -939,5 +946,22 @@ func TestGenerateMatrix(t *testing.T) {
 		res = generateMatrix1(item.Num)
 		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestMissingNumber(t *testing.T) {
+	var list = []common.Item2{
+		{[]int{3, 0, 1}, 2},
+		{[]int{0, 1}, 2},
+		{[]int{9, 6, 4, 2, 3, 5, 7, 0, 1}, 8},
+		{[]int{0}, 1},
+		{[]int{1, 2}, 0},
+	}
+	var res int
+	for _, item := range list {
+		res = missingNumber1(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("------------------------SPLIT------------------------")
+
 	}
 }

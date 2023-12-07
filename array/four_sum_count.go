@@ -39,10 +39,8 @@ func fourSumCount11(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
 	)
 
 	for i, listA := range mapA {
-		for j, listB := range mapB {
-			if i+j == 0 {
-				ans += listA * listB
-			}
+		if listB, ok := mapB[-1*i]; ok {
+			ans += listA * listB
 		}
 	}
 
@@ -64,7 +62,7 @@ func fourSumCount12(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
 
 	for _, v1 := range nums3 {
 		for _, v2 := range nums4 {
-			ans += m[-v1-v2]
+			ans += m[-1*(v1+v2)]
 		}
 	}
 	return ans

@@ -38,16 +38,19 @@ func minSubArrayLen1(target int, nums []int) int {
 	return ans
 }
 
-// 双指针+滑动窗口
+// 滑动窗口
 func minSubArrayLen2(target int, nums []int) int {
 	var ans = math.MaxInt64
 	for i, j := 0, 0; j < len(nums); {
+		// 每次减去右窗口
 		target -= nums[j]
-		for target <= 0 { // 只要大于等于target，一直右移i
+		// 和大于等于target，则获取长度，并将左窗口右移
+		for target <= 0 {
 			ans = common.MinInTwo(ans, j-i+1)
 			target += nums[i]
 			i++
 		}
+		// 右窗口右移
 		j++
 	}
 	if ans == math.MaxInt64 {
