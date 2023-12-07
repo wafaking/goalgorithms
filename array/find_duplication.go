@@ -1,10 +1,14 @@
 package array
 
-// 不修改数组寻找重复数(leetcode-287)
-// 给定一个包含n+1个整数的数组nums，其数字都在[1,n]范围内（包括1和n），仅有一个数重复，但重复次数未知。
-// 返回这个重复的数。条件：不修改数组nums，空间复杂度为 O(1) 。
-//示例 1：输入：nums = [1,3,4,2,2], 输出：2
-//示例 2： 输入：nums = [3,1,3,4,2], 输出：3
+//寻找重复数(leetcode-287)
+//给定一个包含n+1个整数的数组nums，其数字都在[1,n]范围内（包括1和n），可知至少存在一个重复的整数。
+//假设nums只有一个重复的整数，返回这个重复的数。
+//你设计的解决方案必须不修改数组nums且只用常量级O(1)的额外空间。
+//示例1：输入：nums=[1,3,4,2,2]输出：2
+//示例2：输入：nums=[3,1,3,4,2]输出：3
+//进阶：
+//	如何证明nums中至少存在一个重复的数字?
+//	你可以设计一个线性级时间复杂度 O(n) 的解决方案吗？
 
 // findDuplicate1 暴力解法(双循环，空间复杂度为O(1)，时间复杂度为O(n^2))
 func findDuplicate1(nums []int) int {
@@ -31,19 +35,15 @@ func findDuplicate21(nums []int) int {
 	//1,2,3,3,4,5,4 n=6, len=7
 	var l, r = 1, len(nums) - 1
 	for l <= r {
+		if l == r {
+			return l
+		}
+
 		var mid = (r-l)>>1 + l
 		var count int
 		for _, v := range nums {
 			if v >= l && v <= mid {
 				count++
-			}
-		}
-
-		if l == r { // 左右重合
-			if count >= 1 { // 有满足条件的
-				return l
-			} else {
-				break
 			}
 		}
 
@@ -80,15 +80,16 @@ func findDuplicate22(nums []int) int {
 	return ans
 }
 
-//如果被替换的数第i 位为 1，且 target 第 ii 位为 1：x 不变，满足 x>y。
-//如果被替换的数第i 位为 0，且 target 第 ii 位为 1：x 加一，满足 x>y。
-//如果被替换的数第i 位为 1，且 target 第 ii 位为 0：x 减一，满足 x≤y。
-//如果被替换的数第i 位为 0，且 target 第 ii 位为 0：x 不变，满足 x≤y。
+//如果被替换的数第i位为1，且target第ii位为1：x不变，满足x>y。
+//如果被替换的数第i位为0，且target第ii位为1：x加一，满足x>y。
+//如果被替换的数第i位为1，且target第ii位为0：x减一，满足x≤y。
+//如果被替换的数第i位为0，且target第ii位为0：x不变，满足x≤y。
 // 1.计nums二进制第i位等于1的所有数的和为x，[1,n]二进制所有第i位为1的和为y
 // 2.如果数字重复了两次，则除去一位重复的数字，nums和[1,n]是相等的,如：
 //	[1,2,2,3]和[1,2,3](注：nums比[1,n]多一个数字)，则当x>y时的i组成的一定为重复的数值;
 // 3.如果数字重复了超过两次，则可以看成[1,n]中部分整数被替换成了重复的数字，对于nums中
 //	i位为1的每一位，替换之前有x>y,替换之后仍有x>y
+// 如：[1,2,2,2]和[1,2,3]替换后个位的1比之前多，那么此位一定是重复的位
 
 // findDuplicate3 使用二进制法
 func findDuplicate3(nums []int) int {

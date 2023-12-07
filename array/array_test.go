@@ -2,6 +2,7 @@ package array
 
 import (
 	"goalgorithms/common"
+	"sort"
 	"testing"
 )
 
@@ -472,29 +473,19 @@ func TestFindDuplicate(t *testing.T) {
 		{[]int{3, 1, 3, 4, 2}, 3},
 		{[]int{1, 2, 3, 3, 3, 5, 4}, 3},
 	}
+	var res int
 	for _, item := range list {
-		res := findDuplicate1(item.Nums)
-		t.Logf("res: %t\n", res == item.Expected)
-	}
-	t.Log("----------SPLIT------------")
-	for _, item := range list {
-		res := findDuplicate21(item.Nums)
-		t.Logf("res: %t\n", res == item.Expected)
-	}
-	t.Log("----------SPLIT------------")
-	for _, item := range list {
-		res := findDuplicate22(item.Nums)
-		t.Logf("res: %t\n", res == item.Expected)
-	}
-	t.Log("----------SPLIT------------")
-	for _, item := range list {
-		res := findDuplicate3(item.Nums)
-		t.Logf("res: %t\n", res == item.Expected)
-	}
-	t.Log("----------SPLIT------------")
-	for _, item := range list {
-		res := findDuplicate4(item.Nums)
-		t.Logf("res: %t\n", res == item.Expected)
+		res = findDuplicate1(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = findDuplicate21(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = findDuplicate22(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = findDuplicate3(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = findDuplicate4(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("------------------------SPLIT------------------------")
 	}
 }
 
@@ -504,7 +495,7 @@ func TestSingleNumber(t *testing.T) {
 		{[]int{4, 1, 2, 1, 2}, 4},
 	}
 	for _, item := range list {
-		res := singleNumber(item.Nums)
+		res := singleNumber1(item.Nums)
 		t.Logf("res: %t\n", res == item.Expected)
 	}
 	t.Log("----------SPLIT------------")
@@ -512,47 +503,50 @@ func TestSingleNumber(t *testing.T) {
 
 func TestSingleNumber2(t *testing.T) {
 	var list = []common.Item2{
-		//{[]int{6, 3, 6, 6}, 3},
-		//{[]int{2, 2, 3, 2}, 3},
-		//{[]int{0, 1, 0, 1, 0, 1, 99}, 99},
-		//{[]int{-2, -2, 1, -2, 1, 4, 1}, 4},
-		//{[]int{-2, -2, 1, 1, 4, 1, 4, 4, -4, -2}, -4},
+		{[]int{6, 3, 6, 6}, 3},
+		{[]int{2, 2, 3, 2}, 3},
+		{[]int{0, 1, 0, 1, 0, 1, 99}, 99},
+		{[]int{-2, -2, 1, -2, 1, 4, 1}, 4},
+		{[]int{-2, -2, 1, 1, 4, 1, 4, 4, -4, -2}, -4},
 		{[]int{-2, -2, -2, -4}, -4},
+		{[]int{1, 1, 1, -4}, -4},
 	}
+	var res int
 	for _, item := range list {
-		res := singleNumber21(item.Nums)
-		t.Logf("res: %t\n", res == item.Expected)
+		res = singleNumber21(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = singleNumber22(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = singleNumber23(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = singleNumber24(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = singleNumber25(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("------------------------SPLIT------------------------")
+
 	}
-	t.Log("----------SPLIT------------")
-	for _, item := range list {
-		res := singleNumber22(item.Nums)
-		t.Logf("res: %t\n", res == item.Expected)
-	}
-	t.Log("----------SPLIT------------")
-	for _, item := range list {
-		res := singleNumber23(item.Nums)
-		t.Logf("res: %t\n", res == item.Expected)
-	}
-	t.Log("----------SPLIT------------")
 }
 
 func TestSingleNumber3(t *testing.T) {
-	var list = []common.Item1{
-		{[]int{1, 2, 1, 2, 3}, 0, nil},
-		{[]int{2, 2, 3, 3, 4, 5}, 0, []int{4, 5}},
-		{[]int{-2, -2, -3, -4, 1, 1}, 0, []int{-3, -4}},
-		{[]int{-1, 0}, 0, []int{-1, 0}},
+	var list = []common.Item20{
+		{[]int{1, 2, 1, 3, 2, 5}, []int{3, 5}},
+		{[]int{2, 2, 3, 3, 4, 5}, []int{4, 5}},
+		{[]int{-2, -2, -3, -4, 1, 1}, []int{-3, -4}},
+		{[]int{-1, 0}, []int{-1, 0}},
+		{[]int{0, 1}, []int{0, 1}},
 	}
+	var res = make([]int, 0, 2)
 	for _, item := range list {
-		res := singleNumber31(item.Nums)
-		t.Logf("res: %v, Expected: %v\n", res, item.Expected)
+		sort.Ints(item.Expected)
+		res = singleNumber31(item.Nums)
+		sort.Ints(res)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		res = singleNumber32(item.Nums)
+		sort.Ints(res)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		t.Log("------------------------SPLIT------------------------")
 	}
-	t.Log("----------SPLIT------------")
-	for _, item := range list {
-		res := singleNumber32(item.Nums)
-		t.Logf("res: %v, Expected: %v\n", res, item.Expected)
-	}
-	t.Log("----------SPLIT------------")
 }
 
 func TestSubsets1(t *testing.T) {
