@@ -37,8 +37,6 @@ func combinationSum21(candidates []int, target int) (ans [][]int) {
 				visited[tempStr] = struct{}{}
 			}
 			return
-		} else if sum > target {
-			return
 		}
 
 		var m = make(map[int]struct{}, len(nums))
@@ -66,46 +64,46 @@ func combinationSum21(candidates []int, target int) (ans [][]int) {
 	return ans
 }
 
-// combinationSum22 借助全排列思想（推荐此方法）
-func combinationSum22(candidates []int, target int) (ans [][]int) {
-	sort.Ints(candidates) // 先排序
-
-	var dfs func(nums []int, path []int, sum int)
-	dfs = func(nums []int, path []int, sum int) {
-		// len(path)>0 用于过滤target=0的情况
-		if sum == target && len(path) > 0 {
-			ans = append(ans, append([]int{}, path...))
-			// 如果考虑全为数组全为0，或数组内有0的情况，可以去掉return
-			return
-		} else if target < sum {
+// 借助全排列思想（推荐此方法）
+func combinationSum22(candidates []int, target int) [][]int {
+	var (
+		ans = make([][]int, 0)
+		dfs func(idx int, path []int)
+		n   = len(candidates)
+	)
+	dfs = func(idx int, path []int) {
+		if target == 0 {
+			temp := make([]int, len(path))
+			copy(temp, path)
+			ans = append(ans, temp)
 			return
 		}
 
-		// 记录已遍历过的数值
+		// 每一层不能重复
+		// 记录每层已遍历过的数值
 		var m = make(map[int]struct{})
-		for i := 0; i < len(nums); i++ {
-			if _, ok := m[nums[i]]; ok {
+		for i := idx; i < n; i++ {
+			if _, ok := m[candidates[i]]; ok {
 				continue
 			}
-			m[nums[i]] = struct{}{}
-
-			var cur = nums[i]
-			sum += cur
-			path = append(path, cur)
-			// 此处与全排列不一样，仅使用nums[i+1:]，不再使用cur前面的数字
-			// 不再遍历
-			dfs(nums[i+1:], path, sum)
-			sum -= cur
+			m[candidates[i]] = struct{}{}
+			target -= candidates[i]
+			path = append(path, candidates[i])
+			dfs(i+1, path)
 			path = path[:len(path)-1]
+			target += candidates[i]
+			for i+1 < n && candidates[i] == candidates[i+1] {
+				i++
+			}
 		}
 	}
-	dfs(candidates, []int{}, 0)
+	sort.Ints(candidates)
+	dfs(0, []int{})
 	return ans
 }
 
 // combinationSum23 借助全排列思想(推荐,效率高)
 func combinationSum23(candidates []int, target int) (ans [][]int) {
-	sort.Ints(candidates) // 先排序
 
 	var (
 		dfs  func(nums []int, sum int)
@@ -138,6 +136,7 @@ func combinationSum23(candidates []int, target int) (ans [][]int) {
 			}
 		}
 	}
+	sort.Ints(candidates) // 先排序
 	dfs(candidates, 0)
 	return ans
 }

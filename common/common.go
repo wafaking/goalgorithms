@@ -152,3 +152,9 @@ type Item29 struct {
 	Num      int
 	Expected [][]int
 }
+
+type Item30 struct {
+	Num      int
+	Target   int
+	Expected [][]int `json:"-"`
+}

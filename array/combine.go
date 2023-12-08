@@ -1,12 +1,12 @@
 package array
 
-// 组合(leetcode-77)
-// 给定两个整数n和k，返回范围[1,n]中所有可能的k个数的组合。
-// 示例1： 输入：n=4, k=2,输出：[2,4], [3,4], [2,3], [1,2], [1,3], [1,4]]
-// 示例2： 输入：n=1, k=1,输出：[[1]]
+//组合(leetcode-77)
+//给定两个整数n和k，返回范围[1,n]中所有可能的k个数的组合
+//示例1：输入：n=4,k=2,输出：[2,4],[3,4],[2,3],[1,2],[1,3],[1,4]]
+//示例2：输入：n=1,k=1,输出：[[1]]
 
-// combine11 全排列
-func combine11(n int, k int) [][]int {
+// combine1 递归全排列
+func combine1(n int, k int) [][]int {
 	var (
 		ans  [][]int
 		path = make([]int, 0, k)
@@ -33,10 +33,10 @@ func combine11(n int, k int) [][]int {
 	return ans
 }
 
-// combine12 全排列
-func combine12(n int, k int) [][]int {
+// 全排列(传递path)
+func combine2(n int, k int) [][]int {
 	var (
-		ans [][]int
+		ans = make([][]int, 0)
 		dfs func(start int, path []int)
 	)
 	dfs = func(start int, path []int) {
@@ -58,8 +58,8 @@ func combine12(n int, k int) [][]int {
 	return ans
 }
 
-// combine13 全排列
-func combine13(n int, k int) [][]int {
+// combine3 全排列
+func combine3(n int, k int) [][]int {
 	var (
 		ans  [][]int
 		path = make([]int, 0)
@@ -88,8 +88,38 @@ func combine13(n int, k int) [][]int {
 	return ans
 }
 
-// combine2 二进制子集枚举
-func combine2(n int, k int) [][]int {
+// 全排列(当前元素添加与否)
+func combine4(n int, k int) [][]int {
+	var (
+		ans  [][]int
+		path = make([]int, 0, k)
+		dfs  func(start int)
+	)
+	dfs = func(start int) {
+		if len(path)+(n-start+1) < k {
+			return
+		}
+		if len(path) == k {
+			var temp = make([]int, len(path))
+			copy(temp, path)
+			ans = append(ans, temp)
+			return
+		}
+
+		// 选择此元素
+		path = append(path, start)
+		dfs(start + 1)
+
+		// 不选择此元素
+		path = path[:len(path)-1]
+		dfs(start + 1)
+	}
+	dfs(1)
+	return ans
+}
+
+// 二进制子集枚举(TODO)
+func combine5(n int, k int) [][]int {
 	var (
 		ans  [][]int
 		path []int
@@ -110,32 +140,8 @@ func combine2(n int, k int) [][]int {
 	return ans
 }
 
-func combine(n int, k int) [][]int {
-	var (
-		ans [][]int
-		dfs func(start int, path []int)
-	)
-	dfs = func(start int, path []int) {
-		if len(path) == k {
-			var temp = make([]int, len(path))
-			copy(temp, path)
-			ans = append(ans, temp)
-			return
-		}
-		for i := start + 1; i <= n; i++ {
-			path = append(path, i)
-			dfs(i, path)
-			path = path[:len(path)-1]
-		}
-	}
-	for i := 1; i <= n; i++ {
-		dfs(i, []int{i})
-	}
-	return ans
-}
-
-// combine3 使用二进制的思想，参数官方思路（todo-----）
-func combine3(n int, k int) (ans [][]int) {
+// 使用二进制的思想，参数官方思路（todo-----）
+func combine6(n int, k int) (ans [][]int) {
 	// 初始化
 	// 将 temp 中 [0, k - 1] 每个位置 i 设置为 i + 1，即 [0, k - 1] 存 [1, k]
 	// 末尾加一位 n + 1 作为哨兵

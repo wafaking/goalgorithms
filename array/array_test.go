@@ -12,13 +12,13 @@ func TestMain(t *testing.M) {
 	//sli := []int{2, 3, 1, 0, 2, 5, 3}
 	//sli := []int{2, 7, 11, 15}
 	//sli := []int{3, 2, 4}
-	sli := []int{3, 0, -2, -1, -1, -1, 1, 2}
+	//sli := []int{3, 0, -2, -1, -1, -1, 1, 2}
 	//sli := []int{3, 2, 5, 4, 7, 2, 6, 5}
 	//sli := []int{1, 2, 2, 3, 4, 5, 6, 7}
 	//sli := []int{1, 2, 3, 4, 4}
 
-	InitNums(sli)
-	PrintNums()
+	//InitNums(sli)
+	//PrintNums()
 
 	//Init2DNums()
 	//Println2DNums()
@@ -99,8 +99,16 @@ func TestFindRepeatNumber(t *testing.T) {
 }
 
 func TestGetDuplications(t *testing.T) {
-	res := getDuplications(nums, 8)
-	t.Log("res: ", res)
+	var list = []common.Item2{
+		{
+			Nums:     []int{3, 0, -2, -1, -1, -1, 1, 2},
+			Expected: -2,
+		},
+	}
+	for _, item := range list {
+		res := getDuplications(item.Nums, len(item.Nums))
+		t.Log("res: ", res)
+	}
 }
 
 func TestThreeSum(t *testing.T) {
@@ -355,77 +363,76 @@ func TestPermuteUnique(t *testing.T) {
 }
 
 func TestCombine(t *testing.T) {
-	var list = []common.Item1{
-		{Nums: []int{4}, Target: 2, Expected: nil},
-		{Nums: []int{1}, Target: 1, Expected: nil},
-		//{Nums: []int{1}, Target: 2, Expected: nil},
-		{Nums: []int{4}, Target: 3, Expected: nil},
+	var list = []common.Item30{
+		{
+			Num:      4,
+			Target:   2,
+			Expected: [][]int{{1, 2}, {1, 3}, {1, 4}, {2, 3}, {2, 4}, {3, 4}},
+		},
+		{
+			Num:      1,
+			Target:   1,
+			Expected: [][]int{{1}},
+		},
+		{
+			Num:      4,
+			Target:   3,
+			Expected: [][]int{{1, 2, 3}, {1, 2, 4}, {1, 3, 4}, {2, 3, 4}},
+		},
 	}
+	var res = make([][]int, 0)
 	for _, item := range list {
-		res := combine11(item.Nums[0], item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("----------SPLIT------------")
-		res = combine12(item.Nums[0], item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("----------SPLIT------------")
-		res = combine13(item.Nums[0], item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("----------SPLIT------------")
-		res = combine2(item.Nums[0], item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("----------SPLIT------------")
-		res = combine3(item.Nums[0], item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("----------SPLIT------------")
+		res = combine1(item.Num, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		res = combine2(item.Num, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		res = combine3(item.Num, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		res = combine4(item.Num, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		res = combine5(item.Num, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		res = combine6(item.Num, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		t.Log("--------------------SPLIT---------------------------")
 	}
-	//for _, nums := range numsList {
-	//	//res := permuteUnique2(nums)
-	//	res := permuteUnique2(nums)
-	//	t.Logf("res: %v\n", res)
-	//}
 }
 
 func TestCombinationSum1(t *testing.T) {
-	var list = []common.Item1{
-		{[]int{2}, 1, nil},
-		{[]int{2, 3, 5}, 9, nil},
-		{[]int{2, 3, 5}, 8, nil},
-		{[]int{2, 3, 6, 7}, 7, nil},
-		//{[]int{2, 2, 3, 5}, 9, nil},
-		//{[]int{2, 2, 2}, 8, nil},
+	var list = []common.Item26{
+		{[]int{2}, 1, [][]int{}},
+		{[]int{2, 3, 5}, 8, [][]int{{2, 2, 2, 2}, {2, 3, 3}, {3, 5}}},
+		{[]int{2, 3, 6, 7}, 7, [][]int{{2, 2, 3}, {7}}},
 	}
 
+	var res = make([][]int, 0)
 	for _, item := range list {
-		res := combinationSum11(item.Nums, item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("------------SPLIT-------------")
+		res = combinationSum11(item.Nums, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
 		res = combinationSum12(item.Nums, item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("------------SPLIT-------------")
-		res = combinationSum13(item.Nums, item.Target)
-		t.Logf("res: %v\n", res)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		t.Log("--------------------SPLIT---------------------------")
 	}
 }
 
 func TestCombinationSum2(t *testing.T) {
-	var list = []common.Item1{
-		{[]int{2, 2, 2, 2, 4, 6}, 8, nil},
-		{[]int{2, 2, 2, 2, 2, 2}, 8, nil},
-		{[]int{1, 1, 1, 2}, 4, nil},
-		{[]int{0, 0, 0, 0}, 0, nil},
+	var list = []common.Item26{
+		{[]int{10, 1, 2, 7, 6, 1, 5}, 8, [][]int{{1, 1, 6}, {1, 2, 5}, {1, 7}, {2, 6}}},
+		{[]int{2, 5, 2, 1, 2}, 5, [][]int{{1, 2, 2}, {5}}},
+		// 示例1: 输入: candidates=[10,1,2,7,6,1,5], target=8, 输出: {{1,1,6},{1,2,5},{1,7},{2,6}}
+		// 示例2: 输入: candidates=[2,5,2,1,2], target=5, 输出: [[1,2,2],[5]]
 	}
+	var res = make([][]int, 0)
 	for _, item := range list {
-		res := combinationSum21(item.Nums, item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("------------SPLIT-------------")
+		res = combinationSum21(item.Nums, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
 		res = combinationSum22(item.Nums, item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("------------SPLIT-------------")
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
 		res = combinationSum23(item.Nums, item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("------------SPLIT-------------")
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
 		res = combinationSum24(item.Nums, item.Target)
-		t.Logf("res: %v\n", res)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		t.Log("--------------------SPLIT---------------------------")
 	}
 }
 
@@ -895,10 +902,6 @@ func TestMinSubArrayLen(t *testing.T) {
 		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		res = minSubArrayLen3(item.Target, item.Nums)
 		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
-		res = minSubArrayLen4(item.Target, item.Nums)
-		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
-		//res = minSubArrayLen5(item.Target, item.Nums)
-		//t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }

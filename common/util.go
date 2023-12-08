@@ -1,5 +1,7 @@
 package common
 
+import "sort"
+
 func DiffTwoIntSlice(sli1, sli2 []int) bool {
 	if len(sli1) != len(sli2) {
 		return false
@@ -17,6 +19,8 @@ func DiffTwoDoubleIntSlice(sli1, sli2 [][]int) bool {
 		return false
 	}
 	for i := range sli1 {
+		sort.Ints(sli1[i])
+		sort.Ints(sli2[i])
 		if !DiffTwoIntSlice(sli1[i], sli2[i]) {
 			return false
 		}
