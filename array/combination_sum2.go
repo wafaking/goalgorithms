@@ -77,6 +77,8 @@ func combinationSum22(candidates []int, target int) [][]int {
 			copy(temp, path)
 			ans = append(ans, temp)
 			return
+		} else if target < 0 {
+			return
 		}
 
 		// 每一层不能重复

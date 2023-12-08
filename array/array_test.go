@@ -437,42 +437,40 @@ func TestCombinationSum2(t *testing.T) {
 }
 
 func TestCombinationSum3(t *testing.T) {
-	var list = []common.Item1{
-		{[]int{3}, 7, nil},
-		{[]int{4}, 7, nil},
-		{[]int{3}, 9, nil},
-		{[]int{9}, 45, nil},
-		{[]int{4}, 1, nil},
+	var list = []common.Item30{
+		{3, 7, [][]int{{1, 2, 4}}},
+		{3, 9, [][]int{{1, 2, 6}, {1, 3, 5}, {2, 3, 4}}},
+		{4, 1, [][]int{}},
 	}
 
+	var res = make([][]int, 0)
 	for _, item := range list {
-		res := combinationSum31(item.Nums[0], item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("------------SPLIT-------------")
-		res = combinationSum32(item.Nums[0], item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("------------SPLIT-------------")
+		res = combinationSum31(item.Num, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		res = combinationSum32(item.Num, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		res = combinationSum33(item.Num, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		res = combinationSum34(item.Num, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoDoubleIntSlice(res, item.Expected), res, item.Expected, item)
+		t.Log("--------------------SPLIT---------------------------")
 	}
 }
 
 func TestCombinationSum4(t *testing.T) {
-	var list = []common.Item1{
-		{[]int{1, 2, 3}, 7, []int{44}},
-		{[]int{1, 2, 3}, 4, []int{7}},
-		//{[]int{9}, 3, []int{0}},
-		//{[]int{4, 2, 1}, 32, []int{0}},
+	var list = []common.Item3{
+		{[]int{1, 2, 3}, 7, 44},
+		{[]int{1, 2, 3}, 4, 7},
+		{[]int{9}, 3, 0},
 	}
-	// 示例1：输入:nums=[1,2,3], target=4，输出：7
-	// 	所有可能的组合为：(1, 1, 1, 1),(1, 1, 2),(1, 2, 1),(1, 3),(2, 1, 1),(2, 2),(3, 1)
-	// 示例2：输入：nums=[9], target=3,输出：0
 
+	var res int
 	for _, item := range list {
-		//res := combinationSum41(item.Nums, item.Target)
-		//t.Logf("res: %v\n", res)
-		//t.Log("------------SPLIT-------------")
-		res := combinationSum42(item.Nums, item.Target)
-		t.Logf("res: %v\n", res)
-		t.Log("------------SPLIT-------------")
+		res = combinationSum41(item.Nums, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = combinationSum42(item.Nums, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("--------------------SPLIT---------------------------")
 	}
 }
 

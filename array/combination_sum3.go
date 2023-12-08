@@ -1,13 +1,86 @@
 package array
 
-// 组合总和III(leetcode-216)
-// 找出所有相加之和为n的k个数的组合，且满足下列条件：只使用数字1到9, 每个数字最多使用一次
-// 返回所有可能的有效组合的列表。该列表不能包含相同的组合两次，组合可以以任何顺序返回。
-// 示例1: 输入: k = 3, n = 7 输出: [[1,2,4]] 解释: 1 + 2 + 4 = 7
-// 示例2: 输入: k = 3, n = 9 输出: [[1,2,6], [1,3,5], [2,3,4]]
-// 示例3: 输入: k = 4, n = 1, 输出: []
+//组合总和III(leetcode-216)
+//找出所有相加之和为n的k个数的组合，且满足下列条件：只使用数字1到9,每个数字最多使用一次
+//返回所有可能的有效组合的列表。该列表不能包含相同的组合两次，组合可以以任何顺序返回。
+//示例1:输入:k=3,n=7输出:[[1,2,4]]解释:1+2+4=7
+//示例2:输入:k=3,n=9输出:[[1,2,6],[1,3,5],[2,3,4]]
+//示例3:输入:k=4,n=1,输出:[]
 
+// 排列组织
 func combinationSum31(k int, n int) [][]int {
+	var (
+		ans = make([][]int, 0)
+		dfs func(num int, path []int)
+	)
+	dfs = func(num int, path []int) {
+		if len(path) == k && n == 0 {
+			temp := make([]int, k)
+			copy(temp, path)
+			ans = append(ans, temp)
+			return
+		} else if len(path) >= k {
+			return
+		} else if n < 0 {
+			return
+		}
+
+		for i := num; i <= 9; i++ {
+			path = append(path, i)
+			n -= i
+			dfs(i+1, path)
+			n += i
+			path = path[:len(path)-1]
+		}
+	}
+	if n < k {
+		return ans
+	}
+	dfs(1, []int{})
+	return ans
+}
+
+// 排列组合
+func combinationSum32(k int, n int) [][]int {
+	var (
+		ans = make([][]int, 0)
+		dfs func(num int, path []int)
+	)
+	dfs = func(num int, path []int) {
+		if len(path) == k && n == 0 {
+			temp := make([]int, k)
+			copy(temp, path)
+			ans = append(ans, temp)
+			return
+		} else if len(path) >= k {
+			return
+		} else if n < 0 {
+			return
+		} else if num > 9 {
+			return
+		} else if len(path)+10-num < k { // 剩余数目
+			return
+		}
+
+		// 包含num
+		path = append(path, num)
+		n -= num
+		dfs(num+1, path)
+		n += num
+		path = path[:len(path)-1]
+
+		// 不包含num
+		dfs(num+1, path)
+	}
+	if n < k {
+		return ans
+	}
+	dfs(1, []int{})
+	return ans
+}
+
+// 二进制（子集）枚举(TODO)
+func combinationSum33(k int, n int) [][]int {
 	var (
 		ans [][]int
 		min = (k + 1) * (k / 2)
@@ -56,8 +129,8 @@ func combinationSum31(k int, n int) [][]int {
 // 中的所有整数的时候，就可以不重不漏地把每个状态枚举到，对于一个状态mask，我们可以用位运算的方法得到对应的子集序列，然后再判断是否满足上面的两个条件，如果满足，就记录答案。
 // 如何通过位运算来得到mask各个位置的信息？对于第i个位置我们可以判断(1 << i) & mask 是否为0，如果不为0则说明i在子集当中。当然，这里要注意的是，一个9位二进制数i的范围是[0, 8],
 // 而可选择的数字是[1,9]，所以我们需要做一个映射，最简单的办法就是当我们知道i位置不为0的时候将i+1加入子集。
-// combinationSum32 子集枚举(枚举所有子集，将sum=n的添加到结果集中, 参考leetcode-77/78)
-func combinationSum32(k int, n int) [][]int {
+// (TODO) 子集枚举(枚举所有子集，将sum=n的添加到结果集中, 参考leetcode-77/78)
+func combinationSum34(k int, n int) [][]int {
 	var (
 		ans   [][]int
 		temp  []int
