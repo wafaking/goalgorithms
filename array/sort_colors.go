@@ -42,3 +42,22 @@ func sortColors2(nums []int) {
 		}
 	}
 }
+
+// 双指针(同2，但边界不同)
+func sortColors3(nums []int) {
+	var pivot0, pivot2 = 0, len(nums) - 1
+	for i := 0; i < len(nums) && i <= pivot2; {
+		switch nums[i] {
+		case 0:
+			nums[pivot0], nums[i] = nums[i], nums[pivot0]
+			pivot0++
+			i++
+		case 1:
+			i++
+		case 2:
+			nums[pivot2], nums[i] = nums[i], nums[pivot2]
+			pivot2--
+		}
+	}
+	return
+}

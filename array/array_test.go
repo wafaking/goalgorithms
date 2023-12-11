@@ -466,6 +466,8 @@ func TestCombinationSum4(t *testing.T) {
 
 	var res int
 	for _, item := range list {
+		//res = combinationSum04(item.Nums, item.Target)
+		//t.Logf("%v, res-expected:%+v, %+v, item:%+v", res == item.Expected, res, item.Expected, item)
 		res = combinationSum41(item.Nums, item.Target)
 		t.Logf("%v, res-expected:%+v, %+v, item:%+v", res == item.Expected, res, item.Expected, item)
 		res = combinationSum42(item.Nums, item.Target)
@@ -640,6 +642,10 @@ func TestSolveNQueens(t *testing.T) {
 func TestSortColors(t *testing.T) {
 	var list = []common.Item6{
 		{
+			Nums:     []int{1, 0},
+			Expected: []int{0, 1},
+		},
+		{
 			Nums:     []int{2, 0},
 			Expected: []int{0, 2},
 		},
@@ -653,13 +659,16 @@ func TestSortColors(t *testing.T) {
 		},
 	}
 	for _, item := range list {
-		var nums = make([]int, len(item.Nums))
-		copy(nums, item.Nums)
-		sortColors1(nums)
-		t.Logf("res: %v, item:%+v", common.DiffTwoIntSlice(nums, item.Expected), item)
-		copy(nums, item.Nums)
-		sortColors2(nums)
-		t.Logf("res: %v, item:%+v", common.DiffTwoIntSlice(nums, item.Expected), item)
+		var res = make([]int, len(item.Nums))
+		copy(res, item.Nums)
+		sortColors1(res)
+		t.Logf("%v, res:%+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		copy(res, item.Nums)
+		sortColors2(res)
+		t.Logf("%v, res:%+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		copy(res, item.Nums)
+		sortColors3(res)
+		t.Logf("%v, res:%+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
 		t.Log("--------------------SPLIT--------------------")
 	}
 }
@@ -964,5 +973,36 @@ func TestMissingNumber(t *testing.T) {
 		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("------------------------SPLIT------------------------")
 
+	}
+}
+
+func TestMaxSlidingWindow(t *testing.T) {
+	var list = []common.Item21{
+		{
+			Nums:     []int{1, 3, -1, -3, 5, 3, 6, 7},
+			Target:   3,
+			Expected: []int{3, 3, 5, 5, 6, 7},
+		},
+		{
+			Nums:     []int{1, 3, -4, -1, -5, -3, 5, 3, 6, 7},
+			Target:   3,
+			Expected: []int{3, 3, -1, -1, 5, 5, 6, 7},
+		},
+		{
+			Nums:     []int{1},
+			Target:   1,
+			Expected: []int{1},
+		},
+	}
+
+	var (
+		res = make([]int, 0)
+	)
+	for _, item := range list {
+		res = maxSlidingWindow1(item.Nums, item.Target)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		res = maxSlidingWindow2(item.Nums, item.Target)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
 	}
 }
