@@ -2,6 +2,7 @@ package str
 
 import (
 	"fmt"
+	"goalgorithms/common"
 	"log"
 	"testing"
 )
@@ -246,6 +247,11 @@ func TestMyPow(t *testing.T) {
 	list := []item{
 		{
 			Num:      2.00000,
+			N:        8,
+			Expected: 256.00000,
+		},
+		{
+			Num:      2.00000,
 			N:        10,
 			Expected: 1024.00000,
 		},
@@ -261,16 +267,15 @@ func TestMyPow(t *testing.T) {
 		},
 	}
 
+	var res float64
 	for _, item := range list {
-		res := myPow11(item.Num, item.N)
+		res = myPow11(item.Num, item.N)
 		t.Logf("%f(res): %f(expected),num: %f, n=%d", res, item.Expected, item.Num, item.N)
-		t.Log("-----------SPLIT----------")
 		res = myPow12(item.Num, item.N)
 		t.Logf("%f(res): %f(expected),num: %f, n=%d", res, item.Expected, item.Num, item.N)
-		t.Log("-----------SPLIT----------")
 		res = myPow13(item.Num, item.N)
 		t.Logf("%f(res): %f(expected),num: %f, n=%d", res, item.Expected, item.Num, item.N)
-		t.Log("-----------SPLIT----------")
+		t.Log("----------------------SPLIT---------------------")
 	}
 }
 
@@ -325,19 +330,6 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 	}
 }
 
-//func TestPrefixMap(t *testing.T) {
-//	var list = []string{
-//		"",
-//		"A",
-//		"ABCDBA",
-//	}
-//	for _, str := range list {
-//		res := prefixMap(str)
-//		t.Logf("str: %s, res: %+v", str, res)
-//		//t.Log("------------------------")
-//	}
-//}
-
 func TestKMPSearch(t *testing.T) {
 	var list = []item4{
 		{
@@ -365,13 +357,106 @@ func TestGenerateNext(t *testing.T) {
 		},
 	}
 	for _, item := range list {
-		//res := generateNext(item.S)
 		res := generateNext(item.S)
-		//assert.Equal("")
-		//assert := assert.New(t)
-		// assert equality
-		//assert.Equal(item.Expected, res, "they should be equal")
 		t.Logf("str: %s, res: %+v", item.S, res)
 		t.Log("------------------------")
+	}
+}
+
+func TestIsHappy(t *testing.T) {
+	var list = []common.Item31{
+		{
+			Num:      19,
+			Expected: true,
+		},
+		{
+			Num:      2,
+			Expected: false,
+		},
+		{
+			Num:      1,
+			Expected: true,
+		},
+		{
+			Num:      11,
+			Expected: false,
+		},
+	}
+
+	var res bool
+	for _, item := range list {
+		res = isHappy1(item.Num)
+		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		res = isHappy2(item.Num)
+		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		res = isHappy3(item.Num)
+		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
+}
+
+func TestIsUgly(t *testing.T) {
+	var list = []common.Item31{
+		{
+			Num:      0,
+			Expected: false,
+		},
+		{
+			Num:      210,
+			Expected: false,
+		},
+		{
+			Num:      6,
+			Expected: true,
+		},
+		{
+			Num:      1,
+			Expected: true,
+		},
+		{
+			Num:      14,
+			Expected: false,
+		},
+	}
+
+	var res bool
+	for _, item := range list {
+		res = isUgly1(item.Num)
+		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
+}
+
+func TestNthUglyNumber(t *testing.T) {
+	var list = []common.Item4{
+		{
+			Num:      1,
+			Expected: 1,
+		},
+		{
+			Num:      4,
+			Expected: 4,
+		},
+		{
+			Num:      5,
+			Expected: 5,
+		},
+		{
+			Num:      6,
+			Expected: 6,
+		},
+		{
+			Num:      10,
+			Expected: 12,
+		},
+	}
+
+	var res int
+	for _, item := range list {
+		res = nthUglyNumber1(item.Num)
+		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		res = nthUglyNumber2(item.Num)
+		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
 	}
 }
