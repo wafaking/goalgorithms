@@ -163,3 +163,8 @@ type Item31 struct {
 	Num      int
 	Expected bool
 }
+
+type Item32 struct {
+	Bytes    []byte
+	Expected []byte
+}

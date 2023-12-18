@@ -534,7 +534,6 @@ func TestSingleNumber2(t *testing.T) {
 		res = singleNumber25(item.Nums)
 		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("------------------------SPLIT------------------------")
-
 	}
 }
 

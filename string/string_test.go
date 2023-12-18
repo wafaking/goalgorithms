@@ -529,12 +529,56 @@ func TestCountPrimes(t *testing.T) {
 
 	var res int
 	for _, item := range list {
-		//res = countPrimes1(item.Num)
-		//t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		res = countPrimes1(item.Num)
+		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
 		res = countPrimes2(item.Num)
 		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
-		//res = countPrimes3(item.Num)
-		//t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		res = countPrimes3(item.Num)
+		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
 		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
+}
+
+func TestFindGCD(t *testing.T) {
+	var list = []common.Item2{
+		{[]int{2, 5, 6, 9, 10}, 2},
+		{[]int{7, 5, 6, 8, 3}, 1},
+		{[]int{3, 3}, 3},
+	}
+	var res int
+	for _, item := range list {
+		res = findGCD1(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = findGCD2(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = findGCD3(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = findGCD4(item.Nums)
+		t.Logf("res: %t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Log("------------------------SPLIT------------------------")
+	}
+}
+
+func TestReverseString(t *testing.T) {
+	var list = []common.Item32{
+		{
+			Bytes:    []byte{'h', 'e', 'l', 'l', 'o'},
+			Expected: []byte{'o', 'l', 'l', 'e', 'h'},
+		},
+		{
+			Bytes:    []byte{'H', 'a', 'n', 'n', 'a', 'h'},
+			Expected: []byte{'h', 'a', 'n', 'n', 'a', 'H'},
+		},
+	}
+
+	for _, item := range list {
+		var temp = make([]byte, len(item.Bytes))
+		copy(temp, item.Bytes)
+		reverseString1(temp)
+		t.Logf("res: %t, res: %+vs, item:%+v", string(temp) == string(item.Expected), temp, item)
+		copy(temp, item.Bytes)
+		reverseString2(temp)
+		t.Logf("res: %t, res: %+vs, item:%+v", string(temp) == string(item.Expected), temp, item)
+		t.Log("------------------------SPLIT------------------------")
 	}
 }
