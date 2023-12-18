@@ -460,3 +460,81 @@ func TestNthUglyNumber(t *testing.T) {
 		t.Log("----------------SPLIT------------------SPLIT----------")
 	}
 }
+
+func TestNumSquares(t *testing.T) {
+	var list = []common.Item4{
+		{
+			Num:      12,
+			Expected: 3,
+		},
+		{
+			Num:      7,
+			Expected: 4,
+		},
+		{
+			Num:      13,
+			Expected: 2,
+		},
+		{
+			Num:      1,
+			Expected: 1,
+		},
+		{
+			Num:      16,
+			Expected: 1,
+		},
+		{
+			Num:      25,
+			Expected: 1,
+		},
+	}
+
+	var res int
+	for _, item := range list {
+		res = numSquares1(item.Num)
+		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		res = numSquares2(item.Num)
+		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
+}
+
+func TestCountPrimes(t *testing.T) {
+	var list = []common.Item4{
+		//{
+		//	Num:      1,
+		//	Expected: 0,
+		//},
+		{
+			Num:      10,
+			Expected: 4,
+		},
+		{
+			Num:      20,
+			Expected: 8,
+		},
+		{
+			Num:      31,
+			Expected: 10,
+		},
+		{
+			Num:      45,
+			Expected: 14,
+		},
+		{
+			Num:      499979,
+			Expected: 41537,
+		},
+	}
+
+	var res int
+	for _, item := range list {
+		//res = countPrimes1(item.Num)
+		//t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		res = countPrimes2(item.Num)
+		t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		//res = countPrimes3(item.Num)
+		//t.Logf("%t, res:%+v, item:%+v", item.Expected == res, res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
+}

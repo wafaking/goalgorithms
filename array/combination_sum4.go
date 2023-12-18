@@ -6,34 +6,35 @@ package array
 //	所有可能的组合为：(1,1,1,1),(1,1,2),(1,2,1),(1,3),(2,1,1),(2,2),(3,1)
 //示例2：输入：nums=[9],target=3,输出：0
 
-//func combinationSum04(nums []int, target int) int {
-//	var (
-//		n  = len(nums)
-//		dp = make([][]int, n+1)
-//	)
-//	if n == 0 {
-//		return 0
-//	}
-//
-//	for i := 0; i <= n; i++ {
-//		dp[i] = make([]int, target+1)
-//		dp[i][0] = 1
-//	}
-//
-//	for i := 1; i <= n; i++ {
-//		for j := 1; j <= target; j++ {
-//			if j < nums[i-1] { // 小于target
-//				dp[i][j] = dp[i-1][j]
-//			} else { // 大于等于target
-//				// 不选nums[i-1]: dp[i-1][j]
-//				// 选nums[i-1]:之后剩余的
-//				dp[i][j] = dp[i-1][j] + dp[i][j-nums[i-1]]
-//			}
-//		}
-//	}
-//
-//	return dp[n][target]
-//}
+// TODO
+func combinationSum04(nums []int, target int) int {
+	var (
+		n  = len(nums)
+		dp = make([][]int, target+1)
+	)
+	if n == 0 {
+		return 0
+	}
+
+	for i := 0; i <= n; i++ {
+		dp[i] = make([]int, target+1)
+		dp[i][0] = 1
+	}
+
+	for i := 1; i <= n; i++ {
+		for j := 1; j <= target; j++ {
+			if j < nums[i-1] { // 小于target
+				dp[i][j] = dp[i-1][j]
+			} else { // 大于等于target
+				// 不选nums[i-1]: dp[i-1][j]
+				// 选nums[i-1]:之后剩余的
+				dp[i][j] = dp[i-1][j] + dp[i][j-nums[i-1]]
+			}
+		}
+	}
+
+	return dp[n][target]
+}
 
 // 全排列，当nums=[4,2,1],target=32时超时（不推荐）
 func combinationSum41(nums []int, target int) int {
