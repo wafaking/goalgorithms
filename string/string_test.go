@@ -108,21 +108,10 @@ func TestLetterCasePermutation(t *testing.T) {
 		//res = letterCasePermutation6(item)
 		//t.Logf("res: %v\n", res)
 		t.Log("----------SPLIT------------")
-		//res = permutation3(item)
-		//t.Logf("res: %v\n", res)
-		//t.Log("----------SPLIT------------")
-		//res = permutation4(item)
-		//t.Logf("res: %v\n", res)
-		//t.Log("----------SPLIT------------")
-		//res = permutation5(item)
-		//t.Logf("res: %v\n", res)
-		//t.Log("----------SPLIT------------")
-
 	}
 }
 
 func TestCheckInclusion(t *testing.T) {
-	//res := checkInclusion1("ab", "eidbaooo")
 	res := checkInclusion("ab", "eidbocoaoo")
 	log.Println("res: ", res)
 }
@@ -208,21 +197,6 @@ func TestAddStrings(t *testing.T) {
 	//var num1, num2 = "59", "93"
 	res := AddStrings2(num1, num2)
 	t.Logf("res: %s, num1：%s, num2:%s", res, num1, num2)
-}
-
-func TestReverseStr(t *testing.T) {
-
-	var strList = []string{
-		"abcdefg",
-		"abcdef",
-		"abcd",
-	}
-
-	for _, v := range strList {
-		//res := reverseStr1(v, 7)
-		res := reverseStr2(v, 2)
-		t.Logf("res:%s", res)
-	}
 }
 
 func TestLongestPalindrome(t *testing.T) {
@@ -579,6 +553,34 @@ func TestReverseString(t *testing.T) {
 		copy(temp, item.Bytes)
 		reverseString2(temp)
 		t.Logf("res: %t, res: %+vs, item:%+v", string(temp) == string(item.Expected), temp, item)
+		t.Log("------------------------SPLIT------------------------")
+	}
+}
+
+func TestReverseStr(t *testing.T) {
+	var list = []common.Item33{
+		{
+			Str:      "abcdefg",
+			Target:   2,
+			Expected: "bacdfeg",
+		},
+		{
+			Str:      "abcd",
+			Target:   2,
+			Expected: "bacd",
+		},
+	}
+
+	var res string
+	for _, item := range list {
+		res = reverseStr1(item.Str, item.Target)
+		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
+		res = reverseStr2(item.Str, item.Target)
+		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
+		res = reverseStr3(item.Str, item.Target)
+		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
+		res = reverseStr4(item.Str, item.Target)
+		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
 		t.Log("------------------------SPLIT------------------------")
 	}
 }

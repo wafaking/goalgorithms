@@ -168,3 +168,9 @@ type Item32 struct {
 	Bytes    []byte
 	Expected []byte
 }
+
+type Item33 struct {
+	Str      string
+	Target   int
+	Expected string
+}
