@@ -1,7 +1,6 @@
 package str
 
 import (
-	"fmt"
 	"goalgorithms/common"
 	"log"
 	"testing"
@@ -27,10 +26,30 @@ func TestSwapTwoNum(t *testing.T) {
 }
 
 func TestReverseVowels(t *testing.T) {
-	var s1 = "leetcode"
-	// var s2 = "hello"
-	res := reverseVowels(s1)
-	fmt.Println("res: ", res)
+	var list = []common.Item36{
+		{
+			Str:      "leetcode",
+			Expected: "leotcede",
+		},
+		{
+			Str:      "hello",
+			Expected: "holle",
+		},
+		{
+			Str:      "hhhhh",
+			Expected: "hhhhh",
+		},
+	}
+	var res string
+	for _, item := range list {
+		res = reverseVowels1(item.Str)
+		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
+		res = reverseVowels2(item.Str)
+		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
+		res = reverseVowels3(item.Str)
+		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
+		t.Log("-------------------------SPLIT----------------")
+	}
 }
 
 func TestReplaceSpace(t *testing.T) {

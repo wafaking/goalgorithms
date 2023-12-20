@@ -185,3 +185,8 @@ type Item35 struct {
 	S        string
 	Expected []int
 }
+
+type Item36 struct {
+	Str      string
+	Expected string
+}
