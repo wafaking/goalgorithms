@@ -20,7 +20,7 @@ func reverseStr1(s string, k int) string {
 
 	//"abcdefg"
 	if len(s) <= k {
-		return reverse(s)
+		return common.Reverse(s)
 	}
 
 	var strList []string
@@ -42,9 +42,9 @@ func reverseStr1(s string, k int) string {
 
 func reversePrevK(str string, k int) string {
 	if len(str) >= k {
-		return reverse(str[:k]) + str[k:]
+		return common.Reverse(str[:k]) + str[k:]
 	}
-	return reverse(str)
+	return common.Reverse(str)
 }
 
 // 法二：将字符串切分放入数组，然后分别翻转再组合
@@ -53,20 +53,20 @@ func reverseStr2(s string, k int) string {
 		return s
 	}
 	if len(s) <= k {
-		return reverse(s)
+		return common.Reverse(s)
 	}
 
 	//"abcdefg"
 	var res string
 	for s != "" {
 		if len(s) <= k {
-			res += reverse(s)
+			res += common.Reverse(s)
 			s = ""
 		} else if len(s) > k && len(s) <= 2*k {
-			res += reverse(s[:k]) + s[k:]
+			res += common.Reverse(s[:k]) + s[k:]
 			s = ""
 		} else { // len(s)>2*k
-			res += reverse(s[:k]) + s[k:2*k]
+			res += common.Reverse(s[:k]) + s[k:2*k]
 			s = s[2*k:]
 		}
 	}

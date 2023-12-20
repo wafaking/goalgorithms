@@ -16,7 +16,7 @@ func TestReverse(t *testing.T) {
 	}
 
 	for k, expected := range strRes {
-		res := reverse(k)
+		res := common.Reverse(k)
 		log.Printf("isRight: %t, res:%s, expected:%s", res == expected, res, expected)
 	}
 }
@@ -117,27 +117,27 @@ func TestCheckInclusion(t *testing.T) {
 }
 
 func TestRemoveKdigits(t *testing.T) {
-	var list = []item2{
-		{Num: "10001", N: 1, Expected: "1"},
-		{Num: "100010", N: 1, Expected: "10"},
-		{Num: "1432219", N: 3, Expected: "1219"},
-		{Num: "10200", N: 1, Expected: "200"},
-		{Num: "10", N: 1, Expected: "0"},
-		{Num: "10", N: 2, Expected: "0"},
-		{Num: "10", N: 3, Expected: "0"},
-		{Num: "10001", N: 4, Expected: "0"},
-		{Num: "10001", N: 2, Expected: "0"},
-		{Num: "1102912", N: 2, Expected: "2912"},
-		{Num: "1102912", N: 3, Expected: "212"},
-		{Num: "11111", N: 3, Expected: "11"},
-		{Num: "12345", N: 2, Expected: "123"},
+	var list = []common.Item33{
+		{Str: "10001", N: 1, Expected: "1"},
+		{Str: "100010", N: 1, Expected: "10"},
+		{Str: "1432219", N: 3, Expected: "1219"},
+		{Str: "10200", N: 1, Expected: "200"},
+		{Str: "10", N: 1, Expected: "0"},
+		{Str: "10", N: 2, Expected: "0"},
+		{Str: "10", N: 3, Expected: "0"},
+		{Str: "10001", N: 4, Expected: "0"},
+		{Str: "10001", N: 2, Expected: "0"},
+		{Str: "1102912", N: 2, Expected: "2912"},
+		{Str: "1102912", N: 3, Expected: "212"},
+		{Str: "11111", N: 3, Expected: "11"},
+		{Str: "12345", N: 2, Expected: "123"},
 	}
 	for _, item := range list {
-		res := removeKdigits1(item.Num, item.N)
+		res := removeKdigits1(item.Str, item.N)
 		if res != item.Expected {
 			t.Fatalf("removeKdigits1 FAILED, res: %s, expected:%s, item:%#v", res, item.Expected, item)
 		}
-		res = removeKdigits2(item.Num, item.N)
+		res = removeKdigits2(item.Str, item.N)
 		if res != item.Expected {
 			t.Fatalf("removeKdigits2 FAILED, res: %s, expected:%s, item:%#v", res, item.Expected, item)
 		}
@@ -218,7 +218,7 @@ func TestLongestPalindrome(t *testing.T) {
 
 }
 func TestMyPow(t *testing.T) {
-	list := []item{
+	list := []common.Item34{
 		{
 			Num:      2.00000,
 			N:        8,
@@ -305,26 +305,26 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 }
 
 func TestKMPSearch(t *testing.T) {
-	var list = []item4{
+	var list = []common.Item16{
 		{
-			S:        "ABC ABCDAB ABCDABCDABDE",
-			P:        "ABCDABD",
+			Text1:    "ABC ABCDAB ABCDABCDABDE",
+			Text2:    "ABCDABD",
 			Expected: 15,
 		},
 		{
-			S:        "AAAAAAAAAAAAAAAAAAS",
-			P:        "AAAAAAAAB",
+			Text1:    "AAAAAAAAAAAAAAAAAAS",
+			Text2:    "AAAAAAAAB",
 			Expected: -1,
 		},
 	}
 	for _, item := range list {
-		res := strStrV2(item.S, item.P)
+		res := strStrV2(item.Text1, item.Text2)
 		t.Logf("result: %t, res-expect:%d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 	}
 }
 
 func TestGenerateNext(t *testing.T) {
-	var list = []item3{
+	var list = []common.Item35{
 		{
 			S:        "ABCDABD",
 			Expected: []int{-1, 0, 0, 0, 0, 1, 2},
@@ -561,25 +561,25 @@ func TestReverseStr(t *testing.T) {
 	var list = []common.Item33{
 		{
 			Str:      "abcdefg",
-			Target:   2,
+			N:        2,
 			Expected: "bacdfeg",
 		},
 		{
 			Str:      "abcd",
-			Target:   2,
+			N:        2,
 			Expected: "bacd",
 		},
 	}
 
 	var res string
 	for _, item := range list {
-		res = reverseStr1(item.Str, item.Target)
+		res = reverseStr1(item.Str, item.N)
 		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
-		res = reverseStr2(item.Str, item.Target)
+		res = reverseStr2(item.Str, item.N)
 		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
-		res = reverseStr3(item.Str, item.Target)
+		res = reverseStr3(item.Str, item.N)
 		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
-		res = reverseStr4(item.Str, item.Target)
+		res = reverseStr4(item.Str, item.N)
 		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
 		t.Log("------------------------SPLIT------------------------")
 	}

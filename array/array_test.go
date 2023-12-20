@@ -466,11 +466,11 @@ func TestCombinationSum4(t *testing.T) {
 
 	var res int
 	for _, item := range list {
-		//res = combinationSum04(item.Nums, item.Target)
-		//t.Logf("%v, res-expected:%+v, %+v, item:%+v", res == item.Expected, res, item.Expected, item)
 		res = combinationSum41(item.Nums, item.Target)
 		t.Logf("%v, res-expected:%+v, %+v, item:%+v", res == item.Expected, res, item.Expected, item)
 		res = combinationSum42(item.Nums, item.Target)
+		t.Logf("%v, res-expected:%+v, %+v, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = combinationSum43(item.Nums, item.Target)
 		t.Logf("%v, res-expected:%+v, %+v, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------------SPLIT---------------------------")
 	}

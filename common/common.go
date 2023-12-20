@@ -171,6 +171,17 @@ type Item32 struct {
 
 type Item33 struct {
 	Str      string
-	Target   int
+	N        int
 	Expected string
+}
+
+type Item34 struct {
+	Num      float64
+	N        int
+	Expected float64
+}
+
+type Item35 struct {
+	S        string
+	Expected []int
 }
