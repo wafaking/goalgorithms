@@ -1,4 +1,4 @@
-package stack
+package queue_stack
 
 import (
 	"fmt"

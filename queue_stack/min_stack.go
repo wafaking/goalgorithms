@@ -1,4 +1,4 @@
-package stack
+package queue_stack
 
 //最小栈(leetcode-155/LCR-147)
 //定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的min函数在该栈中，
@@ -27,7 +27,6 @@ type MinStack struct {
 	helpStack []int // 辅助栈
 }
 
-/** initialize your data structure here. */
 func Constructor() MinStack {
 	return MinStack{
 		stack:     make([]int, 0),

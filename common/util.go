@@ -87,3 +87,10 @@ func Reverse(str string) string {
 	}
 	return string(bt)
 }
+
+func BoolToInt(ok bool) int {
+	if ok {
+		return 1
+	}
+	return 0
+}

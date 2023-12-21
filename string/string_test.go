@@ -593,13 +593,13 @@ func TestReverseStr(t *testing.T) {
 	var res string
 	for _, item := range list {
 		res = reverseStr1(item.Str, item.N)
-		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
+		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
 		res = reverseStr2(item.Str, item.N)
-		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
+		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
 		res = reverseStr3(item.Str, item.N)
-		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
+		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
 		res = reverseStr4(item.Str, item.N)
-		t.Logf("res: %t, res: %+vs, item:%+v", res == item.Expected, res, item)
+		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
 		t.Log("------------------------SPLIT------------------------")
 	}
 }
