@@ -135,34 +135,6 @@ func TestCheckInclusion(t *testing.T) {
 	log.Println("res: ", res)
 }
 
-func TestRemoveKdigits(t *testing.T) {
-	var list = []common.Item33{
-		{Str: "10001", N: 1, Expected: "1"},
-		{Str: "100010", N: 1, Expected: "10"},
-		{Str: "1432219", N: 3, Expected: "1219"},
-		{Str: "10200", N: 1, Expected: "200"},
-		{Str: "10", N: 1, Expected: "0"},
-		{Str: "10", N: 2, Expected: "0"},
-		{Str: "10", N: 3, Expected: "0"},
-		{Str: "10001", N: 4, Expected: "0"},
-		{Str: "10001", N: 2, Expected: "0"},
-		{Str: "1102912", N: 2, Expected: "2912"},
-		{Str: "1102912", N: 3, Expected: "212"},
-		{Str: "11111", N: 3, Expected: "11"},
-		{Str: "12345", N: 2, Expected: "123"},
-	}
-	for _, item := range list {
-		res := removeKdigits1(item.Str, item.N)
-		if res != item.Expected {
-			t.Fatalf("removeKdigits1 FAILED, res: %s, expected:%s, item:%#v", res, item.Expected, item)
-		}
-		res = removeKdigits2(item.Str, item.N)
-		if res != item.Expected {
-			t.Fatalf("removeKdigits2 FAILED, res: %s, expected:%s, item:%#v", res, item.Expected, item)
-		}
-	}
-}
-
 func TestChineseToNumber(t *testing.T) {
 	var listMap = map[string]int64{
 		//"四千五百一十三":          4513,

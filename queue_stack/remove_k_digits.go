@@ -1,24 +1,15 @@
-package str
+package queue_stack
 
 import (
 	"strings"
 	"unicode"
 )
 
-// 移掉K位数字,使数值最小(leetcode-402)
-// 给定以字符串表示的非负整数num和整数k，移除这个数中的k位数字，使得剩下的数字最小。
-// 示例 1 ： //输入：num = "1432219", k = 3, 输出："1219"
-// 示例 2 ： //输入：num = "10200", k = 1, 输出："200"
-// 示例 3 ： //输入：num = "10", k = 2, 输出："0"
-
-func isNumAllDigit(num string) bool {
-	for k := range num {
-		if !unicode.IsDigit(rune(num[k])) {
-			return false
-		}
-	}
-	return true
-}
+//移掉K位数字,使数值最小(leetcode-402)
+//给定以字符串表示的非负整数num和整数k，移除这个数中的k位数字，使得剩下的数字最小。
+//示例1：//输入：num="1432219",k=3,输出："1219"
+//示例2：//输入：num="10200",k=1,输出："200"
+//示例3：//输入：num="10",k=2,输出："0"
 
 // 法1：单调栈+贪心
 func removeKdigits1(num string, k int) string {
@@ -27,6 +18,15 @@ func removeKdigits1(num string, k int) string {
 	}
 	if len(num) <= k {
 		return "0"
+	}
+
+	var isNumAllDigit = func(num string) bool {
+		for k := range num {
+			if !unicode.IsDigit(rune(num[k])) {
+				return false
+			}
+		}
+		return true
 	}
 
 	// 判断是否有不合法字符
@@ -82,20 +82,24 @@ func removeKdigits2(num string, k int) string {
 		}
 	}
 
-	var stack = make([]byte, 0, len(num))
-	for i := range num {
-		for k > 0 && len(stack) > 0 && num[i] < stack[len(stack)-1] {
+	var stack = make([]int32, 0, len(num))
+	for _, v := range num {
+		// 移除栈中比v大的元素
+		for len(stack) > 0 && k > 0 && (v < stack[len(stack)-1]) {
 			stack = stack[:len(stack)-1]
 			k--
 		}
-		stack = append(stack, num[i])
+
+		// 将v添加到栈中
+		if v != '0' || len(stack) > 0 {
+			stack = append(stack, v)
+		}
 	}
 
-	// 再从末尾截取一遍，防止出现: num=11111 k=2 最后未删除
-	stack = stack[:len(stack)-k]
-	res := strings.TrimLeft(string(stack), "0")
-	if res == "" {
-		res = "0"
+	// 特殊情况
+	if len(stack) == 0 || k >= len(stack) {
+		return "0"
 	}
-	return res
+	// 排队特殊情况后，只剩下len(stack)>k的情况，此时stack中不可能有0,因此直接返回
+	return string(stack[:len(stack)-k])
 }

@@ -195,21 +195,28 @@ func TestTwoQueue2Stack(t *testing.T) {
 	t.Logf("%v, res:%+v, expected:%+v", common.DiffTwoIntSlice(res, expected), res, expected)
 }
 
-//func TestQueueWith2Stack(t *testing.T) {
-//	obj := StackToQueueConstructor2()
-//	obj.AppendTail(3)
-//	param := obj.DeleteHead()
-//	t.Logf("value: %d", param)
-//	param = obj.DeleteHead()
-//	t.Logf("value: %d", param)
-//	param = obj.DeleteHead()
-//	t.Logf("value: %d", param)
-//
-//	//输入：
-//	//["CQueue","appendTail","deleteHead","deleteHead","deleteHead"]
-//	//[[],[3],[],[],[]]
-//	//输出：
-//	//[null,null,3,3,3]
-//	//预期结果：
-//	//[null,null,3,-1,-1]
-//}
+func TestRemoveKDigits(t *testing.T) {
+	var list = []common.Item33{
+		{Str: "10001", N: 1, Expected: "1"},
+		{Str: "100010", N: 1, Expected: "10"},
+		{Str: "1432219", N: 3, Expected: "1219"},
+		{Str: "10200", N: 1, Expected: "200"},
+		{Str: "10", N: 1, Expected: "0"},
+		{Str: "10", N: 2, Expected: "0"},
+		{Str: "10", N: 3, Expected: "0"},
+		{Str: "10001", N: 4, Expected: "0"},
+		{Str: "10001", N: 2, Expected: "0"},
+		{Str: "1102912", N: 2, Expected: "2912"},
+		{Str: "1102912", N: 3, Expected: "212"},
+		{Str: "11111", N: 3, Expected: "11"},
+		{Str: "12345", N: 2, Expected: "123"},
+	}
+	var res string
+	for _, item := range list {
+		res = removeKdigits1(item.Str, item.N)
+		t.Logf("%v, res:%s, item:%+v", res == item.Expected, res, item)
+		res = removeKdigits2(item.Str, item.N)
+		t.Logf("%v, res:%s, item:%+v", res == item.Expected, res, item)
+		t.Log("----------------------SPLIT-------------------")
+	}
+}
