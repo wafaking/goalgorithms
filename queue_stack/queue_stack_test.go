@@ -36,18 +36,29 @@ func TestFibonacci(t *testing.T) {
 		{Num: 6, Expected: 8},
 		{Num: 8, Expected: 21},
 	}
-	var (
-		res  int
-		res2 string
-	)
+	var res int
 	for _, item := range list {
 		res = fibonacci1(item.Num)
 		t.Logf("res: %t, res: %d, item:%+v", res == item.Expected, res, item)
 		res = fibonacci2(item.Num)
 		t.Logf("res: %t, res: %d, item:%+v", res == item.Expected, res, item)
-		// TODO
-		res2 = fibonacci3(item.Num)
-		t.Logf("res: %s, item:%+v", res2, item)
+		t.Log("------------------------SPLIT------------------------")
+	}
+}
+
+func TestBigFibonacci(t *testing.T) {
+	var list = []common.Item37{
+		{Num: 100, Expected: "354224848179261915075"},
+		{Num: 101, Expected: "573147844013817084101"},
+		{Num: 102, Expected: "927372692193078999176"},
+		{Num: 200, Expected: "280571172992510140037611932413038677189525"},
+	}
+	var res string
+	for _, item := range list {
+		res = bigFibonacci1(item.Num)
+		t.Logf("%t, res: %s, item:%+v", res == item.Expected, res, item)
+		res = bigFibonacci2(item.Num)
+		t.Logf("%t, res: %s, item:%+v", res == item.Expected, res, item)
 		t.Log("------------------------SPLIT------------------------")
 	}
 }

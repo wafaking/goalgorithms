@@ -190,3 +190,13 @@ type Item36 struct {
 	Str      string
 	Expected string
 }
+
+type Item37 struct {
+	Num      int
+	Expected string
+}
+
+type Item38 struct {
+	Str1, Str2 string
+	Expected   string
+}

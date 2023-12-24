@@ -181,13 +181,36 @@ func TestNumberToChinese(t *testing.T) {
 }
 
 func TestAddStrings(t *testing.T) {
-	//var num1, num2 = "333", "222"
-	//var num1, num2 = "33", "222"
-	//var num1, num2 = "333", "adb"
-	var num1, num2 = "399", "21"
-	//var num1, num2 = "59", "93"
-	res := AddStrings2(num1, num2)
-	t.Logf("res: %s, num1：%s, num2:%s", res, num1, num2)
+	var list = []common.Item38{
+		{
+			Str1:     "333",
+			Str2:     "222",
+			Expected: "555",
+		},
+		{
+			Str1:     "33",
+			Str2:     "222",
+			Expected: "255",
+		},
+		{
+			Str1:     "399",
+			Str2:     "21",
+			Expected: "420",
+		},
+		{
+			Str1:     "59",
+			Str2:     "93",
+			Expected: "152",
+		},
+	}
+	var res string
+	for _, item := range list {
+		res = addStrings1(item.Str1, item.Str2)
+		t.Logf("%t, res: %s, item:%+v", res == item.Expected, res, item)
+		res = addStrings2(item.Str1, item.Str2)
+		t.Logf("%t, res: %s, item:%+v", res == item.Expected, res, item)
+		t.Log("------------------------SPLIT------------------------")
+	}
 }
 
 func TestLongestPalindrome(t *testing.T) {
@@ -571,6 +594,34 @@ func TestReverseStr(t *testing.T) {
 		res = reverseStr3(item.Str, item.N)
 		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
 		res = reverseStr4(item.Str, item.N)
+		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
+		t.Log("------------------------SPLIT------------------------")
+	}
+}
+
+func TestAddDigits(t *testing.T) {
+	var list = []common.Item4{
+		{
+			Num:      38,
+			Expected: 2,
+		},
+		{
+			Num:      0,
+			Expected: 0,
+		},
+		{
+			Num:      999,
+			Expected: 9,
+		},
+	}
+
+	var res int
+	for _, item := range list {
+		res = addDigits1(item.Num)
+		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = addDigits2(item.Num)
+		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
+		res = addDigits3(item.Num)
 		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
 		t.Log("------------------------SPLIT------------------------")
 	}

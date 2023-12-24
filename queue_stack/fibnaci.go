@@ -1,7 +1,6 @@
 package queue_stack
 
 import (
-	str "goalgorithms/string"
 	"math"
 	"strconv"
 )
@@ -41,9 +40,8 @@ func fibonacci2(n int) int {
 	return fibN
 }
 
-// TODO verify... ...
-// 使用升序，避免重复计算(可以解决n过大时溢出的问题)
-func fibonacci3(n int) string {
+// 使用字符串相加(可以解决n过大时溢出的问题)
+func bigFibonacci1(n int) string {
 	if n == 0 {
 		return "0"
 	} else if n == 1 {
@@ -51,31 +49,104 @@ func fibonacci3(n int) string {
 	}
 
 	var (
-		fib0     int64 = 0
-		fib1     int64 = 1
-		fibN     int64
-		fs0, fs1 string
-		res      string
-		i        = 2
+		str1, str2    = "0", "1"
+		ans           string
+		addTwoStrings func(num1 string, num2 string) string
 	)
 
-	for i <= n {
-		if math.MaxInt64-fib1 <= fib0 {
-			fs0 = strconv.FormatInt(fib0, 10)
-			fs1 = strconv.FormatInt(fib1, 10)
+	addTwoStrings = func(num1 string, num2 string) string {
+		var (
+			ans    string
+			sign   uint8
+			n1, n2 = len(num1) - 1, len(num2) - 1
+		)
+		for i := 0; i <= n1 || i <= n2 || sign != 0; i++ {
+			var a, b uint8
+			if n1 >= i {
+				a = num1[n1-i] - '0'
+			}
+			if n2 >= i {
+				b = num2[n2-i] - '0'
+			}
+			sum := sign + a + b
+			if sum > 9 {
+				sign = 1
+				sum %= 10
+			} else {
+				sign = 0
+			}
+			ans = strconv.Itoa(int(sum)) + ans
+		}
+		return ans
+	}
+
+	for i := 2; i <= n; i++ {
+		ans = addTwoStrings(str1, str2)
+		str1, str2 = str2, ans
+	}
+
+	return str2
+}
+
+// 使用字符串相加,开始时用数值相加，溢出时用字符串相加
+func bigFibonacci2(n int) string {
+	if n == 0 {
+		return "0"
+	} else if n == 1 {
+		return "1"
+	}
+
+	var (
+		i                      = 2
+		num1, num2, numN int64 = 0, 1, 0
+		str1, str2, ans  string
+		addTwoStrings    func(num1 string, num2 string) string
+	)
+
+	addTwoStrings = func(num1 string, num2 string) string {
+		var (
+			ans    string
+			sign   uint8
+			n1, n2 = len(num1) - 1, len(num2) - 1
+		)
+		for i := 0; i <= n1 || i <= n2 || sign != 0; i++ {
+			var a, b uint8
+			if n1 >= i {
+				a = num1[n1-i] - '0'
+			}
+			if n2 >= i {
+				b = num2[n2-i] - '0'
+			}
+			sum := sign + a + b
+			if sum > 9 {
+				sign = 1
+				sum %= 10
+			} else {
+				sign = 0
+			}
+			ans = strconv.Itoa(int(sum)) + ans
+		}
+		return ans
+	}
+
+	for ; i <= n; i++ {
+		if math.MaxInt64-num2 <= num1 {
 			break
 		}
-		fibN = fib0 + fib1
-		fib0, fib1 = fib1, fibN
-		res = strconv.FormatInt(fibN, 10)
-		i++
+		numN = num1 + num2
+		num1, num2 = num2, numN
 	}
 
-	for i <= n {
-		res = str.AddStrings2(fs0, fs1)
-		fs0, fs1 = fs1, res
-		i++
+	if i == n {
+		return strconv.FormatInt(num2, 10)
 	}
 
-	return res
+	str1 = strconv.FormatInt(num1, 10)
+	str2 = strconv.FormatInt(num2, 10)
+	for ; i <= n; i++ {
+		ans = addTwoStrings(str1, str2)
+		str1, str2 = str2, ans
+	}
+
+	return str2
 }
