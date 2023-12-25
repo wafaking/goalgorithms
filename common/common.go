@@ -200,3 +200,33 @@ type Item38 struct {
 	Str1, Str2 string
 	Expected   string
 }
+
+type Item39 struct {
+	Nums     []int
+	N1       int
+	N2       int
+	Expected []int
+}
+
+type Item40 struct {
+	Str      string
+	Expected bool
+}
+
+type Item41 struct {
+	Str      string
+	Expected int
+}
+
+type Item42 struct {
+	Tokens   []string
+	Expected int
+}
+
+type Item43 struct {
+	Nums1    []int
+	Nums2    []int
+	N1       int
+	N2       int
+	Expected []int
+}

@@ -231,3 +231,73 @@ func TestRemoveKDigits(t *testing.T) {
 		t.Log("----------------------SPLIT-------------------")
 	}
 }
+
+func TestIsValidParentheses(t *testing.T) {
+	var list = []common.Item40{
+		{
+			Str:      "()",
+			Expected: true,
+		},
+		{
+			Str:      "()[]{}",
+			Expected: true,
+		},
+		{
+			Str:      "(]{}",
+			Expected: false,
+		},
+		{
+			Str:      "()[]{}}",
+			Expected: false,
+		},
+		{
+			Str:      "([)]",
+			Expected: false,
+		},
+		{
+			Str:      "[()]",
+			Expected: true,
+		},
+		{
+			Str:      "{[()]}",
+			Expected: true,
+		},
+		{
+			Str:      "[{()]}",
+			Expected: false,
+		},
+	}
+	var res bool
+	for _, item := range list {
+		res = isValid1(item.Str)
+		t.Logf("%t, res:%t, item:%+v", res == item.Expected, res, item)
+		res = isValid2(item.Str)
+		t.Logf("%t, res:%t, item:%+v", res == item.Expected, res, item)
+		t.Log("----------------------SPLIT-------------------")
+	}
+}
+
+func TestEvalRPN(t *testing.T) {
+	var list = []common.Item42{
+		{
+			Tokens:   []string{"2", "1", "+", "3", "*"},
+			Expected: 9,
+		},
+		{
+			Tokens:   []string{"4", "13", "5", "/", "+"},
+			Expected: 6,
+		},
+		{
+			Tokens:   []string{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"},
+			Expected: 22,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = evalRPN1(item.Tokens)
+		t.Logf("%t, res:%d, item:%+v", res == item.Expected, res, item)
+		res = evalRPN2(item.Tokens)
+		t.Logf("%t, res:%d, item:%+v", res == item.Expected, res, item)
+		t.Log("----------------------SPLIT-------------------")
+	}
+}

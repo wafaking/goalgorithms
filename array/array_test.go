@@ -185,66 +185,131 @@ func TestFourSum(t *testing.T) {
 	t.Log("----------SPLIT------------")
 }
 
-func TestFindNumberIn2DArray(t *testing.T) {
-	matrix := [][]int{
-		{1, 4, 7, 11, 15},
-		{2, 5, 8, 12, 19},
-		{3, 6, 9, 16, 22},
-		{10, 13, 14, 17, 24},
-		{18, 21, 23, 26, 30},
+func TestSearchMatrix1(t *testing.T) {
+	var list = []common.Item27{
+		{
+			Grid: [][]int{
+				{1, 4, 7, 11, 15},
+				{2, 5, 8, 12, 19},
+				{3, 6, 9, 16, 22},
+				{10, 13, 14, 17, 24},
+				{18, 21, 23, 26, 30},
+			},
+			Target:   5,
+			Expected: true,
+		},
+		{
+			Grid: [][]int{
+				{1, 4, 7, 11, 15},
+				{2, 5, 8, 12, 19},
+				{3, 6, 9, 16, 22},
+				{10, 13, 14, 17, 24},
+				{18, 21, 23, 26, 30},
+			},
+			Target:   20,
+			Expected: false,
+		},
 	}
-	matrix = [][]int{{-5}}
-	res := findNumberIn2DArray(matrix, -5)
-	t.Log("res: ", res)
+	var res bool
+	for _, item := range list {
+		res = searchMatrix21(item.Grid, item.Target)
+		t.Logf("%t, res:%t, item:%+v", item.Expected == res, res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
+}
+
+func TestSearchMatrix2(t *testing.T) {
+	var list = []common.Item27{
+		{
+			Grid: [][]int{
+				{1, 4, 7, 11, 15},
+				{2, 5, 8, 12, 19},
+				{3, 6, 9, 16, 22},
+				{10, 13, 14, 17, 24},
+				{18, 21, 23, 26, 30},
+			},
+			Target:   5,
+			Expected: true,
+		},
+		{
+			Grid: [][]int{
+				{1, 4, 7, 11, 15},
+				{2, 5, 8, 12, 19},
+				{3, 6, 9, 16, 22},
+				{10, 13, 14, 17, 24},
+				{18, 21, 23, 26, 30},
+			},
+			Target:   20,
+			Expected: false,
+		},
+		{
+			Grid: [][]int{
+				{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60},
+			},
+			Target:   13,
+			Expected: false,
+		},
+		{
+			Grid: [][]int{
+				{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60},
+			},
+			Target:   3,
+			Expected: true,
+		},
+	}
+	var res bool
+	for _, item := range list {
+		res = searchMatrix11(item.Grid, item.Target)
+		t.Logf("%t, res:%t, item:%+v", item.Expected == res, res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
 }
 
 func TestMerge(t *testing.T) {
-	type Te struct {
-		nums1 []int
-		m     int
-		nums2 []int
-		n     int
+	var list = []common.Item43{
+		{
+
+			Nums1:    []int{1, 2, 3, 0, 0, 0},
+			Nums2:    []int{2, 5, 6},
+			N1:       3,
+			N2:       3,
+			Expected: []int{1, 2, 2, 3, 5, 6},
+		},
+		{
+			Nums1:    []int{0},
+			Nums2:    []int{1},
+			N1:       0,
+			N2:       1,
+			Expected: []int{1},
+		},
+		{
+			Nums1:    []int{1},
+			Nums2:    []int{},
+			N1:       1,
+			N2:       0,
+			Expected: []int{1},
+		},
+		{
+			Nums1:    []int{4, 5, 6, 0, 0, 0},
+			Nums2:    []int{1, 2, 3},
+			N1:       3,
+			N2:       3,
+			Expected: []int{1, 2, 3, 4, 5, 6},
+		},
 	}
-	sli := []Te{
-		{
-			nums1: []int{1, 2, 3, 0, 0, 0},
-			nums2: []int{2, 5, 6},
-			m:     3,
-			n:     3,
-		},
-		{
-			nums1: []int{0},
-			nums2: []int{1},
-			m:     0,
-			n:     1,
-		},
-		{
-			nums1: []int{2, 0},
-			nums2: []int{1},
-			m:     1,
-			n:     1,
-		},
-		{
-			nums1: []int{4, 5, 6, 0, 0, 0},
-			nums2: []int{1, 2, 3},
-			m:     3,
-			n:     3,
-		},
-	}
 
-	//nums1 := []int{0}
-	//nums2 := []int{1}
-	//m, n := 0, 1
-
-	//nums1 := []int{2, 0}
-	//nums2 := []int{1}
-	//m, n := 1, 1
-
-	for _, v := range sli {
-		t.Log("nums1: ", v.nums1)
-		t.Log("nums2: ", v.nums2)
-		merge2(v.nums1, v.m, v.nums2, v.n)
-		t.Log("res: ", v.nums1)
+	for _, item := range list {
+		temp := make([]int, len(item.Nums1))
+		copy(temp, item.Nums1)
+		merge1(temp, item.N1, item.Nums2, item.N2)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(temp, item.Expected), temp, item)
+		copy(temp, item.Nums1)
+		merge2(temp, item.N1, item.Nums2, item.N2)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(temp, item.Expected), temp, item)
+		copy(temp, item.Nums1)
+		merge3(temp, item.N1, item.Nums2, item.N2)
+		t.Logf("%t, res: %+v, item:%+v", common.DiffTwoIntSlice(temp, item.Expected), temp, item)
+		t.Log("------------------------SPLIT------------------------")
 	}
 
 }
@@ -1001,6 +1066,30 @@ func TestMaxSlidingWindow(t *testing.T) {
 		res = maxSlidingWindow1(item.Nums, item.Target)
 		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
 		res = maxSlidingWindow2(item.Nums, item.Target)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
+}
+
+func TestIntersection(t *testing.T) {
+	var list = []common.Item19{
+		{
+			Nums1:    []int{1, 2, 2, 1},
+			Nums2:    []int{2, 2},
+			Expected: []int{2},
+		},
+		{
+			Nums1:    []int{4, 9, 5},
+			Nums2:    []int{9, 4, 9, 8, 4},
+			Expected: []int{9, 4},
+		},
+	}
+
+	var res = make([]int, 0)
+	for _, item := range list {
+		sort.Ints(item.Expected)
+		res = intersection1(item.Nums1, item.Nums2)
+		sort.Ints(res)
 		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
 		t.Log("----------------SPLIT------------------SPLIT----------")
 	}

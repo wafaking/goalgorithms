@@ -141,45 +141,95 @@ func TestDeleteValue(t *testing.T) {
 func TestReverseList(t *testing.T) {
 
 	var (
-		list = [][]int{
-			{1, 2, 3},
-			{1, 2, 3, 4},
+		list = []common.Item20{
+			{
+				Nums:     []int{1, 2, 3},
+				Expected: []int{3, 2, 1},
+			},
+			{
+				Nums:     []int{1, 2, 3, 4},
+				Expected: []int{4, 3, 2, 1},
+			},
+			{
+				Nums:     []int{1, 2, 3, 4, 5},
+				Expected: []int{5, 4, 3, 2, 1},
+			},
+			{
+				Nums:     []int{},
+				Expected: []int{},
+			},
+			{
+				Nums:     []int{1},
+				Expected: []int{1},
+			},
 		}
 	)
-	for _, sli := range list {
-		res := PrintList2(reverseList1(BuildListNode(sli)))
-		t.Logf("res: %+v", res)
-		t.Log("---------------SPLIT-------------SPLIT-------")
-		res = PrintList2(reverseList2(BuildListNode(sli)))
-		t.Logf("res: %+v", res)
-		t.Log("---------------SPLIT-------------SPLIT-------")
-		res = PrintList2(reverseList3(BuildListNode(sli)))
-		t.Logf("res: %+v", res)
-		t.Log("---------------SPLIT-------------SPLIT-------")
+	var res = make([]int, 0)
+	for _, item := range list {
+		res = PrintList2(reverseList1(BuildListNode(item.Nums)))
+		t.Logf("%v, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		res = PrintList2(reverseList2(BuildListNode(item.Nums)))
+		t.Logf("%v, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		res = PrintList2(reverseList3(BuildListNode(item.Nums)))
+		t.Logf("%v, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		res = PrintList2(reverseList4(BuildListNode(item.Nums)))
+		t.Logf("%v, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		t.Log("-------------------------SPLIT-------------------------")
+
 	}
 }
 
 func TestReverseBetween(t *testing.T) {
 
 	var (
-		list = [][]int{
-			//{1, 2, 3},
-			{1, 2, 3, 4, 5, 6},
+		list = []common.Item39{
+			{
+				Nums:     []int{},
+				N1:       1,
+				N2:       3,
+				Expected: []int{},
+			},
+			{
+				Nums:     []int{1, 2, 3, 4, 5},
+				N1:       2,
+				N2:       4,
+				Expected: []int{1, 4, 3, 2, 5},
+			},
+			{
+				Nums:     []int{5},
+				N1:       1,
+				N2:       1,
+				Expected: []int{5},
+			},
+			{
+				Nums:     []int{1, 2, 3, 4, 5},
+				N1:       1,
+				N2:       7,
+				Expected: []int{5, 4, 3, 2, 1},
+			},
+			{
+				Nums:     []int{1, 2, 3, 4, 5},
+				N1:       1,
+				N2:       5,
+				Expected: []int{5, 4, 3, 2, 1},
+			},
+			{
+				Nums:     []int{1, 2, 3},
+				N1:       4,
+				N2:       1,
+				Expected: []int{1, 2, 3},
+			},
 		}
 	)
-	for _, sli := range list {
-		res := PrintList2(reverseBetween1(BuildListNode(sli), 1, 6))
-		t.Logf("res: %+v", res)
-		t.Log("---------------SPLIT-------------SPLIT-------")
-		res = PrintList2(reverseBetween2(BuildListNode(sli), 1, 5))
-		t.Logf("res: %+v", res)
-		t.Log("---------------SPLIT-------------SPLIT-------")
-		//res = PrintList2(reverseList2(BuildListNode(sli)))
-		//t.Logf("res: %+v", res)
-		//t.Log("---------------SPLIT-------------SPLIT-------")
-		//res = PrintList2(reverseList3(BuildListNode(sli)))
-		//t.Logf("res: %+v", res)
-		//t.Log("---------------SPLIT-------------SPLIT-------")
+	var res = make([]int, 0)
+	for _, item := range list {
+		res = PrintList2(reverseBetween1(BuildListNode(item.Nums), item.N1, item.N2))
+		t.Logf("%v, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		res = PrintList2(reverseBetween2(BuildListNode(item.Nums), item.N1, item.N2))
+		t.Logf("%v, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		res = PrintList2(reverseBetween3(BuildListNode(item.Nums), item.N1, item.N2))
+		t.Logf("%v, res: %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		t.Log("-------------------------SPLIT-------------------------")
 	}
 }
 
