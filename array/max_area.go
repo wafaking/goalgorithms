@@ -1,12 +1,15 @@
 package array
 
-//给定一个长度为 n 的整数数组height。有n条垂线，第 i 条线的两个端点是(i, 0)和(i, height[i])。
+import "goalgorithms/common"
+
+//给定一个长度为n的整数数组height。有n条垂线，第i条线的两个端点是(i,0)和(i,height[i])。
 //找出其中的两条线，使得它们与x轴共同构成的容器可以容纳最多的水。
 //返回容器可以储存的最大水量。
-//输入：[1,8,6,2,5,4,8,3,7], 输出：49
-//解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。
-//示例 2： 输入：height = [1,1], 输出：1
+//输入：[1,8,6,2,5,4,8,3,7],输出：49
+//解释：图中垂直线代表输入数组[1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为49。
+//示例2：输入：height=[1,1],输出：1
 
+// 双指针
 func maxArea1(height []int) int {
 	var max int
 	var start, end = 0, len(height) - 1
@@ -39,16 +42,12 @@ func maxArea1(height []int) int {
 	return max
 }
 
+// 双指针
 func maxArea2(height []int) int {
-	//输入：[1,8,6,2,5,4,8,3,7]
-	//输出：49
-	var i, j = 0, len(height) - 1
 	var maxArea int
-	for i < j {
-		area := getMin(height[i], height[j]) * (j - i)
-		if area > maxArea {
-			maxArea = area
-		}
+	for i, j := 0, len(height)-1; i < j; {
+		area := common.MinInTwo(height[i], height[j]) * (j - i)
+		maxArea = common.MaxInTwo(maxArea, area)
 		if height[i] > height[j] {
 			j--
 		} else {
@@ -56,12 +55,4 @@ func maxArea2(height []int) int {
 		}
 	}
 	return maxArea
-}
-
-func getMin(i, j int) int {
-	if i > j {
-		return j
-	} else {
-		return i
-	}
 }

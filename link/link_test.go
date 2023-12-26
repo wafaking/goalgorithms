@@ -449,6 +449,41 @@ func TestRemoveNthFromEnd(t *testing.T) {
 	}
 }
 
+func TestSwapPairs(t *testing.T) {
+	var list = []common.Item20{
+		{
+			Nums:     []int{1, 2, 3, 4, 5},
+			Expected: []int{2, 1, 4, 3, 5},
+		},
+		{
+			Nums:     []int{1, 2, 3, 4},
+			Expected: []int{2, 1, 4, 3},
+		},
+		{
+			Nums:     []int{1},
+			Expected: []int{1},
+		},
+		{
+			Nums:     []int{},
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{1, 2},
+			Expected: []int{2, 1},
+		},
+	}
+	var (
+		res  = make([]int, 0)
+		head = new(common.ListNode)
+	)
+	for _, item := range list {
+		head = swapPairs1(BuildListNode(item.Nums))
+		res = PrintList2(head)
+		t.Logf("%t, res:%+v item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item)
+		common.PrintSplit(t)
+	}
+}
+
 //func TestHasCycle(t *testing.T) {
 //	var list = []common.Item8{
 //		{
@@ -481,3 +516,40 @@ func TestRemoveNthFromEnd(t *testing.T) {
 //		t.Log("--------------------SPLIT--------------------------")
 //	}
 //}
+
+func TestIsPalindrome(t *testing.T) {
+	var list = []common.Item8{
+		{
+			Nums:     []int{1, 8, 6, 2, 5, 4, 8, 3, 7},
+			Expected: false,
+		},
+		{
+			Nums:     []int{1, 2, 2, 1},
+			Expected: true,
+		},
+		{
+			Nums:     []int{8, 1, 6, 2, 2, 6, 1, 8},
+			Expected: true,
+		},
+		{
+			Nums:     []int{},
+			Expected: true,
+		},
+		{
+			Nums:     []int{1},
+			Expected: true,
+		},
+	}
+	var res bool
+	for _, item := range list {
+		res = isPalindrome1(BuildListNode(item.Nums))
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+		res = isPalindrome2(BuildListNode(item.Nums))
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+		res = isPalindrome3(BuildListNode(item.Nums))
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+		res = isPalindrome4(BuildListNode(item.Nums))
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+		common.PrintSplit(t)
+	}
+}

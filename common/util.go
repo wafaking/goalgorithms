@@ -1,6 +1,27 @@
 package common
 
-import "sort"
+import (
+	"sort"
+	"testing"
+)
+
+var split = "----------------------------SPLIT---------------------------------"
+
+func PrintSplit(t *testing.T) {
+	t.Log(split)
+}
+
+func PrintDiffTwoBool(res, expected bool, item interface{}, t *testing.T) {
+	t.Logf("%t, res:%t, item:%+v", res == expected, res, item)
+}
+
+func PrintDiffTwoInt(res, expected int, item interface{}, t *testing.T) {
+	t.Logf("%t, res:%+v, item:%+v", res == expected, res, item)
+}
+
+func PrintDiffTwoIntSlice(res, expected []int, item interface{}, t *testing.T) {
+	t.Logf("%t, res:%+v, item:%+v", DiffTwoIntSlice(res, expected), res, item)
+}
 
 func DiffTwoIntSlice(sli1, sli2 []int) bool {
 	if len(sli1) != len(sli2) {

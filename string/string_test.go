@@ -595,7 +595,7 @@ func TestReverseStr(t *testing.T) {
 		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
 		res = reverseStr4(item.Str, item.N)
 		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
-		t.Log("------------------------SPLIT------------------------")
+		t.Log("------------------------SPlIT------------------------")
 	}
 }
 

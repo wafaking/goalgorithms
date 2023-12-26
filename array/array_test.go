@@ -368,9 +368,32 @@ func TestGetWordSum(t *testing.T) {
 }
 
 func TestMaxArea(t *testing.T) {
-	height := []int{1, 8, 6, 2, 5, 4, 8, 3, 7}
-	res := maxArea2(height)
-	t.Logf("res: %d", res)
+	var list = []common.Item2{
+		{
+			Nums:     []int{1, 8, 6, 2, 5, 4, 8, 3, 7},
+			Expected: 49,
+		},
+		{
+			Nums:     []int{1, 1},
+			Expected: 1,
+		},
+		{
+			Nums:     []int{8, 1, 6, 2, 5, 8, 4, 3, 7},
+			Expected: 56,
+		},
+		{
+			Nums:     []int{1, 6, 2, 5, 8, 4, 8, 3, 7},
+			Expected: 42,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = maxArea1(item.Nums)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		res = maxArea2(item.Nums)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		common.PrintSplit(t)
+	}
 }
 
 func TestPermute(t *testing.T) {
@@ -1090,6 +1113,35 @@ func TestIntersection(t *testing.T) {
 		sort.Ints(item.Expected)
 		res = intersection1(item.Nums1, item.Nums2)
 		sort.Ints(res)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
+}
+
+func TestIntersect(t *testing.T) {
+	var list = []common.Item19{
+		{
+			Nums1:    []int{1, 2, 2, 1},
+			Nums2:    []int{2, 2},
+			Expected: []int{2, 2},
+		},
+		{
+			Nums1:    []int{4, 9, 5},
+			Nums2:    []int{9, 4, 9, 8, 4},
+			Expected: []int{4, 9},
+		},
+	}
+
+	var res = make([]int, 0)
+	for _, item := range list {
+		sort.Ints(item.Expected)
+		res = intersect1(item.Nums1, item.Nums2)
+		sort.Ints(res)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		res = intersect2(item.Nums1, item.Nums2)
+		sort.Ints(res)
+		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		res = intersect3(item.Nums1, item.Nums2)
 		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
 		t.Log("----------------SPLIT------------------SPLIT----------")
 	}
