@@ -320,38 +320,42 @@ func TestTotalDestinationPath(t *testing.T) {
 }
 
 func TestMinArray(t *testing.T) {
-	var sliList = [][]int{
-		{},
-		{2},
-		{3, 2},
-		{3, 4, 5, 1, 2},
-		{2, 2, 2, 0, 1},
-		{3, 4, 5, 6, 1, 2},
-		{1, 1, 1, 1, 1, 1, 0, 1, 1},
+	var list = []common.Item2{
+		{
+			Nums:     []int{},
+			Expected: -1,
+		},
+		{
+			Nums:     []int{2},
+			Expected: 2,
+		},
+		{
+			Nums:     []int{3, 2},
+			Expected: 2,
+		},
+		{
+			Nums:     []int{3, 4, 5, 1, 2},
+			Expected: 1,
+		},
+		{
+			Nums:     []int{2, 2, 2, 0, 1},
+			Expected: 0,
+		},
+		{
+			Nums:     []int{3, 4, 5, 6, 1, 2},
+			Expected: 1,
+		},
+		{
+			Nums:     []int{2, 2, 2, 2, 2, 2, 1, 2, 2},
+			Expected: 1,
+		},
 	}
-	for _, sli := range sliList {
-		// res := minArray(sli)
-		res := minArray(sli)
-		t.Logf("res: %d, sli: %+v", res, sli)
+	var res int
+	for _, item := range list {
+		res = minArray(item.Nums)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		common.PrintSplit(t)
 	}
-}
-
-func TestExistInMatrix(t *testing.T) {
-	// var board = [][]byte{
-	// 	{'A', 'B', 'C', 'E'},
-	// 	{'S', 'F', 'C', 'S'},
-	// 	{'A', 'D', 'E', 'E'},
-	// }
-	// var word = "ABCCED"
-
-	var board = [][]byte{
-		{'a', 'b'},
-		{'d', 'c'},
-	}
-	var word = "abcd"
-
-	res := exist(board, word)
-	t.Logf("res: %t", res)
 }
 
 func TestMovingCount(t *testing.T) {
@@ -1144,5 +1148,43 @@ func TestIntersect(t *testing.T) {
 		res = intersect3(item.Nums1, item.Nums2)
 		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
 		t.Log("----------------SPLIT------------------SPLIT----------")
+	}
+}
+
+func TestExistInMatrix(t *testing.T) {
+	var list = []common.Item44{
+		{
+			Grid: [][]byte{
+				{'A', 'B', 'C', 'E'},
+				{'S', 'F', 'C', 'S'},
+				{'A', 'D', 'E', 'E'},
+			},
+			Word:     "ABCCED",
+			Expected: true,
+		},
+		{
+			Grid: [][]byte{
+				{'a', 'b'},
+				{'d', 'c'},
+			},
+			Word:     "abcd",
+			Expected: true,
+		},
+		{
+			Grid: [][]byte{
+				{'A', 'B', 'C', 'E'},
+				{'S', 'F', 'C', 'S'},
+				{'A', 'D', 'E', 'E'},
+			},
+			Word:     "ABCCEF",
+			Expected: false,
+		},
+	}
+
+	var res bool
+	for _, item := range list {
+		res = exist(item.Grid, item.Word)
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+		common.PrintSplit(t)
 	}
 }

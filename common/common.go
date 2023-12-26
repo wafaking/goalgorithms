@@ -230,3 +230,9 @@ type Item43 struct {
 	N2       int
 	Expected []int
 }
+
+type Item44 struct {
+	Grid     [][]byte
+	Word     string
+	Expected bool
+}

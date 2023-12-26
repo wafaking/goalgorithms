@@ -84,15 +84,15 @@ func TestDeleteDuplicatesAll(t *testing.T) {
 		head = BuildListNode(item.Nums)
 		resNode = deleteDuplicates21(head)
 		res = PrintList2(resNode)
-		t.Logf("%t, res:%+v, item:%+v", common.DiffTwoIntSlice(item.Expected, res), res, item)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		head = BuildListNode(item.Nums)
+		resNode = deleteDuplicates22(head)
+		res = PrintList2(resNode)
+		common.PrintSplit(t)
 	}
 	PrintHead()
 }
-
-//func TestdeleteDuplicates21(t *testing.T) {
-//	deleteDuplicatesAll(head)
-//	PrintHead()
-//}
 
 func TestReversePrint(t *testing.T) {
 	var (
