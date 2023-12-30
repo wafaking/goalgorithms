@@ -97,6 +97,11 @@ func TestMinCostClimbingStairs(t *testing.T) {
 func TestUniquePaths(t *testing.T) {
 	var list = []common.Item9{
 		{
+			Num1:     2,
+			Num2:     2,
+			Expected: 2,
+		},
+		{
 			Num1:     3,
 			Num2:     7,
 			Expected: 28,
@@ -128,16 +133,17 @@ func TestUniquePaths(t *testing.T) {
 		},
 	}
 
+	var res int
 	for _, item := range list {
-		res := uniquePaths1(item.Num1, item.Num2)
-		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = uniquePaths1(item.Num1, item.Num2)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
 		res = uniquePaths2(item.Num1, item.Num2)
-		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
 		res = uniquePaths3(item.Num1, item.Num2)
-		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
 		res = uniquePaths4(item.Num1, item.Num2)
-		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
-		t.Log("--------------split----------------split--------------")
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		common.PrintSplit(t)
 	}
 }
 

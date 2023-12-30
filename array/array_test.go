@@ -359,11 +359,49 @@ func TestMinArray(t *testing.T) {
 }
 
 func TestMovingCount(t *testing.T) {
-	// res := movingCount(2, 3, 1) Expected: 3
-	// res := movingCount(3, 1, 0) // Expected: 1
-	// res := movingCount(3, 2, 17) // Expected: 6
-	res := movingCount(16, 8, 4) // Expected: 15
-	t.Logf("res: %d", res)
+	var list = []common.Item45{
+		{
+			Num1:     2,
+			Num2:     3,
+			Target:   1,
+			Expected: 3,
+		},
+		{
+			Num1:     3,
+			Num2:     1,
+			Target:   0,
+			Expected: 1,
+		},
+		{
+			Num1:     3,
+			Num2:     2,
+			Target:   17,
+			Expected: 6,
+		},
+		{
+			Num1:     16,
+			Num2:     7,
+			Target:   17,
+			Expected: 112,
+		},
+		{
+			Num1:     13,
+			Num2:     15,
+			Target:   20,
+			Expected: 195,
+		},
+	}
+
+	var res int
+	for _, item := range list {
+		res = movingCount1(item.Num1, item.Num2, item.Target) // Expected: 15
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		res = movingCount2(item.Num1, item.Num2, item.Target) // Expected: 15
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		res = movingCount3(item.Num1, item.Num2, item.Target) // Expected: 15
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		common.PrintSplit(t)
+	}
 }
 
 func TestGetWordSum(t *testing.T) {

@@ -236,3 +236,10 @@ type Item44 struct {
 	Word     string
 	Expected bool
 }
+
+type Item45 struct {
+	Num1     int
+	Num2     int
+	Target   int
+	Expected int
+}
