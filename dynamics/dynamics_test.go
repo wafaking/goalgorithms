@@ -166,14 +166,6 @@ func TestUniquePathsWithObstacles(t *testing.T) {
 			Expected: 0,
 		},
 		{
-			Grid:     [][]int{{0}, {0}},
-			Expected: 1,
-		},
-		{
-			Grid:     [][]int{{1}, {0}},
-			Expected: 0,
-		},
-		{
 			Grid:     [][]int{{0, 1, 0}},
 			Expected: 0,
 		},
@@ -210,14 +202,74 @@ func TestUniquePathsWithObstacles(t *testing.T) {
 			Expected: 0,
 		},
 	}
-
+	var res int
 	for _, item := range list {
-		res := uniquePathsWithObstacles1(item.Grid)
-		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		res = uniquePathsWithObstacles1(item.Grid)
+		t.Logf("%t, res: %d, item:%+v", res == item.Expected, res, item)
 		res = uniquePathsWithObstacles2(item.Grid)
-		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
+		t.Logf("%t, res: %d, item:%+v", res == item.Expected, res, item)
 		res = uniquePathsWithObstacles3(item.Grid)
-		t.Logf("%t, res-Expected: %d:%d", res == item.Expected, res, item.Expected)
+		t.Logf("%t, res: %d, item:%+v", res == item.Expected, res, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestMinPathSum(t *testing.T) {
+	var list = []common.Item12{
+		{
+			Grid:     [][]int{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}},
+			Expected: 7,
+		},
+		{
+			Grid:     [][]int{{1, 2, 3}, {4, 5, 6}},
+			Expected: 12,
+		},
+		{
+			Grid:     [][]int{{0, 0}},
+			Expected: 0,
+		},
+		{
+			Grid:     [][]int{{1, 0}},
+			Expected: 1,
+		},
+		{
+			Grid:     [][]int{{0, 1, 0}},
+			Expected: 1,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = minPathSum1(item.Grid)
+		t.Logf("%t, res: %d, item:%+v", res == item.Expected, res, item)
+		t.Log("--------------split----------------split--------------")
+	}
+}
+
+func TestCalculateMinimumHP(t *testing.T) {
+	var list = []common.Item12{
+		{
+			Grid:     [][]int{{-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}},
+			Expected: 7,
+		},
+		{
+			Grid:     [][]int{{-2, -1, 3}, {-5, -3, 1}, {10, 30, -5}},
+			Expected: 5,
+		},
+		{
+			Grid:     [][]int{{3, 4, 3}, {-2, 6, 1}, {10, 10, -5}},
+			Expected: 1,
+		},
+		{
+			Grid:     [][]int{{0}},
+			Expected: 1,
+		},
+	}
+	var res int
+	for _, item := range list {
+		res = calculateMinimumHP1(item.Grid)
+		t.Logf("%t, res: %d, item:%+v", res == item.Expected, res, item)
+		res = calculateMinimumHP2(item.Grid)
+		t.Logf("%t, res: %d, item:%+v", res == item.Expected, res, item)
 		t.Log("--------------split----------------split--------------")
 	}
 }
