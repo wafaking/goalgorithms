@@ -1967,11 +1967,11 @@ func TestPathSum3(t *testing.T) {
 	for _, item := range list {
 		root = BuildBinaryTree(item.Nums)
 		res = pathSum31(root, item.Target)
-		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Logf("%t, res:%d, item:%+v", res == item.Expected, res, item)
 		res = pathSum32(root, item.Target)
-		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Logf("%t, res: %d, item:%+v", res == item.Expected, res, item)
 		res = pathSum33(root, item.Target)
-		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		t.Logf("%t, res:%d, item:%+v", res == item.Expected, res, item)
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }

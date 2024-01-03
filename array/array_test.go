@@ -1226,3 +1226,47 @@ func TestExistInMatrix(t *testing.T) {
 		common.PrintSplit(t)
 	}
 }
+
+func TestWardrobeFinishing(t *testing.T) {
+	var list = []common.Item45{
+		{
+			Num1:     4,
+			Num2:     7,
+			Target:   5,
+			Expected: 18,
+		},
+		{
+			Num1:     12,
+			Num2:     3,
+			Target:   4,
+			Expected: 12,
+		},
+		{
+			Num1:     16,
+			Num2:     8,
+			Target:   4,
+			Expected: 15,
+		},
+		{
+			Num1:     38,
+			Num2:     15,
+			Target:   9,
+			Expected: 135,
+		},
+		{
+			Num1:     14,
+			Num2:     14,
+			Target:   5,
+			Expected: 21,
+		},
+	}
+
+	var res int
+	for _, item := range list {
+		res = wardrobeFinishing1(item.Num1, item.Num2, item.Target)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		res = wardrobeFinishing2(item.Num1, item.Num2, item.Target)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		common.PrintSplit(t)
+	}
+}
