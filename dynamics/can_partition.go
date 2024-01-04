@@ -51,8 +51,33 @@ func canPartition1(nums []int) bool {
 	return dfs(0, 0)
 }
 
-// 法二：使用动态规划
+// 法一：深度遍历（容易超出时间限制）
 func canPartition2(nums []int) bool {
+	var sum int
+	for i := range nums {
+		sum += nums[i]
+	}
+	if sum&1 != 0 { // 奇数不成立
+		return false
+	}
+
+	var dfs func(idx, sum int) bool
+	dfs = func(idx, sum int) bool {
+		if idx >= len(nums) {
+			if sum == 0 {
+				return true
+			}
+			return false
+		}
+
+		// 选择加当前数或减去当前数
+		return dfs(idx+1, sum+nums[idx]) || dfs(idx+1, sum-nums[idx])
+	}
+	return dfs(0, 0)
+}
+
+// 法二：使用动态规划
+func canPartition3(nums []int) bool {
 	var sum int
 	for _, v := range nums {
 		sum += v
@@ -95,7 +120,7 @@ func canPartition2(nums []int) bool {
 }
 
 // 法三：动态规划（单个数组）
-func canPartition3(nums []int) bool {
+func canPartition4(nums []int) bool {
 	var sum int
 	for _, v := range nums {
 		sum += v

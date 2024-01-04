@@ -5,6 +5,7 @@ package dynamics
 //例如，nums=[2,1]，可以在2之前添加'+'，在1之前添加'-'，然后串联起来得到表达式"+2-1"。
 //返回可以通过上述方法构造的、运算结果等于target的不同表达式的数目。
 //示例1：输入：nums=[1,1,1,1,1],target=3,输出：5
+//注：0 <= nums[i] <= 1000
 //解释：一共有5种方法让最终目标和为3。
 //	-1+1+1+1+1=3
 //	+1-1+1+1+1=3
@@ -13,7 +14,7 @@ package dynamics
 //	+1+1+1+1-1=3
 //示例2：输入：nums=[1],target=1,输出：1;
 
-// 回溯法
+// 深度遍历
 func findTargetSumWays11(nums []int, target int) int {
 	var (
 		times int
@@ -22,14 +23,13 @@ func findTargetSumWays11(nums []int, target int) int {
 	for _, v := range nums {
 		sum += v
 	}
+	// 注：num[i]>0
+	// (sum-target)%2==1？参考动态规划的方法
 	if sum < target || (sum-target)%2 == 1 {
 		return 0
 	}
 
-	var (
-		backTrace func(idx, sum int)
-		//neg       = (sum - target) >> 2
-	)
+	var backTrace func(idx, sum int)
 	backTrace = func(idx, sum int) {
 		if idx == len(nums) {
 			if target == sum {
@@ -108,4 +108,26 @@ func findTargetSumWays13(nums []int, target int) int {
 		}
 	}
 	return dp[neg]
+}
+
+// 深度遍历
+func findTargetSumWays14(nums []int, target int) int {
+	var (
+		ans int
+		dfs func(idx, target int)
+	)
+
+	dfs = func(idx, target int) {
+		if idx == len(nums) {
+			if target == 0 {
+				ans++
+			}
+			return
+		}
+		dfs(idx+1, target-nums[idx])
+		dfs(idx+1, target+nums[idx])
+	}
+
+	dfs(0, target)
+	return ans
 }
