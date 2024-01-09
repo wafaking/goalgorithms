@@ -1975,3 +1975,64 @@ func TestPathSum3(t *testing.T) {
 		t.Log("--------------------SPLIT--------------------------")
 	}
 }
+
+func TestFindTarget(t *testing.T) {
+	var list = []common.Item18{
+		{
+			Nums:     []int{2, 2, 2, 2, 3, 4, 5},
+			Target:   8,
+			Expected: true,
+		},
+		{
+			Nums:     []int{4, 3, 2, 3, 5, 2, 1},
+			Target:   5,
+			Expected: true,
+		},
+		{
+			Nums:     []int{4, 3, 2, 3, 5, 2, 1, 1, 4},
+			Target:   11,
+			Expected: false,
+		},
+		{
+			Nums:     []int{2, 2},
+			Target:   4,
+			Expected: true,
+		},
+		{
+			Nums:     []int{2, 2},
+			Target:   5,
+			Expected: false,
+		},
+		{
+			Nums:     []int{5, 3, 6, 2, 4, defaultNullTreeVal, 7},
+			Target:   9,
+			Expected: true,
+		},
+		{
+			Nums:     []int{5, 3, 6, 2, 4, defaultNullTreeVal, 7},
+			Target:   28,
+			Expected: false,
+		},
+		{
+			Nums:     []int{2, 1, 3},
+			Target:   3,
+			Expected: true,
+		},
+	}
+
+	var (
+		res  bool
+		root *common.TreeNode
+	)
+	for _, item := range list {
+		root = BuildBinaryTree(item.Nums)
+		res = findTarget1(root, item.Target)
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+		res = findTarget2(root, item.Target)
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+		res = findTarget3(root, item.Target)
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+
+		common.PrintSplit(t)
+	}
+}

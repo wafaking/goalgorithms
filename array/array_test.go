@@ -1270,3 +1270,29 @@ func TestWardrobeFinishing(t *testing.T) {
 		common.PrintSplit(t)
 	}
 }
+
+func TestMoveZeroes(t *testing.T) {
+	var list = []common.Item20{
+		{
+			Nums:     []int{0, 1, 0, 3, 12},
+			Expected: []int{1, 3, 12, 0, 0},
+		},
+		{
+			Nums:     []int{1, 0, 0, 3, 12},
+			Expected: []int{1, 3, 12, 0, 0},
+		},
+		{
+			Nums:     []int{0},
+			Expected: []int{0},
+		},
+	}
+	for _, item := range list {
+		tempArray := make([]int, len(item.Nums))
+		copy(tempArray, item.Nums)
+		moveZeroes1(tempArray)
+		common.PrintDiffTwoIntSlice(tempArray, item.Expected, item, t)
+		copy(tempArray, item.Nums)
+		moveZeroes2(tempArray)
+		common.PrintSplit(t)
+	}
+}
