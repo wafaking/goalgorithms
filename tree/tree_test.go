@@ -26,13 +26,6 @@ import (
 // layer 4 3 8 1 5 9 2 7 10 6
 
 func TestMain(t *testing.M) {
-	list := []int{
-		4, 3, 8, 1, 2, 5, 7, 9, 6, 10,
-	}
-	for _, v := range list {
-		Insert(v)
-	}
-
 	t.Run()
 }
 
@@ -248,6 +241,13 @@ func TestLevelOrderBottom(t *testing.T) {
 }
 
 func TestLevelOrder(t *testing.T) {
+	list := []int{
+		4, 3, 8, 1, 2, 5, 7, 9, 6, 10,
+	}
+	var root = new(common.TreeNode)
+	for _, v := range list {
+		Insert(root, v)
+	}
 	res := levelOrder11(root)
 	log.Println("res: ", res)
 }
@@ -899,7 +899,10 @@ func TestConstructMaximumBinaryTree(t *testing.T) {
 		},
 	}
 
-	var res []int
+	var (
+		res  []int
+		root *common.TreeNode
+	)
 	for _, item := range list {
 		root = constructMaximumBinaryTree1(item.Nums)
 		res = levelOrder11(root)
@@ -1449,6 +1452,7 @@ func TestConvertBST(t *testing.T) {
 	var (
 		res  = make([]int, 0)
 		tree *common.TreeNode
+		root *common.TreeNode
 	)
 	for _, item := range list {
 		root = BuildBinaryTree(item.Nums)
@@ -2032,6 +2036,82 @@ func TestFindTarget(t *testing.T) {
 		common.PrintDiffTwoBool(res, item.Expected, item, t)
 		res = findTarget3(root, item.Target)
 		common.PrintDiffTwoBool(res, item.Expected, item, t)
+
+		common.PrintSplit(t)
+	}
+}
+
+func TestBstFromPreorder(t *testing.T) {
+	var list = []common.Item20{
+		{
+			Nums:     []int{8, 5, 1, 7, 10, 12},
+			Expected: []int{8, 5, 10, 1, 7, defaultNullTreeVal, 12},
+		},
+		{
+			Nums:     []int{4, 2},
+			Expected: []int{4, 2, defaultNullTreeVal},
+		},
+		{
+			Nums:     []int{1, 3},
+			Expected: []int{1, defaultNullTreeVal, 3},
+		},
+	}
+
+	var (
+		res  = make([]int, 0)
+		root *common.TreeNode
+	)
+	for _, item := range list {
+		root = bstFromPreorder1(item.Nums)
+		res = levelOrder11(root)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		common.PrintSplit(t)
+	}
+}
+
+func TestFindTargetNode(t *testing.T) {
+	var list = []common.Item3{
+		{
+			Nums:     []int{8, 5, 1, 7, 10, 12},
+			Target:   3,
+			Expected: 8,
+		},
+		{
+			Nums:     []int{4, 2},
+			Target:   2,
+			Expected: 2,
+		},
+		{
+			Nums:     []int{1, defaultNullTreeVal, 3},
+			Target:   1,
+			Expected: 3,
+		},
+		{
+			Nums:     []int{1, 3},
+			Target:   4,
+			Expected: -1,
+		},
+		{
+			Nums:     []int{7, 3, 9, 1, 5},
+			Target:   2,
+			Expected: 7,
+		},
+		{
+			Nums:     []int{10, 5, 15, 2, 7, defaultNullTreeVal, 20, 1, defaultNullTreeVal, 6, 8},
+			Target:   4,
+			Expected: 8,
+		},
+	}
+
+	var (
+		res  int
+		root *common.TreeNode
+	)
+	for _, item := range list {
+		root = BuildBinaryTree(item.Nums)
+		res = findTargetNode1(root, item.Target)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
 
 		common.PrintSplit(t)
 	}

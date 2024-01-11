@@ -1,10 +1,26 @@
 package sort
 
-import "fmt"
+func QuickSort1(sli []int) []int {
+	if len(sli) == 0 {
+		return []int{}
+	}
 
-// TODO
-func QuickSort(sli []int) {
-	fmt.Println("before quick sort: ", sli)
+	//rand.Seed(time.Now().UnixNano())
+	//idx:= rand.Intn()
+	//rand.Int()
 
-	fmt.Println("after quick sort: ", sli)
+	var (
+		// TODO
+		pivot       = sli[0]
+		left, right = make([]int, 0), make([]int, 0)
+	)
+	for i := 1; i < len(sli); i++ {
+		if sli[i] > pivot {
+			right = append(right, sli[i])
+		} else {
+			left = append(left, sli[i])
+		}
+	}
+	return append(append(QuickSort1(left), pivot), QuickSort1(right)...)
+
 }

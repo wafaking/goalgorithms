@@ -18,6 +18,7 @@ func QuickSort2Ways(nums []int) {
 		}
 	)
 
+	// 左闭右闭
 	partition = func(l, r int) {
 		// 将数组分为左、右两部分
 		//2, 1, 4, 3, 7, 8, 5, 6
@@ -30,6 +31,7 @@ func QuickSort2Ways(nums []int) {
 		// 7,1,4,3,2,6,5,9,8 -->l=7,r=6,即数据9,5，结束-->r=6
 		// 将r:5与7交换-->5,1,4,3,2,6,7,9,8
 
+		// TODO
 		if l >= r {
 			return
 		}

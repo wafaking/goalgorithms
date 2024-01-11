@@ -217,3 +217,33 @@ func TestQuickSort2Ways(t *testing.T) {
 		t.Log("--------------------SPLIT--------------------")
 	}
 }
+
+func TestQuickSort(t *testing.T) {
+	var list = []common.Item6{
+		{
+			Nums:     []int{1, 3, 2},
+			Expected: []int{1, 2, 3},
+		},
+		{
+			Nums:     []int{2, 1, 4, 3, 7, 8, 5, 6},
+			Expected: []int{1, 2, 3, 4, 5, 6, 7, 8},
+		},
+		{
+			Nums:     []int{2, 1, 4, 3, 7, 8, 5, 9, 6},
+			Expected: []int{1, 2, 3, 4, 5, 6, 7, 8, 9},
+		},
+		{
+			Nums:     []int{2, 0, 2, 1, 1, 0},
+			Expected: []int{0, 0, 1, 1, 2, 2},
+		},
+	}
+	var res = make([]int, 0)
+	for _, item := range list {
+		var nums = make([]int, len(item.Nums))
+		copy(nums, item.Nums)
+		res = QuickSort1(nums)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		common.PrintSplit(t)
+	}
+}

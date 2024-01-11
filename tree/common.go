@@ -3,7 +3,7 @@ package tree
 import "goalgorithms/common"
 
 var (
-	root               *common.TreeNode
+	//root               *common.TreeNode
 	defaultNullTreeVal = -99999
 )
 
@@ -50,7 +50,7 @@ func BuildBinaryTree(nums []int) *common.TreeNode {
 }
 
 // Insert 添加节点
-func Insert(num int) {
+func Insert(root *common.TreeNode, num int) {
 	var node *common.TreeNode
 	if num == defaultNullTreeVal {
 		node = nil
