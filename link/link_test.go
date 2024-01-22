@@ -553,3 +553,49 @@ func TestIsPalindrome(t *testing.T) {
 		common.PrintSplit(t)
 	}
 }
+
+func TestSortList(t *testing.T) {
+	var list = []common.Item20{
+		{
+			Nums:     []int{0, 3, 0, 2, 3},
+			Expected: []int{0, 0, 2, 3, 3},
+		},
+		{
+			Nums:     []int{1, 3, 4, 2, 3, 4, 5},
+			Expected: []int{1, 2, 3, 3, 4, 4, 5},
+		},
+		{
+			Nums:     []int{4, 2, 1, 3},
+			Expected: []int{1, 2, 3, 4},
+		},
+		{
+			Nums:     []int{},
+			Expected: []int{},
+		},
+	}
+
+	var (
+		head, resNode *common.ListNode
+		res           = make([]int, 0)
+	)
+
+	for _, item := range list {
+		head = BuildListNode(item.Nums)
+		resNode = sortList1(head)
+		res = PrintList2(resNode)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		head = BuildListNode(item.Nums)
+		resNode = sortList2(head)
+		res = PrintList2(resNode)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		head = BuildListNode(item.Nums)
+		resNode = sortList3(head)
+		res = PrintList2(resNode)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		common.PrintSplit(t)
+	}
+	PrintHead()
+}

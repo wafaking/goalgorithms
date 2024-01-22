@@ -209,16 +209,17 @@ func TestQuickSort2Ways(t *testing.T) {
 	for _, item := range list {
 		var nums = make([]int, len(item.Nums))
 		copy(nums, item.Nums)
-		QuickSort2Ways(nums)
-		t.Logf("res: %v, %+v, , item:%+v", common.DiffTwoIntSlice(nums, item.Expected), nums, item)
+		QuickSort2Ways1(nums)
+		common.PrintDiffTwoIntSlice(nums, item.Expected, item, t)
 		copy(nums, item.Nums)
-		QuickSort3Ways(nums)
-		t.Logf("res: %v, item:%+v", common.DiffTwoIntSlice(nums, item.Expected), item)
-		t.Log("--------------------SPLIT--------------------")
+		QuickSort2Ways1(nums)
+		common.PrintDiffTwoIntSlice(nums, item.Expected, item, t)
+
+		common.PrintSplit(t)
 	}
 }
 
-func TestQuickSort(t *testing.T) {
+func TestQuickSort3Ways(t *testing.T) {
 	var list = []common.Item6{
 		{
 			Nums:     []int{1, 3, 2},
@@ -237,11 +238,84 @@ func TestQuickSort(t *testing.T) {
 			Expected: []int{0, 0, 1, 1, 2, 2},
 		},
 	}
-	var res = make([]int, 0)
 	for _, item := range list {
 		var nums = make([]int, len(item.Nums))
 		copy(nums, item.Nums)
-		res = QuickSort1(nums)
+		QuickSort3Ways(nums)
+		t.Logf("res: %v, item:%+v", common.DiffTwoIntSlice(nums, item.Expected), item)
+		t.Log("--------------------SPLIT--------------------")
+	}
+}
+
+func TestQuickSort(t *testing.T) {
+	var list = []common.Item6{
+		{
+			Nums:     []int{3, 1, 4, 1, 2, 7, 8, 5, 6},
+			Expected: []int{1, 1, 2, 3, 4, 5, 6, 7, 8},
+		},
+		{
+			Nums:     []int{1, 3, 2},
+			Expected: []int{1, 2, 3},
+		},
+		{
+			Nums:     []int{2, 1, 4, 3, 7, 8, 5, 6},
+			Expected: []int{1, 2, 3, 4, 5, 6, 7, 8},
+		},
+		{
+			Nums:     []int{2, 1, 4, 3, 7, 8, 5, 9, 6},
+			Expected: []int{1, 2, 3, 4, 5, 6, 7, 8, 9},
+		},
+		{
+			Nums:     []int{2, 0, 2, 1, 1, 0},
+			Expected: []int{0, 0, 1, 1, 2, 2},
+		},
+	}
+
+	var res = make([]int, 0)
+	for _, item := range list {
+		res = QuickSort1(item.Nums)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+		common.PrintSplit(t)
+	}
+}
+
+func TestMergeSort(t *testing.T) {
+	var list = []common.Item6{
+		{
+			Nums:     []int{},
+			Expected: []int{},
+		},
+		{
+			Nums:     []int{3, 1, 4, 1, 2, 7, 8, 5, 6},
+			Expected: []int{1, 1, 2, 3, 4, 5, 6, 7, 8},
+		},
+		{
+			Nums:     []int{1, 3, 2},
+			Expected: []int{1, 2, 3},
+		},
+		{
+			Nums:     []int{2, 1, 4, 3, 7, 8, 5, 6},
+			Expected: []int{1, 2, 3, 4, 5, 6, 7, 8},
+		},
+		{
+			Nums:     []int{2, 1, 4, 3, 7, 8, 5, 9, 6},
+			Expected: []int{1, 2, 3, 4, 5, 6, 7, 8, 9},
+		},
+		{
+			Nums:     []int{2, 0, 2, 1, 1, 0},
+			Expected: []int{0, 0, 1, 1, 2, 2},
+		},
+	}
+
+	var res = make([]int, 0)
+	for _, item := range list {
+		var temp = make([]int, len(item.Nums))
+		copy(temp, item.Nums)
+		res = mergeSort1(temp)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		copy(temp, item.Nums)
+		res = mergeSort2(temp)
 		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
 
 		common.PrintSplit(t)
