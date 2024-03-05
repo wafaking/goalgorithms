@@ -771,7 +771,6 @@ func TestFindLength(t *testing.T) {
 			Nums1:    []int{1, 2, 3, 2, 1},
 			Nums2:    []int{3, 2, 1, 4, 7},
 			Expected: 3,
-			//示例2：输入：nums1=[0,0,0,0,0],nums2=[0,0,0,0,0]输出：5
 		},
 		{
 			Nums1:    []int{0, 0, 0, 0, 0},
