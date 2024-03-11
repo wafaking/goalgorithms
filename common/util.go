@@ -23,6 +23,10 @@ func PrintDiffTwoIntSlice(res, expected []int, item interface{}, t *testing.T) {
 	t.Logf("%t, res:%+v, item:%+v", DiffTwoIntSlice(res, expected), res, item)
 }
 
+func PrintDiffTwoStr(res, expected string, item interface{}, t *testing.T) {
+	t.Logf("%t, res:%+v, item:%+v", res == expected, res, item)
+}
+
 func DiffTwoIntSlice(sli1, sli2 []int) bool {
 	if len(sli1) != len(sli2) {
 		return false

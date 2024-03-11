@@ -13,7 +13,7 @@ import "goalgorithms/common"
 // 示例3：输入：text1="abc",text2="def",输出：0(两个字符串没有公共子序列，返回0)。
 
 // 动态规划
-func longestCommonSubsequence(text1 string, text2 string) int {
+func longestCommonSubsequence1(text1 string, text2 string) int {
 	// dp[i][j]表示text1的前i个字符与text2的前j个字符的最长公共子串的长度
 	// 此处用text1表示纵坐标，text2表示横坐标
 	var dp = make([][]int, len(text1)+1)

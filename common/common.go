@@ -243,3 +243,8 @@ type Item45 struct {
 	Target   int
 	Expected int
 }
+
+type Item46 struct {
+	Tokens   []string
+	Expected string
+}

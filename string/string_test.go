@@ -297,24 +297,45 @@ func TestIsPalindromeInt1(t *testing.T) {
 }
 
 func TestLengthOfLongestSubstring(t *testing.T) {
-	var list = []struct {
-		Str      string
-		Expected int
-	}{
-		{Str: "abcabcbb", Expected: 3},
-		{Str: "bbbbb", Expected: 1},
-		{Str: "pwwkew", Expected: 3},
+	var list = []common.Item41{
+		{
+			Str:      "abba",
+			Expected: 2,
+		},
+		{
+			Str:      "abcabcbb",
+			Expected: 3,
+		},
+		{
+			Str:      "bbbbb",
+			Expected: 1,
+		},
+		{
+			Str:      "pw",
+			Expected: 2,
+		},
+		{
+			Str:      "a",
+			Expected: 1,
+		},
+		{
+			Str:      "pwwkew",
+			Expected: 3,
+		},
 	}
+	var res int
 	for _, item := range list {
-		res := lengthOfLongestSubstring2(item.Str)
-		if res != item.Expected {
-			log.Fatalf("lengthOfLongestSubstring2 failed, res: %d, item:%#v", res, item)
-		}
-
+		res = lengthOfLongestSubstring11(item.Str)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		res = lengthOfLongestSubstring1(item.Str)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		res = lengthOfLongestSubstring2(item.Str)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		res = lengthOfLongestSubstring3(item.Str)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
 		res = lengthOfLongestSubstring21(item.Str)
-		if res != item.Expected {
-			log.Fatalf("lengthOfLongestSubstring3 failed, res: %d, item:%#v", res, item)
-		}
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+		common.PrintSplit(t)
 	}
 }
 
@@ -624,5 +645,43 @@ func TestAddDigits(t *testing.T) {
 		res = addDigits3(item.Num)
 		t.Logf("res: %t, res: %+v, item:%+v", res == item.Expected, res, item)
 		t.Log("------------------------SPLIT------------------------")
+	}
+}
+
+func TestLongestCommonPrefix(t *testing.T) {
+	var list = []common.Item46{
+		{
+			Tokens:   []string{"flower", "flow", "flight"},
+			Expected: "fl",
+		},
+		{
+			Tokens:   []string{"dog", "racecar", "car"},
+			Expected: "",
+		},
+		{
+			Tokens:   []string{"ab"},
+			Expected: "ab",
+		},
+		{
+			Tokens:   []string{},
+			Expected: "",
+		},
+		{
+			Tokens:   []string{""},
+			Expected: "",
+		},
+	}
+
+	var res string
+	for _, item := range list {
+		res = longestCommonPrefix1(item.Tokens)
+		common.PrintDiffTwoStr(res, item.Expected, item, t)
+		res = longestCommonPrefix2(item.Tokens)
+		common.PrintDiffTwoStr(res, item.Expected, item, t)
+		res = longestCommonPrefix3(item.Tokens)
+		common.PrintDiffTwoStr(res, item.Expected, item, t)
+		res = longestCommonPrefix4(item.Tokens)
+		common.PrintDiffTwoStr(res, item.Expected, item, t)
+		common.PrintSplit(t)
 	}
 }

@@ -728,7 +728,7 @@ func TestLongestCommonSubsequence(t *testing.T) {
 	}
 	var res int
 	for _, item := range list {
-		res = longestCommonSubsequence(item.Text1, item.Text2)
+		res = longestCommonSubsequence1(item.Text1, item.Text2)
 		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
@@ -759,7 +759,7 @@ func TestLongestCommonSubstring(t *testing.T) {
 	}
 	var res int
 	for _, item := range list {
-		res = longestCommonSubstring(item.Text1, item.Text2)
+		res = longestCommonSubstring1(item.Text1, item.Text2)
 		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		t.Log("--------------split----------------split--------------")
 	}
