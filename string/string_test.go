@@ -325,15 +325,11 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 	}
 	var res int
 	for _, item := range list {
-		res = lengthOfLongestSubstring11(item.Str)
-		common.PrintDiffTwoInt(res, item.Expected, item, t)
 		res = lengthOfLongestSubstring1(item.Str)
 		common.PrintDiffTwoInt(res, item.Expected, item, t)
 		res = lengthOfLongestSubstring2(item.Str)
 		common.PrintDiffTwoInt(res, item.Expected, item, t)
 		res = lengthOfLongestSubstring3(item.Str)
-		common.PrintDiffTwoInt(res, item.Expected, item, t)
-		res = lengthOfLongestSubstring21(item.Str)
 		common.PrintDiffTwoInt(res, item.Expected, item, t)
 		common.PrintSplit(t)
 	}
