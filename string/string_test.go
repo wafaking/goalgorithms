@@ -131,8 +131,56 @@ func TestLetterCasePermutation(t *testing.T) {
 }
 
 func TestCheckInclusion(t *testing.T) {
-	res := checkInclusion("ab", "eidbocoaoo")
-	log.Println("res: ", res)
+	var list = []common.Item15{
+		{
+			S:        "abc",
+			P:        "bbbca",
+			Expected: true,
+		},
+		//{
+		//	S:        "ab",
+		//	P:        "eidbaooo",
+		//	Expected: true,
+		//},
+		{
+			S:        "ab",
+			P:        "eidboaoo",
+			Expected: false,
+		},
+		{
+			S:        "ab",
+			P:        "a",
+			Expected: false,
+		},
+		{
+			S:        "aaa",
+			P:        "aaa",
+			Expected: true,
+		},
+		{
+			S:        "",
+			P:        "",
+			Expected: true,
+		},
+		{
+			S:        "abca",
+			P:        "abdaabcd",
+			Expected: true,
+		},
+	}
+
+	var res bool
+	for _, item := range list {
+		res = checkInclusion1(item.S, item.P)
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+		res = checkInclusion21(item.S, item.P)
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+		res = checkInclusion22(item.S, item.P)
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+		//res = checkInclusion3(item.S, item.P)
+		//common.PrintDiffTwoBool(res, item.Expected, item, t)
+		common.PrintSplit(t)
+	}
 }
 
 func TestChineseToNumber(t *testing.T) {
