@@ -9,6 +9,7 @@ import (
 // 示例1： 输入：nums = [1,1,2], 输出： [[1,1,2], [1,2,1], [2,1,1]]
 // 示例2： 输入：nums = [1,2,3]，输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 
+// TODO ------------
 // permuteUnique11 深度遍历，有重复遍历
 func permuteUnique11(nums []int) [][]int {
 	var (
@@ -65,6 +66,7 @@ func permuteUnique12(nums []int) [][]int {
 		for i, v := range nums {
 			// 1：visited[i]条件为真表示i位置的数已使用过
 			// 2：如1,1,2,取2,1(首位1)和2,1(第二位1)的visited值为[1,0,1]和[0,1,1]
+			// TODO ----引处是不是有错误，visited[i-1]不一定
 			if visited[i] || (i > 0 && nums[i] == nums[i-1] && !visited[i-1]) {
 				continue
 			}

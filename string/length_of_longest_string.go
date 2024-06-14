@@ -5,10 +5,55 @@ import "goalgorithms/common"
 // 无重复字符的最长子串(leetcode-3)
 // 给定一个字符串s，请你找出其中不含有重复字符的最长子串的长度。
 // 注："pwke"是"pwwkew"子序列，不是子串。
-
 // 示例1: 输入:s="abcabcbb" 输出: 3(abc)
 // 示例2: 输入:s="bbbbb" 输出: 1(b)
 // 示例3: 输入:s="pwwkew" 输出: 3(wke)
+
+func lengthOfLongestSubstring01(s string) int {
+	var (
+		max int
+		m   = make(map[uint8]int)
+		ans int
+	)
+	//abcbac
+	for i := 0; i < len(s); i++ {
+		for j := i + 1; j < len(s); j++ {
+			pos, ok := m[s[j]]
+			if !ok {
+				m[s[j]] = j
+				continue
+			}
+
+			max = common.MaxInTwo(max, j-i)
+			for k := i; k <= pos; i++ {
+				delete(m[s[k]])
+			}
+			i = j
+
+			ans = j - pos + 1
+
+			break
+		}
+	}
+	return max
+}
+
+// 滑动窗口
+func lengthOfLongestSubstring0(s string) int {
+	var (
+		ans int
+		max int
+		m   = make(map[uint8]int)
+	)
+	//if len()
+	for i, j := 0, 1; i <= j && j < len(s); {
+		//if i == j {
+		//	ans = 1
+		//}
+	}
+
+	return ans
+}
 
 // lengthOfLongestSubstring1 使用map，双层遍历
 func lengthOfLongestSubstring1(s string) int {

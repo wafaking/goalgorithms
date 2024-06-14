@@ -4,9 +4,9 @@ package heap
 type Heap []int
 
 // len get h's length(注：可以不用*Heap，因heap是引用，只要长度不会变，操作的同一地址)
-func (h Heap) len() int           { return len(h) }
-func (h Heap) swap(i, j int)      { h[i], h[j] = h[j], h[i] }
-func (h Heap) less(i, j int) bool { return h[i] < h[j] } //大顶堆，将交换改成>
+func (h *Heap) len() int           { return len(*h) }
+func (h *Heap) swap(i, j int)      { (*h)[i], (*h)[j] = (*h)[j], (*h)[i] }
+func (h *Heap) less(i, j int) bool { return (*h)[i] < (*h)[j] } //大顶堆，将交换改成>
 
 // up to up adjust the index i's position
 func (h *Heap) up(i int) {

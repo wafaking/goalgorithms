@@ -2,7 +2,8 @@ package tree
 
 import "goalgorithms/common"
 
-//给定一个二叉树，返回它的右视图所能看到的节点值(按从顶部到底部的顺序)(leetcode-199/sword2-46)
+//二叉树的右视图(leetcode-199/sword2-46)
+//给定一个二叉树，返回它的右视图所能看到的节点值(按从顶部到底部的顺序)
 //示例1:输入:[1,2,3,null,5,null,4]输出:[1,3,4]
 //示例2:输入:[1,null,3]输出:[1,3]
 //示例3:输入:[]输出:[]
@@ -45,15 +46,13 @@ func rightSideView1(root *common.TreeNode) []int {
 // rightSideView2 法二：广度优先遍历
 // 思路：一层一层遍历，每层的最后一个元素就是右视图中看到的元素
 func rightSideView2(root *common.TreeNode) []int {
-	var (
-		res   []int              // 结果集
-		queue []*common.TreeNode // 队列，用于存储每一层的元素
-	)
 	if root == nil {
-		return res
-	} else {
-		queue = append(queue, root)
+		return []int{}
 	}
+	var (
+		res   []int                      // 结果集
+		queue = []*common.TreeNode{root} // 队列，用于存储每一层的元素
+	)
 
 	for len(queue) > 0 {
 		var size = len(queue)
@@ -90,6 +89,7 @@ func rightSideView3(root *common.TreeNode) []int {
 			if i == 0 {
 				ans = append(ans, cur.Val)
 			}
+			// 先添加右侧，再添加左侧
 			if cur.Right != nil {
 				queue = append(queue, cur.Right)
 			}

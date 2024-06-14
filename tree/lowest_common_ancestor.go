@@ -14,7 +14,6 @@ import "goalgorithms/common"
 
 // 后序遍历(向上查找公共父节点)
 func lowestCommonAncestor1(root, p, q *common.TreeNode) *common.TreeNode {
-
 	var f func(root *common.TreeNode) *common.TreeNode
 	f = func(root *common.TreeNode) *common.TreeNode {
 		if root == nil {
