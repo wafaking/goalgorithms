@@ -81,7 +81,7 @@ func TestPermutation(t *testing.T) {
 	var list = []string{
 		"abc",
 		"aac",
-		//"中1c",
+		// "中1c",
 	}
 	for _, item := range list {
 		res := permutation1(item)
@@ -93,12 +93,12 @@ func TestPermutation(t *testing.T) {
 		res = permutation3(item)
 		t.Logf("res: %v\n", res)
 		t.Log("----------SPLIT------------")
-		//res = permutation4(item)
-		//t.Logf("res: %v\n", res)
-		//t.Log("----------SPLIT------------")
-		//res = permutation5(item)
-		//t.Logf("res: %v\n", res)
-		//t.Log("----------SPLIT------------")
+		// res = permutation4(item)
+		// t.Logf("res: %v\n", res)
+		// t.Log("----------SPLIT------------")
+		// res = permutation5(item)
+		// t.Logf("res: %v\n", res)
+		// t.Log("----------SPLIT------------")
 
 	}
 }
@@ -108,10 +108,10 @@ func TestLetterCasePermutation(t *testing.T) {
 		"ab",
 		"abc",
 		"a1b2",
-		//"1a2b3c",
-		//"3z4",
-		//"123",
-		//"中1c",
+		// "1a2b3c",
+		// "3z4",
+		// "123",
+		// "中1c",
 	}
 	for _, item := range list {
 		res := letterCasePermutation1(item)
@@ -124,8 +124,8 @@ func TestLetterCasePermutation(t *testing.T) {
 		t.Logf("res: %v\n", res)
 		res = letterCasePermutation5(item)
 		t.Logf("res: %v\n", res)
-		//res = letterCasePermutation6(item)
-		//t.Logf("res: %v\n", res)
+		// res = letterCasePermutation6(item)
+		// t.Logf("res: %v\n", res)
 		t.Log("----------SPLIT------------")
 	}
 }
@@ -137,11 +137,11 @@ func TestCheckInclusion(t *testing.T) {
 			P:        "bbbca",
 			Expected: true,
 		},
-		//{
+		// {
 		//	S:        "ab",
 		//	P:        "eidbaooo",
 		//	Expected: true,
-		//},
+		// },
 		{
 			S:        "ab",
 			P:        "eidboaoo",
@@ -177,27 +177,27 @@ func TestCheckInclusion(t *testing.T) {
 		common.PrintDiffTwoBool(res, item.Expected, item, t)
 		res = checkInclusion22(item.S, item.P)
 		common.PrintDiffTwoBool(res, item.Expected, item, t)
-		//res = checkInclusion3(item.S, item.P)
-		//common.PrintDiffTwoBool(res, item.Expected, item, t)
+		// res = checkInclusion3(item.S, item.P)
+		// common.PrintDiffTwoBool(res, item.Expected, item, t)
 		common.PrintSplit(t)
 	}
 }
 
 func TestChineseToNumber(t *testing.T) {
 	var listMap = map[string]int64{
-		//"四千五百一十三":          4513,
-		//"四万":               40000,
-		//"四万二千五百一十三":        42513,
-		//"四万零五百一十三":         40513,
-		//"七千零七十九万":          70790000,
-		//"一亿七千七十九万七千一百九十七":  170797197,
-		//"一亿七千零七十九万七千一百九十七": 170797197,
-		//"一千亿七千七十九万七千一百九十七": 100070797197,
-		//"一万亿七千七十九万七千一百九十七": 1000070807197,
+		// "四千五百一十三":          4513,
+		// "四万":               40000,
+		// "四万二千五百一十三":        42513,
+		// "四万零五百一十三":         40513,
+		// "七千零七十九万":          70790000,
+		// "一亿七千七十九万七千一百九十七":  170797197,
+		// "一亿七千零七十九万七千一百九十七": 170797197,
+		// "一千亿七千七十九万七千一百九十七": 100070797197,
+		// "一万亿七千七十九万七千一百九十七": 1000070807197,
 		"11000万": 1000,
 	}
 	for k, expected := range listMap {
-		//res := chineseToNumber(v)
+		// res := chineseToNumber(v)
 		res := ZHToInt64(k)
 		log.Printf("isPass: %t,%s, v:%d, expectd:%d \n", res == expected, k, res, expected)
 	}
@@ -221,9 +221,9 @@ func TestNumberToChinese(t *testing.T) {
 		100070797197: "一千亿七千零七十九万七千一百九十七",
 	}
 	for k, expected := range listMap {
-		//log.Println("k: ", k)
+		// log.Println("k: ", k)
 		res := Number2ZH1(k)
-		//res := Number2ZH2(k)
+		// res := Number2ZH2(k)
 		log.Printf("isPass: %t, %d, v:%s, expectd:%s\n", res == expected, k, res, expected)
 	}
 }
@@ -273,7 +273,7 @@ func TestLongestPalindrome(t *testing.T) {
 	}
 
 	for str, expected := range m {
-		//res := longestPalindrome1(str)
+		// res := longestPalindrome1(str)
 		res := longestPalindrome2(str)
 		t.Logf(" Right: %t, res：%s, expected:%s, str: %s", res == expected, res, expected, str)
 	}
@@ -333,7 +333,7 @@ func TestIsPalindromeInt1(t *testing.T) {
 	for _, num := range list {
 		res := isPalindrome1(num)
 		t.Logf("res: %t, num=%d", res, num)
-		//t.Log("-----------SPLIT----------")
+		// t.Log("-----------SPLIT----------")
 		res = isPalindrome21(num)
 		t.Logf("res: %t, num=%d", res, num)
 		res = isPalindrome22(num)
@@ -369,6 +369,10 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 		{
 			Str:      "pwwkew",
 			Expected: 3,
+		},
+		{
+			Str:      "ababcdabcef",
+			Expected: 6,
 		},
 	}
 	var res int
@@ -554,10 +558,10 @@ func TestNumSquares(t *testing.T) {
 
 func TestCountPrimes(t *testing.T) {
 	var list = []common.Item4{
-		//{
+		// {
 		//	Num:      1,
 		//	Expected: 0,
-		//},
+		// },
 		{
 			Num:      10,
 			Expected: 4,

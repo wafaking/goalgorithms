@@ -1,6 +1,7 @@
 package search
 
 import (
+	"goalgorithms/common"
 	"testing"
 )
 
@@ -41,11 +42,15 @@ func TestBinarySearch(t *testing.T) {
 	var res int
 	for _, item := range list {
 		res = binarySearch1(item.nums, item.target)
-		t.Logf("%t------expected:res=%d:%d, item:%+v", res == item.expected, item.expected, res, item)
+		common.PrintDiffTwoInt(res, item.expected, item, t)
+
 		res = binarySearch2(item.nums, item.target)
-		t.Logf("%t------expected:res=%d:%d, item:%+v", res == item.expected, item.expected, res, item)
-		res = binarySearch4(item.nums, item.target)
-		t.Logf("%t------expected:res=%d:%d, item:%+v", res == item.expected, item.expected, res, item)
-		t.Logf("------------------------------------------")
+		common.PrintDiffTwoInt(res, item.expected, item, t)
+
+		res = binarySearch3(item.nums, item.target)
+		common.PrintDiffTwoInt(res, item.expected, item, t)
+
+		common.PrintSplit(t)
+
 	}
 }

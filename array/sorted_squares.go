@@ -2,11 +2,31 @@ package array
 
 import "sort"
 
-//有序数组的平方(leetcode-977)
-//给你一个按非递减顺序排序的整数数组nums，返回每个数字的平方组成的新数组，要求也按非递减顺序排序。
-//示例1：输入：nums=[-4,-1,0,3,10]输出：[0,1,9,16,100]
-//解释：平方后，数组变为[16,1,0,9,100]排序后，数组变为[0,1,9,16,100]
-//示例2：输入：nums=[-7,-3,2,3,11]输出：[4,9,9,49,121]
+// 有序数组的平方(leetcode-977)
+// 给你一个按非递减顺序排序的整数数组nums，返回每个数字的平方组成的新数组，要求也按非递减顺序排序。
+// 示例1：输入：nums=[-4,-1,0,3,10]输出：[0,1,9,16,100]
+// 解释：平方后，数组变为[16,1,0,9,100]排序后，数组变为[0,1,9,16,100]
+// 示例2：输入：nums=[-7,-3,2,3,11]输出：[4,9,9,49,121]
+
+// 双指针
+func sortedSquares0(nums []int) []int {
+	var (
+		n   = len(nums)
+		res = make([]int, n)
+	)
+	for i, j := 0, len(nums)-1; i <= j; n-- {
+		si := nums[i] * nums[i]
+		sj := nums[j] * nums[j]
+		if si <= sj {
+			res[n-1] = sj
+			j--
+		} else {
+			res[n-1] = si
+			i++
+		}
+	}
+	return res
+}
 
 func sortedSquares1(nums []int) []int {
 	for i := range nums {
@@ -34,8 +54,8 @@ func sortedSquares2(nums []int) []int {
 			r--
 		}
 	}
-	//[-4,-1,-1,0,3,3,10]
-	//16, 1, 1, 0, 9,9, 100
+	// [-4,-1,-1,0,3,3,10]
+	// 16, 1, 1, 0, 9,9, 100
 	for i := 0; i <= (n-1)>>1; i++ {
 		ans[i], ans[n-i-1] = ans[n-i-1], ans[i]
 	}
@@ -64,7 +84,7 @@ func sortedSquares3(nums []int) []int {
 
 // 双指针，从中间到两端，时间复杂度为O(n)
 func sortedSquares4(nums []int) []int {
-	//[-4,-1,-1,0,3,3,10]
+	// [-4,-1,-1,0,3,3,10]
 	// 16, 1, 1, 0, 9,9, 100
 	var (
 		pivot = -1

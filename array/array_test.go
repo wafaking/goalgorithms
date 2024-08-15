@@ -7,21 +7,21 @@ import (
 )
 
 func TestMain(t *testing.M) {
-	//sli := []int{5, 3, 7, 2, 0, 4, 1, 2}
-	//sli := []int{4, 7, 5, 9, 2, 3}
-	//sli := []int{2, 3, 1, 0, 2, 5, 3}
-	//sli := []int{2, 7, 11, 15}
-	//sli := []int{3, 2, 4}
-	//sli := []int{3, 0, -2, -1, -1, -1, 1, 2}
-	//sli := []int{3, 2, 5, 4, 7, 2, 6, 5}
-	//sli := []int{1, 2, 2, 3, 4, 5, 6, 7}
-	//sli := []int{1, 2, 3, 4, 4}
+	// sli := []int{5, 3, 7, 2, 0, 4, 1, 2}
+	// sli := []int{4, 7, 5, 9, 2, 3}
+	// sli := []int{2, 3, 1, 0, 2, 5, 3}
+	// sli := []int{2, 7, 11, 15}
+	// sli := []int{3, 2, 4}
+	// sli := []int{3, 0, -2, -1, -1, -1, 1, 2}
+	// sli := []int{3, 2, 5, 4, 7, 2, 6, 5}
+	// sli := []int{1, 2, 2, 3, 4, 5, 6, 7}
+	// sli := []int{1, 2, 3, 4, 4}
 
-	//InitNums(sli)
-	//PrintNums()
+	// InitNums(sli)
+	// PrintNums()
 
-	//Init2DNums()
-	//Println2DNums()
+	// Init2DNums()
+	// Println2DNums()
 	t.Run()
 }
 
@@ -113,9 +113,9 @@ func TestGetDuplications(t *testing.T) {
 
 func TestThreeSum(t *testing.T) {
 	var samples = [][]int{
-		//{0, 1, 1},
-		//{0, 0, 0},
-		//{-1, 0, 1, 2, -1, -4},
+		// {0, 1, 1},
+		// {0, 0, 0},
+		// {-1, 0, 1, 2, -1, -4},
 		{-4, -1, -1, -1, -1, 0, 1, 2, 2},
 	}
 	for _, nums := range samples {
@@ -171,8 +171,8 @@ func TestFourSumCount(t *testing.T) {
 
 func TestFourSum(t *testing.T) {
 	var samples = []common.Item1{
-		//{[]int{2, 2, 2, 2, 2}, 8, nil},
-		//{[]int{1, 0, -1, 0, -2, 2}, 0, nil},
+		// {[]int{2, 2, 2, 2, 2}, 8, nil},
+		// {[]int{1, 0, -1, 0, -2, 2}, 0, nil},
 		{[]int{-4, -1, -1, -1, -1, 0, 1, 2, 2, 3}, 0, nil},
 	}
 	// 示例1： 输入：nums=[1,0,-1,0,-2,2], target=0, 输出：[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
@@ -440,9 +440,9 @@ func TestMaxArea(t *testing.T) {
 
 func TestPermute(t *testing.T) {
 	var numsList = [][]int{
-		//{},
-		//{1},
-		//{0, 1},
+		// {},
+		// {1},
+		// {0, 1},
 		{1, 2, 3},
 	}
 	for _, nums := range numsList {
@@ -461,21 +461,21 @@ func TestPermute(t *testing.T) {
 		res = permute3(nums)
 		t.Logf("res: %v\n", res)
 		t.Log("-------------SPLIT----------")
-		//res = permute32(nums)
-		//t.Logf("res: %v\n", res)
-		//t.Log("-------------SPLIT----------")
+		// res = permute32(nums)
+		// t.Logf("res: %v\n", res)
+		// t.Log("-------------SPLIT----------")
 	}
 }
 
 func TestPermuteUnique(t *testing.T) {
 	var numsList = [][]int{
-		//{},
-		//{1},
-		//{0, 1},
-		//{1, 2, 3},
+		// {},
+		// {1},
+		// {0, 1},
+		// {1, 2, 3},
 		{1, 1, 2},
-		//{1, 2, 1},
-		//{1, 1, 1},
+		// {1, 2, 1},
+		// {1, 1, 1},
 		{1, 2, 1, 1},
 		{-1, 2, -1, 2, 1, -1, 2, 1},
 		{0, 1, 0, 0, 9},
@@ -486,7 +486,7 @@ func TestPermuteUnique(t *testing.T) {
 	}
 	t.Log("----------SPLIT------------")
 	for _, nums := range numsList {
-		//res := permuteUnique2(nums)
+		// res := permuteUnique2(nums)
 		res := permuteUnique2(nums)
 		t.Logf("res: %v\n", res)
 	}
@@ -870,14 +870,14 @@ func TestConstructorLRU(t *testing.T) {
 	*/
 
 	t.Log("--------------------------SPLIT-----------------------------")
-	//["LRUCache","put","put","put","put", "get","get","get","get", "put", "get","get","get","get","get"]
-	//[[3],[1,1],[2,2],[3,3],[4,4], [4],[3],[2],[1], [5,5], [1],[2],[3],[4],[5]]
+	// ["LRUCache","put","put","put","put", "get","get","get","get", "put", "get","get","get","get","get"]
+	// [[3],[1,1],[2,2],[3,3],[4,4], [4],[3],[2],[1], [5,5], [1],[2],[3],[4],[5]]
 	//
-	//添加到测试用例
-	//输出
-	//[null,null,null,null,null,4,3,2,-1,null,-1,2,-1,4,5]
-	//预期结果
-	//[null,null,null,null,null,4,3,2,-1,null,-1,2,3,-1,5]
+	// 添加到测试用例
+	// 输出
+	// [null,null,null,null,null,4,3,2,-1,null,-1,2,-1,4,5]
+	// 预期结果
+	// [null,null,null,null,null,4,3,2,-1,null,-1,2,3,-1,5]
 
 	lRUCache = ConstructorLRU(3)
 	lRUCache.Put(1, 1)
@@ -885,7 +885,7 @@ func TestConstructorLRU(t *testing.T) {
 	lRUCache.Put(3, 3)
 	lRUCache.Put(4, 4)
 
-	//var res int
+	// var res int
 	res = lRUCache.Get(4)
 	t.Logf("%t, res:expect==%d:%d", res == 4, res, 4)
 	res = lRUCache.Get(3)
@@ -935,13 +935,16 @@ func TestRemoveElement(t *testing.T) {
 	var res int
 	for _, item := range list {
 		tempArray := make([]int, len(item.Nums))
+
 		copy(tempArray, item.Nums)
 		res = removeElement1(tempArray, item.Target)
-		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+
 		copy(tempArray, item.Nums)
 		res = removeElement2(tempArray, item.Target)
-		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
-		t.Log("--------------split----------------split--------------")
+		common.PrintDiffTwoInt(res, item.Expected, item, t)
+
+		common.PrintSplit(t)
 	}
 }
 
@@ -972,18 +975,26 @@ func TestSortedSquares(t *testing.T) {
 	for _, item := range list {
 		tempArray := make([]int, len(item.Nums))
 		copy(tempArray, item.Nums)
+		res = sortedSquares0(tempArray)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		copy(tempArray, item.Nums)
 		res = sortedSquares1(tempArray)
-		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
 		copy(tempArray, item.Nums)
 		res = sortedSquares2(tempArray)
-		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
 		copy(tempArray, item.Nums)
 		res = sortedSquares3(tempArray)
-		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
 		copy(tempArray, item.Nums)
 		res = sortedSquares4(tempArray)
-		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
-		t.Log("--------------split----------------split--------------")
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		common.PrintSplit(t)
 	}
 }
 

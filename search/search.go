@@ -38,7 +38,7 @@ func binarySearch2(nums []int, target int) int {
 }
 
 // 法三：递归：左闭右开区间
-func binarySearch4(nums []int, target int) int {
+func binarySearch3(nums []int, target int) int {
 	var dfs func(low, high int) int
 	dfs = func(low, high int) int {
 		if low >= high {
@@ -48,10 +48,10 @@ func binarySearch4(nums []int, target int) int {
 		if nums[mid] == target {
 			return mid
 		} else if nums[mid] > target {
-			//high = mid
+			// high = mid
 			return dfs(low, mid)
 		} else {
-			//low = mid + 1
+			// low = mid + 1
 			return dfs(mid+1, high)
 		}
 	}
