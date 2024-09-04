@@ -6,14 +6,15 @@ import (
 	"sort"
 )
 
-//长度最小的子数组(leetcode-209)
-//给定一个含有n个正整数的数组和一个正整数target。
-//找出该数组中满足其总和[大于等于]target的长度最小的连续子数组[numsl,numsl+1,...,numsr-1,numsr]，并返回其长度。如果不存在符合条件的子数组，返回0。
-//示例1：输入：target=7,nums=[2,3,1,2,4,3]输出：2
-//解释：子数组[4,3]是该条件下的长度最小的子数组。
-//示例2：输入：target=4,nums=[1,4,4]输出：1
-//示例3：输入：target=11,nums=[1,1,1,1,1,1,1,1]输出：0
-//进阶：
+// 长度最小的子数组(leetcode-209)
+// 给定一个含有n个正整数的数组和一个正整数target。
+// 找出该数组中满足其总和[大于等于]target的长度最小的连续子数组
+// [numsl,numsl+1,...,numsr-1,numsr]，并返回其长度。如果不存在符合条件的子数组，返回0。
+// 示例1：输入：target=7,nums=[2,3,1,2,4,3]输出：2
+// 解释：子数组[4,3]是该条件下的长度最小的子数组。
+// 示例2：输入：target=4,nums=[1,4,4]输出：1
+// 示例3：输入：target=11,nums=[1,1,1,1,1,1,1,1]输出：0
+// 进阶：
 //	如果你已经实现O(n)时间复杂度的解法,请尝试设计一个O(nlog(n))时间复杂度的解法。
 
 // 暴力破解(易超时)
@@ -41,6 +42,7 @@ func minSubArrayLen1(target int, nums []int) int {
 // 滑动窗口
 func minSubArrayLen2(target int, nums []int) int {
 	var ans = math.MaxInt64
+	// 2,3,1,2,4,3
 	for i, j := 0, 0; j < len(nums); {
 		// 每次减去右窗口
 		target -= nums[j]
@@ -59,7 +61,7 @@ func minSubArrayLen2(target int, nums []int) int {
 	return ans
 }
 
-//前缀和+二分查找
+// 前缀和+二分查找
 func minSubArrayLen3(target int, nums []int) int {
 	var (
 		ans  = math.MaxInt64
@@ -88,4 +90,30 @@ func minSubArrayLen3(target int, nums []int) int {
 		return 0
 	}
 	return ans
+}
+
+// 双指针
+func minSubArrayLen4(target int, nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+	var (
+		minLength = math.MaxInt
+		sum       int
+	)
+
+	for i, j := 0, 0; j < len(nums); {
+		sum += nums[j]
+		for sum >= target {
+			minLength = common.MinInTwo(minLength, j-i+1)
+			sum -= nums[i]
+			i++
+		}
+		j++
+	}
+
+	if minLength == math.MaxInt {
+		return 0
+	}
+	return minLength
 }
