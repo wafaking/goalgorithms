@@ -1043,16 +1043,15 @@ func TestMinSubArrayLen(t *testing.T) {
 	}
 	var res int
 	for _, item := range list {
-		res = minSubArrayLen0(item.Target, item.Nums)
-		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
-
 		res = minSubArrayLen1(item.Target, item.Nums)
 		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		res = minSubArrayLen2(item.Target, item.Nums)
 		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
 		res = minSubArrayLen3(item.Target, item.Nums)
 		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
-		t.Log("--------------split----------------split--------------")
+		res = minSubArrayLen4(item.Target, item.Nums)
+		t.Logf("%t, res-Expected: %d:%d, item:%+v", res == item.Expected, res, item.Expected, item)
+		common.PrintSplit(t)
 	}
 }
 

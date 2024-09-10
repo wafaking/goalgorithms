@@ -6,9 +6,9 @@ import (
 	"testing"
 )
 
-//func TestMain(t *testing.M) {
+// func TestMain(t *testing.M) {
 //	t.Run()
-//}
+// }
 
 func TestPrintListNode(t *testing.T) {
 	PrintHead()
@@ -115,8 +115,8 @@ func TestReversePrint(t *testing.T) {
 		t.Logf("res: %+v", res)
 		t.Log("---------------SPLIT-------------SPLIT-------")
 	}
-	//reversePrint4(head)
-	//log.Println("res: ", res)
+	// reversePrint4(head)
+	// log.Println("res: ", res)
 
 }
 func TestGetKthFromEnd(t *testing.T) {
@@ -235,8 +235,8 @@ func TestReverseBetween(t *testing.T) {
 
 func TestMiddleNode(t *testing.T) {
 	var list = []common.Item19{
-		//{Nums1: []int{1}, Nums2: nil, Expected: []int{1}},
-		//{Nums1: []int{1, 2}, Nums2: nil, Expected: []int{2}},
+		// {Nums1: []int{1}, Nums2: nil, Expected: []int{1}},
+		// {Nums1: []int{1, 2}, Nums2: nil, Expected: []int{2}},
 		{Nums1: []int{1, 2, 3, 4, 5}, Nums2: nil, Expected: []int{3, 4, 5}},
 		// 1->3, 2->5
 		// 1->3, 2->5, 3->nil
@@ -296,18 +296,18 @@ func TestAddTwoNumbers1(t *testing.T) {
 }
 
 func TestAddTwoNumbers2(t *testing.T) {
-	//s1 := []int{1, 2, 4}
-	//s1 := []int{7, 2, 4, 2}
+	// s1 := []int{1, 2, 4}
+	// s1 := []int{7, 2, 4, 2}
 	s1 := []int{7, 2, 4, 2}
-	//s2 := []int{1, 3, 4}
+	// s2 := []int{1, 3, 4}
 	s2 := []int{5, 6, 4}
 	list1 := BuildListNode(s1)
 	PrintList(list1)
 	list2 := BuildListNode(s2)
 	PrintList(list2)
 
-	//res := addTwoNumbers1(list1, list2)
-	//res := addTwoNumbers2(list1, list2)
+	// res := addTwoNumbers1(list1, list2)
+	// res := addTwoNumbers2(list1, list2)
 	res := addTwoNumbers23(list1, list2)
 	PrintList(res)
 }
@@ -319,10 +319,10 @@ func TestMergeInBetween(t *testing.T) {
 		Expected: []int{0, 1, 1000000, 1000001, 1000002, 5, 6},
 	}
 	var list = [][2]int{
-		//{2, 4},
-		//{4, 2},
+		// {2, 4},
+		// {4, 2},
 		{-2, -1},
-		//{0, 6},
+		// {0, 6},
 	}
 
 	for _, item := range list {
@@ -395,7 +395,12 @@ func TestRemoveElements(t *testing.T) {
 	for _, item := range list {
 		head = removeElements1(BuildListNode(item.Nums), item.Target)
 		res = PrintList2(head)
-		t.Logf("%v, res-expected:%+v, %+v, item:%+v", common.DiffTwoIntSlice(res, item.Expected), res, item.Expected, item)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		head = removeElements2(BuildListNode(item.Nums), item.Target)
+		res = PrintList2(head)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
 		t.Log("--------------split----------------split--------------")
 	}
 }
@@ -484,38 +489,42 @@ func TestSwapPairs(t *testing.T) {
 	}
 }
 
-//func TestHasCycle(t *testing.T) {
-//	var list = []common.Item8{
-//		{
-//			Nums:     []int{1, 2, 3, 4, 5, 6, 7},
-//			Expected: false,
-//		},
-//		{
-//			Nums:     []int{1, 2, 2, 3, 4, 4, 3},
-//			Expected: true,
-//		},
-//		{
-//			Nums:     []int{1, 2, 2, -1, 3, -1, 3},
-//			Expected: false,
-//		},
-//		{
-//			Nums:     []int{},
-//			Expected: true,
-//		},
-//		{
-//			Nums:     []int{1},
-//			Expected: true,
-//		},
-//	}
-//
-//	var res bool
-//	for _, item := range list {
-//		root := BuildListNode(item.Nums)
-//		res = hasCycle1(root)
-//		t.Logf("%t, res: %+v, item:%+v", res == item.Expected, res, item)
-//		t.Log("--------------------SPLIT--------------------------")
-//	}
-//}
+func TestHasCycle(t *testing.T) {
+	var list = []common.Item8{
+		{
+			Nums:     []int{1, 2, 3, 4, 5, 6, 7},
+			Expected: false,
+		},
+		{
+			Nums:     []int{1, 2, 2, 3, 4, 4, 3},
+			Expected: true,
+		},
+		{
+			Nums:     []int{1, 2, 2, -1, 3, -1, 3},
+			Expected: false,
+		},
+		{
+			Nums:     []int{},
+			Expected: true,
+		},
+		{
+			Nums:     []int{1},
+			Expected: true,
+		},
+	}
+
+	var res bool
+	for _, item := range list {
+		root := BuildListNode(item.Nums)
+		res = hasCycle1(root)
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+
+		root = BuildListNode(item.Nums)
+		res = hasCycle2(root)
+		common.PrintDiffTwoBool(res, item.Expected, item, t)
+		common.PrintSplit(t)
+	}
+}
 
 func TestIsPalindrome(t *testing.T) {
 	var list = []common.Item8{
@@ -598,4 +607,61 @@ func TestSortList(t *testing.T) {
 		common.PrintSplit(t)
 	}
 	PrintHead()
+}
+
+func TestLinkDesign(t *testing.T) {
+	var res = make([]int, 0)
+	myLink := Constructor()
+	res = myLink.Print()
+	common.PrintDiffTwoIntSlice(res, []int{}, nil, t)
+
+	myLink.AddAtHead(2)
+	res = myLink.Print()
+	common.PrintDiffTwoIntSlice(res, []int{2}, nil, t)
+
+	// ["MyLinkedList","addAtHead","deleteAtIndex","addAtHead","addAtHead","addAtHead","addAtHead","addAtHead","addAtTail","get","deleteAtIndex","deleteAtIndex"]
+	// 	[[],[2],[1],[2],[7],[3],[2],[5],[5],[5],[6],[4]]
+	// 	输出
+	// 	[null,null,null,null,null,null,null,null,null,5,null,null]
+	// 	预期结果
+	// 	[null,null,null,null,null,null,null,null,null,2,null,null]
+
+	myLink.DeleteAtIndex(1)
+	res = myLink.Print()
+	common.PrintDiffTwoIntSlice(res, []int{2}, nil, t)
+
+	myLink.AddAtHead(2)
+	res = myLink.Print()
+	common.PrintDiffTwoIntSlice(res, []int{2, 2}, nil, t)
+
+	myLink.AddAtHead(7)
+	res = myLink.Print()
+	common.PrintDiffTwoIntSlice(res, []int{7, 2, 2}, nil, t)
+
+	myLink.AddAtHead(3)
+	res = myLink.Print()
+	common.PrintDiffTwoIntSlice(res, []int{3, 7, 2, 2}, nil, t)
+
+	myLink.AddAtHead(2)
+	res = myLink.Print()
+	common.PrintDiffTwoIntSlice(res, []int{2, 3, 7, 2, 2}, nil, t)
+
+	myLink.AddAtHead(5)
+	res = myLink.Print()
+	common.PrintDiffTwoIntSlice(res, []int{5, 2, 3, 7, 2, 2}, nil, t)
+
+	myLink.AddAtTail(5)
+	res = myLink.Print()
+	common.PrintDiffTwoIntSlice(res, []int{5, 2, 3, 7, 2, 2, 5}, nil, t)
+
+	resInt := myLink.Get(5)
+	common.PrintDiffTwoInt(resInt, 2, nil, t)
+
+	myLink.DeleteAtIndex(6)
+	res = myLink.Print()
+	common.PrintDiffTwoIntSlice(res, []int{5, 2, 3, 7, 2, 2}, nil, t)
+
+	myLink.DeleteAtIndex(4)
+	res = myLink.Print()
+	common.PrintDiffTwoIntSlice(res, []int{5, 2, 3, 7, 2}, nil, t)
 }

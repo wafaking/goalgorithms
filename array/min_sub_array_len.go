@@ -42,7 +42,6 @@ func minSubArrayLen1(target int, nums []int) int {
 // 滑动窗口
 func minSubArrayLen2(target int, nums []int) int {
 	var ans = math.MaxInt64
-	// 2,3,1,2,4,3
 	for i, j := 0, 0; j < len(nums); {
 		// 每次减去右窗口
 		target -= nums[j]
@@ -70,13 +69,17 @@ func minSubArrayLen3(target int, nums []int) int {
 	)
 	// 为了方便计算，令 size = n + 1
 	// sums[0] = 0 意味着前 0 个元素的前缀和为 0
-	// sums[1] = A[0] 前 1 个元素的前缀和为 A[0
+	// sums[1] = A[0] 前 1 个元素的前缀和
 
 	// 构造前缀和数组sums
 	for i := 1; i < n+1; i++ {
 		sums[i] = sums[i-1] + nums[i-1]
 	}
-
+	// 		2,3,1,2,4,3
+	// sums 0,2,5,6,8,12,15
+	// 即sums[j]-sums[i]表示nums中[i]到nums[j-1]的和,即sums[3]-sums[1]表示num[1]到nums[3]的和即4，
+	// 因此要求满足sum[j]-sums[i]>=target的最小长度(j-i)
+	// 即：target+sums[i]<=sum[j],因此转化成了寻找target+sum[i]在sums数组中的位置、
 	for i := 0; i < n+1; i++ {
 		// target+sums[i]：把前i个元素的和加到target上相当于移除了前i个元素,即从num[i-1]个元素又算了一遍和
 		sum := target + sums[i]
