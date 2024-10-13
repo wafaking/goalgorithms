@@ -248,3 +248,13 @@ type Item46 struct {
 	Tokens   []string
 	Expected string
 }
+
+type Item47 struct {
+	Strs     []string
+	Expected [][]string
+}
+
+type Item48 struct {
+	Num      int
+	Expected []int
+}

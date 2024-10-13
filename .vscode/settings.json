@@ -1,0 +1,13 @@
+{
+  "go.testFlags": ["-v", "-count=1"],
+  "vim.handleKeys": {
+    "<C-a>": false, // disabled: ctrl + a
+    "<C-c>": false, // disabled: ctrl + c
+    "<C-d>": false, // disabled: ctrl + d
+    "<C-f>": false, // disabled: ctrl + f
+    "<C-w>": false, // disabled: ctrl + w
+    "<C-n>": false, // disabled: ctrl + n
+    "<C-v>": true, // disabled: ctrl + n
+    "<C-D>": true // disabled: ctrl + n
+  }
+}

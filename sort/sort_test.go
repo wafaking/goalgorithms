@@ -250,6 +250,10 @@ func TestQuickSort3Ways(t *testing.T) {
 func TestQuickSort(t *testing.T) {
 	var list = []common.Item6{
 		{
+			Nums:     []int{3},
+			Expected: []int{3},
+		},
+		{
 			Nums:     []int{3, 1, 4, 1, 2, 7, 8, 5, 6},
 			Expected: []int{1, 1, 2, 3, 4, 5, 6, 7, 8},
 		},
@@ -273,8 +277,23 @@ func TestQuickSort(t *testing.T) {
 
 	var res = make([]int, 0)
 	for _, item := range list {
-		res = QuickSort1(item.Nums)
+		tempNums := make([]int, len(item.Nums))
+		copy(tempNums, item.Nums)
+		res = quickSort1(tempNums)
 		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		copy(tempNums, item.Nums)
+		res = quickSort2(tempNums)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		copy(tempNums, item.Nums)
+		res = quickSort3(tempNums)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
+		copy(tempNums, item.Nums)
+		res = quickSort4(tempNums)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+
 		common.PrintSplit(t)
 	}
 }

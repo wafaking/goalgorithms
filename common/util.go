@@ -27,6 +27,10 @@ func PrintDiffTwoStr(res, expected string, item interface{}, t *testing.T) {
 	t.Logf("%t, res:%+v, item:%+v", res == expected, res, item)
 }
 
+func PrintDiffTwoStrSlice(res, expected [][]string, item interface{}, t *testing.T) {
+	t.Logf("%t, res:%+v, item:%+v", DiffTwoDoubleStrSlice(res, expected), res, item)
+}
+
 func DiffTwoIntSlice(sli1, sli2 []int) bool {
 	if len(sli1) != len(sli2) {
 		return false
@@ -118,4 +122,18 @@ func BoolToInt(ok bool) int {
 		return 1
 	}
 	return 0
+}
+
+func DiffTwoDoubleStrSlice(sli1, sli2 [][]string) bool {
+	if len(sli1) != len(sli2) {
+		return false
+	}
+	for i := range sli1 {
+		sort.Strings(sli1[i])
+		sort.Strings(sli2[i])
+		if !DiffTwoStrSlice(sli1[i], sli2[i]) {
+			return false
+		}
+	}
+	return true
 }

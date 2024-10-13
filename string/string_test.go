@@ -733,3 +733,61 @@ func TestLongestCommonPrefix(t *testing.T) {
 		common.PrintSplit(t)
 	}
 }
+
+func TestGroupAnagrams(t *testing.T) {
+	var list = []common.Item47{
+		{
+			Strs: []string{"eat", "tea", "tan", "ate", "nat", "bat"},
+			Expected: [][]string{
+				{"bat"},
+				{"nat", "tan"},
+				{"ate", "eat", "tea"},
+			},
+		},
+		{
+			Strs:     []string{""},
+			Expected: [][]string{{""}},
+		},
+		{
+			Strs:     []string{"a"},
+			Expected: [][]string{{"a"}},
+		},
+	}
+	var res [][]string
+	for _, item := range list {
+		res = groupAnagrams1(item.Strs)
+		common.PrintDiffTwoStrSlice(res, item.Expected, item, t)
+		res = groupAnagrams2(item.Strs)
+		common.PrintDiffTwoStrSlice(res, item.Expected, item, t)
+		common.PrintSplit(t)
+	}
+}
+
+func TestLastStrLength(t *testing.T) {
+	lastStrLength()
+}
+
+func TestPrimeFactor(t *testing.T) {
+	var (
+		list = []common.Item48{
+			{
+				Num:      180,
+				Expected: []int{2, 2, 3, 3, 5},
+			},
+			{
+				Num:      14,
+				Expected: []int{2, 7},
+			},
+			{
+				Num:      200000014,
+				Expected: []int{2, 100000007},
+			},
+		}
+		res = make([]int, 0)
+	)
+	for _, item := range list {
+		res = primeFactor(item.Num)
+		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
+		common.PrintSplit(t)
+	}
+}
