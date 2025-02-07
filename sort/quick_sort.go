@@ -55,7 +55,7 @@ func quickSort2(nums []int) []int {
 	return nums
 }
 
-// 使用指针而不拷贝数组
+// 使用指针而不拷贝数组(同法2)
 func quickSort3(nums []int) []int {
 	if len(nums) < 2 {
 		return nums
@@ -69,7 +69,6 @@ func quickSort3(nums []int) []int {
 			pivot = nums[r]
 			idx   = l
 		)
-		// mid := (r-1)/2 + l
 		for i := l; i < r; i++ {
 			if nums[i] < pivot {
 				nums[i], nums[idx] = nums[idx], nums[i]

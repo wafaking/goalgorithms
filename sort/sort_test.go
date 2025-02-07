@@ -278,6 +278,7 @@ func TestQuickSort(t *testing.T) {
 	var res = make([]int, 0)
 	for _, item := range list {
 		tempNums := make([]int, len(item.Nums))
+
 		copy(tempNums, item.Nums)
 		res = quickSort1(tempNums)
 		common.PrintDiffTwoIntSlice(res, item.Expected, item, t)
